@@ -41,6 +41,7 @@
 #define SC_TRACE_FILE_BASE_H_INCLUDED_
 
 #include <cstdio>
+#include <string>
 
 // use callback-based tracing implementation
 #if defined( SC_ENABLE_SIMULATION_PHASE_CALLBACKS_TRACING )
@@ -51,7 +52,8 @@
 #endif
 
 #include "sysc/tracing/sc_trace.h"
-#include "sysc/tracing/sc_tracing_ids.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_time.h"
 
 #if defined(_MSC_VER) && !defined(SC_WIN_DLL_WARN)
 #pragma warning(push)

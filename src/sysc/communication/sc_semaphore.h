@@ -33,6 +33,7 @@
 #include "sysc/kernel/sc_event.h"
 #include "sysc/kernel/sc_object.h"
 #include "sysc/communication/sc_semaphore_if.h"
+#include "sysc/kernel/sc_cmnhdr.h"
 
 namespace sc_core {
 

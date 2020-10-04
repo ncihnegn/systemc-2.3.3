@@ -51,9 +51,10 @@
 #define SCFX_UTILS_H
 
 
-#include "sysc/datatypes/fx/sc_fxdefs.h"
-#include "sysc/datatypes/fx/scfx_params.h"
+#include "sysc/datatypes/fx/scfx_params.h" // IWYU pragma: keep
 #include "sysc/datatypes/fx/scfx_string.h"
+#include "sysc/datatypes/int/sc_nbdefs.h"
+#include "sysc/utils/sc_machine.h"
 
 
 namespace sc_dt

@@ -49,10 +49,18 @@
   
 */
 
+#include <algorithm>
+
 #include "sysc/communication/sc_interface.h"
 #include "sysc/kernel/sc_module.h"
 #include "sysc/kernel/sc_event.h"
 #include "sysc/communication/sc_port.h"
+#include "sysc/datatypes/int/sc_nbdefs.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_module_name.h"
+#include "sysc/kernel/sc_simcontext.h"
+#include "sysc/kernel/sc_time.h"
+#include "sysc/utils/sc_pq.h"
 
 namespace sc_core {
 

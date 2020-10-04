@@ -59,7 +59,7 @@
 #define SC_NBEXTERNS_H
 
 
-#include "sysc/datatypes/int/sc_nbutils.h"
+#include "sysc/datatypes/int/sc_nbdefs.h"
 
 
 namespace sc_dt

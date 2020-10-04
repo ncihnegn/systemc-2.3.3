@@ -50,7 +50,7 @@
 
 #include "sysc/datatypes/int/sc_length_param.h"
 
-#include <sstream>
+#include <sstream> // IWYU pragma: keep
 
 // explicit template instantiations
 namespace sc_core {

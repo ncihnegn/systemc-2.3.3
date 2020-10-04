@@ -40,16 +40,14 @@
 #  define SC_HAS_PHASE_CALLBACKS_ 0
 #endif
 
-#include "sysc/kernel/sc_simcontext.h"
-#include "sysc/kernel/sc_object_int.h"
-#include "sysc/kernel/sc_status.h"
-
 #include <vector>
+#include <algorithm>
+
+#include "sysc/kernel/sc_simcontext.h"
+#include "sysc/kernel/sc_status.h"
+#include "sysc/kernel/sc_object.h"
 
 namespace sc_core {
-
-class sc_simcontext;
-class sc_object;
 
 class sc_phase_callback_registry
 {

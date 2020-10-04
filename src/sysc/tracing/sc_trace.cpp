@@ -51,11 +51,12 @@
 
 #include "sysc/tracing/sc_trace.h"
 #include "sysc/tracing/sc_tracing_ids.h"
-
 #include "sysc/communication/sc_signal_ifs.h"
 #include "sysc/kernel/sc_event.h"
 #include "sysc/utils/sc_report.h"
 #include "sysc/utils/sc_utils_ids.h"
+#include "sysc/datatypes/bit/sc_logic.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
 

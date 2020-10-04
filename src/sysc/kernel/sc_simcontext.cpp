@@ -29,10 +29,15 @@
  *****************************************************************************/
 
 #include "sysc/kernel/sc_simcontext.h"
-#include "sysc/kernel/sc_simcontext_int.h"
 
-#include "sysc/kernel/sc_cor_fiber.h"
-#include "sysc/kernel/sc_cor_pthread.h"
+#include <assert.h>
+#include <algorithm>
+#include <sstream>
+#include <cstdlib>
+#include <functional>
+#include <string_view>
+
+#include "sysc/kernel/sc_simcontext_int.h"
 #include "sysc/kernel/sc_cor_qt.h"
 #include "sysc/kernel/sc_event.h"
 #include "sysc/kernel/sc_kernel_ids.h"
@@ -45,21 +50,23 @@
 #include "sysc/kernel/sc_thread_process.h"
 #include "sysc/kernel/sc_process_handle.h"
 #include "sysc/kernel/sc_reset.h"
-#include "sysc/kernel/sc_ver.h"
 #include "sysc/kernel/sc_dynamic_processes.h"
 #include "sysc/kernel/sc_phase_callback_registry.h"
 #include "sysc/communication/sc_port.h"
 #include "sysc/communication/sc_export.h"
 #include "sysc/communication/sc_prim_channel.h"
 #include "sysc/tracing/sc_trace.h"
-#include "sysc/utils/sc_mempool.h"
 #include "sysc/utils/sc_list.h"
 #include "sysc/utils/sc_string_view.h"
 #include "sysc/utils/sc_utils_ids.h"
-
-#include <algorithm>
-#include <cstring>
-#include <sstream>
+#include "sysc/kernel/sc_cor.h"
+#include "sysc/kernel/sc_module_name.h"
+#include "sysc/kernel/sc_object.h"
+#include "sysc/kernel/sc_runnable.h"
+#include "sysc/kernel/sc_runnable_int.h"
+#include "sysc/kernel/sc_spawn.h"
+#include "sysc/kernel/sc_spawn_options.h"
+#include "sysc/utils/sc_report_handler.h"
 
 // DEBUGGING MACROS:
 //
@@ -71,6 +78,7 @@
 //            message will not print.
 #if 0
 #   include <cstring>
+
 #   define DEBUG_NAME ""
 #   define DEBUG_MSG(NAME,P,MSG) \
     { \

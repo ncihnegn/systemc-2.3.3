@@ -37,6 +37,9 @@
 #define SC_MODULE_NAME_H
 
 
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/utils/sc_report.h"
+
 namespace sc_core {
 
 class sc_module;

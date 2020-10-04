@@ -76,8 +76,8 @@
 // source.
 //
 
-#include <cctype>
 #include <cmath>
+#include <sstream> // IWYU pragma: keep
 
 #include "sysc/kernel/sc_cmnhdr.h"
 #include "sysc/kernel/sc_macros.h"
@@ -88,11 +88,12 @@
 #include "sysc/datatypes/int/sc_int_ids.h"
 #include "sysc/datatypes/bit/sc_bv_base.h"
 #include "sysc/datatypes/bit/sc_lv_base.h"
-#include "sysc/datatypes/misc/sc_concatref.h"
 #include "sysc/datatypes/fx/sc_ufix.h"
 #include "sysc/datatypes/fx/scfx_other_defs.h"
-
-#include <sstream>
+#include "sysc/datatypes/bit/sc_logic.h"
+#include "sysc/datatypes/fx/sc_fxdefs.h"
+#include "sysc/datatypes/int/sc_nbexterns.h"
+#include "sysc/utils/sc_report_handler.h"
 
 // explicit template instantiations
 namespace sc_core {
@@ -2238,8 +2239,6 @@ sc_unsigned::iszero() const
 #undef CLASS_TYPE
 #undef CLASS_TYPE_STR
 
-#include "sc_unsigned_bitref.inc"
-#include "sc_unsigned_subref.inc"
 
 #undef CONVERT_LONG
 #undef CONVERT_LONG_2

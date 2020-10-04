@@ -42,11 +42,14 @@
 #if !defined(sc_method_process_h_INCLUDED)
 #define sc_method_process_h_INCLUDED
 
+#include <iosfwd>
+#include <vector>
+
 #include "sysc/kernel/sc_process.h"
-#include "sysc/kernel/sc_spawn_options.h"
-#include "sysc/kernel/sc_cor.h"
 #include "sysc/kernel/sc_event.h"
 #include "sysc/kernel/sc_except.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_simcontext.h"
 
 
 // DEBUGGING MACROS:
@@ -59,6 +62,7 @@
 //            message will not print.
 #if 0
 #   include <cstring>
+
 #   define DEBUG_NAME ""
 #   define DEBUG_MSG(NAME,P,MSG) \
     { \
@@ -73,18 +77,19 @@
 
 
 namespace sc_core {
+class sc_cor;
+class sc_report;
+class sc_spawn_options;
+class sc_time;
 
 // forward function and class declarations:
 
 void sc_method_cor_fn( void* );
 void sc_cmethod_cor_fn( void* );
 SC_API void sc_set_stack_size( sc_method_handle, std::size_t );
-class sc_event;
-class sc_module;
-class sc_process_table;
-class sc_process_handle;
-class sc_simcontext;
-class sc_runnable;
+class sc_process_table; // IWYU pragma: keep
+class sc_process_handle; // IWYU pragma: keep
+class sc_runnable; // IWYU pragma: keep
 
 SC_API void next_trigger( sc_simcontext* );
 SC_API void next_trigger( const sc_event&, sc_simcontext* );
@@ -95,7 +100,8 @@ SC_API void next_trigger( const sc_time&, const sc_event&, sc_simcontext* );
 SC_API void next_trigger( const sc_time&, const sc_event_or_list&, sc_simcontext* );
 SC_API void next_trigger( const sc_time&, const sc_event_and_list&, sc_simcontext* );
 
-struct sc_invoke_method; 
+struct sc_invoke_method; // IWYU pragma: keep
+
 //==============================================================================
 // sc_method_process -
 //

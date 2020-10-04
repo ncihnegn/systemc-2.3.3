@@ -70,23 +70,25 @@
 
 
 #include <climits>
+#include <iosfwd>
 
 #include "sysc/datatypes/fx/scfx_mant.h"
-#include "sysc/datatypes/fx/scfx_params.h"
-#include "sysc/datatypes/fx/scfx_string.h"
+#include "sysc/datatypes/fx/sc_fxdefs.h"
+#include "sysc/datatypes/int/sc_nbdefs.h"
+#include "sysc/kernel/sc_cmnhdr.h"
 
 
 namespace sc_dt
 {
 
 // classes defined in this module
-class scfx_index;
 class scfx_rep;
-
 // forward class declarations
 class sc_bv_base;
 class sc_signed;
 class sc_unsigned;
+class scfx_params;
+class scfx_string;
 
 // function declarations
 SC_API void multiply( scfx_rep&, const scfx_rep&, const scfx_rep&,

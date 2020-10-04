@@ -31,12 +31,19 @@
 #if !defined(sc_thread_process_h_INCLUDED)
 #define sc_thread_process_h_INCLUDED
 
-#include "sysc/kernel/sc_spawn_options.h"
+#include <iosfwd>
+#include <vector>
+#include <algorithm>
+
 #include "sysc/kernel/sc_process.h"
 #include "sysc/kernel/sc_cor.h"
 #include "sysc/kernel/sc_event.h"
 #include "sysc/kernel/sc_except.h"
-#include "sysc/kernel/sc_reset.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_kernel_ids.h"
+#include "sysc/kernel/sc_simcontext.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 // DEBUGGING MACROS:
 //
@@ -48,6 +55,7 @@
 //            message will not print.
 #if 0
 #   include <cstring>
+
 #   define DEBUG_NAME ""
 #   define DEBUG_MSG(NAME,P,MSG) \
     { \
@@ -64,18 +72,11 @@
 namespace sc_core {
 
 // forward references:
-class sc_event_and_list;
-class sc_event_or_list;
-class sc_reset;
+class sc_spawn_options;
+class sc_time;
+
 void sc_thread_cor_fn( void* );
 SC_API void sc_set_stack_size( sc_thread_handle, std::size_t );
-class sc_event;
-class sc_join;
-class sc_module;
-class sc_process_handle;
-class sc_process_table;
-class sc_simcontext;
-class sc_runnable;
 
 sc_cor* get_cor_pointer( sc_process_b* process_p );
 SC_API void sc_set_stack_size( sc_thread_handle thread_h, std::size_t size );

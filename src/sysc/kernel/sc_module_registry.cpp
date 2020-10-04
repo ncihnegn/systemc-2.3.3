@@ -28,10 +28,14 @@
  *****************************************************************************/
 
 
+#include <algorithm>
+
 #include "sysc/kernel/sc_kernel_ids.h"
 #include "sysc/kernel/sc_module.h"
 #include "sysc/kernel/sc_module_registry.h"
 #include "sysc/kernel/sc_simcontext.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
 

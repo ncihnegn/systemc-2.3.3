@@ -30,11 +30,14 @@
 #define SC_CLOCK_H
 
 
-#include "sysc/kernel/sc_module.h"
 #include "sysc/communication/sc_signal.h"
-#include "sysc/tracing/sc_trace.h"
+#include "sysc/communication/sc_writer_policy.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_event.h"
+#include "sysc/kernel/sc_time.h"
 
 namespace sc_core {
+class sc_port_base;
 
 // ----------------------------------------------------------------------------
 //  CLASS : sc_clock

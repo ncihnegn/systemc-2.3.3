@@ -33,8 +33,10 @@
 #define sc_spawn_options_h_INCLUDED
 
 #include <vector>
+#include <algorithm>
+
 #include "sysc/communication/sc_export.h"
-#include "sysc/communication/sc_signal_ports.h"
+#include "sysc/kernel/sc_cmnhdr.h"
 
 #if defined(_MSC_VER) && !defined(SC_WIN_DLL_WARN)
 #pragma warning(push)
@@ -47,8 +49,11 @@ class sc_event;
 class sc_port_base;
 class sc_interface;
 class sc_event_finder;
-class sc_process_b;
 class sc_spawn_reset_base;
+template <class T> class sc_in;
+template <class T> class sc_inout;
+template <class T> class sc_out;
+template <class T> class sc_signal_in_if;
 
 
 //=============================================================================

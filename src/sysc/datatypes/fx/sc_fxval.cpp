@@ -45,12 +45,15 @@
 // the source.
 //
 
-#include <cctype>
 #include <cstdlib>
-#include <cmath>
 #include <cfloat>
 
 #include "sysc/datatypes/fx/sc_fxval.h"
+#include "sysc/datatypes/fx/scfx_params.h"
+#include "sysc/datatypes/fx/scfx_string.h"
+#include "sysc/datatypes/fx/scfx_utils.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 
 namespace sc_dt

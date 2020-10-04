@@ -28,13 +28,17 @@
  *****************************************************************************/
 
 
-#include "sysc/kernel/sc_except.h"
 #include "sysc/kernel/sc_kernel_ids.h"
 #include "sysc/kernel/sc_cthread_process.h"
 #include "sysc/kernel/sc_thread_process.h"
-#include "sysc/kernel/sc_simcontext_int.h"
 #include "sysc/kernel/sc_wait.h"
 #include "sysc/utils/sc_utils_ids.h"
+#include "sysc/kernel/sc_event.h"
+#include "sysc/kernel/sc_method_process.h"
+#include "sysc/kernel/sc_process.h"
+#include "sysc/kernel/sc_simcontext.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
 

@@ -32,8 +32,13 @@
 #define sc_cthread_process_h_INCLUDED
 
 #include "sysc/kernel/sc_thread_process.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_except.h"
+#include "sysc/kernel/sc_process.h"
 
 namespace sc_core {
+class sc_simcontext;
+class sc_spawn_options;
 
 // friend function declarations:
 

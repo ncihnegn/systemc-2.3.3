@@ -34,6 +34,7 @@
 #include "sysc/utils/sc_mempool.h"
 #include "sysc/utils/sc_report.h"
 #include "sysc/utils/sc_utils_ids.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
 

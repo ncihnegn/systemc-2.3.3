@@ -58,6 +58,7 @@
 
 
 #include "sysc/datatypes/int/sc_nbdefs.h"
+#include "sysc/kernel/sc_cmnhdr.h"
 
 namespace sc_dt
 {

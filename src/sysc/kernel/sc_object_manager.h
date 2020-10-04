@@ -30,8 +30,11 @@
 #ifndef SC_OBJECT_MANAGER_H
 #define SC_OBJECT_MANAGER_H
 
+#include <stddef.h>
 #include <map>
 #include <vector>
+#include <algorithm>
+#include <string>
 
 namespace sc_core {
 

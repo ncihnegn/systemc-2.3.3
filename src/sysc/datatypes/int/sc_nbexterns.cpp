@@ -52,7 +52,9 @@
 //
 
 #include "sysc/datatypes/int/sc_nbexterns.h"
+
 #include "sysc/kernel/sc_macros.h"
+#include "sysc/datatypes/int/sc_nbutils.h"
 
 
 namespace sc_dt

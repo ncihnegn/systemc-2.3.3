@@ -26,12 +26,15 @@
   CHANGE LOG IS AT THE END OF THE FILE
  *****************************************************************************/
 
+#include <sstream>
+#include <string>
+
 #include "sysc/communication/sc_communication_ids.h"
 #include "sysc/communication/sc_semaphore.h"
 #include "sysc/kernel/sc_simcontext.h"
 #include "sysc/kernel/sc_wait.h"
-
-#include <sstream>
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
 

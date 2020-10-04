@@ -48,6 +48,8 @@
 
 #include "sysc/datatypes/fx/scfx_pow10.h"
 
+#include "sysc/datatypes/fx/scfx_utils.h"
+
 
 namespace sc_dt
 {

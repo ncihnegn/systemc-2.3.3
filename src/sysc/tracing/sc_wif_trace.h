@@ -59,14 +59,34 @@
 #ifndef SC_WIF_TRACE_H
 #define SC_WIF_TRACE_H
 
-#include <cstdio>
+#include <string>
+#include <vector>
+
 #include "sysc/datatypes/int/sc_nbdefs.h"
 #include "sysc/tracing/sc_trace_file_base.h"
+#include "sysc/datatypes/bit/sc_bv_base.h"
+#include "sysc/datatypes/bit/sc_logic.h"
+#include "sysc/datatypes/bit/sc_lv_base.h"
+#include "sysc/datatypes/int/sc_signed.h"
+#include "sysc/datatypes/int/sc_unsigned.h"
+
+namespace sc_dt {
+class sc_bit;
+class sc_fxnum;
+class sc_fxnum_fast;
+class sc_fxval;
+class sc_fxval_fast;
+class sc_int_base;
+class sc_uint_base;
+}  // namespace sc_dt
 
 namespace sc_core {
 
 class wif_trace;  // defined in wif_trace.cc
-template<class T> class wif_T_trace;
+template<class T> class wif_T_trace; // IWYU pragma: keep
+class sc_event;
+class sc_time;
+class sc_trace_file;
 
 class wif_trace_file
   : public sc_trace_file_base

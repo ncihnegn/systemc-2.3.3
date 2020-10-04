@@ -52,17 +52,17 @@
 #define SCFX_MANT_H
 
 
-#include "sysc/datatypes/fx/scfx_ieee.h"
-#include "sysc/datatypes/fx/scfx_utils.h"
+#include <iosfwd>
+
 #include "sysc/kernel/sc_macros.h"
+#include "sysc/datatypes/fx/sc_fxdefs.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/utils/sc_machine.h"
 
 
 namespace sc_dt
 {
 
-// classes defined in this module
-class scfx_mant;
-class scfx_mant_ref;
 
 
 typedef unsigned int  word;       // Using int because of 64-bit machines.

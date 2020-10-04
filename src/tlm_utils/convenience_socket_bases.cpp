@@ -19,10 +19,13 @@
 
 #include "tlm_utils/convenience_socket_bases.h"
 
+#include <sstream>
+#include <string>
+
 #include "sysc/kernel/sc_object.h"
 #include "sysc/kernel/sc_simcontext.h"
 #include "sysc/utils/sc_report.h"
-#include <sstream>
+#include "sysc/utils/sc_report_handler.h"
 
 namespace tlm_utils {
 

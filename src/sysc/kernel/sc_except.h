@@ -30,7 +30,8 @@
 #ifndef SC_EXCEPT_H
 #define SC_EXCEPT_H
 
-#include <exception>
+#include <exception> // IWYU pragma: keep
+
 #include "sysc/kernel/sc_cmnhdr.h"
 
 #if defined(_MSC_VER) && !defined(SC_WIN_DLL_WARN)
@@ -40,10 +41,11 @@
 
 namespace sc_core {
 
-class sc_simcontext;
+class sc_simcontext; // IWYU pragma: keep
 class sc_process_b;
-class sc_method_process;
-class sc_thread_process;
+class sc_method_process; // IWYU pragma: keep
+class sc_thread_process; // IWYU pragma: keep
+
 void sc_thread_cor_fn( void* arg );
 
 /*
@@ -121,6 +123,7 @@ sc_unwind_exception::sc_unwind_exception( const sc_unwind_exception& that )
 //------------------------------------------------------------------------------
  
 class sc_report;
+
 SC_API sc_report* sc_handle_exception();
 
 } // namespace sc_core

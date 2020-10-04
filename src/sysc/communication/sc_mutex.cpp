@@ -27,7 +27,9 @@
  *****************************************************************************/
 
 #include "sysc/communication/sc_mutex.h"
+
 #include "sysc/kernel/sc_simcontext.h"
+#include "sysc/kernel/sc_wait.h"
 
 namespace sc_core {
 

@@ -58,20 +58,27 @@
 // the source.
 //
 
-#include "sysc/utils/sc_machine.h"
-#include "sysc/datatypes/fx/scfx_rep.h"
-
-#include "sysc/datatypes/fx/scfx_ieee.h"
-#include "sysc/datatypes/fx/scfx_pow10.h"
-#include "sysc/datatypes/fx/scfx_utils.h"
-
-#include "sysc/datatypes/bit/sc_bv_base.h"
-#include "sysc/datatypes/bit/sc_lv_base.h"
-
-#include <cctype>
 #include <cstdio>
 #include <cstdlib>
 #include <cmath>
+#include <ostream>
+
+#include "sysc/utils/sc_machine.h"
+#include "sysc/datatypes/fx/scfx_rep.h"
+#include "sysc/datatypes/fx/scfx_ieee.h"
+#include "sysc/datatypes/fx/scfx_pow10.h"
+#include "sysc/datatypes/fx/scfx_utils.h"
+#include "sysc/datatypes/bit/sc_bv_base.h"
+#include "sysc/datatypes/bit/sc_bit_proxies.h"
+#include "sysc/datatypes/bit/sc_proxy.h"
+#include "sysc/datatypes/fx/sc_fx_ids.h"
+#include "sysc/datatypes/fx/scfx_params.h"
+#include "sysc/datatypes/fx/scfx_string.h"
+#include "sysc/datatypes/int/sc_signed.h"
+#include "sysc/datatypes/int/sc_unsigned.h"
+#include "sysc/kernel/sc_macros.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 
 namespace sc_dt

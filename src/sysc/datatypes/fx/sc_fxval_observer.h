@@ -48,16 +48,15 @@
 #define SC_FXVAL_OBSERVER_H
 
 
-#include "sysc/datatypes/fx/sc_fxdefs.h"
+#include "sysc/kernel/sc_cmnhdr.h"
 
 
 namespace sc_dt
 {
 
 // classes defined in this module
-class sc_fxval_observer;
-class sc_fxval_fast_observer;
-
+class sc_fxval_observer; // IWYU pragma: keep
+class sc_fxval_fast_observer; // IWYU pragma: keep
 // forward class declarations
 class sc_fxval;
 class sc_fxval_fast;

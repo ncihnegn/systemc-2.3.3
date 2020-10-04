@@ -37,16 +37,18 @@
 
  *****************************************************************************/
 
+#include <cmath>
+#include <cstdint>
+#include <cstdlib>
 #include <ctime>
 #include <sstream>
 
 #include "sysc/tracing/sc_trace_file_base.h"
 #include "sysc/kernel/sc_simcontext.h"
-#include "sysc/kernel/sc_simcontext_int.h"
-
-#if SC_TRACING_PHASE_CALLBACKS_
-#  include "sysc/kernel/sc_object_int.h"
-#endif
+#include "sysc/kernel/sc_status.h"
+#include "sysc/tracing/sc_tracing_ids.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 #ifndef UINT64_C
 #if defined(_WIN32) && !defined(__MINGW32__)

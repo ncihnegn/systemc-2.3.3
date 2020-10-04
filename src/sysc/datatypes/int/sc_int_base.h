@@ -69,30 +69,27 @@
 #ifndef SC_INT_BASE_H
 #define SC_INT_BASE_H
 
+#include <iostream>
+#include <string>
+
 #include "sysc/kernel/sc_cmnhdr.h"
-#include "sysc/kernel/sc_object.h"
 #include "sysc/datatypes/misc/sc_value_base.h"
-#include "sysc/datatypes/int/sc_int_ids.h"
 #include "sysc/datatypes/int/sc_length_param.h"
 #include "sysc/datatypes/int/sc_nbdefs.h"
 #include "sysc/datatypes/int/sc_uint_base.h"
 #include "sysc/utils/sc_temporary.h"
+#include "sysc/datatypes/int/sc_nbutils.h"
 
 
 namespace sc_dt
 {
 
-class sc_concatref;
-
 // classes defined in this module
-class sc_int_bitref_r;
-class sc_int_bitref;
-class sc_int_subref_r;
-class sc_int_subref;
-class sc_int_base;
+class sc_int_bitref; // IWYU pragma: keep
+class sc_int_subref; // IWYU pragma: keep
+class sc_int_base; // IWYU pragma: keep
 class sc_signed_subref_r;
 class sc_unsigned_subref_r;
-
 // forward class declarations
 class sc_bv_base;
 class sc_lv_base;

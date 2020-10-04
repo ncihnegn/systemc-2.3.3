@@ -27,15 +27,12 @@
  *****************************************************************************/
 
 
-#include <cstdlib>
-#include <cstddef>
-
 #include "sysc/kernel/sc_process_handle.h"
-#include "sysc/kernel/sc_simcontext.h"
-#include "sysc/kernel/sc_simcontext_int.h"
 #include "sysc/kernel/sc_kernel_ids.h"
 #include "sysc/kernel/sc_thread_process.h"
 #include "sysc/kernel/sc_join.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
 

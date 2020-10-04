@@ -60,11 +60,31 @@
 #define SC_FXNUM_H
 
 
+#include <math.h>
+#include <iostream>
+#include <string>
+
 #include "sysc/kernel/sc_cmnhdr.h"
 #include "sysc/datatypes/bit/sc_lv_base.h"
 #include "sysc/datatypes/fx/sc_fxval.h"
 #include "sysc/datatypes/fx/scfx_params.h"
 #include "sysc/datatypes/fx/sc_fxnum_observer.h"
+#include "sysc/datatypes/bit/sc_bit.h"
+#include "sysc/datatypes/bit/sc_bv_base.h"
+#include "sysc/datatypes/bit/sc_proxy.h"
+#include "sysc/datatypes/fx/sc_fx_ids.h"
+#include "sysc/datatypes/fx/sc_fxcast_switch.h"
+#include "sysc/datatypes/fx/sc_fxdefs.h"
+#include "sysc/datatypes/fx/sc_fxval_observer.h"
+#include "sysc/datatypes/fx/scfx_ieee.h"
+#include "sysc/datatypes/fx/scfx_rep.h"
+#include "sysc/datatypes/int/sc_int_base.h"
+#include "sysc/datatypes/int/sc_nbdefs.h"
+#include "sysc/datatypes/int/sc_signed.h"
+#include "sysc/datatypes/int/sc_uint_base.h"
+#include "sysc/datatypes/int/sc_unsigned.h"
+#include "sysc/kernel/sc_macros.h"
+#include "sysc/utils/sc_report_handler.h"
 
 
 namespace sc_core {
@@ -79,16 +99,12 @@ namespace sc_dt
 {
 
 // classes defined in this module
-class sc_fxnum_bitref_r;
-class sc_fxnum_fast_bitref_r;
-class sc_fxnum_bitref;
 class sc_fxnum_fast_bitref;
-class sc_fxnum_subref_r;
 class sc_fxnum_fast_subref_r;
-class sc_fxnum_subref;
 class sc_fxnum_fast_subref;
 class sc_fxnum;
 class sc_fxnum_fast;
+class sc_fxtype_params;
 
 
 // ----------------------------------------------------------------------------

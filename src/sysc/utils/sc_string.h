@@ -35,8 +35,9 @@
 #define SC_STRING_H
 
 
-#include "sysc/utils/sc_report.h"
 #include <iostream>
+
+#include "sysc/kernel/sc_cmnhdr.h"
 
 namespace sc_dt {
 	class sc_string_old;

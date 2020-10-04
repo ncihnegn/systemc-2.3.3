@@ -31,8 +31,9 @@
 
 #include "sysc/kernel/sc_event.h"
 #include "sysc/kernel/sc_object.h"
-#include "sysc/kernel/sc_wait.h"
 #include "sysc/communication/sc_mutex_if.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_process.h"
 
 namespace sc_core {
 

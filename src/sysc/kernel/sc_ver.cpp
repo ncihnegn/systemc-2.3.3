@@ -26,15 +26,15 @@
   CHANGE LOG AT THE END OF THE FILE
  *****************************************************************************/
 
-#include <cstddef>
 #include <cstdlib>
+#include <cstring>
+#include <iostream>
+#include <sstream> // IWYU pragma: keep
 
 #include "sysc/kernel/sc_ver.h"
 #include "sysc/kernel/sc_kernel_ids.h"
 #include "sysc/utils/sc_report.h"
-
-#include <cstring>
-#include <sstream>
+#include "sysc/utils/sc_report_handler.h"
 
 using std::getenv;
 using std::strcmp;

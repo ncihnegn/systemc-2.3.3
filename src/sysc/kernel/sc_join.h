@@ -39,9 +39,12 @@
 #define SC_JOIN_H
 
 #include "sysc/kernel/sc_process.h"
-#include "sysc/kernel/sc_wait.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_event.h"
+#include "sysc/kernel/sc_thread_process.h"
 
 namespace sc_core {
+class sc_process_handle;
 
 //==============================================================================
 // CLASS sc_join

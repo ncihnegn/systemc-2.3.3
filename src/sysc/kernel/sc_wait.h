@@ -31,7 +31,8 @@
 #define SC_WAIT_H
 
 
-#include "sysc/kernel/sc_simcontext.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_time.h"
 
 namespace sc_core {
 

@@ -30,11 +30,18 @@
 #define SC_SIGNAL_PORTS_H
 
 
+#include <iosfwd>
+#include <string>
+#include <vector>
+#include <algorithm>
+
 #include "sysc/communication/sc_event_finder.h"
 #include "sysc/communication/sc_port.h"
 #include "sysc/communication/sc_signal_ifs.h"
 #include "sysc/datatypes/bit/sc_logic.h"
 #include "sysc/tracing/sc_trace.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_simcontext.h"
 
 #if ! defined( SC_DISABLE_VIRTUAL_BIND )
 #  define SC_VIRTUAL_ virtual
@@ -48,6 +55,8 @@
 #endif
 
 namespace sc_core {
+class sc_event;
+class sc_interface;
 
 // ----------------------------------------------------------------------------
 //  STRUCT : sc_trace_params

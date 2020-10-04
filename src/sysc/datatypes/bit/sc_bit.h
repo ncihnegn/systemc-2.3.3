@@ -63,15 +63,14 @@
 #define SC_BIT_H
 
 
-#include "sysc/datatypes/int/sc_nbdefs.h"
 #include <iostream>
+
+#include "sysc/datatypes/int/sc_nbdefs.h"
+#include "sysc/kernel/sc_cmnhdr.h"
 
 
 namespace sc_dt
 {
-
-// classes defined in this module
-class sc_bit;
 
 // forward class declarations
 class sc_logic;

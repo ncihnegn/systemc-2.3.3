@@ -59,6 +59,10 @@
 #include "sysc/datatypes/bit/sc_bv_base.h"
 #include "sysc/datatypes/fx/sc_fix.h"
 #include "sysc/datatypes/fx/sc_ufix.h"
+#include "sysc/datatypes/bit/sc_logic.h"
+#include "sysc/datatypes/bit/sc_lv_base.h"
+#include "sysc/datatypes/fx/sc_fxdefs.h"
+#include "sysc/kernel/sc_macros.h"
 
 
 namespace sc_dt

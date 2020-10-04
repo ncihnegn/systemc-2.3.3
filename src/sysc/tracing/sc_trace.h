@@ -49,10 +49,11 @@
 #ifndef SC_TRACE_H
 #define SC_TRACE_H
 
-#include <cstdio>
+#include <string>
 
 #include "sysc/datatypes/int/sc_nbdefs.h"
 #include "sysc/kernel/sc_time.h"
+#include "sysc/kernel/sc_cmnhdr.h"
 
 // Some forward declarations
 namespace sc_dt
@@ -74,8 +75,6 @@ namespace sc_dt
 namespace sc_core {
 
 class sc_event;
-class sc_time;
-
 template <class T> class sc_signal_in_if;
 
 // Base class for all kinds of trace files. 

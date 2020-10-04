@@ -29,11 +29,18 @@
 #ifndef SC_PRIM_CHANNEL_H
 #define SC_PRIM_CHANNEL_H
 
+#include <vector>
+
 #include "sysc/kernel/sc_object.h"
 #include "sysc/kernel/sc_wait.h"
 #include "sysc/kernel/sc_wait_cthread.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_event.h"
+#include "sysc/kernel/sc_time.h"
 
 namespace sc_core {
+class sc_prim_channel_registry;
+class sc_simcontext;
 
 // ----------------------------------------------------------------------------
 //  CLASS : sc_prim_channel
@@ -300,7 +307,7 @@ private:
     sc_prim_channel_registry& operator = ( const sc_prim_channel_registry& );
 
 private:
-    class async_update_list;   
+    class async_update_list;
 
     async_update_list*            m_async_update_list_p; // external updates.
     int                           m_construction_done;   // # of constructs.

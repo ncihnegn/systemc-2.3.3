@@ -27,9 +27,16 @@
  *****************************************************************************/
 
 #include "sysc/kernel/sc_method_process.h"
+
 #include "sysc/kernel/sc_simcontext_int.h"
 #include "sysc/kernel/sc_module.h"
 #include "sysc/kernel/sc_spawn_options.h"
+#include "sysc/kernel/sc_kernel_ids.h"
+#include "sysc/kernel/sc_object.h"
+#include "sysc/kernel/sc_sensitive.h"
+#include "sysc/kernel/sc_status.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 // DEBUGGING MACROS:
 //
@@ -41,6 +48,7 @@
 //            message will not print.
 #if 0
 #   include <cstring>
+
 #   define DEBUG_NAME ""
 #   define DEBUG_MSG(NAME,P,MSG) \
     { \

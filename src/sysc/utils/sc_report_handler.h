@@ -30,6 +30,8 @@
 #ifndef SC_REPORT_HANDLER_H
 #define SC_REPORT_HANDLER_H
 
+#include "sysc/kernel/sc_cmnhdr.h"
+
 namespace sc_core {
 
 // ----------------------------------------------------------------------------
@@ -54,7 +56,7 @@ struct SC_API sc_msg_def
 };
 
 typedef void (* sc_report_handler_proc)(const sc_report&, const sc_actions &);
-class sc_report;
+
 extern SC_API bool sc_report_close_default_log();
 class SC_API sc_report_handler
 {

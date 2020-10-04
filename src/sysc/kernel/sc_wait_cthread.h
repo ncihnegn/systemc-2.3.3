@@ -33,7 +33,11 @@
 
 
 #include "sysc/kernel/sc_simcontext.h"
-#include "sysc/datatypes/bit/sc_logic.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+
+namespace sc_dt {
+class sc_logic;
+}  // namespace sc_dt
 
 
 namespace sc_core 

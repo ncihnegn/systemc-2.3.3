@@ -27,11 +27,19 @@
  *****************************************************************************/
 
 
+#include <ext/alloc_traits.h>
+#include <memory>
+#include <algorithm>
+
 #include "sysc/kernel/sc_simcontext.h"
 #include "sysc/kernel/sc_reset.h"
 #include "sysc/kernel/sc_process_handle.h"
-#include "sysc/communication/sc_signal.h"
 #include "sysc/communication/sc_signal_ports.h"
+#include "sysc/communication/sc_interface.h"
+#include "sysc/communication/sc_signal_ifs.h"
+#include "sysc/kernel/sc_kernel_ids.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 
 // THE SYSTEMC PROOF OF CONCEPT SIMULATOR RESET SIGNAL IMPLEMENTATION:

@@ -31,9 +31,14 @@
 #define SC_EVENT_FINDER
 
 
-#include "sysc/communication/sc_port.h"
+#include "sysc/communication/sc_communication_ids.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_event.h"
+#include "sysc/utils/sc_report.h"
 
 namespace sc_core {
+class sc_interface;
+class sc_port_base;
 
 // ----------------------------------------------------------------------------
 //  CLASS : sc_event_finder

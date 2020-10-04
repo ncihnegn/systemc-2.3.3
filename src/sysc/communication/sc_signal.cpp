@@ -26,14 +26,17 @@
   CHANGE LOG IS AT THE END OF THE FILE
  *****************************************************************************/
 
+#include <sstream> // IWYU pragma: keep
 
 #include "sysc/communication/sc_communication_ids.h"
 #include "sysc/utils/sc_utils_ids.h"
 #include "sysc/communication/sc_signal.h"
 #include "sysc/kernel/sc_reset.h"
 #include "sysc/kernel/sc_simcontext_int.h"
-
-#include <sstream>
+#include "sysc/communication/sc_port.h"
+#include "sysc/kernel/sc_object.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 using sc_dt::sc_logic;
 

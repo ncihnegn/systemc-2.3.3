@@ -63,15 +63,16 @@
 #ifndef SC_NBUTILS_H
 #define SC_NBUTILS_H
 
-#include <cmath>
 #include <limits>
+#include <ostream> // IWYU pragma: keep
+#include <string>
 
 #include "sysc/datatypes/bit/sc_bit_ids.h"
 #include "sysc/datatypes/int/sc_int_ids.h"
 #include "sysc/datatypes/int/sc_nbdefs.h"
 #include "sysc/utils/sc_report.h"
-#include <ios>
-#include <ostream>
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_dt
 {

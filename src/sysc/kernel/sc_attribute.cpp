@@ -28,6 +28,9 @@
 
 #include "sysc/kernel/sc_attribute.h"
 
+#include <ext/alloc_traits.h>
+#include <utility>
+
 namespace sc_core {
 
 // ----------------------------------------------------------------------------

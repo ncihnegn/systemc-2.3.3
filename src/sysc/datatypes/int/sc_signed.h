@@ -93,27 +93,26 @@
 #define SC_SIGNED_H
 
 
-#include "sysc/kernel/sc_object.h"
+#include <iostream>
+#include <string>
+
 #include "sysc/datatypes/misc/sc_value_base.h"
 #include "sysc/utils/sc_temporary.h"
 #include "sysc/datatypes/int/sc_length_param.h"
 #include "sysc/datatypes/int/sc_nbdefs.h"
 #include "sysc/datatypes/int/sc_nbutils.h"
-#include "sysc/datatypes/int/sc_nbexterns.h"
 #include "sysc/datatypes/int/sc_unsigned.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/utils/sc_report.h"
 
 
 namespace sc_dt
 {
 
 // classes defined in this module
-class sc_signed_bitref_r;
-class sc_signed_bitref;
-class sc_signed_subref_r;
-class sc_signed_subref;
-class sc_concatref;
-class sc_signed;
-
+class sc_signed_bitref; // IWYU pragma: keep
+class sc_signed_subref_r; // IWYU pragma: keep
+class sc_signed_subref; // IWYU pragma: keep
 // forward class declarations
 class sc_bv_base;
 class sc_lv_base;
@@ -121,9 +120,8 @@ class sc_int_base;
 class sc_uint_base;
 class sc_int_subref_r;
 class sc_uint_subref_r;
-class sc_signed;
-class sc_unsigned;
-class sc_unsigned_subref_r;
+class sc_unsigned; // IWYU pragma: keep
+class sc_unsigned_subref_r; // IWYU pragma: keep
 class sc_fxval;
 class sc_fxval_fast;
 class sc_fxnum;

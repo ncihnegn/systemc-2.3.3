@@ -18,11 +18,19 @@
  *****************************************************************************/
 
 #include "tlm_core/tlm_2/tlm_generic_payload/tlm_phase.h"
+
+#include <ext/alloc_traits.h>
+#include <map>
+#include <memory>
+#include <string>
+#include <string_view>
+#include <utility>
+#include <vector>
+
 #include "sysc/utils/sc_string_view.h"
 #include "sysc/utils/sc_typeindex.h"
 #include "sysc/utils/sc_report.h"
-#include <cstring>
-#include <map>
+#include "sysc/utils/sc_report_handler.h"
 
 using sc_core::sc_string_view;
 using sc_core::sc_type_index;

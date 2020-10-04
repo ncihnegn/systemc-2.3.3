@@ -33,6 +33,7 @@
 #define SC_SENSITIVE_H
 
 #include "sysc/kernel/sc_process.h"
+#include "sysc/kernel/sc_cmnhdr.h"
 
 namespace sc_dt
 {

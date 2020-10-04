@@ -28,9 +28,13 @@
  *****************************************************************************/
 
 #include "sysc/kernel/sc_cthread_process.h"
-#include "sysc/kernel/sc_simcontext_int.h"
+
+#include "sysc/kernel/sc_kernel_ids.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
+class sc_spawn_options;
 
 //------------------------------------------------------------------------------
 //"sc_cthread_process::dont_initialize"

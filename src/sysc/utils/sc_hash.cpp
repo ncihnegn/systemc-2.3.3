@@ -27,15 +27,14 @@
   CHANGE LOG AT END OF FILE
  *****************************************************************************/
 
+#include <cstddef>
+#include <cstring>
+#include <algorithm>
+
 #include "sysc/kernel/sc_cmnhdr.h"
 #include "sysc/utils/sc_hash.h"
 #include "sysc/utils/sc_mempool.h"
 #include "sysc/utils/sc_report.h"  // sc_assert
-
-#include <cstdlib>
-#include <cstddef>
-#include <cstring>
-#include <algorithm>
 
 namespace sc_core {
 

@@ -39,6 +39,7 @@
 
 
 #include "sysc/utils/sc_report.h"
+#include "sysc/kernel/sc_cmnhdr.h"
 
 
 namespace sc_core {

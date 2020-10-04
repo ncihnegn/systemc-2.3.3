@@ -65,17 +65,27 @@
 #define SC_LV_BASE_H
 
 
-#include "sysc/datatypes/bit/sc_bit_ids.h"
+#include <string>
+
 #include "sysc/datatypes/bit/sc_bv_base.h"
 #include "sysc/datatypes/bit/sc_logic.h"
 #include "sysc/datatypes/int/sc_length_param.h"
+#include "sysc/datatypes/bit/sc_bit_proxies.h"
+#include "sysc/datatypes/bit/sc_proxy.h"
+#include "sysc/datatypes/int/sc_nbdefs.h"
+#include "sysc/datatypes/int/sc_signed.h"
+#include "sysc/datatypes/int/sc_unsigned.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_macros.h"
+#include "sysc/utils/sc_report.h"
 
 
 namespace sc_dt
 {
 
 // classes defined in this module
-class sc_lv_base;
+class sc_int_base;
+class sc_uint_base;
 
 
 // ----------------------------------------------------------------------------

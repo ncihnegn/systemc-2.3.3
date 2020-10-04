@@ -43,15 +43,22 @@
 #endif
 
 #include "sysc/communication/sc_clock.h"
-#include "sysc/communication/sc_communication_ids.h"
-#include "sysc/kernel/sc_simcontext.h"
-#include "sysc/kernel/sc_process.h"
-#include "sysc/kernel/sc_spawn.h"
-#include "sysc/utils/sc_utils_ids.h"
 
 #include <sstream>
+#include <string>
+#include <typeinfo>
+
+#include "sysc/communication/sc_communication_ids.h"
+#include "sysc/kernel/sc_simcontext.h"
+#include "sysc/kernel/sc_spawn.h"
+#include "sysc/utils/sc_utils_ids.h"
+#include "sysc/communication/sc_signal_ifs.h"
+#include "sysc/kernel/sc_spawn_options.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
+class sc_port_base;
 
 // ----------------------------------------------------------------------------
 //  CLASS : sc_clock

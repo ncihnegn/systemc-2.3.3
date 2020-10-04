@@ -48,10 +48,13 @@
 #define SC_FXDEFS_H
 
 
+#include <iosfwd>
+#include <string>
+
 #include "sysc/kernel/sc_cmnhdr.h"
-#include "sysc/utils/sc_machine.h"
-#include "sysc/datatypes/fx/sc_fx_ids.h"
-#include "sysc/datatypes/int/sc_nbutils.h"
+#include "sysc/utils/sc_machine.h" // IWYU pragma: keep
+#include "sysc/datatypes/int/sc_nbutils.h" // IWYU pragma: keep
+#include "sysc/utils/sc_report.h"
 
 
 namespace sc_dt

@@ -60,20 +60,22 @@
 // source.
 //
 
+#include <sstream> // IWYU pragma: keep
+
 #include "sysc/kernel/sc_macros.h"
 #include "sysc/datatypes/int/sc_signed.h"
 #include "sysc/datatypes/int/sc_unsigned.h"
 #include "sysc/datatypes/int/sc_int_base.h"
 #include "sysc/datatypes/int/sc_uint_base.h"
-#include "sysc/datatypes/int/sc_signed.h"
 #include "sysc/datatypes/int/sc_int_ids.h"
 #include "sysc/datatypes/bit/sc_bv_base.h"
 #include "sysc/datatypes/bit/sc_lv_base.h"
-#include "sysc/datatypes/misc/sc_concatref.h"
 #include "sysc/datatypes/fx/sc_fix.h"
 #include "sysc/datatypes/fx/scfx_other_defs.h"
-
-#include <sstream>
+#include "sysc/datatypes/bit/sc_logic.h"
+#include "sysc/datatypes/fx/sc_fxdefs.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 // explicit template instantiations
 namespace sc_core {

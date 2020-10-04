@@ -28,11 +28,14 @@
  *****************************************************************************/
 
 #include "sysc/communication/sc_export.h"
+
+#include <sstream>
+#include <string>
+#include <algorithm>
+
 #include "sysc/kernel/sc_simcontext.h"
 #include "sysc/kernel/sc_module.h"
 #include "sysc/kernel/sc_object_int.h"
-
-#include <sstream>
 
 namespace sc_core {
 

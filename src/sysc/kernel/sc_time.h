@@ -31,15 +31,18 @@
 #define SC_TIME_H
 
 
+#include <iostream>
+#include <string>
+
 #include "sysc/datatypes/int/sc_nbdefs.h"
 #include "sysc/datatypes/fx/scfx_ieee.h"
-
-#include <iostream>
+#include "sysc/kernel/sc_cmnhdr.h"
 
 
 namespace sc_core {
 
 class sc_simcontext;
+class sc_time;
 
 // friend operator declarations
 
@@ -66,8 +69,6 @@ enum sc_time_unit
     SC_MS,
     SC_SEC
 };
-
-class SC_API sc_time_tuple;
 
 // ----------------------------------------------------------------------------
 //  CLASS : sc_time

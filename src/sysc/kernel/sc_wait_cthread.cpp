@@ -29,14 +29,18 @@
 
 
 
+#include <sstream>
+#include <string>
+
 #include "sysc/kernel/sc_kernel_ids.h"
 #include "sysc/kernel/sc_cthread_process.h"
-#include "sysc/kernel/sc_simcontext_int.h"
 #include "sysc/kernel/sc_wait_cthread.h"
-#include "sysc/communication/sc_port.h"
-#include "sysc/kernel/sc_wait.h"
-
-#include <sstream>
+#include "sysc/communication/sc_signal_ifs.h"
+#include "sysc/datatypes/bit/sc_logic.h"
+#include "sysc/kernel/sc_process.h"
+#include "sysc/kernel/sc_thread_process.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
 

@@ -31,10 +31,13 @@
 #if !defined(sc_process_h_INCLUDED)
 #define sc_process_h_INCLUDED
 
-#include "sysc/kernel/sc_constants.h"
+#include <iosfwd>
+#include <string>
+#include <vector>
+
 #include "sysc/kernel/sc_object.h"
-#include "sysc/kernel/sc_kernel_ids.h"
-#include "sysc/communication/sc_export.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/utils/sc_report.h"
 
 #if defined(_MSC_VER) && !defined(SC_WIN_DLL_WARN)
 #pragma warning(push)
@@ -45,8 +48,8 @@ namespace sc_core {
 
 // Forward declarations:
 class sc_process_handle;
-class sc_thread_process;
 class sc_reset;
+class sc_simcontext;
 
 SC_API const char* sc_gen_unique_name( const char*, bool preserve_first );
 SC_API  sc_process_handle sc_get_current_process_handle();
@@ -207,7 +210,6 @@ class sc_event;
 class sc_event_list;
 class sc_name_gen;
 class sc_spawn_options;
-class sc_unwind_exception;
 
 //==============================================================================
 // CLASS sc_throw_it<EXCEPT> - ARBITRARY EXCEPTION CLASS

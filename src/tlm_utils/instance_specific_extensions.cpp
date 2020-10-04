@@ -17,11 +17,20 @@
 
  *****************************************************************************/
 
+#include <stddef.h>
+#include <map>
+#include <typeinfo>
+#include <utility>
+#include <vector>
+
 #include "tlm_utils/instance_specific_extensions_int.h"
 #include "sysc/utils/sc_typeindex.h" // sc_typeindex
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "tlm_core/tlm_2/tlm_generic_payload/tlm_array.h"
 
-#include <map>
-#include <iostream>
+namespace tlm_utils {
+class instance_specific_extension_carrier;
+}  // namespace tlm_utils
 
 namespace tlm {
 template class SC_API tlm_array<tlm_utils::ispex_base*>;

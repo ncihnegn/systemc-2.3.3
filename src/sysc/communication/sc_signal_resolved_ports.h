@@ -32,6 +32,9 @@
 
 #include "sysc/communication/sc_signal_ports.h"
 #include "sysc/datatypes/bit/sc_logic.h"
+#include "sysc/communication/sc_port.h"
+#include "sysc/communication/sc_signal_ifs.h"
+#include "sysc/kernel/sc_cmnhdr.h"
 
 namespace sc_core {
 

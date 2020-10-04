@@ -32,6 +32,8 @@
 #include "sysc/kernel/sc_process.h"
 //
 #include "sysc/utils/sc_report.h"
+#include "sysc/kernel/sc_kernel_ids.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
 

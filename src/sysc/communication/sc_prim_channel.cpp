@@ -28,10 +28,13 @@
  *****************************************************************************/
 
 #include "sysc/communication/sc_prim_channel.h"
+
 #include "sysc/communication/sc_communication_ids.h"
 #include "sysc/kernel/sc_simcontext.h"
-#include "sysc/kernel/sc_module.h"
 #include "sysc/kernel/sc_object_int.h"
+#include "sysc/communication/sc_mutex_if.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 #ifndef SC_DISABLE_ASYNC_UPDATES
 #  include "sysc/communication/sc_host_mutex.h"

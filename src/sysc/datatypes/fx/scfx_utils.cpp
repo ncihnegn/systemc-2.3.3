@@ -47,6 +47,8 @@
 
 #include "sysc/datatypes/fx/scfx_utils.h"
 
+#include "sysc/datatypes/fx/sc_fxdefs.h"
+
 
 namespace sc_dt
 {

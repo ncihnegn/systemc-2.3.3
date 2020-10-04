@@ -48,12 +48,10 @@
 // the source.
 //
 
-#include <cstdlib>
-#include <cctype>
-#include <cstdio>
-
 #include "sysc/datatypes/int/sc_int_ids.h"
 #include "sysc/datatypes/misc/sc_value_base.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_dt
 {

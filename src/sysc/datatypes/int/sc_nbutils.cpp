@@ -57,9 +57,9 @@
 //
 
 #include <cctype>
-#include <cstdio>
 #include <cstring>
-#include <sstream>
+#include <ostream>
+#include <sstream> // IWYU pragma: keep
 
 #include "sysc/datatypes/int/sc_int_ids.h"
 #include "sysc/datatypes/int/sc_nbutils.h"

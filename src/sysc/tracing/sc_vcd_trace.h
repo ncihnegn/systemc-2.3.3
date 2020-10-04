@@ -49,14 +49,34 @@
 #ifndef SC_VCD_TRACE_H
 #define SC_VCD_TRACE_H
 
+#include <string>
+#include <vector>
+
 #include "sysc/tracing/sc_trace_file_base.h"
+#include "sysc/datatypes/bit/sc_bv_base.h"
+#include "sysc/datatypes/bit/sc_logic.h"
+#include "sysc/datatypes/bit/sc_lv_base.h"
+#include "sysc/datatypes/int/sc_nbdefs.h"
+#include "sysc/datatypes/int/sc_signed.h"
+#include "sysc/datatypes/int/sc_unsigned.h"
+
+namespace sc_dt {
+class sc_bit;
+class sc_fxnum;
+class sc_fxnum_fast;
+class sc_fxval;
+class sc_fxval_fast;
+class sc_int_base;
+class sc_uint_base;
+}  // namespace sc_dt
 
 namespace sc_core {
 
 class sc_time;
-
 class vcd_trace;  // defined in sc_vcd_trace.cpp
-template<class T> class vcd_T_trace;
+template<class T> class vcd_T_trace; // IWYU pragma: keep
+class sc_event;
+class sc_trace_file;
 
 
 // ----------------------------------------------------------------------------

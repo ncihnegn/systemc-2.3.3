@@ -27,7 +27,9 @@
  *****************************************************************************/
 
 #include "sysc/communication/sc_event_queue.h"
-#include "sysc/kernel/sc_method_process.h"
+
+#include "sysc/kernel/sc_sensitive.h"
+#include "sysc/utils/sc_report.h"
 
 namespace sc_core {
 

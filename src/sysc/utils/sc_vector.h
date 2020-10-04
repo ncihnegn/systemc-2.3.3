@@ -33,8 +33,11 @@
 #include <iterator>
 #include <string>
 #include <algorithm> // std::swap
+#include <cstddef>
+#include <unordered_map>
 
 #include "sysc/kernel/sc_object.h"
+#include "sysc/kernel/sc_cmnhdr.h"
 
 #if SC_CPLUSPLUS >= 201103L // use C++11 for type traits
 # include <type_traits>
@@ -111,7 +114,6 @@ namespace sc_meta {
 // forward declarations
 template< typename T >              class sc_vector;
 template< typename T, typename MT > class sc_vector_assembly;
-template< typename T, typename MT > class sc_vector_iter;
 
 // implementation-defined
 template< typename Container, typename ArgumentIterator >

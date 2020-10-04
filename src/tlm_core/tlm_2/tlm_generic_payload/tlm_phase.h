@@ -20,10 +20,8 @@
 #ifndef TLM_CORE_TLM2_TLM_PHASE_H_INCLUDED_
 #define TLM_CORE_TLM2_TLM_PHASE_H_INCLUDED_
 
-#include <string>
 #include <iostream>
 #include <typeinfo>
-#include <vector>
 
 #include "sysc/kernel/sc_cmnhdr.h" // SC_API
 #include "sysc/kernel/sc_macros.h" // SC_CONCAT_HELPER_, SC_STRINGIFY_HELPER_

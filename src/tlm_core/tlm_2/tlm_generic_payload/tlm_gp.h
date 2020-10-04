@@ -27,17 +27,17 @@
 #ifndef TLM_CORE_TLM2_TLM_GP_H_INCLUDED_
 #define TLM_CORE_TLM2_TLM_GP_H_INCLUDED_
 
+#include <typeinfo> // std::type_info
+#include <string>
+
 #include "sysc/kernel/sc_cmnhdr.h" // SC_API
 #include "sysc/utils/sc_report.h" // sc_assert
 #include "sysc/datatypes/int/sc_nbdefs.h" // sc_dt::uint64
-
 #include "tlm_core/tlm_2/tlm_generic_payload/tlm_array.h"
-
-#include <typeinfo> // std::type_info
 
 namespace tlm {
 
-class tlm_generic_payload;
+class tlm_generic_payload; // IWYU pragma: keep
 
 class tlm_mm_interface {
 public:

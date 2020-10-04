@@ -51,9 +51,8 @@
 // the source.
 //
 
-#include <cmath>
-
 #include "sysc/datatypes/fx/sc_fxnum.h"
+#include "sysc/datatypes/bit/sc_bit_proxies.h"
 
 
 namespace sc_dt

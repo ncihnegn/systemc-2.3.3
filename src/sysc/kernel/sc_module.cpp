@@ -27,13 +27,9 @@
  *****************************************************************************/
 
 
-#include <cassert>
-#include <cmath>
-#include <cstddef>
-#include <cstdio>
 #include <sstream>
+#include <algorithm>
 
-#include "sysc/kernel/sc_event.h"
 #include "sysc/kernel/sc_kernel_ids.h"
 #include "sysc/kernel/sc_module.h"
 #include "sysc/kernel/sc_module_registry.h"
@@ -46,13 +42,14 @@
 #include "sysc/kernel/sc_object_int.h"
 #include "sysc/kernel/sc_reset.h"
 #include "sysc/communication/sc_communication_ids.h"
-#include "sysc/communication/sc_interface.h"
 #include "sysc/communication/sc_port.h"
-#include "sysc/communication/sc_signal.h"
-#include "sysc/communication/sc_signal_ports.h"
 #include "sysc/utils/sc_utils_ids.h"
+#include "sysc/kernel/sc_thread_process.h"
+#include "sysc/utils/sc_list.h"
 
 namespace sc_core {
+class sc_interface;
+template <class T> class sc_signal_in_if;
 
 // ----------------------------------------------------------------------------
 //  CLASS : sc_module_dynalloc_list

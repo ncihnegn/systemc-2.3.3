@@ -29,6 +29,10 @@
 #ifndef SC_MEMPOOL_H
 #define SC_MEMPOOL_H
 
+#include <iosfwd>
+
+#include "sysc/kernel/sc_cmnhdr.h"
+
 namespace sc_core {
 
 // ----------------------------------------------------------------------------

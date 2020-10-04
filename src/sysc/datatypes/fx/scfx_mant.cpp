@@ -48,6 +48,9 @@
 
 #include "sysc/datatypes/fx/scfx_mant.h"
 
+#include "sysc/datatypes/fx/scfx_utils.h"
+#include "sysc/datatypes/int/sc_nbdefs.h"
+
 
 namespace sc_dt
 {

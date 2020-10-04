@@ -28,9 +28,7 @@
  *****************************************************************************/
 
 
-#include "sysc/kernel/sc_event.h"
 #include "sysc/kernel/sc_kernel_ids.h"
-#include "sysc/kernel/sc_module.h"
 #include "sysc/kernel/sc_cthread_process.h"
 #include "sysc/kernel/sc_method_process.h"
 #include "sysc/kernel/sc_thread_process.h"
@@ -38,6 +36,13 @@
 #include "sysc/kernel/sc_sensitive.h"
 #include "sysc/communication/sc_signal_ports.h"
 #include "sysc/utils/sc_utils_ids.h"
+#include "sysc/communication/sc_event_finder.h"
+#include "sysc/communication/sc_interface.h"
+#include "sysc/communication/sc_port.h"
+#include "sysc/communication/sc_signal_ifs.h"
+#include "sysc/kernel/sc_simcontext.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
 

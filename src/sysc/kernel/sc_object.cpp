@@ -27,26 +27,23 @@
  *****************************************************************************/
 
 
-#include <cstdlib>
-#include <cassert>
 #include <cstddef>
-#include <cstdio>
 #include <cstring>
 #include <cctype>
+#include <algorithm>
 
-#include "sysc/kernel/sc_externs.h"
 #include "sysc/kernel/sc_kernel_ids.h"
-#include "sysc/kernel/sc_module.h"
 #include "sysc/kernel/sc_object.h"
 #include "sysc/kernel/sc_object_manager.h"
 #include "sysc/kernel/sc_phase_callback_registry.h"
-#include "sysc/kernel/sc_process_handle.h"
 #include "sysc/kernel/sc_simcontext.h"
 #include "sysc/kernel/sc_event.h"
-#include "sysc/utils/sc_hash.h"
-#include "sysc/utils/sc_list.h"
 #include "sysc/utils/sc_utils_ids.h"
 #include "sysc/utils/sc_mempool.h"
+#include "sysc/kernel/sc_attribute.h"
+#include "sysc/kernel/sc_status.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
 

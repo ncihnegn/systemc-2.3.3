@@ -61,9 +61,13 @@
  *****************************************************************************/
 
 
-#include <cstdlib>
+#include <math.h>
 #include <limits>
 #include <vector>
+#include <sstream>
+#include <iomanip>
+#include <cstdio>
+#include <algorithm>
 
 #include "sysc/kernel/sc_simcontext.h"
 #include "sysc/kernel/sc_ver.h"
@@ -74,17 +78,22 @@
 #include "sysc/datatypes/int/sc_unsigned.h"
 #include "sysc/datatypes/int/sc_int_base.h"
 #include "sysc/datatypes/int/sc_uint_base.h"
-#include "sysc/datatypes/fx/fx.h"
 #include "sysc/tracing/sc_wif_trace.h"
-
-#include <sstream>
-#include <iomanip>
+#include "sysc/datatypes/fx/sc_ufixed.h"
+#include "sysc/datatypes/fx/scfx_params.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_time.h"
+#include "sysc/tracing/sc_trace.h"
+#include "sysc/tracing/sc_tracing_ids.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 #if defined(_MSC_VER)
 # pragma warning(disable:4309) // truncation of constant value
 #endif
 
 namespace sc_core {
+class sc_event;
 
 // Forward declarations for functions that come later in the file
 static char map_sc_logic_state_to_wif_state(char in_char);

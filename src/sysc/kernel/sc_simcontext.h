@@ -30,12 +30,18 @@
 #ifndef SC_SIMCONTEXT_H
 #define SC_SIMCONTEXT_H
 
+#include <stddef.h>
+#include <string>
+#include <vector>
+#include <algorithm>
+
 #include "sysc/kernel/sc_cmnhdr.h"
 #include "sysc/kernel/sc_process.h"
 #include "sysc/kernel/sc_status.h"
 #include "sysc/kernel/sc_time.h"
-#include "sysc/utils/sc_hash.h"
 #include "sysc/utils/sc_pq.h"
+#include "sysc/datatypes/int/sc_nbdefs.h"
+#include "sysc/utils/sc_report.h"
 
 #if defined(_MSC_VER) && !defined(SC_WIN_DLL_WARN)
 #pragma warning(push)
@@ -52,27 +58,21 @@ class sc_event;
 class sc_event_timed;
 class sc_export_registry;
 class sc_module;
-class sc_module_name;
 class sc_module_registry;
 class sc_name_gen;
 class sc_object;
 class sc_object_manager;
 class sc_phase_callback_registry;
-class sc_process_handle;
 class sc_port_registry;
 class sc_prim_channel_registry;
 class sc_process_table;
-class sc_signal_bool_deval;
 class sc_trace_file;
 class sc_runnable;
-class sc_process_host;
-class sc_method_process;
-class sc_cthread_process;
-class sc_thread_process;
 class sc_reset_finder;
-
-
 template< typename > class sc_plist;
+class sc_simcontext;
+class sc_spawn_options;
+
 typedef sc_plist< sc_process_b* > sc_process_list;
 
 struct SC_API sc_curr_proc_info
@@ -134,7 +134,7 @@ SC_API bool    sc_pending_activity_at_current_time( const sc_simcontext* );
 SC_API bool    sc_pending_activity_at_future_time( const sc_simcontext* );
 SC_API sc_time sc_time_to_pending_activity( const sc_simcontext* );
 
-struct sc_invoke_method; 
+struct sc_invoke_method;
 
 // ----------------------------------------------------------------------------
 //  CLASS : sc_simcontext
@@ -624,6 +624,7 @@ sc_simcontext::write_check() const
 // ----------------------------------------------------------------------------
 
 class sc_process_handle;
+
 SC_API sc_process_handle sc_get_current_process_handle();
 
 // Get the current object hierarchy context

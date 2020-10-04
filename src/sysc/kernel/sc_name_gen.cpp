@@ -27,10 +27,12 @@
  *****************************************************************************/
 
 
+#include <sstream>
+
 #include "sysc/kernel/sc_kernel_ids.h"
 #include "sysc/kernel/sc_name_gen.h"
-
-#include <sstream>
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
 

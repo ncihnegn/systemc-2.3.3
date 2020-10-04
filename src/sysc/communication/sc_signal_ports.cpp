@@ -27,10 +27,11 @@
  *****************************************************************************/
 
 #include "sysc/communication/sc_signal_ports.h"
-#include "sysc/datatypes/int/sc_signed.h"
-#include "sysc/datatypes/int/sc_unsigned.h"
-#include "sysc/datatypes/bit/sc_lv_base.h"
+
 #include "sysc/utils/sc_utils_ids.h"
+#include "sysc/communication/sc_interface.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
 

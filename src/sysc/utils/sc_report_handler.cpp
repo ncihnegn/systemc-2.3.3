@@ -27,16 +27,20 @@
   CHANGE LOG AT END OF FILE
  *****************************************************************************/
 
+#include <limits.h>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <fstream>
+#include <fstream> // IWYU pragma: keep
+#include <iostream>
+#include <string>
 
 #include "sysc/kernel/sc_process.h"
-#include "sysc/kernel/sc_simcontext_int.h"
 #include "sysc/utils/sc_stop_here.h"
 #include "sysc/utils/sc_report_handler.h"
 #include "sysc/utils/sc_report.h"
+#include "sysc/kernel/sc_simcontext.h"
+#include "sysc/kernel/sc_time.h"
 
 namespace std {}
 

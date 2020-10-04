@@ -18,10 +18,13 @@
  *****************************************************************************/
 
 #include "tlm_core/tlm_2/tlm_generic_payload/tlm_gp.h"
-#include "sysc/utils/sc_typeindex.h" // sc_typeindex
 
 #include <map>
 #include <cstring>  // std::memcpy et.al.
+#include <utility>
+#include <vector>
+
+#include "sysc/utils/sc_typeindex.h" // sc_typeindex
 
 using sc_core::sc_type_index;
 

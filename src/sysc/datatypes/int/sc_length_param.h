@@ -58,14 +58,21 @@
 #define SC_LENGTH_PARAM_H
 
 
+#include <iostream>
+#include <string>
+
 #include "sysc/datatypes/fx/sc_context.h"
+#include "sysc/datatypes/fx/sc_fxdefs.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/utils/sc_hash.h"
+#include "sysc/utils/sc_report_handler.h"
 
 
 namespace sc_dt
 {
 
 // classes defined in this module
-class sc_length_param;
+class sc_length_param; // IWYU pragma: keep
 
 // friend operator declarations
     SC_API bool operator == ( const sc_length_param&,

@@ -30,12 +30,15 @@
 #define SC_PORT_H
 
 
+#include <cstddef>
+#include <vector>
+
 #include "sysc/communication/sc_communication_ids.h"
-#include "sysc/communication/sc_interface.h"
-#include "sysc/kernel/sc_event.h"
 #include "sysc/kernel/sc_object.h"
 #include "sysc/kernel/sc_process.h"
 #include "sysc/utils/sc_typeindex.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/utils/sc_report.h"
 
 #if ! defined( SC_DISABLE_VIRTUAL_BIND )
 #  define SC_VIRTUAL_ virtual
@@ -51,9 +54,10 @@
 namespace sc_core {
 
 class sc_event_finder;
-class sc_port_base;
-
 struct sc_bind_info;
+class sc_event;
+class sc_interface;
+class sc_simcontext;
 
 enum sc_port_policy
 {

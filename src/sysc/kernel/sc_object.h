@@ -30,8 +30,11 @@
 #ifndef SC_OBJECT_H
 #define SC_OBJECT_H
 
-#include "sysc/kernel/sc_attribute.h"
 #include <iostream>
+#include <string>
+#include <vector>
+
+#include "sysc/kernel/sc_cmnhdr.h"
 
 #if defined(_MSC_VER) && !defined(SC_WIN_DLL_WARN)
 #pragma warning(push)
@@ -41,12 +44,13 @@
 namespace sc_core {
 
 class SC_API sc_event;
-class SC_API sc_module;
-class sc_phase_callback_registry;
-class sc_runnable;
+class sc_phase_callback_registry; // IWYU pragma: keep
+class sc_runnable; // IWYU pragma: keep
 class SC_API sc_simcontext;
 class SC_API sc_trace_file;
-class SC_API sc_trace_file_base;
+class SC_API sc_trace_file_base; // IWYU pragma: keep
+class sc_attr_base;
+class sc_attr_cltn;
 
 // ----------------------------------------------------------------------------
 //  CLASS : sc_object

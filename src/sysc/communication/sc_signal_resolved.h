@@ -31,7 +31,14 @@
 #define SC_SIGNAL_RESOLVED_H
 
 
+#include <vector>
+
 #include "sysc/communication/sc_signal.h"
+#include "sysc/communication/sc_writer_policy.h"
+#include "sysc/datatypes/bit/sc_logic.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_process.h"
+#include "sysc/kernel/sc_simcontext.h"
 
 #if defined(_MSC_VER) && !defined(SC_WIN_DLL_WARN)
 #pragma warning(push)
@@ -40,7 +47,8 @@
 
 namespace sc_core {
 
-class sc_process_b;
+class sc_port_base;
+template <class T> class sc_signal_in_if;
 
 extern SC_API const sc_dt::sc_logic_value_t sc_logic_resolution_tbl[4][4];
 

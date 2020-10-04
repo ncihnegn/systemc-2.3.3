@@ -30,6 +30,10 @@
 #include "sysc/communication/sc_event_finder.h"
 
 #include <sstream>
+#include <string>
+
+#include "sysc/communication/sc_port.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
 

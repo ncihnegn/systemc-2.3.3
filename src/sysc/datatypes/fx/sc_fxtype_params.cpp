@@ -47,7 +47,7 @@
 
 #include "sysc/datatypes/fx/sc_fxtype_params.h"
 
-#include <sstream>
+#include <sstream> // IWYU pragma: keep
 
 // explicit template instantiations
 namespace sc_core {

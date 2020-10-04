@@ -32,13 +32,10 @@
 #pragma warning(disable:4661)
 #endif
 
-#include <cstdio>
-
-#include "sysc/kernel/sc_simcontext.h"
-#include "sysc/kernel/sc_process_handle.h"
 #include "sysc/communication/sc_communication_ids.h"
 #include "sysc/communication/sc_signal_resolved.h"
 #include "sysc/communication/sc_signal_resolved_ports.h"
+#include "sysc/communication/sc_interface.h"
 
 namespace sc_core {
 

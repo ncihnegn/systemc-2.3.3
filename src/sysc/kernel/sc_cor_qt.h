@@ -31,6 +31,11 @@
 #define SC_COR_QT_H
 
 
+#include <iosfwd>
+
+namespace sc_core {
+class sc_simcontext;
+}  // namespace sc_core
 #if !defined(_WIN32) && !defined(WIN32) && !defined(WIN64)  && !defined(SC_USE_PTHREADS)
 
 #include "sysc/kernel/sc_cor.h"
@@ -39,6 +44,7 @@
 namespace sc_core {
 
 class sc_cor_pkg_qt;
+
 typedef sc_cor_pkg_qt sc_cor_pkg_t;
 
 // ----------------------------------------------------------------------------

@@ -32,6 +32,8 @@
 #define SC_MODULE_REGISTRY_H
 
 
+#include <vector>
+
 namespace sc_core {
 
 class sc_module;

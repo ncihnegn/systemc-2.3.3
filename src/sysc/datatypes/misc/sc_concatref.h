@@ -77,21 +77,25 @@
 #ifndef SC_CONCATREF_H
 #define SC_CONCATREF_H
 
-#include "sysc/kernel/sc_object.h"
+#include <iostream>
+#include <string>
+
 #include "sysc/datatypes/misc/sc_value_base.h"
 #include "sysc/utils/sc_temporary.h"
-#include "sysc/datatypes/bit/sc_bv.h"
-#include "sysc/datatypes/bit/sc_lv.h"
 #include "sysc/datatypes/int/sc_int_base.h"
 #include "sysc/datatypes/int/sc_uint_base.h"
 #include "sysc/datatypes/int/sc_signed.h"
 #include "sysc/datatypes/int/sc_unsigned.h"
+#include "sysc/datatypes/bit/sc_bv_base.h"
+#include "sysc/datatypes/bit/sc_lv_base.h"
+#include "sysc/datatypes/int/sc_nbdefs.h"
+#include "sysc/kernel/sc_cmnhdr.h"
 
 namespace sc_dt {
 
 // classes defined in this module
-class sc_concatref;
-class sc_concat_bool;
+class sc_concatref; // IWYU pragma: keep
+class sc_concat_bool; // IWYU pragma: keep
 
 } // namespace sc_dt
 

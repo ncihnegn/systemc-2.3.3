@@ -29,16 +29,29 @@
  CHANGE LOG AT THE END OF THE FILE
  *****************************************************************************/
 
+#include <cstddef>
+#include <sstream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
 #include "sysc/kernel/sc_name_gen.h"
 #include "sysc/kernel/sc_cthread_process.h"
 #include "sysc/kernel/sc_method_process.h"
 #include "sysc/kernel/sc_thread_process.h"
-#include "sysc/kernel/sc_sensitive.h"
 #include "sysc/kernel/sc_process_handle.h"
 #include "sysc/kernel/sc_event.h"
-#include <sstream>
+#include "sysc/kernel/sc_kernel_ids.h"
+#include "sysc/kernel/sc_object.h"
+#include "sysc/kernel/sc_process.h"
+#include "sysc/kernel/sc_reset.h"
+#include "sysc/kernel/sc_simcontext.h"
+#include "sysc/kernel/sc_status.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
+class sc_spawn_options;
 
 // sc_process_handle entities that are returned for null pointer instances:
 //

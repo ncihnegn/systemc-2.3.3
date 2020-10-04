@@ -29,7 +29,10 @@
 #ifndef SC_SIGNAL_H
 #define SC_SIGNAL_H
 
-#include "sysc/communication/sc_port.h"
+#include <typeinfo>
+#include <iostream>
+#include <string>
+
 #include "sysc/communication/sc_prim_channel.h"
 #include "sysc/communication/sc_signal_ifs.h"
 #include "sysc/communication/sc_writer_policy.h"
@@ -37,10 +40,14 @@
 #include "sysc/kernel/sc_process.h"
 #include "sysc/kernel/sc_simcontext.h"
 #include "sysc/datatypes/bit/sc_logic.h"
-#include "sysc/tracing/sc_trace.h"
-#include <typeinfo>
+#include "sysc/datatypes/int/sc_nbdefs.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_process_handle.h"
 
 namespace sc_core {
+class sc_object;
+class sc_port_base;
+class sc_trace_file;
 
 inline
 bool

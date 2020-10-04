@@ -28,15 +28,17 @@
 
 #include "sysc/kernel/sc_time.h"
 
-#include "sysc/kernel/sc_kernel_ids.h"
-#include "sysc/kernel/sc_simcontext.h"
-#include "sysc/utils/sc_utils_ids.h"
-
 #include <cctype>
 #include <cmath>
 #include <cstdlib>
 #include <cstring>
-#include <sstream>
+#include <sstream> // IWYU pragma: keep
+
+#include "sysc/kernel/sc_kernel_ids.h"
+#include "sysc/kernel/sc_simcontext.h"
+#include "sysc/utils/sc_utils_ids.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 #ifdef SC_ENABLE_EARLY_MAXTIME_CREATION
 #  define SC_MAXTIME_ALLOWED_ 1

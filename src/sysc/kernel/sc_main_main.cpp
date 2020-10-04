@@ -28,18 +28,17 @@
 
 #define SC_DISABLE_API_VERSION_CHECK // for in-library sc_ver.h inclusion
 
-#include "sysc/kernel/sc_cmnhdr.h"
-#include "sysc/kernel/sc_externs.h"
-#include "sysc/kernel/sc_except.h"
-#include "sysc/kernel/sc_ver.h"
-#include "sysc/utils/sc_report.h"
-#include "sysc/utils/sc_report_handler.h"
-#include "sysc/utils/sc_utils_ids.h"
-
 #include <algorithm>
 #include <cstring>
 #include <sstream>
 #include <vector>
+#include <string>
+
+#include "sysc/kernel/sc_externs.h"
+#include "sysc/kernel/sc_except.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
+#include "sysc/utils/sc_utils_ids.h"
 
 namespace sc_core {
 

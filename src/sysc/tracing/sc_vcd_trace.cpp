@@ -55,10 +55,16 @@
 #include <cstring>
 #include <limits>
 #include <vector>
+#include <iomanip>
+#include <map>
+#include <sstream>
+#include <cstdio>
+#include <string_view>
+#include <utility>
+#include <algorithm>
 
 #include "sysc/kernel/sc_simcontext.h"
 #include "sysc/kernel/sc_ver.h"
-#include "sysc/kernel/sc_event.h"
 #include "sysc/datatypes/bit/sc_bit.h"
 #include "sysc/datatypes/bit/sc_logic.h"
 #include "sysc/datatypes/bit/sc_lv_base.h"
@@ -66,20 +72,23 @@
 #include "sysc/datatypes/int/sc_unsigned.h"
 #include "sysc/datatypes/int/sc_int_base.h"
 #include "sysc/datatypes/int/sc_uint_base.h"
-#include "sysc/datatypes/fx/fx.h"
 #include "sysc/tracing/sc_vcd_trace.h"
 #include "sysc/utils/sc_report.h" // sc_assert
 #include "sysc/utils/sc_string_view.h"
-
-#include <iomanip>
-#include <map>
-#include <sstream>
+#include "sysc/datatypes/fx/sc_ufixed.h"
+#include "sysc/datatypes/fx/scfx_params.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_time.h"
+#include "sysc/tracing/sc_trace.h"
+#include "sysc/tracing/sc_tracing_ids.h"
+#include "sysc/utils/sc_report_handler.h"
 
 #if defined(_MSC_VER)
 # pragma warning(disable:4309) // truncation of constant value
 #endif
 
 namespace sc_core {
+class sc_event;
 
 // Forward declarations for functions that come later in the file
 // Map sc_dt::sc_logic to printable VCD

@@ -50,13 +50,12 @@
 
 
 #include "sysc/datatypes/fx/scfx_rep.h"
+#include "sysc/kernel/sc_cmnhdr.h"
 
 
 namespace sc_dt
 {
 
-// classes defined in this module
-class scfx_pow10;
 
 
 // ----------------------------------------------------------------------------

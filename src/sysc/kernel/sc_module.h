@@ -31,16 +31,25 @@
 #ifndef SC_MODULE_H
 #define SC_MODULE_H
 
+#include <iosfwd>
+#include <string>
+#include <vector>
+
 #include "sysc/kernel/sc_kernel_ids.h"
-#include "sysc/kernel/sc_process.h"
 #include "sysc/kernel/sc_module_name.h"
 #include "sysc/kernel/sc_sensitive.h"
 #include "sysc/kernel/sc_time.h"
 #include "sysc/kernel/sc_wait.h"
 #include "sysc/kernel/sc_wait_cthread.h"
 #include "sysc/kernel/sc_process.h"
-#include "sysc/kernel/sc_process_handle.h"
-#include "sysc/utils/sc_list.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_object.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
+
+namespace sc_dt {
+class sc_logic;
+}  // namespace sc_dt
 
 namespace sc_core {
 
@@ -48,6 +57,13 @@ class sc_name_gen;
 template<class T> class sc_in;
 template<class T> class sc_inout;
 template<class T> class sc_out;
+class sc_event;
+class sc_event_and_list;
+class sc_event_or_list;
+class sc_interface;
+class sc_port_base;
+class sc_simcontext;
+template <class T> class sc_signal_in_if;
 
 // ----------------------------------------------------------------------------
 //  STRUCT : sc_bind_proxy

@@ -26,14 +26,17 @@
   CHANGE LOG AT END OF FILE
  *****************************************************************************/
 
+#include <algorithm>
+#include <sstream>
+#include <string>
+
 #include "sysc/kernel/sc_object.h"
 #include "sysc/kernel/sc_phase_callback_registry.h"
 #include "sysc/kernel/sc_kernel_ids.h"
 #include "sysc/utils/sc_report.h"
-
-#include <algorithm>
-#include <functional>
-#include <sstream>
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_object_int.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
 

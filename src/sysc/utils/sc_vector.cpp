@@ -28,13 +28,14 @@
 
 
 #include "sc_vector.h"
-#include "sysc/utils/sc_utils_ids.h"
-
-#include "sysc/kernel/sc_simcontext.h"
-#include "sysc/kernel/sc_simcontext_int.h"
-#include "sysc/kernel/sc_object_manager.h"
 
 #include <sstream>
+
+#include "sysc/utils/sc_utils_ids.h"
+#include "sysc/kernel/sc_simcontext.h"
+#include "sysc/kernel/sc_object_manager.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
 

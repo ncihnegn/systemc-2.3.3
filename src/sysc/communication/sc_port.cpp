@@ -26,6 +26,10 @@
  CHANGE LOG AT THE END OF THE FILE
  *****************************************************************************/
 
+#include <sstream>
+#include <string>
+#include <algorithm>
+
 #include "sysc/kernel/sc_simcontext.h"
 #include "sysc/kernel/sc_module.h"
 #include "sysc/kernel/sc_object_int.h"
@@ -35,11 +39,11 @@
 #include "sysc/utils/sc_utils_ids.h"
 #include "sysc/communication/sc_event_finder.h"
 #include "sysc/communication/sc_port.h"
-#include "sysc/communication/sc_signal_ifs.h"
-
-#include <sstream>
+#include "sysc/communication/sc_interface.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
+class sc_event;
 
 // ----------------------------------------------------------------------------
 //  STRUCT : sc_bind_elem

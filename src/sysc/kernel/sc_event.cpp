@@ -28,17 +28,19 @@
 
 #include <cstdlib>
 #include <cstring>
+#include <sstream>
 
 #include "sysc/kernel/sc_event.h"
 #include "sysc/kernel/sc_kernel_ids.h"
 #include "sysc/kernel/sc_phase_callback_registry.h"
 #include "sysc/kernel/sc_process.h"
 #include "sysc/kernel/sc_process_handle.h"
-#include "sysc/kernel/sc_simcontext_int.h"
 #include "sysc/kernel/sc_object_manager.h"
 #include "sysc/utils/sc_utils_ids.h"
-
-#include <sstream>
+#include "sysc/kernel/sc_method_process.h"
+#include "sysc/kernel/sc_object.h"
+#include "sysc/kernel/sc_status.h"
+#include "sysc/kernel/sc_thread_process.h"
 
 namespace sc_core {
 

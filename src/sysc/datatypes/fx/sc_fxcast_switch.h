@@ -51,14 +51,18 @@
 #define SC_FXCAST_SWITCH_H
 
 
+#include <iostream>
+#include <string>
+
 #include "sysc/datatypes/fx/sc_context.h"
+#include "sysc/datatypes/fx/sc_fxdefs.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/utils/sc_hash.h"
 
 
 namespace sc_dt
 {
 
-// classes defined in this module
-class sc_fxcast_switch;
 
 
 // ----------------------------------------------------------------------------

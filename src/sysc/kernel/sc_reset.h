@@ -29,7 +29,13 @@
 #if !defined(sc_reset_h_INCLUDED)
 #define sc_reset_h_INCLUDED
 
+#include <ostream>
+#include <vector>
+
 #include "sysc/communication/sc_writer_policy.h"
+#include "sysc/communication/sc_signal.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_process.h"
 
 #if defined(_MSC_VER) && !defined(SC_WIN_DLL_WARN)
 #pragma warning(push)
@@ -41,13 +47,10 @@ namespace sc_core {
 // FORWARD CLASS REFERENCES:
 
 template<typename DATA> class sc_signal_in_if;
-template<typename IF, sc_writer_policy POL> class sc_signal;
 template<typename DATA> class sc_in;
 template<typename DATA> class sc_inout;
 template<typename DATA> class sc_out;
-template<typename SOURCE> class sc_spawn_reset;
-class sc_reset;
-class sc_process_b;
+class sc_reset; // IWYU pragma: keep
 
 //==============================================================================
 // CLASS sc_reset_target - RESET ENTRY FOR AN sc_process_b TARGET

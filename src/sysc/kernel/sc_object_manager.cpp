@@ -27,25 +27,16 @@
  *****************************************************************************/
 
 
-#include <cstdio>
-#include <cstdlib>
-#include <cassert>
-#include <cctype>
-#include <cstddef>
-#include <cctype>
-#include <algorithm> // pick up std::sort.
+#include <sstream>
+#include <utility>
 
 #include "sysc/kernel/sc_object.h"
-#include "sysc/utils/sc_hash.h"
-#include "sysc/utils/sc_list.h"
-#include "sysc/utils/sc_mempool.h"
 #include "sysc/kernel/sc_simcontext.h"
 #include "sysc/kernel/sc_object_manager.h"
 #include "sysc/kernel/sc_kernel_ids.h"
-#include "sysc/kernel/sc_process.h"
 #include "sysc/kernel/sc_module_name.h"
-
-#include <sstream>
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
 

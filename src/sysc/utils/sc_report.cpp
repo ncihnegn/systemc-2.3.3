@@ -32,15 +32,17 @@
  *****************************************************************************/
 
 
-#include <cstdlib>
 #include <cstring>
+#include <algorithm> // std::swap
+#include <iosfwd>
+#include <utility>
 
-#include "sysc/kernel/sc_process.h"
 #include "sysc/kernel/sc_simcontext_int.h"
-#include "sysc/utils/sc_stop_here.h"
 #include "sysc/utils/sc_report.h"
 #include "sysc/utils/sc_utils_ids.h"
-#include <algorithm> // std::swap
+#include "sysc/kernel/sc_simcontext.h"
+#include "sysc/kernel/sc_time.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
 

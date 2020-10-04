@@ -30,10 +30,20 @@
 #ifndef SC_EVENT_H
 #define SC_EVENT_H
 
+#include <cstddef>
+#include <string>
+#include <vector>
+#include <algorithm>
+
 #include "sysc/kernel/sc_cmnhdr.h"
 #include "sysc/kernel/sc_kernel_ids.h"
 #include "sysc/kernel/sc_simcontext.h"
-#include "sysc/communication/sc_writer_policy.h"
+#include "sysc/communication/sc_writer_policy.h" // IWYU pragma: keep
+#include "sysc/datatypes/int/sc_nbdefs.h"
+#include "sysc/kernel/sc_process.h"
+#include "sysc/kernel/sc_time.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 #if defined(_MSC_VER) && !defined(SC_WIN_DLL_WARN)
 #pragma warning(push)
@@ -45,11 +55,10 @@ namespace sc_core {
 // forward declarations
 class sc_event;
 class sc_event_timed;
-class sc_event_list;
-class sc_event_or_list;
-class sc_event_and_list;
+class sc_event_or_list; // IWYU pragma: keep
+class sc_event_and_list; // IWYU pragma: keep
 class sc_object;
-class sc_signal_channel;
+class sc_signal_channel; // IWYU pragma: keep
 
 // friend function declarations
 SC_API int sc_notify_time_compare( const void*, const void* );

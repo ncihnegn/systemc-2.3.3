@@ -54,7 +54,15 @@
 #define SC_FXVAL_H
 
 
+#include <math.h>
+#include <iostream>
+#include <string>
+
 #include "sysc/datatypes/fx/scfx_rep.h"
+#include "sysc/datatypes/fx/sc_fxdefs.h"
+#include "sysc/datatypes/fx/scfx_ieee.h"
+#include "sysc/datatypes/int/sc_nbdefs.h"
+#include "sysc/kernel/sc_cmnhdr.h"
 #ifndef SC_FX_EXCLUDE_OTHER
 #include "sysc/datatypes/int/sc_int_base.h"
 #include "sysc/datatypes/int/sc_uint_base.h"
@@ -78,12 +86,11 @@ namespace sc_dt
 {
 
 // classes defined in this module
-class sc_fxval;
 class sc_fxval_fast;
-
 // forward class declarations
 class sc_fxnum;
 class sc_fxnum_fast;
+class scfx_params;
 
 
 // ----------------------------------------------------------------------------

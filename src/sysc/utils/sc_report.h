@@ -34,8 +34,9 @@
 #ifndef SC_REPORT_H
 #define SC_REPORT_H 1
 
-#include <exception>
+#include <exception> // IWYU pragma: keep
 #include <string>
+
 #include "sysc/kernel/sc_cmnhdr.h"
 
 #if defined(_MSC_VER) && !defined(SC_WIN_DLL_WARN)
@@ -101,11 +102,11 @@ enum {
     SC_DEFAULT_CATCH_ACTIONS   = SC_DISPLAY
 };
 
-class sc_object;
 class sc_time;
 struct sc_msg_def;
 class sc_report;
 class sc_report_handler;
+
 SC_API const std::string sc_report_compose_message( const sc_report& );
 
 // ----------------------------------------------------------------------------
@@ -285,8 +286,6 @@ extern SC_API const char SC_ID_REGISTER_ID_FAILED_[];
 #if defined(_MSC_VER) && !defined(SC_WIN_DLL_WARN)
 # pragma warning(pop)
 #endif
-
-#include "sysc/utils/sc_report_handler.h"
 
 /*****************************************************************************
 

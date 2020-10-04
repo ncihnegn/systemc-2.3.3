@@ -26,13 +26,17 @@
  CHANGE LOG AT THE END OF THE FILE
  *****************************************************************************/
 
+#include <iostream>
+
 #include "sysc/kernel/sc_cmnhdr.h"
-#include "sysc/kernel/sc_constants.h"
 #include "sysc/kernel/sc_thread_process.h"
-#include "sysc/kernel/sc_process_handle.h"
 #include "sysc/kernel/sc_simcontext_int.h"
 #include "sysc/kernel/sc_module.h"
 #include "sysc/utils/sc_machine.h"
+#include "sysc/kernel/sc_object.h"
+#include "sysc/kernel/sc_sensitive.h"
+#include "sysc/kernel/sc_spawn_options.h"
+#include "sysc/kernel/sc_status.h"
 
 // DEBUGGING MACROS:
 //
@@ -44,6 +48,7 @@
 //            message will not print.
 #if 0
 #   include <cstring>
+
 #   define DEBUG_NAME ""
 #   define DEBUG_MSG(NAME,P,MSG) \
     { \

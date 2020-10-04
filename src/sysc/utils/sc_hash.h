@@ -30,7 +30,7 @@
 #ifndef SC_HASH_H
 #define SC_HASH_H
 
-#include "sysc/kernel/sc_simcontext.h"
+#include "sysc/kernel/sc_cmnhdr.h"
 
 namespace sc_core {
 

@@ -30,9 +30,14 @@
  *****************************************************************************/
 
 #include "sysc/kernel/sc_spawn_options.h"
+
 #include "sysc/kernel/sc_reset.h"
 
 namespace sc_core {
+template <class T> class sc_in;
+template <class T> class sc_inout;
+template <class T> class sc_out;
+template <class T> class sc_signal_in_if;
 
 // +======================================================================
 // | CLASS sc_spawn_reset_base - Class to do a generic access to an 

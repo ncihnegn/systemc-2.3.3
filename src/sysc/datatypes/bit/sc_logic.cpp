@@ -46,10 +46,13 @@
 // the source.
 //
 
+#include <sstream> // IWYU pragma: keep
+#include <string>
+
 #include "sysc/datatypes/bit/sc_bit_ids.h"
 #include "sysc/datatypes/bit/sc_logic.h"
-
-#include <sstream>
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
 
 namespace sc_dt
 {

@@ -27,7 +27,6 @@
  *****************************************************************************/
 
 
-#include "sysc/kernel/sc_cmnhdr.h"
 #include "sysc/kernel/sc_externs.h"
 
 int

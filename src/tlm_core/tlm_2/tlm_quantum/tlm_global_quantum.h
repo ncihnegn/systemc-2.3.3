@@ -21,6 +21,7 @@
 #define TLM_CORE_TLM2_TLM_GLOBAL_QUANTUM_H_INCLUDED_
 
 #include "sysc/kernel/sc_time.h"
+#include "sysc/kernel/sc_cmnhdr.h"
 
 namespace tlm {
 

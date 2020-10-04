@@ -63,9 +63,9 @@
 #define SC_LOGIC_H
 
 
-#include <cstdio>
+#include <iostream>
+
 #include "sysc/kernel/sc_cmnhdr.h"
-#include "sysc/kernel/sc_macros.h"
 #include "sysc/utils/sc_mempool.h"
 #include "sysc/datatypes/bit/sc_bit.h"
 
@@ -73,8 +73,6 @@
 namespace sc_dt
 {
 
-// classes defined in this module
-class sc_logic;
 
 
 // ----------------------------------------------------------------------------

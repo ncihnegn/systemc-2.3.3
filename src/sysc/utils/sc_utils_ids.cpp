@@ -31,6 +31,8 @@
 #include <cstring>
 
 #include "sysc/utils/sc_report.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/utils/sc_report_handler.h"
 
 
 namespace sc_core {
@@ -42,6 +44,7 @@ namespace sc_core {
 #include "sysc/datatypes/fx/sc_fx_ids.h"
 #include "sysc/datatypes/int/sc_int_ids.h"
 #include "sysc/tracing/sc_tracing_ids.h"
+
 #undef SC_DEFINE_MESSAGE
 
 

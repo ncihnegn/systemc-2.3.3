@@ -33,9 +33,11 @@
 #include <sys/types.h>
 
 #include "sysc/kernel/sc_cor_qt.h"
-#include "sysc/kernel/sc_simcontext.h"
+#include "sysc/packages/qt/md/iX86_64.h"
+#include "sysc/utils/sc_report.h"
 
 namespace sc_core {
+class sc_simcontext;
 
 // ----------------------------------------------------------------------------
 //  File static variables.
