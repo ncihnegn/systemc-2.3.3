@@ -28,7 +28,6 @@
 
 
 #include <algorithm>
-#include <ext/alloc_traits.h>
 #include <memory>
 
 #include "sysc/communication/sc_interface.h"

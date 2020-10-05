@@ -19,7 +19,6 @@
 
 #include "tlm_core/tlm_2/tlm_generic_payload/tlm_phase.h"
 
-#include <ext/alloc_traits.h>
 #include <map>
 #include <memory>
 #include <string>

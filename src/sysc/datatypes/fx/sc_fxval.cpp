@@ -46,6 +46,7 @@
 //
 
 #include <cfloat>
+#include <cmath>
 #include <cstdlib>
 
 #include "sysc/datatypes/fx/sc_fxval.h"
