@@ -1005,7 +1005,7 @@ class SC_API sc_unsigned : public sc_value_base
     // Needed for types using sc_unsigned.
     typedef bool elemtype;
 
-    void invalid_init( const char* type_name, int nb ) const;
+    static void invalid_init( const char* type_name, int nb ) ;
 
 public:
 
@@ -1037,7 +1037,7 @@ public:
     const sc_unsigned& operator = (const sc_signed&          v);
     const sc_unsigned& operator = (const sc_signed_subref_r& a );
 
-    const sc_unsigned& operator = ( const char*               v);
+    const sc_unsigned& operator = ( const char*               a);
     const sc_unsigned& operator = ( int64                     v);
     const sc_unsigned& operator = ( uint64                    v);
     const sc_unsigned& operator = ( long                      v);
@@ -1220,8 +1220,8 @@ public:
 
     // explicit conversion to character string
 
-    const std::string to_string( sc_numrep numrep = SC_DEC ) const;
-    const std::string to_string( sc_numrep numrep, bool w_prefix ) const;
+    std::string to_string( sc_numrep numrep = SC_DEC ) const;
+    std::string to_string( sc_numrep numrep, bool w_prefix ) const;
 
     // Print functions. dump prints the internals of the class.
 

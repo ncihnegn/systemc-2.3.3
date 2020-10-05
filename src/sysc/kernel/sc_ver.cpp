@@ -31,8 +31,8 @@
 #include <iostream>
 #include <sstream> // IWYU pragma: keep
 
-#include "sysc/kernel/sc_ver.h"
 #include "sysc/kernel/sc_kernel_ids.h"
+#include "sysc/kernel/sc_ver.h"
 #include "sysc/utils/sc_report.h"
 #include "sysc/utils/sc_report_handler.h"
 
@@ -55,7 +55,7 @@ SC_API const bool         sc_is_prerelease = SC_IS_PRERELEASE;
 
 SC_API const std::string  sc_version_originator   = SC_VERSION_ORIGINATOR;
 SC_API const std::string  sc_version_release_date = SC_VERSION_RELEASE_DATE;
-SC_API const std::string  sc_version_prerelease   = SC_VERSION_PRERELEASE;
+SC_API const std::string  sc_version_prerelease;
 SC_API const std::string  sc_version_string       = SC_VERSION;
 SC_API const std::string  sc_copyright_string     = SC_COPYRIGHT;
 
@@ -90,7 +90,7 @@ SC_API void
 pln()
 {
     static bool lnp = SC_DISABLE_COPYRIGHT_MESSAGE;
-    if ( lnp || getenv("SYSTEMC_DISABLE_COPYRIGHT_MESSAGE") != 0 ) 
+    if ( lnp || getenv("SYSTEMC_DISABLE_COPYRIGHT_MESSAGE") != nullptr ) 
         lnp = true;
     if ( const char * lnp_env = getenv("SC_COPYRIGHT_MESSAGE") ) {
         lnp = !strcmp( lnp_env, "DISABLE" );
@@ -111,7 +111,7 @@ pln()
 
         //  regressions check point
 
-        if( getenv( "SYSTEMC_REGRESSION" ) != 0 ) {
+        if( getenv( "SYSTEMC_REGRESSION" ) != nullptr ) {
             cerr << "SystemC Simulation" << endl;
         }
 

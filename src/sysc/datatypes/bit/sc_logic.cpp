@@ -92,9 +92,9 @@ void
 sc_logic::invalid_01() const
 {
     if( (int) m_val == Log_Z ) {
-	SC_REPORT_WARNING( sc_core::SC_ID_LOGIC_Z_TO_BOOL_, 0 );
+	SC_REPORT_WARNING( sc_core::SC_ID_LOGIC_Z_TO_BOOL_, nullptr );
     } else {
-	SC_REPORT_WARNING( sc_core::SC_ID_LOGIC_X_TO_BOOL_, 0 );
+	SC_REPORT_WARNING( sc_core::SC_ID_LOGIC_X_TO_BOOL_, nullptr );
     }
 }
 

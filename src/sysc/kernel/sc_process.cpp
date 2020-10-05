@@ -29,24 +29,24 @@
  CHANGE LOG AT THE END OF THE FILE
  *****************************************************************************/
 
+#include <algorithm>
 #include <cstddef>
 #include <sstream>
 #include <string>
 #include <vector>
-#include <algorithm>
 
-#include "sysc/kernel/sc_name_gen.h"
 #include "sysc/kernel/sc_cthread_process.h"
-#include "sysc/kernel/sc_method_process.h"
-#include "sysc/kernel/sc_thread_process.h"
-#include "sysc/kernel/sc_process_handle.h"
 #include "sysc/kernel/sc_event.h"
 #include "sysc/kernel/sc_kernel_ids.h"
+#include "sysc/kernel/sc_method_process.h"
+#include "sysc/kernel/sc_name_gen.h"
 #include "sysc/kernel/sc_object.h"
 #include "sysc/kernel/sc_process.h"
+#include "sysc/kernel/sc_process_handle.h"
 #include "sysc/kernel/sc_reset.h"
 #include "sysc/kernel/sc_simcontext.h"
 #include "sysc/kernel/sc_status.h"
+#include "sysc/kernel/sc_thread_process.h"
 #include "sysc/utils/sc_report.h"
 #include "sysc/utils/sc_report_handler.h"
 
@@ -64,7 +64,7 @@ sc_event                sc_process_handle::non_event( sc_event::kernel_event );
 
 // Last process that was created:
 
-sc_process_b* sc_process_b::m_last_created_process_p = 0;
+sc_process_b* sc_process_b::m_last_created_process_p = nullptr;
 
 //------------------------------------------------------------------------------
 //"sc_process_b::add_static_event"
@@ -94,11 +94,11 @@ void sc_process_b::add_static_event( const sc_event& e )
     {
       case SC_THREAD_PROC_:
       case SC_CTHREAD_PROC_:
-        thread_h = static_cast<sc_thread_handle>( this );
+        thread_h = dynamic_cast<sc_thread_handle>( this );
         e.add_static( thread_h );
         break;
       case SC_METHOD_PROC_:
-        method_h = static_cast<sc_method_handle>( this );
+        method_h = dynamic_cast<sc_method_handle>( this );
         e.add_static( method_h );
         break;
       default:
@@ -129,7 +129,7 @@ void sc_process_b::disconnect_process()
     {
       case SC_THREAD_PROC_:
       case SC_CTHREAD_PROC_:
-        thread_h = static_cast<sc_thread_handle>(this);
+        thread_h = dynamic_cast<sc_thread_handle>(this);
         mon_n = thread_h->m_monitor_q.size();
         if ( mon_n )
         {
@@ -149,9 +149,9 @@ void sc_process_b::disconnect_process()
     remove_dynamic_events();
     remove_static_events();
 
-    for ( std::vector<sc_reset*>::size_type rst_i = 0; rst_i < m_resets.size(); rst_i++ )
+    for (auto & m_reset : m_resets)
     {
-        m_resets[rst_i]->remove_process( this );
+        m_reset->remove_process( this );
     }
     m_resets.resize(0);
 
@@ -185,7 +185,7 @@ void sc_process_b::delete_process()
 
     // Immediate deletion:
 
-    if ( NULL == sc_get_current_process_b() )
+    if ( nullptr == sc_get_current_process_b() )
     {
         delete this;
     }
@@ -274,7 +274,7 @@ sc_process_b::remove_dynamic_events( bool skip_timeout )
     {
       case SC_THREAD_PROC_:
       case SC_CTHREAD_PROC_:
-        thread_h = static_cast<sc_thread_handle>(this);
+        thread_h = dynamic_cast<sc_thread_handle>(this);
 	if ( thread_h->m_timeout_event_p && !skip_timeout ) {
 	    thread_h->m_timeout_event_p->remove_dynamic(thread_h);
 	    thread_h->m_timeout_event_p->cancel();
@@ -282,17 +282,17 @@ sc_process_b::remove_dynamic_events( bool skip_timeout )
         if ( m_event_p )
         {
             m_event_p->remove_dynamic( thread_h );
-            m_event_p = 0;
+            m_event_p = nullptr;
         }
         if ( m_event_list_p )
         {
-            m_event_list_p->remove_dynamic( thread_h, 0 );
+            m_event_list_p->remove_dynamic( thread_h, nullptr );
             m_event_list_p->auto_delete();
-	    m_event_list_p = 0;
+	    m_event_list_p = nullptr;
         }
         break;
       case SC_METHOD_PROC_:
-        method_h = static_cast<sc_method_handle>(this);
+        method_h = dynamic_cast<sc_method_handle>(this);
 	if ( method_h->m_timeout_event_p && !skip_timeout ) {
 	    method_h->m_timeout_event_p->remove_dynamic(method_h);
 	    method_h->m_timeout_event_p->cancel();
@@ -300,13 +300,13 @@ sc_process_b::remove_dynamic_events( bool skip_timeout )
         if ( m_event_p )
         {
             m_event_p->remove_dynamic( method_h );
-            m_event_p = 0;
+            m_event_p = nullptr;
         }
         if ( m_event_list_p )
         {
-            m_event_list_p->remove_dynamic( method_h, 0 );
+            m_event_list_p->remove_dynamic( method_h, nullptr );
             m_event_list_p->auto_delete();
-	    m_event_list_p = 0;
+	    m_event_list_p = nullptr;
         }
         break;
       default: // Some other type, it needs to clean up itself.
@@ -331,14 +331,14 @@ sc_process_b::remove_static_events()
     {
       case SC_THREAD_PROC_:
       case SC_CTHREAD_PROC_:
-        thread_h = static_cast<sc_thread_handle>( this );
+        thread_h = dynamic_cast<sc_thread_handle>( this );
         for( int i = m_static_events.size() - 1; i >= 0; -- i ) {
             m_static_events[i]->remove_static( thread_h );
         }
         m_static_events.resize(0);
         break;
       case SC_METHOD_PROC_:
-        method_h = static_cast<sc_method_handle>( this );
+        method_h = dynamic_cast<sc_method_handle>( this );
         for( int i = m_static_events.size() - 1; i >= 0; -- i ) {
             m_static_events[i]->remove_static( method_h );
         }
@@ -503,7 +503,7 @@ void sc_process_b::reset_process( reset_type rt,
 
         for ( int child_i = 0; child_i < child_n; child_i++ )
         {
-            sc_process_b* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
+            auto* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
             if ( child_p ) child_p->reset_process(rt, descendants);
         }
     }
@@ -531,7 +531,7 @@ void sc_process_b::reset_process( reset_type rt,
       // Turn on sticky synchronous reset: use standard reset mechanism.
 
       case reset_synchronous_on:
-	if ( m_sticky_reset == false )
+	if ( !m_sticky_reset )
 	{
 	    m_sticky_reset = true;
 	    reset_changed( false, true );
@@ -541,7 +541,7 @@ void sc_process_b::reset_process( reset_type rt,
       // Turn off sticky synchronous reset: use standard reset mechanism.
 
       default:
-	if ( m_sticky_reset == true )
+	if ( m_sticky_reset )
 	{
 	    m_sticky_reset = false;
 	    reset_changed( false, false );
@@ -560,39 +560,39 @@ sc_process_b::sc_process_b( const char* name_p, bool is_thread, bool free_host,
      const sc_spawn_options* /* opt_p  */
 ) :
     sc_object( name_p ),
-    file(0),
+    file(nullptr),
     lineno(0),
     proc_id( simcontext()->next_proc_id()),
     m_active_areset_n(0),
     m_active_reset_n(0),
     m_dont_init( false ),
     m_dynamic_proc(),
-    m_event_p(0),
+    m_event_p(nullptr),
     m_event_count(0),
-    m_event_list_p(0),
-    m_exist_p(0),
+    m_event_list_p(nullptr),
+    m_exist_p(nullptr),
     m_free_host( free_host ),
     m_has_reset_signal( false ),
     m_has_stack(false),
     m_is_thread(is_thread),
-    m_last_report_p(0),
-    m_name_gen_p(0),
+    m_last_report_p(nullptr),
+    m_name_gen_p(nullptr),
     m_process_kind(SC_NO_PROC_),
     m_references_n(1),
     m_resets(),
-    m_reset_event_p(0),
-    m_resume_event_p(0),
-    m_runnable_p(0),
+    m_reset_event_p(nullptr),
+    m_resume_event_p(nullptr),
+    m_runnable_p(nullptr),
     m_semantics_host_p( host_p ),
     m_semantics_method_p ( method_p ),
     m_state(ps_normal),
     m_static_events(),
     m_sticky_reset(false),
-    m_term_event_p(0),
-    m_throw_helper_p(0),
+    m_term_event_p(nullptr),
+    m_throw_helper_p(nullptr),
     m_throw_status( THROW_NONE ),
     m_timed_out(false),
-    m_timeout_event_p(0),
+    m_timeout_event_p(nullptr),
     m_trigger_type(STATIC),
     m_unwinding(false)
 {

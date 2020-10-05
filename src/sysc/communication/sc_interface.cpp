@@ -54,7 +54,7 @@ sc_interface::register_port( sc_port_base&, const char* )
 const sc_event&
 sc_interface::default_event() const
 {
-    SC_REPORT_WARNING( SC_ID_NO_DEFAULT_EVENT_, 0 );
+    SC_REPORT_WARNING( SC_ID_NO_DEFAULT_EVENT_, nullptr );
     return sc_event::none;
 }
 
@@ -62,13 +62,13 @@ sc_interface::default_event() const
 // destructor (does nothing)
 
 sc_interface::~sc_interface()
-{}
+= default;
 
 
 // constructor (does nothing)
 
 sc_interface::sc_interface()
-{}
+= default;
 
 } // namespace sc_core
 

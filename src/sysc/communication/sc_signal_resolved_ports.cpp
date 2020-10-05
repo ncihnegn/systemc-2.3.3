@@ -33,9 +33,9 @@
 #endif
 
 #include "sysc/communication/sc_communication_ids.h"
+#include "sysc/communication/sc_interface.h"
 #include "sysc/communication/sc_signal_resolved.h"
 #include "sysc/communication/sc_signal_resolved_ports.h"
-#include "sysc/communication/sc_interface.h"
 
 namespace sc_core {
 
@@ -52,8 +52,8 @@ sc_in_resolved::end_of_elaboration()
 {
     base_type::end_of_elaboration();
     // check if bound channel is a resolved signal
-    if( dynamic_cast<sc_signal_resolved*>( get_interface() ) == 0 ) {
-        report_error( SC_ID_RESOLVED_PORT_NOT_BOUND_, 0 );
+    if( dynamic_cast<sc_signal_resolved*>( get_interface() ) == nullptr ) {
+        report_error( SC_ID_RESOLVED_PORT_NOT_BOUND_, nullptr );
     }
 }
 
@@ -71,8 +71,8 @@ sc_inout_resolved::end_of_elaboration()
 {
     base_type::end_of_elaboration();
     // check if bound channel is a resolved signal
-    if( dynamic_cast<sc_signal_resolved*>( get_interface() ) == 0 ) {
-        report_error( SC_ID_RESOLVED_PORT_NOT_BOUND_, 0 );
+    if( dynamic_cast<sc_signal_resolved*>( get_interface() ) == nullptr ) {
+        report_error( SC_ID_RESOLVED_PORT_NOT_BOUND_, nullptr );
     }
 }
 

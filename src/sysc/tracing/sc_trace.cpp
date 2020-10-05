@@ -50,13 +50,13 @@
 #include <cstdio>
 
 #include "sysc/tracing/sc_trace.h"
-#include "sysc/tracing/sc_tracing_ids.h"
 #include "sysc/communication/sc_signal_ifs.h"
-#include "sysc/kernel/sc_event.h"
-#include "sysc/utils/sc_report.h"
-#include "sysc/utils/sc_utils_ids.h"
 #include "sysc/datatypes/bit/sc_logic.h"
+#include "sysc/kernel/sc_event.h"
+#include "sysc/tracing/sc_tracing_ids.h"
+#include "sysc/utils/sc_report.h"
 #include "sysc/utils/sc_report_handler.h"
+#include "sysc/utils/sc_utils_ids.h"
 
 namespace sc_core {
 
@@ -88,7 +88,7 @@ void sc_trace_file::delta_cycles(bool)
 }
 
 const sc_dt::uint64&
-sc_trace_file::event_trigger_stamp(const sc_event& ev) const
+sc_trace_file::event_trigger_stamp(const sc_event& ev) 
 {
     return ev.m_trigger_stamp;
 }

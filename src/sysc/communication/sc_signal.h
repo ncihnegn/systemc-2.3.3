@@ -123,11 +123,11 @@ protected:
 
     // reporting to avoid code bloat in sc_signal_t
 
-    void deprecated_get_data_ref()  const;
-    void deprecated_get_new_value() const;
-    void deprecated_trace()         const;
+    static void deprecated_get_data_ref()  ;
+    static void deprecated_get_new_value() ;
+    static void deprecated_trace()         ;
 
-    sc_event* lazy_kernel_event( sc_event**, const char* ) const;
+    static sc_event* lazy_kernel_event( sc_event**, const char* ) ;
     void notify_next_delta( sc_event* ev ) const
         { if( ev ) ev->notify_next_delta(); }
 

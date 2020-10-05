@@ -29,20 +29,20 @@
 
 
 #include "sysc/kernel/sc_kernel_ids.h"
-#include "sysc/kernel/sc_cthread_process.h"
-#include "sysc/kernel/sc_method_process.h"
-#include "sysc/kernel/sc_thread_process.h"
-#include "sysc/kernel/sc_process_handle.h"
-#include "sysc/kernel/sc_sensitive.h"
-#include "sysc/communication/sc_signal_ports.h"
-#include "sysc/utils/sc_utils_ids.h"
 #include "sysc/communication/sc_event_finder.h"
 #include "sysc/communication/sc_interface.h"
 #include "sysc/communication/sc_port.h"
 #include "sysc/communication/sc_signal_ifs.h"
+#include "sysc/communication/sc_signal_ports.h"
+#include "sysc/kernel/sc_cthread_process.h"
+#include "sysc/kernel/sc_method_process.h"
+#include "sysc/kernel/sc_process_handle.h"
+#include "sysc/kernel/sc_sensitive.h"
 #include "sysc/kernel/sc_simcontext.h"
+#include "sysc/kernel/sc_thread_process.h"
 #include "sysc/utils/sc_report.h"
 #include "sysc/utils/sc_report_handler.h"
+#include "sysc/utils/sc_utils_ids.h"
 
 namespace sc_core {
 
@@ -86,14 +86,13 @@ warn_no_parens()
 sc_sensitive::sc_sensitive( sc_module* module_ )
 : m_module( module_ ),
   m_mode( SC_NONE_ ),
-  m_handle( 0 )
+  m_handle( nullptr )
 {}
 
 
 // destructor
 
-sc_sensitive::~sc_sensitive()
-{}
+
 
 
 // changing between process handles
@@ -378,14 +377,13 @@ static void sc_deprecated_sensitive_pos()
 sc_sensitive_pos::sc_sensitive_pos( sc_module* module_ )
 : m_module( module_ ),
   m_mode( SC_NONE_ ),
-  m_handle( 0 )
+  m_handle( nullptr )
 {}
 
 
 // destructor
 
-sc_sensitive_pos::~sc_sensitive_pos()
-{}
+
 
 
 // changing between process handles
@@ -653,14 +651,13 @@ static void sc_deprecated_sensitive_neg()
 sc_sensitive_neg::sc_sensitive_neg( sc_module* module_ )
 : m_module( module_ ),
   m_mode( SC_NONE_ ),
-  m_handle( 0 )
+  m_handle( nullptr )
 {}
 
 
 // destructor
 
-sc_sensitive_neg::~sc_sensitive_neg()
-{}
+
 
 
 // changing between process handles

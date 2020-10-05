@@ -28,9 +28,9 @@
 
 #if !defined(_WIN32) && !defined(WIN32) && !defined(SC_USE_PTHREADS)
 
-#include <unistd.h>
 #include <sys/mman.h>
 #include <sys/types.h>
+#include <unistd.h>
 
 #include "sysc/kernel/sc_cor_qt.h"
 #include "sysc/packages/qt/md/iX86_64.h"
@@ -49,7 +49,7 @@ static sc_cor_qt main_cor;
 
 // current coroutine
 
-static sc_cor_qt* curr_cor = 0;
+static sc_cor_qt* curr_cor = nullptr;
 
 
 // ----------------------------------------------------------------------------
@@ -81,7 +81,7 @@ sc_cor_qt::stack_protect( bool enable )
 
 #ifdef QUICKTHREADS_GROW_DOWN
     // Stacks grow from high address down to low address
-    caddr_t redzone = caddr_t( ( ( std::size_t( m_stack ) + pagesize - 1 ) /
+    auto *redzone = caddr_t( ( ( std::size_t( m_stack ) + pagesize - 1 ) /
 				 pagesize ) * pagesize );
 #else
     // Stacks grow from low address up to high address
@@ -140,7 +140,7 @@ sc_cor_pkg_qt::sc_cor_pkg_qt( sc_simcontext* simc )
 {
     if( ++ instance_count == 1 ) {
 	// initialize the current coroutine
-	sc_assert( curr_cor == 0 );
+	sc_assert( curr_cor == nullptr );
 	curr_cor = &main_cor;
     }
 }
@@ -152,7 +152,7 @@ sc_cor_pkg_qt::~sc_cor_pkg_qt()
 {
     if( -- instance_count == 0 ) {
 	// cleanup the current coroutine
-	curr_cor = 0;
+	curr_cor = nullptr;
     }
 }
 
@@ -172,7 +172,7 @@ sc_cor_qt_wrapper( void* arg, void* cor, qt_userf_t* fn )
 sc_cor*
 sc_cor_pkg_qt::create( std::size_t stack_size, sc_cor_fn* fn, void* arg )
 {
-    sc_cor_qt* cor = new sc_cor_qt();
+    auto* cor = new sc_cor_qt();
     cor->m_pkg = this;
     cor->m_stack_size = stack_size;
     cor->m_stack = new char[cor->m_stack_size];
@@ -192,16 +192,16 @@ void*
 sc_cor_qt_yieldhelp( qt_t* sp, void* old_cor, void* )
 {
     reinterpret_cast<sc_cor_qt*>( old_cor )->m_sp = sp;
-    return 0;
+    return nullptr;
 }
 
 void
 sc_cor_pkg_qt::yield( sc_cor* next_cor )
 {
-    sc_cor_qt* new_cor = static_cast<sc_cor_qt*>( next_cor );
+    auto* new_cor = dynamic_cast<sc_cor_qt*>( next_cor );
     sc_cor_qt* old_cor = curr_cor;
     curr_cor = new_cor;
-    QUICKTHREADS_BLOCK( sc_cor_qt_yieldhelp, old_cor, 0, new_cor->m_sp );
+    QUICKTHREADS_BLOCK( sc_cor_qt_yieldhelp, old_cor, nullptr, new_cor->m_sp );
 }
 
 
@@ -211,16 +211,16 @@ extern "C"
 void*
 sc_cor_qt_aborthelp( qt_t*, void*, void* )
 {
-    return 0;
+    return nullptr;
 }
 
 void
 sc_cor_pkg_qt::abort( sc_cor* next_cor )
 {
-    sc_cor_qt* new_cor = static_cast<sc_cor_qt*>( next_cor );
+    auto* new_cor = dynamic_cast<sc_cor_qt*>( next_cor );
     sc_cor_qt* old_cor = curr_cor;
     curr_cor = new_cor;
-    QUICKTHREADS_ABORT( sc_cor_qt_aborthelp, old_cor, 0, new_cor->m_sp );
+    QUICKTHREADS_ABORT( sc_cor_qt_aborthelp, old_cor, nullptr, new_cor->m_sp );
 }
 
 

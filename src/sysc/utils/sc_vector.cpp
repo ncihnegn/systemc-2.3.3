@@ -31,11 +31,11 @@
 
 #include <sstream>
 
-#include "sysc/utils/sc_utils_ids.h"
-#include "sysc/kernel/sc_simcontext.h"
 #include "sysc/kernel/sc_object_manager.h"
+#include "sysc/kernel/sc_simcontext.h"
 #include "sysc/utils/sc_report.h"
 #include "sysc/utils/sc_report_handler.h"
+#include "sysc/utils/sc_utils_ids.h"
 
 namespace sc_core {
 
@@ -51,11 +51,11 @@ sc_vector_base::get_elements() const
   if( !objs_vec_ )
     objs_vec_ = new std::vector< sc_object* >;
 
-  if( objs_vec_->size() || !size() )
+  if( !objs_vec_->empty() || !size() )
     return *objs_vec_;
 
   objs_vec_->reserve( size() );
-  for( const_iterator it=begin(); it != end(); ++it )
+  for( auto it=begin(); it != end(); ++it )
     if( sc_object* obj = object_cast(*it) )
       objs_vec_->push_back( obj );
 
@@ -66,7 +66,7 @@ sc_object*
 sc_vector_base::implicit_cast( ... ) const
 {
   SC_REPORT_ERROR( SC_ID_VECTOR_NONOBJECT_ELEMENTS_, name() );
-  return NULL;
+  return nullptr;
 }
 
 void
@@ -132,7 +132,7 @@ sc_vector_base::make_name( const char* prefix, size_type /* idx */ )
 }
 
 sc_vector_base::context_scope::context_scope( sc_vector_base* owner )
-  : owner_(NULL)
+  : owner_(nullptr)
 {
   sc_simcontext* simc = owner->simcontext();
   sc_assert( simc == sc_get_curr_simcontext() );

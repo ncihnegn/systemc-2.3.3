@@ -27,25 +27,25 @@
  *****************************************************************************/
 
 
-#include <sstream>
 #include <algorithm>
+#include <sstream>
 
+#include "sysc/communication/sc_communication_ids.h"
+#include "sysc/communication/sc_port.h"
 #include "sysc/kernel/sc_kernel_ids.h"
 #include "sysc/kernel/sc_module.h"
 #include "sysc/kernel/sc_module_registry.h"
 #include "sysc/kernel/sc_name_gen.h"
+#include "sysc/kernel/sc_object_int.h"
 #include "sysc/kernel/sc_object_manager.h"
 #include "sysc/kernel/sc_process.h"
 #include "sysc/kernel/sc_process_handle.h"
+#include "sysc/kernel/sc_reset.h"
 #include "sysc/kernel/sc_simcontext.h"
 #include "sysc/kernel/sc_simcontext_int.h"
-#include "sysc/kernel/sc_object_int.h"
-#include "sysc/kernel/sc_reset.h"
-#include "sysc/communication/sc_communication_ids.h"
-#include "sysc/communication/sc_port.h"
-#include "sysc/utils/sc_utils_ids.h"
 #include "sysc/kernel/sc_thread_process.h"
 #include "sysc/utils/sc_list.h"
+#include "sysc/utils/sc_utils_ids.h"
 
 namespace sc_core {
 class sc_interface;
@@ -87,7 +87,7 @@ sc_module_dynalloc_list::~sc_module_dynalloc_list()
 {
     sc_plist<sc_module*>::iterator it( m_list );
     while( ! it.empty() ) {
-        (*it)->m_parent = 0;
+        (*it)->m_parent = nullptr;
         delete *it;
         it ++;
     }
@@ -113,17 +113,17 @@ sc_module_dynalloc( sc_module* module_ )
 // ----------------------------------------------------------------------------
     
 sc_bind_proxy::sc_bind_proxy()
-: iface( 0 ),
-  port( 0 )
+: iface( nullptr ),
+  port( nullptr )
 {}
 
 sc_bind_proxy::sc_bind_proxy( sc_interface& iface_ )
 : iface( &iface_ ),
-  port( 0 )
+  port( nullptr )
 {}
 
 sc_bind_proxy::sc_bind_proxy( sc_port_base& port_ )
-: iface( 0 ),
+: iface( nullptr ),
   port( &port_ )
 {}
 
@@ -143,7 +143,7 @@ sc_module::sc_module_init()
     simcontext()->get_module_registry()->insert( *this );
     simcontext()->hierarchy_push( this );
     m_end_module_called = false;
-    m_module_name_p = 0;
+    m_module_name_p = nullptr;
     m_port_vec = new std::vector<sc_port_base*>;
     m_port_index = 0;
 }
@@ -179,15 +179,15 @@ sc_module::sc_module()
   m_end_module_called(false),
   m_port_vec(),
   m_port_index(0),
-  m_name_gen(0),
-  m_module_name_p(0)
+  m_name_gen(nullptr),
+  m_module_name_p(nullptr)
 {
     /* When this form is used, we better have a fresh sc_module_name
        on the top of the stack */
     sc_module_name* mod_name = 
         simcontext()->get_object_manager()->top_of_module_name_stack();
-    if (0 == mod_name || 0 != mod_name->m_module_p) {
-        SC_REPORT_ERROR( SC_ID_SC_MODULE_NAME_REQUIRED_, 0 );
+    if (nullptr == mod_name || nullptr != mod_name->m_module_p) {
+        SC_REPORT_ERROR( SC_ID_SC_MODULE_NAME_REQUIRED_, nullptr );
         sc_abort(); // can't recover from here
     }
     sc_module_init();
@@ -206,8 +206,8 @@ sc_module::sc_module( const sc_module_name& )
   m_end_module_called(false),
   m_port_vec(),
   m_port_index(0),
-  m_name_gen(0),
-  m_module_name_p(0)
+  m_name_gen(nullptr),
+  m_module_name_p(nullptr)
 {
     /* For those used to the old style of passing a name to sc_module,
        this constructor will reduce the chance of making a mistake */
@@ -216,8 +216,8 @@ sc_module::sc_module( const sc_module_name& )
        on the top of the stack */
     sc_module_name* mod_name = 
         simcontext()->get_object_manager()->top_of_module_name_stack();
-    if (0 == mod_name || 0 != mod_name->m_module_p) {
-        SC_REPORT_ERROR( SC_ID_SC_MODULE_NAME_REQUIRED_, 0 );
+    if (nullptr == mod_name || nullptr != mod_name->m_module_p) {
+        SC_REPORT_ERROR( SC_ID_SC_MODULE_NAME_REQUIRED_, nullptr );
         sc_abort(); // can't recover from here
     }
     sc_module_init();
@@ -239,8 +239,8 @@ sc_module::sc_module( const char* nm )
   m_end_module_called(false),
   m_port_vec(),
   m_port_index(0),
-  m_name_gen(0),
-  m_module_name_p(0)
+  m_name_gen(nullptr),
+  m_module_name_p(nullptr)
 {
     SC_REPORT_WARNING( SC_ID_BAD_SC_MODULE_CONSTRUCTOR_, nm );
     sc_module_init();
@@ -254,8 +254,8 @@ sc_module::sc_module( const std::string& s )
   m_end_module_called(false),
   m_port_vec(),
   m_port_index(0),
-  m_name_gen(0),
-  m_module_name_p(0)
+  m_name_gen(nullptr),
+  m_module_name_p(nullptr)
 {
     SC_REPORT_WARNING( SC_ID_BAD_SC_MODULE_CONSTRUCTOR_, s.c_str() );
     sc_module_init();
@@ -321,7 +321,7 @@ sc_module::end_module()
 	sensitive_pos.reset();
 	sensitive_neg.reset();
 	m_end_module_called = true;
-	m_module_name_p = 0; // make sure we are not called in ~sc_module().
+	m_module_name_p = nullptr; // make sure we are not called in ~sc_module().
     }
 }
 
@@ -405,7 +405,7 @@ sc_module::elaboration_done( bool& error_ )
         msg << "module '" << name() << "'";
         SC_REPORT_WARNING( SC_ID_END_MODULE_NOT_CALLED_, msg.str().c_str() );
         if( error_ ) {
-            SC_REPORT_WARNING( SC_ID_HIER_NAME_INCORRECT_, 0 );
+            SC_REPORT_WARNING( SC_ID_HIER_NAME_INCORRECT_, nullptr );
         }
         error_ = true;
     }
@@ -457,7 +457,7 @@ sc_module::set_stack_size( std::size_t size )
     }
     else
     {
-	SC_REPORT_WARNING( SC_ID_SET_STACK_SIZE_, 0 );
+	SC_REPORT_WARNING( SC_ID_SET_STACK_SIZE_, nullptr );
     }
 }
 

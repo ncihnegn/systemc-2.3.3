@@ -43,9 +43,9 @@
 #include <ctime>
 #include <sstream>
 
-#include "sysc/tracing/sc_trace_file_base.h"
 #include "sysc/kernel/sc_simcontext.h"
 #include "sysc/kernel/sc_status.h"
+#include "sysc/tracing/sc_trace_file_base.h"
 #include "sysc/tracing/sc_tracing_ids.h"
 #include "sysc/utils/sc_report.h"
 #include "sysc/utils/sc_report_handler.h"
@@ -68,7 +68,7 @@ sc_trace_file_base::sc_trace_file_base( const char* name, const char* extension 
 #if SC_TRACING_PHASE_CALLBACKS_
   , sc_object( sc_gen_unique_name("$$$$kernel_tracefile$$$$") )
 #endif
-  , fp(0)
+  , fp(nullptr)
   , trace_unit_fs()
   , kernel_unit_fs()
   , timescale_set_by_user(false)
@@ -144,7 +144,7 @@ sc_trace_file_base::initialize()
 
     if( !tracing_initialized_ ) {
         tracing_initialized_ = true;
-        bool running_regression = ( getenv( "SYSTEMC_REGRESSION" ) != NULL );
+        bool running_regression = ( getenv( "SYSTEMC_REGRESSION" ) != nullptr );
 
         // hide some messages during regression
         if( running_regression ) {
@@ -180,7 +180,7 @@ void
 sc_trace_file_base::open_fp()
 {
     sc_assert( !fp && filename() );
-    fp = fopen( filename(), "w" );
+    fp = fopen( filename(), "we" );
     if( !fp ) {
         SC_REPORT_ERROR( SC_ID_TRACING_FOPEN_FAILED_, filename() );
         sc_abort(); // can't recover from here
@@ -253,7 +253,7 @@ sc_trace_file_base::has_low_units() const {
 int
 sc_trace_file_base::low_units_len() const {
     sc_assert(has_low_units());
-    double max_low_units = static_cast<double>(kernel_unit_fs / trace_unit_fs);
+    auto max_low_units = static_cast<double>(kernel_unit_fs / trace_unit_fs);
     return static_cast<int>(log10(max_low_units));
 }
 

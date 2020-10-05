@@ -79,7 +79,7 @@ private:
     explicit sc_sensitive( sc_module* );
 
     // destructor
-    ~sc_sensitive();
+    ~sc_sensitive() = default;
 
 public:
 
@@ -157,7 +157,7 @@ private:
     explicit sc_sensitive_pos( sc_module* );
 
     // destructor
-    ~sc_sensitive_pos();
+    ~sc_sensitive_pos() = default;
 
 public:
 
@@ -223,7 +223,7 @@ private:
     explicit sc_sensitive_neg( sc_module* );
 
     // destructor
-    ~sc_sensitive_neg();
+    ~sc_sensitive_neg() = default;
 
 public:
 

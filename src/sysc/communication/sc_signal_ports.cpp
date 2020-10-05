@@ -28,10 +28,10 @@
 
 #include "sysc/communication/sc_signal_ports.h"
 
-#include "sysc/utils/sc_utils_ids.h"
 #include "sysc/communication/sc_interface.h"
 #include "sysc/utils/sc_report.h"
 #include "sysc/utils/sc_report_handler.h"
+#include "sysc/utils/sc_utils_ids.h"
 
 namespace sc_core {
 
@@ -51,10 +51,9 @@ template class SC_API sc_port<sc_signal_inout_if<sc_dt::sc_logic>,1,SC_ONE_OR_MO
 void
 sc_in<bool>::end_of_elaboration()
 {
-    if( m_traces != 0 ) {
-	for( int i = 0; i < (int)m_traces->size(); ++ i ) {
-	    sc_trace_params* p = (*m_traces)[i];
-	    in_if_type* iface = dynamic_cast<in_if_type*>( get_interface() );
+    if( m_traces != nullptr ) {
+	for(auto *p : *m_traces) {
+	    auto* iface = dynamic_cast<in_if_type*>( get_interface() );
 	    sc_trace( p->tf, iface->read(), p->name );
 	}
 	remove_traces();
@@ -67,8 +66,8 @@ void
 sc_in<bool>::add_trace_internal(sc_trace_file* tf_,
 	const std::string& name_) const
 {
-    if( tf_ != 0 ) {
-	if( m_traces == 0 ) {
+    if( tf_ != nullptr ) {
+	if( m_traces == nullptr ) {
 	    m_traces = new sc_trace_params_vec;
 	}
 	m_traces->push_back( new sc_trace_params( tf_, name_ ) );
@@ -86,12 +85,12 @@ sc_in<bool>::add_trace(sc_trace_file* tf_,
 void
 sc_in<bool>::remove_traces() const
 {
-    if( m_traces != 0 ) {
+    if( m_traces != nullptr ) {
 	for( int i = m_traces->size() - 1; i >= 0; -- i ) {
 	    delete (*m_traces)[i];
 	}
 	delete m_traces;
-	m_traces = 0;
+	m_traces = nullptr;
     }
 }
 
@@ -107,13 +106,13 @@ sc_in<bool>::vbind( sc_interface& interface_ )
 int
 sc_in<bool>::vbind( sc_port_base& parent_ )
 {
-    in_port_type* in_parent = dynamic_cast<in_port_type*>( &parent_ );
-    if( in_parent != 0 ) {
+    auto* in_parent = dynamic_cast<in_port_type*>( &parent_ );
+    if( in_parent != nullptr ) {
 	sc_port_base::bind( *in_parent );
 	return 0;
     }
-    inout_port_type* inout_parent = dynamic_cast<inout_port_type*>( &parent_ );
-    if( inout_parent != 0 ) {
+    auto* inout_parent = dynamic_cast<inout_port_type*>( &parent_ );
+    if( inout_parent != nullptr ) {
 	sc_port_base::bind( *inout_parent );
 	return 0;
     }
@@ -133,10 +132,9 @@ sc_in<bool>::vbind( sc_port_base& parent_ )
 void
 sc_in<sc_dt::sc_logic>::end_of_elaboration()
 {
-    if( m_traces != 0 ) {
-	for( int i = 0; i < (int)m_traces->size(); ++ i ) {
-	    sc_trace_params* p = (*m_traces)[i];
-	    in_if_type* iface = dynamic_cast<in_if_type*>( get_interface() );
+    if( m_traces != nullptr ) {
+	for(auto *p : *m_traces) {
+	    auto* iface = dynamic_cast<in_if_type*>( get_interface() );
 	    sc_trace( p->tf, iface->read(), p->name );
 	}
 	remove_traces();
@@ -150,8 +148,8 @@ void
 sc_in<sc_dt::sc_logic>::add_trace_internal( sc_trace_file* tf_,
     const std::string& name_ ) const
 {
-    if( tf_ != 0 ) {
-	if( m_traces == 0 ) {
+    if( tf_ != nullptr ) {
+	if( m_traces == nullptr ) {
 	    m_traces = new sc_trace_params_vec;
 	}
 	m_traces->push_back( new sc_trace_params( tf_, name_ ) );
@@ -169,12 +167,12 @@ sc_in<sc_dt::sc_logic>::add_trace( sc_trace_file* tf_,
 void
 sc_in<sc_dt::sc_logic>::remove_traces() const
 {
-    if( m_traces != 0 ) {
+    if( m_traces != nullptr ) {
 	for( int i = m_traces->size() - 1; i >= 0; -- i ) {
 	    delete (*m_traces)[i];
 	}
 	delete m_traces;
-	m_traces = 0;
+	m_traces = nullptr;
     }
 }
 
@@ -190,13 +188,13 @@ sc_in<sc_dt::sc_logic>::vbind( sc_interface& interface_ )
 int
 sc_in<sc_dt::sc_logic>::vbind( sc_port_base& parent_ )
 {
-    in_port_type* in_parent = dynamic_cast<in_port_type*>( &parent_ );
-    if( in_parent != 0 ) {
+    auto* in_parent = dynamic_cast<in_port_type*>( &parent_ );
+    if( in_parent != nullptr ) {
 	sc_port_base::bind( *in_parent );
 	return 0;
     }
-    inout_port_type* inout_parent = dynamic_cast<inout_port_type*>( &parent_ );
-    if( inout_parent != 0 ) {
+    auto* inout_parent = dynamic_cast<inout_port_type*>( &parent_ );
+    if( inout_parent != nullptr ) {
 	sc_port_base::bind( *inout_parent );
 	return 0;
     }
@@ -228,11 +226,11 @@ sc_inout<bool>::~sc_inout()
 void
 sc_inout<bool>::initialize( const data_type& value_ )
 {
-    inout_if_type* iface = dynamic_cast<inout_if_type*>( get_interface() );
-    if( iface != 0 ) {
+    auto* iface = dynamic_cast<inout_if_type*>( get_interface() );
+    if( iface != nullptr ) {
 	iface->write( value_ );
     } else {
-	if( m_init_val == 0 ) {
+	if( m_init_val == nullptr ) {
 	    m_init_val = new data_type;
 	}
 	*m_init_val = value_;
@@ -245,15 +243,14 @@ sc_inout<bool>::initialize( const data_type& value_ )
 void
 sc_inout<bool>::end_of_elaboration()
 {
-    if( m_init_val != 0 ) {
+    if( m_init_val != nullptr ) {
 	write( *m_init_val );
 	delete m_init_val;
-	m_init_val = 0;
+	m_init_val = nullptr;
     }
-    if( m_traces != 0 ) {
-	for( int i = 0; i < (int)m_traces->size(); ++ i ) {
-	    sc_trace_params* p = (*m_traces)[i];
-	    in_if_type* iface = dynamic_cast<in_if_type*>( get_interface() );
+    if( m_traces != nullptr ) {
+	for(auto *p : *m_traces) {
+	    auto* iface = dynamic_cast<in_if_type*>( get_interface() );
 	    sc_trace( p->tf, iface->read(), p->name );
 	}
 	remove_traces();
@@ -267,8 +264,8 @@ void
 sc_inout<bool>::add_trace_internal( sc_trace_file* tf_,
     const std::string& name_ ) const
 {
-    if( tf_ != 0 ) {
-	if( m_traces == 0 ) {
+    if( tf_ != nullptr ) {
+	if( m_traces == nullptr ) {
 	    m_traces = new sc_trace_params_vec;
 	}
 	m_traces->push_back( new sc_trace_params( tf_, name_ ) );
@@ -286,12 +283,12 @@ sc_inout<bool>::add_trace( sc_trace_file* tf_,
 void
 sc_inout<bool>::remove_traces() const
 {
-    if( m_traces != 0 ) {
+    if( m_traces != nullptr ) {
 	for( int i = m_traces->size() - 1; i >= 0; -- i ) {
 	    delete (*m_traces)[i];
 	}
 	delete m_traces;
-	m_traces = 0;
+	m_traces = nullptr;
     }
 }
 
@@ -319,11 +316,11 @@ sc_inout<sc_dt::sc_logic>::~sc_inout()
 void
 sc_inout<sc_dt::sc_logic>::initialize( const data_type& value_ )
 {
-    inout_if_type* iface = dynamic_cast<inout_if_type*>( get_interface() );
-    if( iface != 0 ) {
+    auto* iface = dynamic_cast<inout_if_type*>( get_interface() );
+    if( iface != nullptr ) {
 	iface->write( value_ );
     } else {
-	if( m_init_val == 0 ) {
+	if( m_init_val == nullptr ) {
 	    m_init_val = new data_type;
 	}
 	*m_init_val = value_;
@@ -336,15 +333,14 @@ sc_inout<sc_dt::sc_logic>::initialize( const data_type& value_ )
 void
 sc_inout<sc_dt::sc_logic>::end_of_elaboration()
 {
-    if( m_init_val != 0 ) {
+    if( m_init_val != nullptr ) {
 	write( *m_init_val );
 	delete m_init_val;
-	m_init_val = 0;
+	m_init_val = nullptr;
     }
-    if( m_traces != 0 ) {
-	for( int i = 0; i < (int)m_traces->size(); ++ i ) {
-	    sc_trace_params* p = (*m_traces)[i];
-	    in_if_type* iface = dynamic_cast<in_if_type*>( get_interface() );
+    if( m_traces != nullptr ) {
+	for(auto *p : *m_traces) {
+	    auto* iface = dynamic_cast<in_if_type*>( get_interface() );
 	    sc_trace( p->tf, iface->read(), p->name );
 	}
 	remove_traces();
@@ -358,8 +354,8 @@ void
 sc_inout<sc_dt::sc_logic>::add_trace_internal( sc_trace_file* tf_,
 			       const std::string& name_ ) const
 {
-    if( tf_ != 0 ) {
-	if( m_traces == 0 ) {
+    if( tf_ != nullptr ) {
+	if( m_traces == nullptr ) {
 	    m_traces = new sc_trace_params_vec;
 	}
 	m_traces->push_back( new sc_trace_params( tf_, name_ ) );
@@ -378,12 +374,12 @@ sc_inout<sc_dt::sc_logic>::add_trace( sc_trace_file* tf_,
 void
 sc_inout<sc_dt::sc_logic>::remove_traces() const
 {
-    if( m_traces != 0 ) {
+    if( m_traces != nullptr ) {
 	for( int i = m_traces->size() - 1; i >= 0; -- i ) {
 	    delete (*m_traces)[i];
 	}
 	delete m_traces;
-	m_traces = 0;
+	m_traces = nullptr;
     }
 }
 

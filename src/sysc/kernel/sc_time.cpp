@@ -36,9 +36,9 @@
 
 #include "sysc/kernel/sc_kernel_ids.h"
 #include "sysc/kernel/sc_simcontext.h"
-#include "sysc/utils/sc_utils_ids.h"
 #include "sysc/utils/sc_report.h"
 #include "sysc/utils/sc_report_handler.h"
+#include "sysc/utils/sc_utils_ids.h"
 
 #ifdef SC_ENABLE_EARLY_MAXTIME_CREATION
 #  define SC_MAXTIME_ALLOWED_ 1
@@ -162,7 +162,7 @@ sc_time_tuple::to_string() const
 // constructors
 
 namespace /* anonymous */ {
-static sc_time::value_type
+sc_time::value_type
 from_value_and_unit( double v, sc_time_unit tu, sc_time_params* tp )
 {
     sc_time::value_type t = 0;
@@ -252,7 +252,7 @@ sc_time::from_value( value_type v )
 }
 
 namespace /* anonymous */ {
-static sc_time::value_type
+sc_time::value_type
 from_value_and_unit_symbol( double v, const char* unit, sc_time_params* tp )
 {
     sc_time::value_type t = 0;
@@ -287,7 +287,7 @@ sc_time::sc_time( double v, const char* unit, sc_simcontext* simc )
 sc_time
 sc_time::from_string( const char * str )
 {
-    char * endptr = NULL;
+    char * endptr = nullptr;
     double v = str ? std::strtod( str, &endptr ) : 0.0;
     if( str == endptr || v < 0.0 ) {
         SC_REPORT_ERROR( SC_ID_TIME_CONVERSION_FAILED_, "invalid value given" );
@@ -349,8 +349,7 @@ sc_time_params::sc_time_params()
   default_time_unit_specified( false )
 {}
 
-sc_time_params::~sc_time_params()
-{}
+
 
 
 // ----------------------------------------------------------------------------
@@ -411,7 +410,7 @@ sc_set_time_resolution( double v, sc_time_unit tu )
 	time_params->default_time_unit ) *
 	( time_params->time_resolution / resolution );
     if( time_unit < 1.0 ) {
-	SC_REPORT_WARNING( SC_ID_DEFAULT_TIME_UNIT_CHANGED_, 0 );
+	SC_REPORT_WARNING( SC_ID_DEFAULT_TIME_UNIT_CHANGED_, nullptr );
 	time_params->default_time_unit = 1;
     } else {
 	time_params->default_time_unit = static_cast<sc_dt::int64>( time_unit );

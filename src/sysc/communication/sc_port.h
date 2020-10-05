@@ -156,10 +156,10 @@ protected:
     // called by the sc_sensitive* classes
     virtual void make_sensitive( sc_thread_handle, sc_event_finder* = 0 ) const;
     virtual void make_sensitive( sc_method_handle, sc_event_finder* = 0 ) const;
-    void add_static_event(
-		sc_method_handle process_p, const sc_event& event) const;
-    void add_static_event(
-		sc_thread_handle process_p, const sc_event& event) const;
+    static void add_static_event(
+		sc_method_handle process_p, const sc_event& event) ;
+    static void add_static_event(
+		sc_thread_handle process_p, const sc_event& event) ;
 
 private:
 

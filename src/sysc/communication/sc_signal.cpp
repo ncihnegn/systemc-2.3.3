@@ -29,14 +29,14 @@
 #include <sstream> // IWYU pragma: keep
 
 #include "sysc/communication/sc_communication_ids.h"
-#include "sysc/utils/sc_utils_ids.h"
+#include "sysc/communication/sc_port.h"
 #include "sysc/communication/sc_signal.h"
+#include "sysc/kernel/sc_object.h"
 #include "sysc/kernel/sc_reset.h"
 #include "sysc/kernel/sc_simcontext_int.h"
-#include "sysc/communication/sc_port.h"
-#include "sysc/kernel/sc_object.h"
 #include "sysc/utils/sc_report.h"
 #include "sysc/utils/sc_report_handler.h"
+#include "sysc/utils/sc_utils_ids.h"
 
 using sc_dt::sc_logic;
 
@@ -86,12 +86,11 @@ sc_writer_policy_check_port::
          !sc_get_curr_simcontext()->write_check_conflicts_only() )
     {
         // an out or inout port; only one can be connected
-        if( m_output != 0) {
+        if( m_output != nullptr) {
             sc_signal_invalid_writer( target, m_output, port_, false );
             return false;
-        } else {
-            m_output = port_;
-        }
+        }             m_output = port_;
+       
     }
     return true;
 }
@@ -102,7 +101,7 @@ sc_signal_channel::~sc_signal_channel()
 }
 
 void
-sc_signal_channel::deprecated_get_data_ref() const
+sc_signal_channel::deprecated_get_data_ref() 
 {
     static bool warn_get_data_ref_deprecated=true;
     if ( warn_get_data_ref_deprecated )
@@ -114,7 +113,7 @@ sc_signal_channel::deprecated_get_data_ref() const
 }
 
 void
-sc_signal_channel::deprecated_get_new_value() const
+sc_signal_channel::deprecated_get_new_value() 
 {
     static bool warn_new_value=true;
     if ( warn_new_value )
@@ -126,7 +125,7 @@ sc_signal_channel::deprecated_get_new_value() const
 }
 
 void
-sc_signal_channel::deprecated_trace() const
+sc_signal_channel::deprecated_trace() 
 {
     static bool warn_trace_deprecated=true;
     if ( warn_trace_deprecated )
@@ -139,7 +138,7 @@ sc_signal_channel::deprecated_trace() const
 
 // create a (kernel) event, if needed
 sc_event*
-sc_signal_channel::lazy_kernel_event( sc_event** ev, const char* name ) const
+sc_signal_channel::lazy_kernel_event( sc_event** ev, const char* name ) 
 {
     if ( !*ev ) {
         *ev = new sc_event( sc_event::kernel_event, name );

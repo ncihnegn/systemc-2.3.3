@@ -32,21 +32,20 @@
 
 #include "sysc/kernel/sc_event.h"
 #include "sysc/kernel/sc_kernel_ids.h"
+#include "sysc/kernel/sc_method_process.h"
+#include "sysc/kernel/sc_object.h"
+#include "sysc/kernel/sc_object_manager.h"
 #include "sysc/kernel/sc_phase_callback_registry.h"
 #include "sysc/kernel/sc_process.h"
 #include "sysc/kernel/sc_process_handle.h"
-#include "sysc/kernel/sc_object_manager.h"
-#include "sysc/utils/sc_utils_ids.h"
-#include "sysc/kernel/sc_method_process.h"
-#include "sysc/kernel/sc_object.h"
 #include "sysc/kernel/sc_status.h"
 #include "sysc/kernel/sc_thread_process.h"
+#include "sysc/utils/sc_utils_ids.h"
 
 namespace sc_core {
 
 using std::malloc;
 using std::strrchr;
-using std::strncmp;
 
 // ----------------------------------------------------------------------------
 //  CLASS : sc_event
@@ -77,9 +76,9 @@ sc_event::cancel()
     }
     case TIMED: {
         // remove this event from the timed events set
-        sc_assert( m_timed != 0 );
-        m_timed->m_event = 0;
-        m_timed = 0;
+        sc_assert( m_timed != nullptr );
+        m_timed->m_event = nullptr;
+        m_timed = nullptr;
         m_notify_type = NONE;
         break;
     }
@@ -128,9 +127,9 @@ sc_event::notify( const sc_time& t )
 #       endif
         if( m_notify_type == TIMED ) {
             // remove this event from the timed events set
-            sc_assert( m_timed != 0 );
-            m_timed->m_event = 0;
-            m_timed = 0;
+            sc_assert( m_timed != nullptr );
+            m_timed->m_event = nullptr;
+            m_timed = nullptr;
         }
         // add this event to the delta events set
         m_delta_event_index = m_simc->add_delta_event( this );
@@ -151,16 +150,16 @@ sc_event::notify( const sc_time& t )
         }
 #   endif
     if( m_notify_type == TIMED ) {
-        sc_assert( m_timed != 0 );
+        sc_assert( m_timed != nullptr );
         if( m_timed->m_notify_time <= m_simc->time_stamp() + t ) {
             return;
         }
         // remove this event from the timed events set
-        m_timed->m_event = 0;
-        m_timed = 0;
+        m_timed->m_event = nullptr;
+        m_timed = nullptr;
     }
     // add this event to the timed events set
-    sc_event_timed* et = new sc_event_timed( this, m_simc->time_stamp() + t );
+    auto* et = new sc_event_timed( this, m_simc->time_stamp() + t );
     m_simc->add_timed_event( et );
     m_timed = et;
     m_notify_type = TIMED;
@@ -182,7 +181,7 @@ sc_event::notify_delayed()
 {
     sc_warn_notify_delayed();
     if( m_notify_type != NONE ) {
-        SC_REPORT_ERROR( SC_ID_NOTIFY_DELAYED_, 0 );
+        SC_REPORT_ERROR( SC_ID_NOTIFY_DELAYED_, nullptr );
     }
     // add this event to the delta events set
     m_delta_event_index = m_simc->add_delta_event( this );
@@ -194,7 +193,7 @@ sc_event::notify_delayed( const sc_time& t )
 {
     sc_warn_notify_delayed();
     if( m_notify_type != NONE ) {
-        SC_REPORT_ERROR( SC_ID_NOTIFY_DELAYED_, 0 );
+        SC_REPORT_ERROR( SC_ID_NOTIFY_DELAYED_, nullptr );
     }
     if( t == SC_ZERO_TIME ) {
         // add this event to the delta events set
@@ -202,7 +201,7 @@ sc_event::notify_delayed( const sc_time& t )
         m_notify_type = DELTA;
     } else {
         // add this event to the timed events set
-        sc_event_timed* et = new sc_event_timed( this,
+        auto* et = new sc_event_timed( this,
                                                  m_simc->time_stamp() + t );
         m_simc->add_timed_event( et );
         m_timed = et;
@@ -269,7 +268,7 @@ sc_event::reset()
 {
     m_notify_type = NONE;
     m_delta_event_index = -1;
-    m_timed = 0;
+    m_timed = nullptr;
     // clear the dynamic sensitive methods
     m_methods_dynamic.resize(0);
     // clear the dynamic sensitive threads
@@ -288,12 +287,12 @@ sc_event::reset()
 // +----------------------------------------------------------------------------
 sc_event::sc_event( const char* name ) :
     m_name(),
-    m_parent_p(NULL),
+    m_parent_p(nullptr),
     m_simc( sc_get_curr_simcontext() ),
     m_trigger_stamp( ~sc_dt::UINT64_ZERO ),
     m_notify_type( NONE ),
     m_delta_event_index( -1 ),
-    m_timed( 0 ),
+    m_timed( nullptr ),
     m_methods_static(),
     m_methods_dynamic(),
     m_threads_static(),
@@ -311,18 +310,18 @@ sc_event::sc_event( const char* name ) :
 // +----------------------------------------------------------------------------
 sc_event::sc_event() :
     m_name(),
-    m_parent_p(NULL),
+    m_parent_p(nullptr),
     m_simc( sc_get_curr_simcontext() ),
     m_trigger_stamp( ~sc_dt::UINT64_ZERO ),
     m_notify_type( NONE ),
     m_delta_event_index( -1 ),
-    m_timed( 0 ),
+    m_timed( nullptr ),
     m_methods_static(),
     m_methods_dynamic(),
     m_threads_static(),
     m_threads_dynamic()
 {
-    register_event( NULL );
+    register_event( nullptr );
 }
 
 // +----------------------------------------------------------------------------
@@ -334,12 +333,12 @@ sc_event::sc_event() :
 // +----------------------------------------------------------------------------
 sc_event::sc_event( kernel_tag, const char* name ) :
     m_name(),
-    m_parent_p(NULL),
+    m_parent_p(nullptr),
     m_simc( sc_get_curr_simcontext() ),
     m_trigger_stamp( ~sc_dt::UINT64_ZERO ),
     m_notify_type( NONE ),
     m_delta_event_index( -1 ),
-    m_timed( 0 ),
+    m_timed( nullptr ),
     m_methods_static(),
     m_methods_dynamic(),
     m_threads_static(),
@@ -364,13 +363,13 @@ sc_event::~sc_event()
 	object_manager_p->remove_event( m_name );
     }
 
-    for(size_t i = 0; i < m_threads_dynamic.size(); ++i ) {
-        if( m_threads_dynamic[i]->m_event_p == this )
-            m_threads_dynamic[i]->m_event_p = 0;
+    for(auto & i : m_threads_dynamic) {
+        if( i->m_event_p == this )
+            i->m_event_p = nullptr;
     }
-    for(size_t i = 0; i < m_methods_dynamic.size(); ++i ) {
-        if( m_methods_dynamic[i]->m_event_p == this )
-            m_methods_dynamic[i]->m_event_p = 0;
+    for(auto & i : m_methods_dynamic) {
+        if( i->m_event_p == this )
+            i->m_event_p = nullptr;
     }
 }
 
@@ -387,7 +386,7 @@ sc_event::trigger()
     m_trigger_stamp = m_simc->change_stamp();
     m_notify_type = NONE;
     m_delta_event_index = -1;
-    m_timed = 0;
+    m_timed = nullptr;
 
     int       last_i; // index of last element in vector now accessing.
     int       size;   // size of vector now accessing.
@@ -547,21 +546,21 @@ union sc_event_timed_u
 };
 
 static
-sc_event_timed_u* free_list = 0;
+sc_event_timed_u* free_list = nullptr;
 
 void*
 sc_event_timed::allocate()
 {
     const int ALLOC_SIZE = 64;
 
-    if( free_list == 0 ) {
+    if( free_list == nullptr ) {
         free_list = (sc_event_timed_u*) malloc( ALLOC_SIZE *
                                                 sizeof( sc_event_timed_u ) );
         int i = 0;
         for( ; i < ALLOC_SIZE - 1; ++ i ) {
             free_list[i].next = &free_list[i + 1];
         }
-        free_list[i].next = 0;
+        free_list[i].next = nullptr;
     }
 
     sc_event_timed_u* q = free_list;
@@ -572,8 +571,8 @@ sc_event_timed::allocate()
 void
 sc_event_timed::deallocate( void* p )
 {
-    if( p != 0 ) {
-        sc_event_timed_u* q = reinterpret_cast<sc_event_timed_u*>( p );
+    if( p != nullptr ) {
+        auto* q = reinterpret_cast<sc_event_timed_u*>( p );
         q->next = free_list;
         free_list = q;
     }
@@ -590,7 +589,7 @@ void
 sc_event_list::push_back( const sc_event& e )
 {
     // make sure e is not already in the list
-    if ( m_events.size() != 0 ) {
+    if ( !m_events.empty() ) {
       const sc_event** l_events = &m_events[0];
       for( int i = m_events.size() - 1; i >= 0; -- i ) {
           if( &e == l_events[i] ) {
@@ -617,7 +616,7 @@ void
 sc_event_list::add_dynamic( sc_method_handle method_h ) const
 {
     m_busy++;
-    if ( m_events.size() != 0 ) {
+    if ( !m_events.empty() ) {
       const sc_event* const * l_events = &m_events[0];
       for( int i = m_events.size() - 1; i >= 0; -- i ) {
           l_events[i]->add_dynamic( method_h );
@@ -629,7 +628,7 @@ void
 sc_event_list::add_dynamic( sc_thread_handle thread_h ) const
 {
     m_busy++;
-    if ( m_events.size() != 0 ) {
+    if ( !m_events.empty() ) {
       const sc_event* const* l_events = &m_events[0];
       for( int i = m_events.size() - 1; i >= 0; -- i ) {
           l_events[i]->add_dynamic( thread_h );
@@ -641,7 +640,7 @@ void
 sc_event_list::remove_dynamic( sc_method_handle method_h,
                                const sc_event* e_not ) const
 {
-    if ( m_events.size() != 0 ) {
+    if ( !m_events.empty() ) {
       const sc_event* const* l_events = &m_events[0];
       for( int i = m_events.size() - 1; i >= 0; -- i ) {
           const sc_event* e = l_events[i];
@@ -656,7 +655,7 @@ void
 sc_event_list::remove_dynamic( sc_thread_handle thread_h,
                                const sc_event* e_not ) const
 {
-    if ( m_events.size() != 0 ) {
+    if ( !m_events.empty() ) {
       const sc_event* const* l_events = &m_events[0];
       for( int i = m_events.size() - 1; i >= 0; -- i ) {
           const sc_event* e = l_events[i];
@@ -668,7 +667,7 @@ sc_event_list::remove_dynamic( sc_thread_handle thread_h,
 }
 
 void
-sc_event_list::report_premature_destruction() const
+sc_event_list::report_premature_destruction() 
 {
     // TDB: reliably detect premature destruction
     //
@@ -693,7 +692,7 @@ sc_event_list::report_premature_destruction() const
 }
 
 void
-sc_event_list::report_invalid_modification() const
+sc_event_list::report_invalid_modification() 
 {
     SC_REPORT_ERROR( SC_ID_EVENT_LIST_FAILED_
                    , "list modified while being waited on" );

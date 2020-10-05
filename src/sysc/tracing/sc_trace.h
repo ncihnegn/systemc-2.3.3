@@ -165,7 +165,7 @@ protected:
     virtual void cycle( bool delta_cycle ) = 0;
 
     // Helper for event tracing
-    const sc_dt::uint64& event_trigger_stamp( const sc_event& event ) const;
+    static const sc_dt::uint64& event_trigger_stamp( const sc_event& event ) ;
 
     // Flush results and close file
     virtual ~sc_trace_file()

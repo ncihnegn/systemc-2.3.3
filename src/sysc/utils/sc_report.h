@@ -107,7 +107,7 @@ struct sc_msg_def;
 class sc_report;
 class sc_report_handler;
 
-SC_API const std::string sc_report_compose_message( const sc_report& );
+SC_API std::string sc_report_compose_message( const sc_report& );
 
 // ----------------------------------------------------------------------------
 //  CLASS : sc_report

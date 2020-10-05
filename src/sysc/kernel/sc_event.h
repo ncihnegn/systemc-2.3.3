@@ -175,8 +175,8 @@ protected:
     bool temporary()   const;
     void auto_delete() const;
 
-    void report_premature_destruction() const;
-    void report_invalid_modification()  const;
+    static void report_premature_destruction() ;
+    static void report_invalid_modification()  ;
 
 private:
 

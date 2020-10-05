@@ -31,11 +31,11 @@
 #include <algorithm>
 #include <cstring>
 #include <sstream>
-#include <vector>
 #include <string>
+#include <vector>
 
-#include "sysc/kernel/sc_externs.h"
 #include "sysc/kernel/sc_except.h"
+#include "sysc/kernel/sc_externs.h"
 #include "sysc/utils/sc_report.h"
 #include "sysc/utils/sc_report_handler.h"
 #include "sysc/utils/sc_utils_ids.h"
@@ -69,7 +69,7 @@ sc_elab_and_sim( int argc, char* argv[] )
 
     // Copy argv into a new structure to prevent sc_main from modifying the
     // result returned from sc_argv.
-    std::vector<char*> argv_copy(argc + 1, static_cast<char*>(NULL));
+    std::vector<char*> argv_copy(argc + 1, static_cast<char*>(nullptr));
     for ( int i = 0; i < argc; ++i ) {
         std::size_t size = std::strlen(argv[i]) + 1;
         argv_copy[i] = new char[size];

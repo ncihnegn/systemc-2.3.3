@@ -32,17 +32,17 @@
  *****************************************************************************/
 
 
-#include <cstring>
 #include <algorithm> // std::swap
+#include <cstring>
 #include <iosfwd>
 #include <utility>
 
-#include "sysc/kernel/sc_simcontext_int.h"
-#include "sysc/utils/sc_report.h"
-#include "sysc/utils/sc_utils_ids.h"
 #include "sysc/kernel/sc_simcontext.h"
+#include "sysc/kernel/sc_simcontext_int.h"
 #include "sysc/kernel/sc_time.h"
+#include "sysc/utils/sc_report.h"
 #include "sysc/utils/sc_report_handler.h"
+#include "sysc/utils/sc_utils_ids.h"
 
 namespace sc_core {
 
@@ -71,22 +71,21 @@ static inline char * empty_dup(const char * p)
         std::copy(p, p + size, result);
         return result;
     }
-    else
-    {
-        return empty_str;
-    }
+    
+            return empty_str;
+   
 }
 
 sc_report::sc_report()
 : severity(SC_INFO),
-  md(0),
-  msg(empty_dup(0)),
-  file(empty_dup(0)),
+  md(nullptr),
+  msg(empty_dup(nullptr)),
+  file(empty_dup(nullptr)),
   line(0),
   timestamp(new sc_time(sc_time_stamp())),
-  process_name(empty_dup(0)),
+  process_name(empty_dup(nullptr)),
   m_verbosity_level(SC_MEDIUM),
-  m_what(empty_dup(0))
+  m_what(empty_dup(nullptr))
 {
 }
 
@@ -169,7 +168,7 @@ bool sc_report::valid() const
 
 const char* sc_report::get_process_name() const
 {
-    return process_name != empty_str ? process_name : 0;
+    return process_name != empty_str ? process_name : nullptr;
 }
 
 //
@@ -218,7 +217,7 @@ void sc_report::register_id( int id, const char* msg )
 			 "invalid report id" );
         return;
     }
-    if( msg == 0 ) {
+    if( msg == nullptr ) {
 	SC_REPORT_ERROR( SC_ID_REGISTER_ID_FAILED_,
 			 "invalid report message" );
         return;

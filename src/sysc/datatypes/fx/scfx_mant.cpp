@@ -80,7 +80,7 @@ next_pow2_index( std::size_t size )
     return index;
 }
 
-static word_list* free_words[32] = { 0 };
+static word_list* free_words[32] = { nullptr };
     
 word*
 scfx_mant::alloc_word( std::size_t size )
@@ -100,7 +100,7 @@ scfx_mant::alloc_word( std::size_t size )
 	{
 	    slot[i].m_next_p = &slot[i+alloc_size];
 	}
-	slot[i].m_next_p = 0;
+	slot[i].m_next_p = nullptr;
     }
 
     word* result = (word*)slot;
@@ -114,7 +114,7 @@ scfx_mant::free_word( word* array, std::size_t size )
     if( array && size )
     {
         int slot_index = next_pow2_index( size );
-	word_list* wl_p = (word_list*)array;
+	auto* wl_p = (word_list*)array;
 
 	wl_p->m_next_p = free_words[slot_index];
 	free_words[slot_index] = wl_p;

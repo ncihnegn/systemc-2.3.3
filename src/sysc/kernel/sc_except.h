@@ -95,7 +95,7 @@ class SC_API sc_unwind_exception : public std::exception
 
   protected:
     explicit
-    sc_unwind_exception( sc_process_b* target_p, bool is_reset = false );
+    sc_unwind_exception( sc_process_b* proc_p, bool is_reset = false );
 
     bool active() const;
     void clear()  const;

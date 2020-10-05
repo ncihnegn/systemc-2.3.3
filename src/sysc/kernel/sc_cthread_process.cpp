@@ -43,7 +43,7 @@ class sc_spawn_options;
 //------------------------------------------------------------------------------
 void sc_cthread_process::dont_initialize( bool /* dont */ )
 {
-    SC_REPORT_WARNING( SC_ID_DONT_INITIALIZE_, 0 );
+    SC_REPORT_WARNING( SC_ID_DONT_INITIALIZE_, nullptr );
 }
 
 //------------------------------------------------------------------------------
@@ -67,8 +67,7 @@ sc_cthread_process::sc_cthread_process( const char* name_p,
 // This is the object instance constructor for this class.
 //------------------------------------------------------------------------------
 sc_cthread_process::~sc_cthread_process()
-{
-}
+= default;
 
 } // namespace sc_core 
 

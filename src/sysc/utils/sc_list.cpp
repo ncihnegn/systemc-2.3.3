@@ -33,8 +33,8 @@
 #include "sysc/utils/sc_list.h"
 #include "sysc/utils/sc_mempool.h"
 #include "sysc/utils/sc_report.h"
-#include "sysc/utils/sc_utils_ids.h"
 #include "sysc/utils/sc_report_handler.h"
+#include "sysc/utils/sc_utils_ids.h"
 
 namespace sc_core {
 
@@ -43,28 +43,28 @@ class SC_API sc_plist_elem {
     friend class sc_plist_base;
 
 private:
-    sc_plist_elem() : data(0), prev(0), next(0) 
-    {}
+    sc_plist_elem()  
+    = default;
     sc_plist_elem( void* d, sc_plist_elem* p, sc_plist_elem* n ) :
         data(d), prev(p), next(n) 
     {}
     ~sc_plist_elem()
-    {}
+    = default;
 
     static void* operator new(std::size_t sz)            { return sc_mempool::allocate(sz); }
     static void operator delete(void* p, std::size_t sz) { sc_mempool::release(p, sz);      }
     
-    void* data;
-    sc_plist_elem* prev;
-    sc_plist_elem* next;
+    void* data{nullptr};
+    sc_plist_elem* prev{nullptr};
+    sc_plist_elem* next{nullptr};
 };
 
-sc_plist_base::sc_plist_base() : head(0), tail(0) {}
+sc_plist_base::sc_plist_base() : head(nullptr), tail(nullptr) {}
 
 sc_plist_base::~sc_plist_base()
 {
     handle_t p;
-    for( handle_t h = head; h != 0; h = p ) {
+    for( handle_t h = head; h != nullptr; h = p ) {
         p = h->next;
         delete h;
     }
@@ -74,19 +74,19 @@ void
 sc_plist_base::erase_all()
 {
     handle_t p;
-    for( handle_t h = head; h != 0; h = p ) {
+    for( handle_t h = head; h != nullptr; h = p ) {
         p = h->next;
         delete h;
     }
-    head = 0;
-    tail = 0;
+    head = nullptr;
+    tail = nullptr;
 }
 
 int
 sc_plist_base::size() const
 {
     int n = 0;
-    for( handle_t h = head; h != 0; h = h->next ) {
+    for( handle_t h = head; h != nullptr; h = h->next ) {
         n++;
     }
     return n;
@@ -95,7 +95,7 @@ sc_plist_base::size() const
 sc_plist_base::handle_t
 sc_plist_base::push_back( void* d )
 {
-    handle_t q = new sc_plist_elem( d, tail, 0 );
+    auto *q = new sc_plist_elem( d, tail, nullptr );
     if (tail) {
         tail->next = q;
         tail = q;
@@ -109,7 +109,7 @@ sc_plist_base::push_back( void* d )
 sc_plist_base::handle_t
 sc_plist_base::push_front( void* d )
 {
-    handle_t q = new sc_plist_elem( d, (sc_plist_elem*) 0, head );
+    auto *q = new sc_plist_elem( d, (sc_plist_elem*) nullptr, head );
     if (head) {
         head->prev = q;
         head = q;
@@ -127,11 +127,11 @@ sc_plist_base::pop_back()
     void* d = q->data;
     tail = tail->prev;
     delete q;
-    if (tail != 0) {
-        tail->next = 0;
+    if (tail != nullptr) {
+        tail->next = nullptr;
     }
     else {
-        head = 0;
+        head = nullptr;
     }
     return d;
 }
@@ -143,11 +143,11 @@ sc_plist_base::pop_front()
     void* d = q->data;
     head = head->next;
     delete q;
-    if (head != 0) {
-        head->prev = 0;
+    if (head != nullptr) {
+        head->prev = nullptr;
     }
     else {
-        tail = 0;
+        tail = nullptr;
     }
     return d;
 }
@@ -155,29 +155,27 @@ sc_plist_base::pop_front()
 sc_plist_base::handle_t
 sc_plist_base::insert_before( handle_t h, void* d )
 {
-    if (h == 0) {
+    if (h == nullptr) {
         return push_back(d);
     }
-    else {
-        handle_t q = new sc_plist_elem( d, h->prev, h );
+            auto *q = new sc_plist_elem( d, h->prev, h );
         h->prev->next = q;
         h->prev = q;
         return q;
-    }
+   
 }
 
 sc_plist_base::handle_t
 sc_plist_base::insert_after( handle_t h, void* d )
 {
-    if (h == 0) {
+    if (h == nullptr) {
         return push_front(d);
     }
-    else {
-        handle_t q = new sc_plist_elem( d, h, h->next );
+            auto *q = new sc_plist_elem( d, h, h->next );
         h->next->prev = q;
         h->next = q;
         return q;
-    }
+   
 }
 
 void*
@@ -185,19 +183,18 @@ sc_plist_base::remove( handle_t h )
 {
     if (h == head)
         return pop_front();
-    else if (h == tail)
+    if (h == tail)
         return pop_back();
-    else {
-        void* d = h->data;
+            void* d = h->data;
         h->prev->next = h->next;
         h->next->prev = h->prev;
         delete h;
         return d;
-    }
+   
 }
 
 void*
-sc_plist_base::get( handle_t h ) const
+sc_plist_base::get( handle_t h ) 
 {
     return h->data;
 }
@@ -211,7 +208,7 @@ sc_plist_base::set( handle_t h, void* d )
 void
 sc_plist_base::mapcar( sc_plist_map_fn f, void* arg )
 {
-    for (handle_t h = head; h != 0; h = h->next) {
+    for (handle_t h = head; h != nullptr; h = h->next) {
         f( h->data, arg );
     }
 }
@@ -223,11 +220,10 @@ sc_plist_base::front() const
    if (head) {			
         return head->data;
     }				
-    else {
-      SC_REPORT_ERROR( SC_ID_FRONT_ON_EMPTY_LIST_ , 0 );
+          SC_REPORT_ERROR( SC_ID_FRONT_ON_EMPTY_LIST_ , nullptr );
       // never reached
-      return 0;
-    }
+      return nullptr;
+   
 }
 
 void*
@@ -236,11 +232,10 @@ sc_plist_base::back() const
    if (tail) {
         return tail->data;
     }
-    else {
-      SC_REPORT_ERROR( SC_ID_BACK_ON_EMPTY_LIST_, 0 );
+          SC_REPORT_ERROR( SC_ID_BACK_ON_EMPTY_LIST_, nullptr );
       // never reached
-      return 0;
-    }
+      return nullptr;
+   
 }
 
 
@@ -262,15 +257,12 @@ sc_plist_base_iter::reset( sc_plist_base* l, bool from_tail )
     }
 }
 
-sc_plist_base_iter::~sc_plist_base_iter()
-{
 
-}
 
 bool
 sc_plist_base_iter::empty() const
 {
-    return ptr == 0;
+    return ptr == nullptr;
 }
 
 void

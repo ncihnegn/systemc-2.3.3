@@ -83,7 +83,7 @@ sc_module_registry::remove( sc_module& module_ )
 	}
     }
     if( i == size() ) {
-        SC_REPORT_ERROR( SC_ID_REMOVE_MODULE_, 0 );
+        SC_REPORT_ERROR( SC_ID_REMOVE_MODULE_, nullptr );
         return;
     }
 
@@ -103,7 +103,7 @@ sc_module_registry::sc_module_registry( sc_simcontext& simc_ )
 // destructor
 
 sc_module_registry::~sc_module_registry()
-{}
+= default;
 
 // called when construction is done
 

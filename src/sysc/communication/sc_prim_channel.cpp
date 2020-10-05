@@ -30,9 +30,9 @@
 #include "sysc/communication/sc_prim_channel.h"
 
 #include "sysc/communication/sc_communication_ids.h"
-#include "sysc/kernel/sc_simcontext.h"
-#include "sysc/kernel/sc_object_int.h"
 #include "sysc/communication/sc_mutex_if.h"
+#include "sysc/kernel/sc_object_int.h"
+#include "sysc/kernel/sc_simcontext.h"
 #include "sysc/utils/sc_report.h"
 #include "sysc/utils/sc_report_handler.h"
 
@@ -54,9 +54,9 @@ namespace sc_core {
 // constructors
 
 sc_prim_channel::sc_prim_channel()
-: sc_object( 0 ),
+: sc_object( nullptr ),
   m_registry( simcontext()->get_prim_channel_registry() ),
-  m_update_next_p( 0 ) 
+  m_update_next_p( nullptr ) 
 {
     m_registry->insert( *this );
 }
@@ -64,7 +64,7 @@ sc_prim_channel::sc_prim_channel()
 sc_prim_channel::sc_prim_channel( const char* name_ )
 : sc_object( name_ ),
   m_registry( simcontext()->get_prim_channel_registry() ),
-  m_update_next_p( 0 )
+  m_update_next_p( nullptr )
 {
     m_registry->insert( *this );
 }
@@ -157,9 +157,9 @@ class sc_prim_channel_registry::async_update_list
 #ifndef SC_DISABLE_ASYNC_UPDATES
 public:
 
-    bool pending() const
+    [[nodiscard]] bool pending() const
     {
-	return m_push_queue.size() != 0;
+	return !m_push_queue.empty();
     }
 
     void suspend()
@@ -180,15 +180,17 @@ public:
 
     void accept_updates()
     {
-	sc_assert( ! m_pop_queue.size() );
+	sc_assert( m_pop_queue.empty() );
 	{
 	    sc_scoped_lock lock( m_mutex );
 	    m_push_queue.swap( m_pop_queue );
 	    // leaving the block releases the mutex
 	}
 
-	std::vector< sc_prim_channel* >::const_iterator
-	    it = m_pop_queue.begin(), end = m_pop_queue.end();
+	auto
+	    it = m_pop_queue.begin();
+	auto
+	    end = m_pop_queue.end();
 	while( it!= end )
 	{
 	    // we use request_update instead of perform_update
@@ -203,7 +205,7 @@ public:
     bool attach_suspending( sc_prim_channel& p )
     {
         sc_scoped_lock lock( m_mutex );
-        std::vector<sc_prim_channel*>::iterator it =
+        auto it =
           std::find(m_suspending_channels.begin(), m_suspending_channels.end(), &p);
         if ( it == m_suspending_channels.end() ) {
             m_suspending_channels.push_back(&p);
@@ -217,19 +219,19 @@ public:
     bool detach_suspending( sc_prim_channel& p )
     {
         sc_scoped_lock lock( m_mutex );
-        std::vector<sc_prim_channel*>::iterator it =
+        auto it =
           std::find(m_suspending_channels.begin(), m_suspending_channels.end(), &p);
         if ( it != m_suspending_channels.end() ) {
             *it = m_suspending_channels.back();
             m_suspending_channels.pop_back();
-            m_has_suspending_channels = (m_suspending_channels.size() > 0);
+            m_has_suspending_channels = (!m_suspending_channels.empty());
             return true;
         }
         return false;
         // return releases the mutex
     }
 
-    async_update_list() : m_has_suspending_channels() {}
+    async_update_list()  = default;
 
 private:
     sc_host_mutex                   m_mutex;
@@ -237,7 +239,7 @@ private:
     std::vector< sc_prim_channel* > m_push_queue;
     std::vector< sc_prim_channel* > m_pop_queue;
     std::vector< sc_prim_channel* > m_suspending_channels;
-    bool                            m_has_suspending_channels;
+    bool                            m_has_suspending_channels{};
 
 #endif // ! SC_DISABLE_ASYNC_UPDATES
 };
@@ -287,7 +289,7 @@ sc_prim_channel_registry::remove( sc_prim_channel& prim_channel_ )
 	}
     }
     if( i == size() ) {
-        SC_REPORT_ERROR( SC_ID_REMOVE_PRIM_CHANNEL_, 0 );
+        SC_REPORT_ERROR( SC_ID_REMOVE_PRIM_CHANNEL_, nullptr );
         return;
     }
 
@@ -389,7 +391,7 @@ sc_prim_channel_registry::perform_update()
 // constructor
 
 sc_prim_channel_registry::sc_prim_channel_registry( sc_simcontext& simc_ )
-  :  m_async_update_list_p(0)
+  :  m_async_update_list_p(nullptr)
   ,  m_construction_done(0)
   ,  m_prim_channel_vec()
   ,  m_simc( &simc_ )

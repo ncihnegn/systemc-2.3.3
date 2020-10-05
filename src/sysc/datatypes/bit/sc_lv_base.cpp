@@ -64,7 +64,7 @@ template class SC_API sc_proxy<sc_bv_base>;
 SC_API void sc_proxy_out_of_bounds(const char* msg, int64 val)
 {
     std::stringstream ss;
-    if( msg != NULL )
+    if( msg != nullptr )
         ss << msg;
     if( val != 0 )
         ss << val;
@@ -89,7 +89,7 @@ sc_lv_base::init( int length_, const sc_logic& init_value )
 {
     // check the length
     if( length_ <= 0 ) {
-        SC_REPORT_ERROR( sc_core::SC_ID_ZERO_LENGTH_, 0 );
+        SC_REPORT_ERROR( sc_core::SC_ID_ZERO_LENGTH_, nullptr );
         sc_core::sc_abort(); // can't recover from here
     }
     // allocate memory for the data and control words
@@ -133,7 +133,7 @@ sc_lv_base::assign_from_string( const std::string& s )
 // constructors
 
 sc_lv_base::sc_lv_base( const char* a )
-    : m_len( 0 ), m_size( 0 ), m_data( 0 ), m_ctrl( 0 )
+    : m_len( 0 ), m_size( 0 ), m_data( nullptr ), m_ctrl( nullptr )
 {
     std::string s = convert_to_bin( a );
     init( s.length() - 1 );
@@ -141,7 +141,7 @@ sc_lv_base::sc_lv_base( const char* a )
 }
 
 sc_lv_base::sc_lv_base( const char* a, int length_ )
-    : m_len( 0 ), m_size( 0 ), m_data( 0 ), m_ctrl( 0 )
+    : m_len( 0 ), m_size( 0 ), m_data( nullptr ), m_ctrl( nullptr )
 {
     init( length_ );
     assign_from_string( convert_to_bin( a ) );

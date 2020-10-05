@@ -142,7 +142,7 @@ protected:
     sc_module( const sc_module_name& nm ); /* for those used to old style */
 
     /* DEPRECATED */ sc_module( const char* nm ); 
-    /* DEPRECATED */ sc_module( const std::string& nm );
+    /* DEPRECATED */ sc_module( const std::string& s );
 
 public:
 
@@ -171,7 +171,7 @@ protected:
 
 
     // to prevent initialization for SC_METHODs and SC_THREADs
-    void dont_initialize();
+    static void dont_initialize();
 
     // positional binding code - used by operator ()
 
@@ -179,14 +179,14 @@ protected:
     void positional_bind( sc_port_base& );
 
     // set reset sensitivity for SC_xTHREADs
-    void async_reset_signal_is( const sc_in<bool>& port, bool level );
-    void async_reset_signal_is( const sc_inout<bool>& port, bool level );
-    void async_reset_signal_is( const sc_out<bool>& port, bool level );
-    void async_reset_signal_is( const sc_signal_in_if<bool>& iface, bool level);
-    void reset_signal_is( const sc_in<bool>& port, bool level );
-    void reset_signal_is( const sc_inout<bool>& port, bool level );
-    void reset_signal_is( const sc_out<bool>& port, bool level );
-    void reset_signal_is( const sc_signal_in_if<bool>& iface, bool level );
+    static void async_reset_signal_is( const sc_in<bool>& port, bool level );
+    static void async_reset_signal_is( const sc_inout<bool>& port, bool level );
+    static void async_reset_signal_is( const sc_out<bool>& port, bool level );
+    static void async_reset_signal_is( const sc_signal_in_if<bool>& iface, bool level);
+    static void reset_signal_is( const sc_in<bool>& port, bool level );
+    static void reset_signal_is( const sc_inout<bool>& port, bool level );
+    static void reset_signal_is( const sc_out<bool>& port, bool level );
+    static void reset_signal_is( const sc_signal_in_if<bool>& iface, bool level );
 
     // static sensitivity for SC_THREADs and SC_CTHREADs
 
@@ -312,7 +312,7 @@ protected:
     sc_sensitive_neg sensitive_neg;
 
     // Function to set the stack size of the current (c)thread process.
-    void set_stack_size( std::size_t );
+    static void set_stack_size( std::size_t );
 
     int append_port( sc_port_base* );
 

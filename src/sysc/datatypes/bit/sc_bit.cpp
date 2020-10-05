@@ -62,10 +62,10 @@
 #include <string>
 
 #include "sysc/datatypes/bit/sc_bit_ids.h"
-#include "sysc/utils/sc_utils_ids.h"
 #include "sysc/datatypes/bit/sc_logic.h"
 #include "sysc/utils/sc_report.h"
 #include "sysc/utils/sc_report_handler.h"
+#include "sysc/utils/sc_utils_ids.h"
 
 
 namespace sc_dt

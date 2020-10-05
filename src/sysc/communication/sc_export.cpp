@@ -29,13 +29,13 @@
 
 #include "sysc/communication/sc_export.h"
 
+#include <algorithm>
 #include <sstream>
 #include <string>
-#include <algorithm>
 
-#include "sysc/kernel/sc_simcontext.h"
 #include "sysc/kernel/sc_module.h"
 #include "sysc/kernel/sc_object_int.h"
+#include "sysc/kernel/sc_simcontext.h"
 
 namespace sc_core {
 
@@ -71,7 +71,7 @@ sc_export_base::before_end_of_elaboration()
 void
 sc_export_base::construction_done()
 {
-    sc_module* parent = static_cast<sc_module*>( get_parent_object() );
+    auto* parent = dynamic_cast<sc_module*>( get_parent_object() );
     sc_object::hierarchy_scope scope( parent );
     before_end_of_elaboration();
 }
@@ -87,13 +87,13 @@ sc_export_base::end_of_elaboration()
 void
 sc_export_base::elaboration_done()
 {
-    if ( get_interface() == 0 )
+    if ( get_interface() == nullptr )
     {
         report_error( SC_ID_COMPLETE_BINDING_, "export not bound" );
         // may continue, if suppressed
     }
 
-    sc_module* parent = static_cast<sc_module*>( get_parent_object() );
+    auto* parent = dynamic_cast<sc_module*>( get_parent_object() );
     sc_object::hierarchy_scope scope( parent );
     end_of_elaboration();
 }
@@ -109,7 +109,7 @@ sc_export_base::start_of_simulation()
 void
 sc_export_base::start_simulation()
 {
-    sc_module* parent = static_cast<sc_module*>( get_parent_object() );
+    auto* parent = dynamic_cast<sc_module*>( get_parent_object() );
     sc_object::hierarchy_scope scope( parent );
     start_of_simulation();
 }
@@ -125,7 +125,7 @@ sc_export_base::end_of_simulation()
 void
 sc_export_base::simulation_done()
 {
-    sc_module* parent = static_cast<sc_module*>( get_parent_object() );
+    auto* parent = dynamic_cast<sc_module*>( get_parent_object() );
     sc_object::hierarchy_scope scope( parent );
     end_of_simulation();
 }
@@ -134,7 +134,7 @@ void
 sc_export_base::report_error( const char* id, const char* add_msg ) const
 {
     std::stringstream msg;
-    if (add_msg != 0)
+    if (add_msg != nullptr)
         msg << add_msg << ": ";
     msg << "export '" << name() << "' (" << kind() << ")";
     SC_REPORT_ERROR( id, msg.str().c_str() );
@@ -173,7 +173,7 @@ sc_export_registry::insert( sc_export_base* export_ )
 #endif
 
     sc_module* curr_module = m_simc->hierarchy_curr();
-    if( curr_module == 0 ) {
+    if( curr_module == nullptr ) {
         export_->report_error( SC_ID_EXPORT_OUTSIDE_MODULE_ );
         return;
     }
@@ -215,8 +215,7 @@ sc_export_registry::sc_export_registry( sc_simcontext& simc_ )
 // destructor
 
 sc_export_registry::~sc_export_registry()
-{
-}
+= default;
 
 // called when construction is done
 

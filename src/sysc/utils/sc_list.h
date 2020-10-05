@@ -56,8 +56,8 @@ public:
     handle_t insert_before(handle_t h, void* d);
     handle_t insert_after(handle_t h, void* d);
     void* remove(handle_t h);
-    void* get(handle_t h) const;
-    void set(handle_t h, void* d);
+    static void* get(handle_t h) ;
+    static void set(handle_t h, void* d);
     void mapcar( sc_plist_map_fn f, void* arg );
 
     void* front() const;
@@ -78,7 +78,7 @@ public:
     typedef sc_plist_elem* handle_t;
     
     sc_plist_base_iter( sc_plist_base* l, bool from_tail = false );
-    ~sc_plist_base_iter();
+    ~sc_plist_base_iter() = default;
 
     void reset( sc_plist_base* l, bool from_tail = false );
     bool empty() const;

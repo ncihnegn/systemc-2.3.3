@@ -28,12 +28,12 @@
 
 #include "sysc/kernel/sc_method_process.h"
 
-#include "sysc/kernel/sc_simcontext_int.h"
-#include "sysc/kernel/sc_module.h"
-#include "sysc/kernel/sc_spawn_options.h"
 #include "sysc/kernel/sc_kernel_ids.h"
+#include "sysc/kernel/sc_module.h"
 #include "sysc/kernel/sc_object.h"
 #include "sysc/kernel/sc_sensitive.h"
+#include "sysc/kernel/sc_simcontext_int.h"
+#include "sysc/kernel/sc_spawn_options.h"
 #include "sysc/kernel/sc_status.h"
 #include "sysc/utils/sc_report.h"
 #include "sysc/utils/sc_report_handler.h"
@@ -101,17 +101,17 @@ void sc_method_process::clear_trigger()
         return;
       case EVENT:
         m_event_p->remove_dynamic( this );
-        m_event_p = 0;
+        m_event_p = nullptr;
         break;
       case OR_LIST:
-        m_event_list_p->remove_dynamic( this, 0 );
+        m_event_list_p->remove_dynamic( this, nullptr );
         m_event_list_p->auto_delete();
-        m_event_list_p = 0;
+        m_event_list_p = nullptr;
         break;
       case AND_LIST:
-        m_event_list_p->remove_dynamic( this, 0 );
+        m_event_list_p->remove_dynamic( this, nullptr );
         m_event_list_p->auto_delete();
-        m_event_list_p = 0;
+        m_event_list_p = nullptr;
         m_event_count = 0;
         break;
       case TIMEOUT:
@@ -122,21 +122,21 @@ void sc_method_process::clear_trigger()
         m_timeout_event_p->cancel();
         m_timeout_event_p->reset();
         m_event_p->remove_dynamic( this );
-        m_event_p = 0;
+        m_event_p = nullptr;
         break;
       case OR_LIST_TIMEOUT:
         m_timeout_event_p->cancel();
         m_timeout_event_p->reset();
-        m_event_list_p->remove_dynamic( this, 0 );
+        m_event_list_p->remove_dynamic( this, nullptr );
         m_event_list_p->auto_delete();
-        m_event_list_p = 0;
+        m_event_list_p = nullptr;
       break;
       case AND_LIST_TIMEOUT:
         m_timeout_event_p->cancel();
         m_timeout_event_p->reset();
-        m_event_list_p->remove_dynamic( this, 0 );
+        m_event_list_p->remove_dynamic( this, nullptr );
         m_event_list_p->auto_delete();
-        m_event_list_p = 0;
+        m_event_list_p = nullptr;
         m_event_count = 0;
         break;
     }
@@ -163,7 +163,7 @@ void sc_method_process::disable_process(
 
         for ( int child_i = 0; child_i < child_n; child_i++ )
         {
-            sc_process_b* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
+            auto* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
             if ( child_p ) child_p->disable_process(descendants);
         }
     }
@@ -222,7 +222,7 @@ void sc_method_process::enable_process(
 
         for ( int child_i = 0; child_i < child_n; child_i++ )
         {
-            sc_process_b* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
+            auto* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
             if ( child_p ) child_p->enable_process(descendants);
         }
     }
@@ -235,7 +235,7 @@ void sc_method_process::enable_process(
     if ( m_state == ps_bit_ready_to_run )
     {
         m_state = ps_normal;
-	if ( next_runnable() == 0 )
+	if ( next_runnable() == nullptr )
 	    simcontext()->push_runnable_method(this);
     }
 }
@@ -267,7 +267,7 @@ void sc_method_process::kill_process(sc_descendant_inclusion_info descendants)
 
         for ( int child_i = 0; child_i < child_n; child_i++ )
         {
-            sc_process_b* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
+            auto* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
             if ( child_p ) child_p->kill_process(descendants);
         }
     }
@@ -292,7 +292,7 @@ void sc_method_process::kill_process(sc_descendant_inclusion_info descendants)
     // That lets check_for_throws stumble across it if we were in the call
     // chain when the kill call occurred.
 
-    if ( next_runnable() != 0 )
+    if ( next_runnable() != nullptr )
         simcontext()->remove_runnable_method( this );
     disconnect_process();
 
@@ -315,12 +315,12 @@ sc_method_process::sc_method_process( const char* name_p,
     sc_process_b(
         name_p ? name_p : sc_gen_unique_name("method_p"),
         false, free_host, method_p, host_p, opt_p),
-	m_cor(0), m_stack_size(0), m_monitor_q()
+	m_cor(nullptr), m_stack_size(0), m_monitor_q()
 {
 
     // CHECK IF THIS IS AN sc_module-BASED PROCESS AND SIMUALTION HAS STARTED:
 
-    if ( dynamic_cast<sc_module*>(host_p) != 0 && sc_is_running() )
+    if ( dynamic_cast<sc_module*>(host_p) != nullptr && sc_is_running() )
     {
         report_error( SC_ID_MODULE_METHOD_AFTER_START_, "" );
         sc_abort(); // can't recover from here
@@ -335,31 +335,30 @@ sc_method_process::sc_method_process( const char* name_p,
         m_dont_init = opt_p->m_dont_initialize;
 
         // traverse event sensitivity list
-        for (unsigned int i = 0; i < opt_p->m_sensitive_events.size(); i++) {
+        for (const auto *m_sensitive_event : opt_p->m_sensitive_events) {
             sc_sensitive::make_static_sensitivity(
-                this, *opt_p->m_sensitive_events[i]);
+                this, *m_sensitive_event);
         }
 
         // traverse port base sensitivity list
-        for ( unsigned int i = 0; i < opt_p->m_sensitive_port_bases.size(); i++)
+        for (auto *m_sensitive_port_base : opt_p->m_sensitive_port_bases)
         {
             sc_sensitive::make_static_sensitivity(
-                this, *opt_p->m_sensitive_port_bases[i]);
+                this, *m_sensitive_port_base);
         }
 
         // traverse interface sensitivity list
-        for ( unsigned int i = 0; i < opt_p->m_sensitive_interfaces.size(); i++)
+        for (auto *m_sensitive_interface : opt_p->m_sensitive_interfaces)
         {
             sc_sensitive::make_static_sensitivity(
-                this, *opt_p->m_sensitive_interfaces[i]);
+                this, *m_sensitive_interface);
         }
 
         // traverse event finder sensitivity list
-        for ( unsigned int i = 0; i < opt_p->m_sensitive_event_finders.size();
-            i++)
+        for (auto *m_sensitive_event_finder : opt_p->m_sensitive_event_finders)
         {
             sc_sensitive::make_static_sensitivity(
-                this, *opt_p->m_sensitive_event_finders[i]);
+                this, *m_sensitive_event_finder);
         }
 
 	// process any reset signal specification:
@@ -407,7 +406,7 @@ void sc_method_process::suspend_process(
 
         for ( int child_i = 0; child_i < child_n; child_i++ )
         {
-            sc_process_b* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
+            auto* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
             if ( child_p ) child_p->suspend_process(descendants);
         }
     }
@@ -437,7 +436,7 @@ void sc_method_process::suspend_process(
     //     scheduling of the process.
 
     m_state = m_state | ps_bit_suspended;
-    if ( next_runnable() != 0 )
+    if ( next_runnable() != nullptr )
     {
 	m_state = m_state | ps_bit_ready_to_run;
 	simcontext()->remove_runnable_method( this );
@@ -470,7 +469,7 @@ void sc_method_process::resume_process(
 
         for ( int child_i = 0; child_i < child_n; child_i++ )
         {
-            sc_process_b* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
+            auto* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
             if ( child_p ) child_p->resume_process(descendants);
         }
     }
@@ -499,7 +498,7 @@ void sc_method_process::resume_process(
     if ( m_state & ps_bit_ready_to_run )
     {
 	m_state = m_state & ~ps_bit_ready_to_run;
-	if ( next_runnable() == 0 &&
+	if ( next_runnable() == nullptr &&
 	   ( sc_get_current_process_b() != dynamic_cast<sc_process_b*>(this) ) )
         {
 	    simcontext()->push_runnable_method(this);
@@ -557,12 +556,11 @@ void sc_method_process::throw_reset( bool async )
 	    m_throw_status = THROW_ASYNC_RESET;
 	    throw sc_unwind_exception( this, true );
 	}
-	else
-	{
-	    DEBUG_MSG(DEBUG_NAME,this,
+	
+		    DEBUG_MSG(DEBUG_NAME,this,
 	              "throw_reset: queueing this method for execution");
 	    simcontext()->preempt_with(this);
-	}
+
     }
 }
 
@@ -600,7 +598,7 @@ void sc_method_process::throw_user( const sc_throw_it_helper& helper,
 
         for ( int child_i = 0; child_i < child_n; child_i++ )
         {
-            sc_process_b* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
+            auto* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
             if ( child_p )
 	    {
 	        DEBUG_MSG(DEBUG_NAME,child_p,"about to throw user on");
@@ -686,10 +684,9 @@ bool sc_method_process::trigger_dynamic( sc_event* e )
 	    remove_dynamic_events( true );
 	    return true;
 	}
-	else
-	{
-	    return false;
-	}
+	
+		    return false;
+
     }
 
 
@@ -701,7 +698,7 @@ bool sc_method_process::trigger_dynamic( sc_event* e )
     switch( m_trigger_type )
     {
       case EVENT:
-	m_event_p = 0;
+	m_event_p = nullptr;
 	m_trigger_type = STATIC;
 	break;
 
@@ -710,7 +707,7 @@ bool sc_method_process::trigger_dynamic( sc_event* e )
 	if ( m_event_count == 0 )
 	{
 	    m_event_list_p->auto_delete();
-	    m_event_list_p = 0;
+	    m_event_list_p = nullptr;
 	    m_trigger_type = STATIC;
 	}
 	else
@@ -722,7 +719,7 @@ bool sc_method_process::trigger_dynamic( sc_event* e )
       case OR_LIST:
 	m_event_list_p->remove_dynamic( this, e );
 	m_event_list_p->auto_delete();
-	m_event_list_p = 0;
+	m_event_list_p = nullptr;
 	m_trigger_type = STATIC;
 	break;
 
@@ -735,14 +732,14 @@ bool sc_method_process::trigger_dynamic( sc_event* e )
 	{
 	    m_timed_out = true;
 	    m_event_p->remove_dynamic( this );
-	    m_event_p = 0;
+	    m_event_p = nullptr;
 	    m_trigger_type = STATIC;
 	}
 	else
 	{
 	    m_timeout_event_p->cancel();
 	    m_timeout_event_p->reset();
-	    m_event_p = 0;
+	    m_event_p = nullptr;
 	    m_trigger_type = STATIC;
 	}
 	break;
@@ -753,7 +750,7 @@ bool sc_method_process::trigger_dynamic( sc_event* e )
             m_timed_out = true;
             m_event_list_p->remove_dynamic( this, e );
             m_event_list_p->auto_delete();
-            m_event_list_p = 0;
+            m_event_list_p = nullptr;
             m_trigger_type = STATIC;
 	}
 
@@ -763,7 +760,7 @@ bool sc_method_process::trigger_dynamic( sc_event* e )
             m_timeout_event_p->reset();
 	    m_event_list_p->remove_dynamic( this, e );
 	    m_event_list_p->auto_delete();
-	    m_event_list_p = 0;
+	    m_event_list_p = nullptr;
 	    m_trigger_type = STATIC;
 	}
 	break;
@@ -774,7 +771,7 @@ bool sc_method_process::trigger_dynamic( sc_event* e )
             m_timed_out = true;
             m_event_list_p->remove_dynamic( this, e );
             m_event_list_p->auto_delete();
-            m_event_list_p = 0;
+            m_event_list_p = nullptr;
             m_trigger_type = STATIC;
 	}
 
@@ -787,7 +784,7 @@ bool sc_method_process::trigger_dynamic( sc_event* e )
 		m_timeout_event_p->reset();
 		// no need to remove_dynamic
 		m_event_list_p->auto_delete();
-		m_event_list_p = 0;
+		m_event_list_p = nullptr;
 		m_trigger_type = STATIC;
 	    }
 	    else

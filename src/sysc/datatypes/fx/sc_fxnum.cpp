@@ -258,38 +258,38 @@ sc_fxnum_fast_subref_r::dump( ::std::ostream& os ) const
 
 // explicit conversion to character string
 
-const std::string
+std::string
 sc_fxnum::to_string() const
 {
     return std::string( m_rep->to_string( SC_DEC, -1, SC_F, &m_params ) );
 }
 
-const std::string
+std::string
 sc_fxnum::to_string( sc_numrep numrep ) const
 {
     return std::string( m_rep->to_string( numrep, -1, SC_F, &m_params ) );
 }
 
-const std::string
+std::string
 sc_fxnum::to_string( sc_numrep numrep, bool w_prefix ) const
 {
     return std::string( m_rep->to_string( numrep, (w_prefix ? 1 : 0),
 					SC_F, &m_params ) );
 }
 
-const std::string
+std::string
 sc_fxnum::to_string( sc_fmt fmt ) const
 {
     return std::string( m_rep->to_string( SC_DEC, -1, fmt, &m_params ) );
 }
 
-const std::string
+std::string
 sc_fxnum::to_string( sc_numrep numrep, sc_fmt fmt ) const
 {
     return std::string( m_rep->to_string( numrep, -1, fmt, &m_params ) );
 }
 
-const std::string
+std::string
 sc_fxnum::to_string( sc_numrep numrep, bool w_prefix, sc_fmt fmt ) const
 {
     return std::string( m_rep->to_string( numrep, (w_prefix ? 1 : 0),
@@ -297,25 +297,25 @@ sc_fxnum::to_string( sc_numrep numrep, bool w_prefix, sc_fmt fmt ) const
 }
 
 
-const std::string
+std::string
 sc_fxnum::to_dec() const
 {
     return std::string( m_rep->to_string( SC_DEC, -1, SC_F, &m_params ) );
 }
 
-const std::string
+std::string
 sc_fxnum::to_bin() const
 {
     return std::string( m_rep->to_string( SC_BIN, -1, SC_F, &m_params ) );
 }
 
-const std::string
+std::string
 sc_fxnum::to_oct() const
 {
     return std::string( m_rep->to_string( SC_OCT, -1, SC_F, &m_params ) );
 }
 
-const std::string
+std::string
 sc_fxnum::to_hex() const
 {
     return std::string( m_rep->to_string( SC_HEX, -1, SC_F, &m_params ) );
@@ -364,7 +364,7 @@ sc_fxnum::lock_observer() const
 {
     SC_ASSERT_( m_observer != 0, "lock observer failed" );
     sc_fxnum_observer* tmp = m_observer;
-    m_observer = 0;
+    m_observer = nullptr;
     return tmp;
 }
 
@@ -469,7 +469,8 @@ overflow( double& c, const scfx_params& params, bool& o_flag )
     int fwl = params.wl() - iwl;
     double full_circle = scfx_pow2( iwl );
     double resolution = scfx_pow2( -fwl );
-    double low, high;
+    double low;
+    double high;
     if( params.enc() == SC_TC_ )
     {
 	high = full_circle / 2.0 - resolution;
@@ -663,43 +664,43 @@ to_string( const scfx_ieee_double&,
 	   sc_numrep,
 	   int,
 	   sc_fmt,
-	   const scfx_params* = 0 );
+	   const scfx_params* = nullptr );
 
 
 // explicit conversion to character string
 
-const std::string
+std::string
 sc_fxnum_fast::to_string() const
 {
     return std::string( sc_dt::to_string( m_val, SC_DEC, -1, SC_F, &m_params ) );
 }
 
-const std::string
+std::string
 sc_fxnum_fast::to_string( sc_numrep numrep ) const
 {
     return std::string( sc_dt::to_string( m_val, numrep, -1, SC_F, &m_params ) );
 }
 
-const std::string
+std::string
 sc_fxnum_fast::to_string( sc_numrep numrep, bool w_prefix ) const
 {
     return std::string( sc_dt::to_string( m_val, numrep, (w_prefix ? 1 : 0),
 					SC_F, &m_params ) );
 }
 
-const std::string
+std::string
 sc_fxnum_fast::to_string( sc_fmt fmt ) const
 {
     return std::string( sc_dt::to_string( m_val, SC_DEC, -1, fmt, &m_params ) );
 }
 
-const std::string
+std::string
 sc_fxnum_fast::to_string( sc_numrep numrep, sc_fmt fmt ) const
 {
     return std::string( sc_dt::to_string( m_val, numrep, -1, fmt, &m_params ) );
 }
 
-const std::string
+std::string
 sc_fxnum_fast::to_string( sc_numrep numrep, bool w_prefix, sc_fmt fmt ) const
 {
     return std::string( sc_dt::to_string( m_val, numrep, (w_prefix ? 1 : 0),
@@ -707,25 +708,25 @@ sc_fxnum_fast::to_string( sc_numrep numrep, bool w_prefix, sc_fmt fmt ) const
 }
 
 
-const std::string
+std::string
 sc_fxnum_fast::to_dec() const
 {
     return std::string( sc_dt::to_string( m_val, SC_DEC, -1, SC_F, &m_params ) );
 }
 
-const std::string
+std::string
 sc_fxnum_fast::to_bin() const
 {
     return std::string( sc_dt::to_string( m_val, SC_BIN, -1, SC_F, &m_params ) );
 }
 
-const std::string
+std::string
 sc_fxnum_fast::to_oct() const
 {
     return std::string( sc_dt::to_string( m_val, SC_OCT, -1, SC_F, &m_params ) );
 }
 
-const std::string
+std::string
 sc_fxnum_fast::to_hex() const
 {
     return std::string( sc_dt::to_string( m_val, SC_HEX, -1, SC_F, &m_params ) );
@@ -799,12 +800,11 @@ sc_fxnum_fast::get_bit( int i ) const
     int j = i - id.exponent();
     if( ( j += 20 ) >= 32 )
         return ( ( m0 & 1U << 31 ) != 0 );
-    else if( j >= 0 )
+    if( j >= 0 )
         return ( ( m0 & 1U << j ) != 0 );
-    else if( ( j += 32 ) >= 0 )
+    if( ( j += 32 ) >= 0 )
         return ( ( m1 & 1U << j ) != 0 );
-    else
-        return false;
+            return false;
 }
 
 
@@ -940,7 +940,7 @@ sc_fxnum_fast::lock_observer() const
 {
     SC_ASSERT_( m_observer != 0, "lock observer failed" );
     sc_fxnum_fast_observer* tmp = m_observer;
-    m_observer = 0;
+    m_observer = nullptr;
     return tmp;
 }
 

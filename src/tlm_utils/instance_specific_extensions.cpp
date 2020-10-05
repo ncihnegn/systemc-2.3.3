@@ -17,16 +17,16 @@
 
  *****************************************************************************/
 
-#include <stddef.h>
+#include <cstddef>
 #include <map>
 #include <typeinfo>
 #include <utility>
 #include <vector>
 
-#include "tlm_utils/instance_specific_extensions_int.h"
-#include "sysc/utils/sc_typeindex.h" // sc_typeindex
 #include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/utils/sc_typeindex.h" // sc_typeindex
 #include "tlm_core/tlm_2/tlm_generic_payload/tlm_array.h"
+#include "tlm_utils/instance_specific_extensions_int.h"
 
 namespace tlm_utils {
 class instance_specific_extension_carrier;
@@ -41,7 +41,7 @@ namespace tlm_utils {
 class ispex_registry // copied from tlm_gp.cpp
 {
   typedef unsigned int key_type;
-  typedef std::map<sc_core::sc_type_index, key_type> type_map;
+  using type_map = std::map<sc_core::sc_type_index, key_type>;
 public:
   static ispex_registry& instance()
   {
@@ -52,7 +52,7 @@ public:
 
   unsigned int register_extension(sc_core::sc_type_index type)
   {
-    type_map::const_iterator it = ids_.find( type );
+    auto it = ids_.find( type );
 
     if( it == ids_.end() ) { // new extension - generate/store ID
       type_map::value_type v( type, static_cast<key_type>(ids_.size()) );
@@ -68,11 +68,11 @@ public:
 private:
   static ispex_registry* instance_;
   type_map ids_;
-  ispex_registry() /* = default */ {}
+  ispex_registry() /* = default */ = default;
 
 }; // class ispex_registry
 
-ispex_registry* ispex_registry::instance_ = NULL;
+ispex_registry* ispex_registry::instance_ = nullptr;
 } //  anonymous namespace
 
 unsigned int
@@ -95,7 +95,7 @@ static unsigned int max_num_ispex_accessors(bool increment=false)
 class instance_specific_extension_container_pool
 {
   instance_specific_extension_container_pool()
-    : unused(NULL){}
+     = default;
 
   ~instance_specific_extension_container_pool();
 
@@ -110,7 +110,7 @@ public:
   void free(instance_specific_extension_container*);
 
 private:
-  instance_specific_extension_container* unused;
+  instance_specific_extension_container* unused{nullptr};
 }; // class instance_specific_extension_container_pool
 
 instance_specific_extension_container*
@@ -152,10 +152,10 @@ instance_specific_extension_container::create()
 
 instance_specific_extension_container::instance_specific_extension_container()
   : use_count(0)
-  , m_txn(NULL)
-  , m_release_fn(NULL)
-  , m_carrier(NULL)
-  , next(NULL)
+  , m_txn(nullptr)
+  , m_release_fn(nullptr)
+  , m_carrier(nullptr)
+  , next(nullptr)
 {
   resize();
 }
@@ -175,17 +175,17 @@ instance_specific_extension_container::resize()
 {
   m_ispex_per_accessor.resize( max_num_ispex_accessors() );
 
-  for (unsigned int i=0; i < m_ispex_per_accessor.size(); ++i) {
-    m_ispex_per_accessor[i] = new instance_specific_extensions_per_accessor(this);
-    m_ispex_per_accessor[i]->resize_extensions();
+  for (auto & i : m_ispex_per_accessor) {
+    i = new instance_specific_extensions_per_accessor(this);
+    i->resize_extensions();
   }
 }
 
 instance_specific_extension_container::
   ~instance_specific_extension_container()
 {
-  for (unsigned int i=0; i<m_ispex_per_accessor.size(); ++i)
-    delete m_ispex_per_accessor[i];
+  for (auto & i : m_ispex_per_accessor)
+    delete i;
 }
 
 void
@@ -229,7 +229,7 @@ ispex_base*
 instance_specific_extensions_per_accessor::
   get_extension(unsigned int index) const
 {
-  return (index < m_extensions.size()) ? m_extensions[index] : NULL;
+  return (index < m_extensions.size()) ? m_extensions[index] : nullptr;
 }
 
 void
@@ -239,7 +239,7 @@ instance_specific_extensions_per_accessor::
   if (index < m_extensions.size())
   {
     if (m_extensions[index]) m_container->dec_use_count();
-    m_extensions[index] = static_cast<ispex_base*>(0);
+    m_extensions[index] = static_cast<ispex_base*>(nullptr);
   }
 }
 

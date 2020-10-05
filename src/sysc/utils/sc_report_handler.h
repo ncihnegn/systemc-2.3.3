@@ -117,7 +117,7 @@ public:
     // if filename is NULL, the previous log file name will be removed.
     // The provider of a report_handler supposed to handle this.
     // Return false if filename is not NULL and filename is already set.
-    static bool set_log_file_name(const char* filename);
+    static bool set_log_file_name(const char* name_);
     static const char* get_log_file_name();
 
     // how the implementation should handle caught (sc_report) exceptions
@@ -169,7 +169,7 @@ public:
 
     static void report(sc_severity,
 		       int         id,
-		       const char* add_msg,
+		       const char* msg_,
 		       const char* file,
 		       int         line);
 

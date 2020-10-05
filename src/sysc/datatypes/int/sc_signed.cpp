@@ -77,20 +77,20 @@
 #include <cmath>
 #include <sstream> // IWYU pragma: keep
 
-#include "sysc/kernel/sc_cmnhdr.h"
-#include "sysc/kernel/sc_macros.h"
-#include "sysc/datatypes/int/sc_signed.h"
-#include "sysc/datatypes/int/sc_unsigned.h"
-#include "sysc/datatypes/int/sc_int_base.h"
-#include "sysc/datatypes/int/sc_uint_base.h"
-#include "sysc/datatypes/int/sc_int_ids.h"
 #include "sysc/datatypes/bit/sc_bv_base.h"
+#include "sysc/datatypes/bit/sc_logic.h"
 #include "sysc/datatypes/bit/sc_lv_base.h"
 #include "sysc/datatypes/fx/sc_fix.h"
-#include "sysc/datatypes/fx/scfx_other_defs.h"
-#include "sysc/datatypes/bit/sc_logic.h"
 #include "sysc/datatypes/fx/sc_fxdefs.h"
+#include "sysc/datatypes/fx/scfx_other_defs.h"
+#include "sysc/datatypes/int/sc_int_base.h"
+#include "sysc/datatypes/int/sc_int_ids.h"
 #include "sysc/datatypes/int/sc_nbexterns.h"
+#include "sysc/datatypes/int/sc_signed.h"
+#include "sysc/datatypes/int/sc_uint_base.h"
+#include "sysc/datatypes/int/sc_unsigned.h"
+#include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_macros.h"
 #include "sysc/utils/sc_report_handler.h"
 
 // explicit template instantiations
@@ -106,7 +106,7 @@ namespace sc_dt {
 sc_core::sc_vpool<sc_signed_bitref> sc_signed_bitref::m_pool(9);
 sc_core::sc_vpool<sc_signed_subref> sc_signed_subref::m_pool(9);
 
-void sc_signed::invalid_init( const char* type_name, int nb ) const
+void sc_signed::invalid_init( const char* type_name, int nb ) 
 {
     std::stringstream msg;
     msg << "sc_signed( "<< type_name << " ) : nb = " << nb << " is not valid";
@@ -458,7 +458,7 @@ bool sc_signed::and_reduce() const
 
 bool sc_signed::or_reduce() const
 {
-    return sgn == SC_ZERO ? false : true;
+    return sgn != SC_ZERO;
 }
 
 bool sc_signed::xor_reduce() const
@@ -469,7 +469,7 @@ bool sc_signed::xor_reduce() const
     odd = 0;
     for ( i = 0; i < nbits; i++ )
         if ( test(i) ) odd = ~odd;
-    return odd ? true : false;
+    return odd != 0;
 }
 
 
@@ -483,7 +483,7 @@ bool sc_signed::xor_reduce() const
 const sc_signed&
 sc_signed::operator = ( const char* a )
 {
-    if( a == 0 ) {
+    if( a == nullptr ) {
         SC_REPORT_ERROR( sc_core::SC_ID_CONVERSION_FAILED_,
                          "character string is zero" );
     }
@@ -597,7 +597,7 @@ sc_signed::operator = ( const sc_bv_base& v )
 	safe_set( i, v.get_bit( i ), digit );
     }
     for( ; i < nbits; ++ i ) {
-	safe_set( i, 0, digit );  // zero-extend
+	safe_set( i, false, digit );  // zero-extend
     }
     convert_2C_to_SM();
     return *this;
@@ -612,7 +612,7 @@ sc_signed::operator = ( const sc_lv_base& v )
 	safe_set( i, sc_logic( v.get_bit( i ) ).to_bool(), digit );
     }
     for( ; i < nbits; ++ i ) {
-	safe_set( i, 0, digit );  // zero-extend
+	safe_set( i, false, digit );  // zero-extend
     }
     convert_2C_to_SM();
     return *this;
@@ -621,7 +621,7 @@ sc_signed::operator = ( const sc_lv_base& v )
 
 // explicit conversion to character string
 
-const std::string
+std::string
 sc_signed::to_string( sc_numrep numrep ) const
 {
     int len = length();
@@ -629,7 +629,7 @@ sc_signed::to_string( sc_numrep numrep ) const
     return aa.to_string( numrep );
 }
 
-const std::string
+std::string
 sc_signed::to_string( sc_numrep numrep, bool w_prefix ) const
 {
     int len = length();
@@ -4052,10 +4052,9 @@ sc_signed::iszero() const
 {
   if (sgn == SC_ZERO)
     return true;
-  else if (sgn != SC_NOSIGN)
+  if (sgn != SC_NOSIGN)
     return false;
-  else
-    return check_for_zero(ndigits, digit);
+      return check_for_zero(ndigits, digit);
 }
 
 
@@ -4063,11 +4062,10 @@ bool
 sc_signed::sign() const
 {
   if (sgn == SC_NEG)
-    return 1;
-  else if (sgn != SC_NOSIGN)
-    return 0;
-  else
-    return ((digit[ndigits - 1] & one_and_zeros(bit_ord(nbits - 1))) != 0);
+    return true;
+  if (sgn != SC_NOSIGN)
+    return false;
+      return ((digit[ndigits - 1] & one_and_zeros(bit_ord(nbits - 1))) != 0);
 }
 
 // The rest of the utils in this section are included from sc_nbcommon.cpp.

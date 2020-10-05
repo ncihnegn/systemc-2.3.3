@@ -29,14 +29,14 @@
 #include <iostream>
 
 #include "sysc/kernel/sc_cmnhdr.h"
-#include "sysc/kernel/sc_thread_process.h"
-#include "sysc/kernel/sc_simcontext_int.h"
 #include "sysc/kernel/sc_module.h"
-#include "sysc/utils/sc_machine.h"
 #include "sysc/kernel/sc_object.h"
 #include "sysc/kernel/sc_sensitive.h"
+#include "sysc/kernel/sc_simcontext_int.h"
 #include "sysc/kernel/sc_spawn_options.h"
 #include "sysc/kernel/sc_status.h"
+#include "sysc/kernel/sc_thread_process.h"
+#include "sysc/utils/sc_machine.h"
 
 // DEBUGGING MACROS:
 //
@@ -112,7 +112,7 @@ SC_ALIGNED_STACK_
 void sc_thread_cor_fn( void* arg )
 {
     sc_simcontext*   simc_p = sc_get_curr_simcontext();
-    sc_thread_handle thread_h = reinterpret_cast<sc_thread_handle>( arg );
+    auto *thread_h = reinterpret_cast<sc_thread_handle>( arg );
 
     // PROCESS THE THREAD AND PROCESS ANY EXCEPTIONS THAT ARE THROWN:
 
@@ -147,7 +147,7 @@ void sc_thread_cor_fn( void* arg )
 
     // IF WE AREN'T ACTIVE MAKE SURE WE WON'T EXECUTE:
 
-    if ( thread_h->next_runnable() != 0 )
+    if ( thread_h->next_runnable() != nullptr )
     {
 	simc_p->remove_runnable_thread(thread_h);
     }
@@ -185,7 +185,7 @@ void sc_thread_process::disable_process(
 
         for ( int child_i = 0; child_i < child_n; child_i++ )
         {
-            sc_process_b* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
+            auto* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
             if ( child_p ) child_p->disable_process(descendants);
         }
     }
@@ -244,7 +244,7 @@ void sc_thread_process::enable_process(
 
         for ( int child_i = 0; child_i < child_n; child_i++ )
         {
-            sc_process_b* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
+            auto* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
             if ( child_p ) child_p->enable_process(descendants);
         }
     }
@@ -257,7 +257,7 @@ void sc_thread_process::enable_process(
     if ( m_state == ps_bit_ready_to_run && sc_allow_process_control_corners )
     {
         m_state = ps_normal;
-	if ( next_runnable() == 0 )
+	if ( next_runnable() == nullptr )
 	    simcontext()->push_runnable_thread(this);
     }
 }
@@ -290,7 +290,7 @@ void sc_thread_process::kill_process(sc_descendant_inclusion_info descendants )
 
         for ( int child_i = 0; child_i < child_n; child_i++ )
         {
-            sc_process_b* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
+            auto* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
             if ( child_p ) child_p->kill_process(descendants);
         }
     }
@@ -363,7 +363,7 @@ void sc_thread_process::resume_process(
 
         for ( int child_i = 0; child_i < child_n; child_i++ )
         {
-            sc_process_b* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
+            auto* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
             if ( child_p ) child_p->resume_process(descendants);
         }
     }
@@ -388,7 +388,7 @@ void sc_thread_process::resume_process(
     if ( m_state & ps_bit_ready_to_run )
     {
 	m_state = m_state & ~ps_bit_ready_to_run;
-	if ( next_runnable() == 0 )
+	if ( next_runnable() == nullptr )
 	    simcontext()->push_runnable_thread(this);
 	remove_dynamic_events();  // order important.
     }
@@ -406,13 +406,13 @@ sc_thread_process::sc_thread_process( const char* name_p, bool free_host,
     sc_process_b(
         name_p ? name_p : sc_gen_unique_name("thread_p"),
         true, free_host, method_p, host_p, opt_p),
-    m_cor_p(0), m_monitor_q(), m_stack_size(SC_DEFAULT_STACK_SIZE),
+    m_cor_p(nullptr), m_monitor_q(), m_stack_size(SC_DEFAULT_STACK_SIZE),
     m_wait_cycle_n(0)
 {
 
     // CHECK IF THIS IS AN sc_module-BASED PROCESS AND SIMULATION HAS STARTED:
 
-    if ( dynamic_cast<sc_module*>(host_p) != 0 && sc_is_running() )
+    if ( dynamic_cast<sc_module*>(host_p) != nullptr && sc_is_running() )
     {
         report_error( SC_ID_MODULE_THREAD_AFTER_START_ );
         sc_abort(); // can't recover from here
@@ -429,31 +429,30 @@ sc_thread_process::sc_thread_process( const char* name_p, bool free_host,
         if ( opt_p->m_stack_size ) m_stack_size = opt_p->m_stack_size;
 
         // traverse event sensitivity list
-        for (unsigned int i = 0; i < opt_p->m_sensitive_events.size(); i++) {
+        for (const auto *m_sensitive_event : opt_p->m_sensitive_events) {
             sc_sensitive::make_static_sensitivity(
-                this, *opt_p->m_sensitive_events[i]);
+                this, *m_sensitive_event);
         }
 
         // traverse port base sensitivity list
-        for ( unsigned int i = 0; i < opt_p->m_sensitive_port_bases.size(); i++)
+        for (auto *m_sensitive_port_base : opt_p->m_sensitive_port_bases)
         {
             sc_sensitive::make_static_sensitivity(
-                this, *opt_p->m_sensitive_port_bases[i]);
+                this, *m_sensitive_port_base);
         }
 
         // traverse interface sensitivity list
-        for ( unsigned int i = 0; i < opt_p->m_sensitive_interfaces.size(); i++)
+        for (auto *m_sensitive_interface : opt_p->m_sensitive_interfaces)
         {
             sc_sensitive::make_static_sensitivity(
-                this, *opt_p->m_sensitive_interfaces[i]);
+                this, *m_sensitive_interface);
         }
 
         // traverse event finder sensitivity list
-        for ( unsigned int i = 0; i < opt_p->m_sensitive_event_finders.size();
-            i++)
+        for (auto *m_sensitive_event_finder : opt_p->m_sensitive_event_finders)
         {
             sc_sensitive::make_static_sensitivity(
-                this, *opt_p->m_sensitive_event_finders[i]);
+                this, *m_sensitive_event_finder);
         }
 
         // process any reset signal specification:
@@ -479,10 +478,10 @@ sc_thread_process::~sc_thread_process()
 
     // DESTROY THE COROUTINE FOR THIS THREAD:
 
-    if( m_cor_p != 0 ) {
+    if( m_cor_p != nullptr ) {
         m_cor_p->stack_protect( false );
         delete m_cor_p;
-        m_cor_p = 0;
+        m_cor_p = nullptr;
     }
 
     // Remove from simcontext, if not spawned during simulation
@@ -527,7 +526,7 @@ void sc_thread_process::suspend_process(
 
         for ( int child_i = 0; child_i < child_n; child_i++ )
         {
-            sc_process_b* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
+            auto* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
             if ( child_p ) child_p->suspend_process(descendants);
         }
     }
@@ -557,7 +556,7 @@ void sc_thread_process::suspend_process(
     //     scheduling of the process, and we need to call suspend_me() here.
 
     m_state = m_state | ps_bit_suspended;
-    if ( next_runnable() != 0 )
+    if ( next_runnable() != nullptr )
     {
 	m_state = m_state | ps_bit_ready_to_run;
 	simcontext()->remove_runnable_thread( this );
@@ -657,7 +656,7 @@ void sc_thread_process::throw_user( const sc_throw_it_helper& helper,
 
         for ( int child_i = 0; child_i < child_n; child_i++ )
         {
-            sc_process_b* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
+            auto* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
             if ( child_p )
 	    {
 	        DEBUG_MSG(DEBUG_NAME,child_p,"about to throw user on");
@@ -682,7 +681,7 @@ void sc_thread_process::throw_user( const sc_throw_it_helper& helper,
         remove_dynamic_events();
         DEBUG_MSG(DEBUG_NAME,this,"throwing user exception to");
         m_throw_status = THROW_USER;
-        if ( m_throw_helper_p != 0 ) delete m_throw_helper_p;
+        delete m_throw_helper_p;
         m_throw_helper_p = helper.clone();
         simcontext()->preempt_with( this );
     }
@@ -744,10 +743,9 @@ bool sc_thread_process::trigger_dynamic( sc_event* e )
 	    remove_dynamic_events( true );
 	    return true;
 	}
-	else
-	{
-	    return false;
-	}
+	
+		    return false;
+
     }
 
 
@@ -759,7 +757,7 @@ bool sc_thread_process::trigger_dynamic( sc_event* e )
     switch( m_trigger_type )
     {
       case EVENT:
-	m_event_p = 0;
+	m_event_p = nullptr;
 	m_trigger_type = STATIC;
 	break;
 
@@ -768,7 +766,7 @@ bool sc_thread_process::trigger_dynamic( sc_event* e )
 	if ( m_event_count == 0 )
 	{
 	    m_event_list_p->auto_delete();
-	    m_event_list_p = 0;
+	    m_event_list_p = nullptr;
 	    m_trigger_type = STATIC;
 	}
 	else
@@ -780,7 +778,7 @@ bool sc_thread_process::trigger_dynamic( sc_event* e )
       case OR_LIST:
 	m_event_list_p->remove_dynamic( this, e );
 	m_event_list_p->auto_delete();
-	m_event_list_p = 0;
+	m_event_list_p = nullptr;
 	m_trigger_type = STATIC;
 	break;
 
@@ -793,14 +791,14 @@ bool sc_thread_process::trigger_dynamic( sc_event* e )
 	{
 	    m_timed_out = true;
 	    m_event_p->remove_dynamic( this );
-	    m_event_p = 0;
+	    m_event_p = nullptr;
 	    m_trigger_type = STATIC;
 	}
 	else
 	{
 	    m_timeout_event_p->cancel();
 	    m_timeout_event_p->reset();
-	    m_event_p = 0;
+	    m_event_p = nullptr;
 	    m_trigger_type = STATIC;
 	}
 	break;
@@ -811,7 +809,7 @@ bool sc_thread_process::trigger_dynamic( sc_event* e )
             m_timed_out = true;
             m_event_list_p->remove_dynamic( this, e );
             m_event_list_p->auto_delete();
-            m_event_list_p = 0;
+            m_event_list_p = nullptr;
             m_trigger_type = STATIC;
 	}
 
@@ -821,7 +819,7 @@ bool sc_thread_process::trigger_dynamic( sc_event* e )
             m_timeout_event_p->reset();
 	    m_event_list_p->remove_dynamic( this, e );
 	    m_event_list_p->auto_delete();
-	    m_event_list_p = 0;
+	    m_event_list_p = nullptr;
 	    m_trigger_type = STATIC;
 	}
 	break;
@@ -832,7 +830,7 @@ bool sc_thread_process::trigger_dynamic( sc_event* e )
             m_timed_out = true;
             m_event_list_p->remove_dynamic( this, e );
             m_event_list_p->auto_delete();
-            m_event_list_p = 0;
+            m_event_list_p = nullptr;
             m_trigger_type = STATIC;
 	}
 
@@ -845,7 +843,7 @@ bool sc_thread_process::trigger_dynamic( sc_event* e )
 		m_timeout_event_p->reset();
 		// no need to remove_dynamic
 		m_event_list_p->auto_delete();
-		m_event_list_p = 0;
+		m_event_list_p = nullptr;
 		m_trigger_type = STATIC;
 	    }
 	    else

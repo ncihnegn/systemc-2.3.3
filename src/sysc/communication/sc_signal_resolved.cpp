@@ -32,12 +32,12 @@
 #pragma warning(disable:4661)
 #endif
 
+#include <algorithm>
 #include <ext/alloc_traits.h>
 #include <memory>
-#include <algorithm>
 
-#include "sysc/kernel/sc_simcontext.h"
 #include "sysc/communication/sc_signal_resolved.h"
+#include "sysc/kernel/sc_simcontext.h"
 #include "sysc/utils/sc_report.h"
 
 namespace sc_core {

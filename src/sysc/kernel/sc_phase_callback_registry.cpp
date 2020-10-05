@@ -30,12 +30,12 @@
 #include <sstream>
 #include <string>
 
-#include "sysc/kernel/sc_object.h"
-#include "sysc/kernel/sc_phase_callback_registry.h"
-#include "sysc/kernel/sc_kernel_ids.h"
-#include "sysc/utils/sc_report.h"
 #include "sysc/kernel/sc_cmnhdr.h"
+#include "sysc/kernel/sc_kernel_ids.h"
+#include "sysc/kernel/sc_object.h"
 #include "sysc/kernel/sc_object_int.h"
+#include "sysc/kernel/sc_phase_callback_registry.h"
+#include "sysc/utils/sc_report.h"
 #include "sysc/utils/sc_report_handler.h"
 
 namespace sc_core {
@@ -52,7 +52,7 @@ sc_phase_callback_registry::sc_phase_callback_registry( sc_simcontext& simc )
 {}
 
 sc_phase_callback_registry::~sc_phase_callback_registry()
-{}
+= default;
 
 static const sc_phase_callback_registry::mask_type
   SC_PHASE_CALLBACK_MASK = SC_STATUS_ANY;
@@ -80,7 +80,7 @@ erase_remove( std::vector<T>* vec, T const& t )
     vec->erase( std::remove( vec->begin(), vec->end(), t ) );
 }
 
-}  // namespace anonymous
+} // namespace
 
 
 sc_phase_callback_registry::mask_type
@@ -161,7 +161,7 @@ sc_phase_callback_registry::validate_mask( cb_type& cb
 sc_phase_callback_registry::mask_type
 sc_phase_callback_registry::register_callback( cb_type& cb, mask_type m )
 {
-    storage_type::iterator it =
+    auto it =
       find_if( m_cb_vec.begin(), m_cb_vec.end(), entry_match(&cb) );
 
     m = validate_mask(cb, m, /* warn */ true );
@@ -202,7 +202,7 @@ sc_phase_callback_registry::register_callback( cb_type& cb, mask_type m )
 sc_phase_callback_registry::mask_type
 sc_phase_callback_registry::unregister_callback( cb_type& cb, mask_type m )
 {
-    storage_type::iterator it =
+    auto it =
       find_if( m_cb_vec.begin(), m_cb_vec.end(), entry_match(&cb) );
 
     m = validate_mask(cb, m);
@@ -244,10 +244,10 @@ sc_phase_callback_registry::do_callback( sc_status s ) const
     typedef storage_type::const_iterator it_type;
     storage_type const & vec = m_cb_vec;
 
-    for(it_type it = vec.begin(), end = vec.end(); it != end; ++it) {
-        if( s & it->mask ) {
-            sc_object::hierarchy_scope scope(it->target);
-            it->target->do_simulation_phase_callback();
+    for(auto it : vec) {
+        if( s & it.mask ) {
+            sc_object::hierarchy_scope scope(it.target);
+            it.target->do_simulation_phase_callback();
         }
     }
 }

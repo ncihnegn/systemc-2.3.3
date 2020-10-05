@@ -41,19 +41,19 @@ namespace sc_core {
 
 // constructors
 
-sc_attr_base::sc_attr_base( const std::string& name_ )
-: m_name( name_ )
+sc_attr_base::sc_attr_base( std::string  name_ )
+: m_name(std::move( name_ ))
 {}
 
 sc_attr_base::sc_attr_base( const sc_attr_base& a )
-: m_name( a.m_name )
-{}
+ 
+= default;
 
 
 // destructor (does nothing)
 
 sc_attr_base::~sc_attr_base()
-{}
+= default;
 
 
 // get the name
@@ -77,8 +77,8 @@ sc_attr_cltn::sc_attr_cltn() : m_cltn()
 {}
 
 sc_attr_cltn::sc_attr_cltn( const sc_attr_cltn& a )
-: m_cltn( a.m_cltn )
-{}
+ 
+= default;
 
 
 // destructor
@@ -95,7 +95,7 @@ sc_attr_cltn::~sc_attr_cltn()
 bool
 sc_attr_cltn::push_back( sc_attr_base* attribute_ )
 {
-    if( attribute_ == 0 ) {
+    if( attribute_ == nullptr ) {
 	return false;
     }
     for( int i = m_cltn.size() - 1; i >= 0; -- i ) {
@@ -119,7 +119,7 @@ sc_attr_cltn::operator [] ( const std::string& name_ )
 	    return m_cltn[i];
 	}
     }
-    return 0;
+    return nullptr;
 }
 
 const sc_attr_base*
@@ -130,7 +130,7 @@ sc_attr_cltn::operator [] ( const std::string& name_ ) const
 	    return m_cltn[i];
 	}
     }
-    return 0;
+    return nullptr;
 }
 
 
@@ -148,7 +148,7 @@ sc_attr_cltn::remove( const std::string& name_ )
 	    return attribute;
 	}
     }
-    return 0;
+    return nullptr;
 }
 
 

@@ -27,23 +27,23 @@
  *****************************************************************************/
 
 
+#include <algorithm>
+#include <cctype>
 #include <cstddef>
 #include <cstring>
-#include <cctype>
-#include <algorithm>
 
+#include "sysc/kernel/sc_attribute.h"
+#include "sysc/kernel/sc_event.h"
 #include "sysc/kernel/sc_kernel_ids.h"
 #include "sysc/kernel/sc_object.h"
 #include "sysc/kernel/sc_object_manager.h"
 #include "sysc/kernel/sc_phase_callback_registry.h"
 #include "sysc/kernel/sc_simcontext.h"
-#include "sysc/kernel/sc_event.h"
-#include "sysc/utils/sc_utils_ids.h"
-#include "sysc/utils/sc_mempool.h"
-#include "sysc/kernel/sc_attribute.h"
 #include "sysc/kernel/sc_status.h"
+#include "sysc/utils/sc_mempool.h"
 #include "sysc/utils/sc_report.h"
 #include "sysc/utils/sc_report_handler.h"
+#include "sysc/utils/sc_utils_ids.h"
 
 namespace sc_core {
 
@@ -82,7 +82,7 @@ sc_object::basename() const
 {
     std::size_t pos; // position of last SC_HIERARCHY_CHAR.
     pos = m_name.rfind( (char)SC_HIERARCHY_CHAR );
-    return ( pos == m_name.npos ) ? m_name.c_str() : &(m_name.c_str()[pos+1]);
+    return ( pos == std::string::npos ) ? m_name.c_str() : &(m_name.c_str()[pos+1]);
 } 
 
 void
@@ -140,7 +140,7 @@ sc_object::remove_child_object( sc_object* object_p )
         if( object_p == m_child_objects[i] ) {
             m_child_objects[i] = m_child_objects[size - 1];
             m_child_objects.pop_back();
-	    object_p->m_parent = NULL;
+	    object_p->m_parent = nullptr;
             return true;
         }
     }
@@ -164,7 +164,7 @@ sc_object::sc_object_init(const char* nm)
     // Make the current simcontext the simcontext for this object 
 
     m_simc = sc_get_curr_simcontext(); 
-    m_attr_cltn_p = 0; 
+    m_attr_cltn_p = nullptr; 
     sc_object_manager* object_manager = m_simc->get_object_manager(); 
     m_parent = m_simc->active_object();
 
@@ -184,15 +184,15 @@ sc_object::sc_object_init(const char* nm)
 } 
 
 sc_object::sc_object() : 
-    m_attr_cltn_p(0), m_child_events(), m_child_objects(), m_name(),
-    m_parent(0), m_simc(0)
+    m_attr_cltn_p(nullptr), m_child_events(), m_child_objects(), m_name(),
+    m_parent(nullptr), m_simc(nullptr)
 {
     sc_object_init( sc_gen_unique_name("object") );
 }
 
 sc_object::sc_object( const sc_object& that ) : 
-    m_attr_cltn_p(0), m_child_events(), m_child_objects(), m_name(),
-    m_parent(0), m_simc(0)
+    m_attr_cltn_p(nullptr), m_child_events(), m_child_objects(), m_name(),
+    m_parent(nullptr), m_simc(nullptr)
 {
     sc_object_init( sc_gen_unique_name( that.basename() ) );
 }
@@ -205,11 +205,11 @@ object_name_illegal_char(char ch)
 }
 
 sc_object::sc_object(const char* nm) : 
-    m_attr_cltn_p(0), m_child_events(), m_child_objects(), m_name(),
-    m_parent(0), m_simc(0)
+    m_attr_cltn_p(nullptr), m_child_events(), m_child_objects(), m_name(),
+    m_parent(nullptr), m_simc(nullptr)
 {
     int namebuf_alloc = 0;
-    char* namebuf = 0;
+    char* namebuf = nullptr;
     const char* p;
 
     // null name or "" uses machine generated name.
@@ -305,12 +305,14 @@ void sc_object::orphan_child_events()
 {
     std::vector< sc_event* > const & events = get_child_events();
 
-    std::vector< sc_event* >::const_iterator
-            it  = events.begin(), end = events.end();
+    auto
+            it  = events.begin();
+    auto
+            end = events.end();
 
     for( ; it != end; ++it  )
     {
-        (*it)->m_parent_p = NULL;
+        (*it)->m_parent_p = nullptr;
         simcontext()->add_child_event(*it);
     }
 }
@@ -325,12 +327,14 @@ void sc_object::orphan_child_objects()
 {
     std::vector< sc_object* > const & children = get_child_objects();
 
-    std::vector< sc_object* >::const_iterator
-            it  = children.begin(), end = children.end();
+    auto
+            it  = children.begin();
+    auto
+            end = children.end();
 
     for( ; it != end; ++it  )
     {
-        (*it)->m_parent = NULL;
+        (*it)->m_parent = nullptr;
         simcontext()->add_child_object(*it);
     }
 }
@@ -376,8 +380,7 @@ sc_object::remove_attribute( const std::string& name_ )
 {
     if ( m_attr_cltn_p )
 	return ( m_attr_cltn_p->remove( name_ ) );
-    else
-	return 0;
+    	return nullptr;
 }
 
 
@@ -398,8 +401,7 @@ sc_object::num_attributes() const
 {
     if ( m_attr_cltn_p )
 	return ( m_attr_cltn_p->size() );
-    else
-	return 0;
+    	return 0;
 }
 
 

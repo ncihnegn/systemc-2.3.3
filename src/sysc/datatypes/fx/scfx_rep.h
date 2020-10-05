@@ -97,7 +97,7 @@ SC_API scfx_rep*  neg_scfx_rep( const scfx_rep& );
 SC_API scfx_rep*  mult_scfx_rep( const scfx_rep&, const scfx_rep&,
 	                  int max_wl = SC_DEFAULT_MAX_WL_ );
 SC_API scfx_rep*  div_scfx_rep( const scfx_rep&, const scfx_rep&,
-	                 int max_wl = SC_DEFAULT_DIV_WL_ );
+	                 int div_wl = SC_DEFAULT_DIV_WL_ );
 SC_API scfx_rep*  add_scfx_rep( const scfx_rep&, const scfx_rep&,
 	                 int max_wl = SC_DEFAULT_MAX_WL_ );
 SC_API scfx_rep*  sub_scfx_rep( const scfx_rep&, const scfx_rep&,

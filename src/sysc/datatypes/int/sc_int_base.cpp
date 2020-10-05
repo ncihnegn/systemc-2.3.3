@@ -62,18 +62,18 @@
 
 #include <sstream> // IWYU pragma: keep
 
-#include "sysc/kernel/sc_macros.h"
-#include "sysc/datatypes/int/sc_signed.h"
-#include "sysc/datatypes/int/sc_unsigned.h"
-#include "sysc/datatypes/int/sc_int_base.h"
-#include "sysc/datatypes/int/sc_uint_base.h"
-#include "sysc/datatypes/int/sc_int_ids.h"
 #include "sysc/datatypes/bit/sc_bv_base.h"
+#include "sysc/datatypes/bit/sc_logic.h"
 #include "sysc/datatypes/bit/sc_lv_base.h"
 #include "sysc/datatypes/fx/sc_fix.h"
-#include "sysc/datatypes/fx/scfx_other_defs.h"
-#include "sysc/datatypes/bit/sc_logic.h"
 #include "sysc/datatypes/fx/sc_fxdefs.h"
+#include "sysc/datatypes/fx/scfx_other_defs.h"
+#include "sysc/datatypes/int/sc_int_base.h"
+#include "sysc/datatypes/int/sc_int_ids.h"
+#include "sysc/datatypes/int/sc_signed.h"
+#include "sysc/datatypes/int/sc_uint_base.h"
+#include "sysc/datatypes/int/sc_unsigned.h"
+#include "sysc/kernel/sc_macros.h"
 #include "sysc/utils/sc_report.h"
 #include "sysc/utils/sc_report_handler.h"
 
@@ -501,7 +501,7 @@ sc_int_base::operator = ( const sc_unsigned& a )
     }
     for( ; i < m_len; ++ i ) {
 	// zero extension
-	set( i, 0 );
+	set( i, false );
     }
     extend_sign();
     return *this;
@@ -518,7 +518,7 @@ sc_int_base::operator = ( const sc_bv_base& a )
     }
     for( ; i < m_len; ++ i ) {
 	// zero extension
-	set( i, 0 );
+	set( i, false );
     }
     extend_sign();
     return *this;
@@ -534,7 +534,7 @@ sc_int_base::operator = ( const sc_lv_base& a )
     }
     for( ; i < m_len; ++ i ) {
 	// zero extension
-	set( i, 0 );
+	set( i, false );
     }
     extend_sign();
     return *this;
@@ -543,7 +543,7 @@ sc_int_base::operator = ( const sc_lv_base& a )
 sc_int_base&
 sc_int_base::operator = ( const char* a )
 {
-    if( a == 0 ) {
+    if( a == nullptr ) {
 	SC_REPORT_ERROR( sc_core::SC_ID_CONVERSION_FAILED_,
 			 "character string is zero" );
     }
@@ -565,7 +565,7 @@ sc_int_base::operator = ( const char* a )
 
 // explicit conversion to character string
 
-const std::string
+std::string
 sc_int_base::to_string( sc_numrep numrep ) const
 {
     int len = m_len;
@@ -573,7 +573,7 @@ sc_int_base::to_string( sc_numrep numrep ) const
     return aa.to_string( numrep );
 }
 
-const std::string
+std::string
 sc_int_base::to_string( sc_numrep numrep, bool w_prefix ) const
 {
     int len = m_len;
@@ -746,7 +746,7 @@ sc_int_base::scan( ::std::istream& is )
     *this = s.c_str();
 }
 
-} // namespace sc_dt;
+} // namespace sc_dt
 
 
 // Taf!

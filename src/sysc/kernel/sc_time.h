@@ -455,7 +455,7 @@ struct SC_API sc_time_params
     bool                default_time_unit_specified;
 
     sc_time_params();
-    ~sc_time_params();
+    ~sc_time_params() = default;
 };
 
 

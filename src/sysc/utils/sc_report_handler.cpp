@@ -27,7 +27,7 @@
   CHANGE LOG AT END OF FILE
  *****************************************************************************/
 
-#include <limits.h>
+#include <climits>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -36,11 +36,11 @@
 #include <string>
 
 #include "sysc/kernel/sc_process.h"
-#include "sysc/utils/sc_stop_here.h"
-#include "sysc/utils/sc_report_handler.h"
-#include "sysc/utils/sc_report.h"
 #include "sysc/kernel/sc_simcontext.h"
 #include "sysc/kernel/sc_time.h"
+#include "sysc/utils/sc_report.h"
+#include "sysc/utils/sc_report_handler.h"
+#include "sysc/utils/sc_stop_here.h"
 
 namespace std {}
 
@@ -49,7 +49,7 @@ namespace sc_core {
 int sc_report_handler::verbosity_level = SC_MEDIUM;
 
 // not documented, but available
-const std::string sc_report_compose_message(const sc_report& rep)
+std::string sc_report_compose_message(const sc_report& rep)
 {
     static const char * severity_names[] = {
 	"Info", "Warning", "Error", "Fatal"
@@ -125,7 +125,7 @@ private:
 };
 
 sc_log_file_handle::sc_log_file_handle()
-{}
+= default;
 
 sc_log_file_handle::sc_log_file_handle(const char * fname)
 : log_file_name(fname)
@@ -226,7 +226,7 @@ void sc_report_handler::default_handler(const sc_report& rep,
 bool sc_report_close_default_log()
 {
     bool ret = log_stream.release();
-    sc_report_handler::set_log_file_name(NULL);
+    sc_report_handler::set_log_file_name(nullptr);
 
     return ret;
 }
@@ -273,7 +273,7 @@ sc_msg_def * sc_report_handler::mdlookup(const char * msg_type_)
 	    if ( !strcmp(msg_type_, item->md[i].msg_type) )
 		return item->md + i;
     }
-    return 0;
+    return nullptr;
 }
 
 // The calculation of actions to be executed
@@ -290,8 +290,8 @@ sc_actions sc_report_handler::execute(sc_msg_def* md, sc_severity severity_)
     actions &= ~suppress_mask; // higher than the high prio
     actions |= force_mask; // higher than above, and the limit is the highest
 
-    unsigned * limit = 0;
-    unsigned * call_count = 0;
+    unsigned * limit = nullptr;
+    unsigned * call_count = nullptr;
 
     // just increment counters and check for overflow
     if ( md->sev_call_count[severity_] < UINT_MAX )
@@ -421,7 +421,7 @@ void sc_report_handler::initialize()
     // PROCESS ANY ENVIRONMENTAL OVERRIDES:
 
     const char* deprecation_warn = std::getenv("SC_DEPRECATION_WARNINGS");
-    if ( (deprecation_warn!=0) && !strcmp(deprecation_warn,"DISABLE") )
+    if ( (deprecation_warn!=nullptr) && !strcmp(deprecation_warn,"DISABLE") )
     {
         set_actions("/IEEE_Std_1666/deprecated", SC_DO_NOTHING);
     }
@@ -433,10 +433,11 @@ void sc_report_handler::initialize()
 void sc_report_handler::release()
 {
     delete last_global_report;
-    last_global_report = 0;
+    last_global_report = nullptr;
     sc_report_close_default_log();
 
-    msg_def_items * items = messages, * newitems = &msg_terminator;
+    msg_def_items * items = messages;
+    msg_def_items * newitems = &msg_terminator;
     messages = &msg_terminator;
 
     while ( items != &msg_terminator )
@@ -470,10 +471,10 @@ sc_msg_def * sc_report_handler::add_msg_type(const char * msg_type_)
     if ( md )
 	return md;
 
-    msg_def_items * items = new msg_def_items;
+    auto * items = new msg_def_items;
 
     if ( !items )
-	return 0;
+	return nullptr;
 
     items->count = 1;
     items->md = new sc_msg_def[items->count];
@@ -481,7 +482,7 @@ sc_msg_def * sc_report_handler::add_msg_type(const char * msg_type_)
     if ( !items->md )
     {
 	delete items;
-	return 0;
+	return nullptr;
     }
     memset(items->md, 0, sizeof(sc_msg_def) * items->count);
     msg_type_len = strlen(msg_type_);
@@ -495,7 +496,7 @@ sc_msg_def * sc_report_handler::add_msg_type(const char * msg_type_)
     {
 	delete [] items->md;
 	delete items;
-	return 0;
+	return nullptr;
     }
     items->md->msg_type = items->md->msg_type_data;
     add_static_msg_types(items);
@@ -651,11 +652,11 @@ void sc_report_handler::clear_cached_report()
     sc_process_b * proc = sc_get_current_process_b();
 
     if ( proc )
-	proc->set_last_report(0);
+	proc->set_last_report(nullptr);
     else
     {
 	delete last_global_report;
-	last_global_report = 0;
+	last_global_report = nullptr;
     }
 }
 
@@ -677,7 +678,7 @@ bool sc_report_handler::set_log_file_name(const char* name_)
     if ( !name_ )
     {
 	free(log_file_name);
-	log_file_name = 0;
+	log_file_name = nullptr;
 	return false;
     }
     if ( log_file_name )
@@ -717,7 +718,7 @@ sc_msg_def * sc_report_handler::mdlookup(int id)
 	    if ( id == item->md[i].id )
 		return item->md + i;
     }
-    return 0;
+    return nullptr;
 }
 
 int sc_report_handler::get_verbosity_level() { return verbosity_level; }
@@ -753,7 +754,7 @@ sc_actions sc_report_handler::sev_limit[SC_MAX_SEVERITY] =
 };
 sc_actions sc_report_handler::sev_call_count[SC_MAX_SEVERITY] = { 0, 0, 0, 0 };
 
-sc_report* sc_report_handler::last_global_report = NULL;
+sc_report* sc_report_handler::last_global_report = nullptr;
 sc_actions sc_report_handler::available_actions =
     SC_DO_NOTHING |
     SC_THROW |
@@ -767,7 +768,7 @@ sc_actions sc_report_handler::available_actions =
 sc_report_handler_proc sc_report_handler::handler =
     &sc_report_handler::default_handler;
 
-char * sc_report_handler::log_file_name = 0;
+char * sc_report_handler::log_file_name = nullptr;
 
 sc_report_handler::msg_def_items * sc_report_handler::messages =
     &sc_report_handler::msg_terminator;
@@ -827,14 +828,14 @@ sc_report_handler::msg_def_items sc_report_handler::msg_terminator =
     default_msgs,
     sizeof(default_msgs)/sizeof(*default_msgs),
     false,
-    NULL
+    nullptr
 };
 
 
 void
 sc_abort()
 {
-    SC_REPORT_INFO(SC_ID_ABORT_, 0);
+    SC_REPORT_INFO(SC_ID_ABORT_, nullptr);
     abort();
 }
 
