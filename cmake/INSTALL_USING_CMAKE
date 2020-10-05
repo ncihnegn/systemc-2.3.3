@@ -25,7 +25,7 @@ Table of Contents
 
 5. Known Problems
 
-6. Ressources
+6. Resources
 
 
 1. Introduction
@@ -147,7 +147,7 @@ cmake-gui, respectively). Each variable is annotated with a brief
 documentation string. The most important variables are:
 
 BUILD_SHARED_LIBS             Build shared instead of static libraries
-                              (default: ON if not targetting Windows).
+                              (default: ON if not targeting Windows).
 
 BUILD_SOURCE_DOCUMENTATION    Build source code documentation using Doxygen
                               (default: OFF).
@@ -250,7 +250,7 @@ This section is primarily relevant for users of 64-bit versions of
 Linux and Windows.
 
 On 64-bit platforms like Linux x86_64 and Windows AMD64, the OS
-provides usually for backward-compatability the capability to execute
+provides usually for backward-compatibility the capability to execute
 64-bit and 32-bit applications. To this end, it provides 32-bit and
 64-bit versions of all runtime libraries (on Linux, they can be
 usually found in the lib/ and lib64/ directories). On these platforms,
@@ -422,7 +422,7 @@ target_link_libraries(simple_perf SystemC::systemc)
     tlm.pc for pkg-config.
 
 
-6. Ressources
+6. Resources
 =============
 
 [1] CMake - Cross Platform Make Homepage <http://www.cmake.org>

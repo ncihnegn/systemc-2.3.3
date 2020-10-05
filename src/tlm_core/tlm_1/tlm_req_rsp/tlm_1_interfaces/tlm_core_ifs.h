@@ -26,6 +26,7 @@
 #define __TLM_CORE_IFS_H__
 
 //#include <systemc>
+#include "sysc/communication/sc_interface.h"
 
 #include "tlm_core/tlm_1/tlm_req_rsp/tlm_1_interfaces/tlm_tag.h"
 

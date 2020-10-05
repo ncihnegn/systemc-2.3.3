@@ -73,7 +73,7 @@ as described in the IEEE 1666-2011 Language Reference Manual.
     - Operating systems or OS versions
 
   Some differences might be caught at link time, while other incompatibilities
-  could just sliently lead to undefined behavior during simulation.  Please
+  could just silently lead to undefined behavior during simulation.  Please
   carefully ensure a consistent build configuration, when integrating binary
   SystemC models built from separate sources.
 
@@ -86,7 +86,7 @@ For details, see the separate RELEASENOTES file.
 Licensing and Copyright
 
    See the separate LICENSE and NOTICE files to determine your rights
-   and responsiblities for using SystemC.
+   and responsibilities for using SystemC.
 
 User Documentation
 
@@ -99,7 +99,7 @@ Installation
 
 Release Notes
 
-   See the separate RELEASENOTES file that provides upto date
+   See the separate RELEASENOTES file that provides up to date
    information about this release of SystemC.
 
 Additional information

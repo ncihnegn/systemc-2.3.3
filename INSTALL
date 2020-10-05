@@ -553,7 +553,7 @@ configurations 'DebugDLL', 'ReleaseDLL' in the SystemC library build),
 several changes are needed.
 
 1. Adjust the linker library directory settings to reference 'DebugDLL'
-   (or 'ReleaseDLL') instead of 'Debug' or 'Release', respecitvely:
+   (or 'ReleaseDLL') instead of 'Debug' or 'Release', respectively:
       ...\systemc-2.3.2\msvc10\systemc\DebugDLL
 
 2. Add the preprocessor switch 'SC_WIN_DLL' to your project's properties
@@ -741,7 +741,7 @@ settings to all build configurations.
  * SC_INCLUDE_DYNAMIC_PROCESSES -
    Enable dynamic process support (sc_spawn, sc_bind)
 
-   To improve compilation times, the functions for spawing dynamic
+   To improve compilation times, the functions for spawning dynamic
    processes are not included by default in an SystemC application.
 
    Define this symbol before including the SystemC header in your
@@ -818,7 +818,7 @@ settings to all build configurations.
    Define 'sc_string' symbol.
 
    Pre-IEEE-1666 versions of SystemC included an 'sc_string' class for
-   string objects.  This class has been superseeded by 'std::string' these
+   string objects.  This class has been superseded by 'std::string' these
    days.
 
    If your application still relies on 'sc_string' being available, set one

@@ -35,6 +35,8 @@
 //
 
 //#include <systemc>
+#include "sysc/communication/sc_prim_channel.h"
+#include "sysc/kernel/sc_event.h"
 
 #include "tlm_core/tlm_1/tlm_req_rsp/tlm_1_interfaces/tlm_fifo_ifs.h"
 #include "tlm_core/tlm_1/tlm_req_rsp/tlm_channels/tlm_fifo/circular_buffer.h"
