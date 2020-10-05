@@ -47,12 +47,8 @@
 
 #include <cstdint>
 
-#include "sysc/datatypes/int/sc_nbdefs.h"
-#include "sysc/kernel/sc_cmnhdr.h"
-#ifdef __APPLE__
 #include "sysc/datatypes/int/sc_int_base.h" // IWYU pragma: keep
 #include "sysc/datatypes/int/sc_uint_base.h" // IWYU pragma: keep
-#endif
 
 #ifndef UINT64_C
 #if defined(_WIN32) && !defined(__MINGW32__)
