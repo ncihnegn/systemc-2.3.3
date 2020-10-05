@@ -46,7 +46,7 @@
 //
 
 #include <cfloat>
-#include <cmath>
+#include <cmath> // IWYU pragma: keep
 #include <cstdlib>
 
 #include "sysc/datatypes/fx/sc_fxval.h"

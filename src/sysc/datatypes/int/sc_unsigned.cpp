@@ -2195,6 +2195,8 @@ sc_unsigned::iszero() const
 #undef CLASS_TYPE
 #undef CLASS_TYPE_STR
 
+#include "sc_unsigned_bitref.inc" // IWYU pragma: keep
+#include "sc_unsigned_subref.inc" // IWYU pragma: keep
 
 #undef CONVERT_LONG
 #undef CONVERT_LONG_2

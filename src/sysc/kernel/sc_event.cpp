@@ -38,6 +38,7 @@
 #include "sysc/kernel/sc_phase_callback_registry.h"
 #include "sysc/kernel/sc_process.h"
 #include "sysc/kernel/sc_process_handle.h"
+#include "sysc/kernel/sc_simcontext_int.h" // IWYU pragma: keep
 #include "sysc/kernel/sc_status.h"
 #include "sysc/kernel/sc_thread_process.h"
 #include "sysc/utils/sc_utils_ids.h"

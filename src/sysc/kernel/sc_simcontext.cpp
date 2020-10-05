@@ -52,6 +52,7 @@
 #include "sysc/kernel/sc_module_registry.h"
 #include "sysc/kernel/sc_name_gen.h"
 #include "sysc/kernel/sc_object.h"
+#include "sysc/kernel/sc_object_int.h" // IWYU pragma: keep
 #include "sysc/kernel/sc_object_manager.h"
 #include "sysc/kernel/sc_phase_callback_registry.h"
 #include "sysc/kernel/sc_process_handle.h"

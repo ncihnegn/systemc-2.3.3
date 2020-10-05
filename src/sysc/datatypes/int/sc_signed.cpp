@@ -4126,6 +4126,8 @@ sc_signed::sign() const
 #undef CLASS_TYPE
 #undef CLASS_TYPE_STR
 
+#include "sc_signed_bitref.inc" // IWYU pragma: keep
+#include "sc_signed_subref.inc" // IWYU pragma: keep
 
 #undef CONVERT_LONG
 #undef CONVERT_LONG_2
