@@ -74,8 +74,8 @@ public:
     // constructor
 
     scfx_params( const sc_fxtype_params&,
-		 sc_enc,
-		 const sc_fxcast_switch& );
+                 sc_enc,
+                 const sc_fxcast_switch& );
 
 
     // query functions
@@ -114,8 +114,8 @@ private:
 
 inline
 scfx_params::scfx_params( const sc_fxtype_params& type_params_,
-			  sc_enc enc_,
-			  const sc_fxcast_switch& cast_sw )
+                          sc_enc enc_,
+                          const sc_fxcast_switch& cast_sw )
 : m_type_params( type_params_ ),
   m_enc( enc_ ),
   m_cast_switch( cast_sw )

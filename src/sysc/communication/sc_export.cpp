@@ -188,9 +188,9 @@ sc_export_registry::remove( sc_export_base* export_ )
     if (size()==0) return;
     int i;
     for( i = size() - 1; i >= 0; -- i ) {
-	if( export_ == m_export_vec[i] ) {
-	    break;
-	}
+        if( export_ == m_export_vec[i] ) {
+            break;
+        }
     }
     if( i == -1 ) {
         export_->report_error( SC_ID_SC_EXPORT_NOT_REGISTERED_ );
@@ -227,7 +227,7 @@ sc_export_registry::construction_done()
       return true;
 
     for( int i = size()-1; i >= m_construction_done; --i ) {
-	m_export_vec[i]->construction_done();
+        m_export_vec[i]->construction_done();
     }
 
     m_construction_done = size();
@@ -240,7 +240,7 @@ void
 sc_export_registry::elaboration_done()
 {
     for( int i = size() - 1; i >= 0; -- i ) {
-	m_export_vec[i]->elaboration_done();
+        m_export_vec[i]->elaboration_done();
     }
 }
 
@@ -250,7 +250,7 @@ void
 sc_export_registry::start_simulation()
 {
     for( int i = size() - 1; i >= 0; -- i ) {
-	m_export_vec[i]->start_simulation();
+        m_export_vec[i]->start_simulation();
     }
 }
 
@@ -258,7 +258,7 @@ void
 sc_export_registry::simulation_done()
 {
     for( int i = size() - 1; i >= 0; -- i ) {
-	m_export_vec[i]->simulation_done();
+        m_export_vec[i]->simulation_done();
     }
 }
 

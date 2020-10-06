@@ -96,7 +96,7 @@ public:
 
     // create a new coroutine
    virtual sc_cor* create(
-	    std::size_t stack_size, sc_cor_fn* fn, void* arg ) = 0;
+            std::size_t stack_size, sc_cor_fn* fn, void* arg ) = 0;
 
     // yield to the next coroutine
     virtual void yield( sc_cor* next_cor ) = 0;

@@ -43,7 +43,7 @@ typedef unsigned long qt_word_t;
     | fr13          Floating registers are only saved if `qt_block' is
     | fr14          called, in which case it saves the floating-point
     | fr15          registers then calls `qt_blocki' to save the integer
-    | fr16	    registers.
+    | fr16            registers.
     | fr17
     | fr18
     | fr19
@@ -179,10 +179,10 @@ extern void qt_start(void);
 
 /* To reach the arguments from the end of the first stack frame use 32
    as a negative adjustment. */
-#define QUICKTHREADS_VARGS_ADJUST(sp)	((qt_t *)(((char *)sp) - 32))
+#define QUICKTHREADS_VARGS_ADJUST(sp)        ((qt_t *)(((char *)sp) - 32))
 
 /* Offset to reach the end of the second stack frame. */
-#define QUICKTHREADS_VSTKBASE	((16*sizeof(qt_word_t)) + 16 + 4*4 + 32)
+#define QUICKTHREADS_VSTKBASE        ((16*sizeof(qt_word_t)) + 16 + 4*4 + 32)
 
 extern void qt_vstart(void);
 #define QUICKTHREADS_VARGS_MD1(sp) \

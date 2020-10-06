@@ -68,7 +68,7 @@ protected:
     {
         table_entry() : m_element_p(NULL), m_name_origin(SC_NAME_NONE) {}
 
-	    void*          m_element_p; // can be an sc_object or an sc_event
+            void*          m_element_p; // can be an sc_object or an sc_event
         sc_name_origin m_name_origin;
     };
 

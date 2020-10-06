@@ -42,13 +42,13 @@ sc_ppq_base::sc_ppq_base( int sz, int (*cmp)( const void*, const void* ) )
 {
     // m_size_alloc must be at least 2, otherwise resizing doesn't work
     if( m_size_alloc < 2 ) {
-	m_size_alloc = 2;
+        m_size_alloc = 2;
     }
     // allocate
     m_heap = new void*[m_size_alloc + 1];
     // initialize
     for( int i = 0; i < m_size_alloc; ++ i ) {
-	m_heap[i] = nullptr;
+        m_heap[i] = nullptr;
     }
 }
 
@@ -101,9 +101,9 @@ sc_ppq_base::heapify( int i )
 
         int r = right( i );
         if( (r <= m_heap_size) &&
-	    (m_compar( m_heap[r], m_heap[largest] ) > 0) ) {
+            (m_compar( m_heap[r], m_heap[largest] ) > 0) ) {
             largest = r;
-	}
+        }
 
         if( largest != i ) {
             void* tmp = m_heap[i];
@@ -112,7 +112,7 @@ sc_ppq_base::heapify( int i )
             i = largest;
         } else {
             break;
-	}
+        }
     }
 }
 

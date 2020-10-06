@@ -79,7 +79,7 @@ sc_signed::operator = ( const sc_fxval& v )
     }
 
     for( int i = 0; i < length(); ++ i )
-	(*this)[i] = v.get_bit( i );
+        (*this)[i] = v.get_bit( i );
 
     return *this;
 }
@@ -96,7 +96,7 @@ sc_signed::operator = ( const sc_fxval_fast& v )
     }
 
     for( int i = 0; i < length(); ++ i )
-	(*this)[i] = v.get_bit( i );
+        (*this)[i] = v.get_bit( i );
 
     return *this;
 }
@@ -113,7 +113,7 @@ sc_signed::operator = ( const sc_fxnum& v )
     }
 
     for( int i = 0; i < length(); ++ i )
-	(*this)[i] = v.get_bit( i );
+        (*this)[i] = v.get_bit( i );
 
     return *this;
 }
@@ -130,7 +130,7 @@ sc_signed::operator = ( const sc_fxnum_fast& v )
     }
 
     for( int i = 0; i < length(); ++ i )
-	(*this)[i] = v.get_bit( i );
+        (*this)[i] = v.get_bit( i );
 
     return *this;
 }
@@ -154,7 +154,7 @@ sc_unsigned::operator = ( const sc_fxval& v )
     }
 
     for( int i = 0; i < length(); ++ i )
-	(*this)[i] = v.get_bit( i );
+        (*this)[i] = v.get_bit( i );
 
     return *this;
 }
@@ -171,7 +171,7 @@ sc_unsigned::operator = ( const sc_fxval_fast& v )
     }
 
     for( int i = 0; i < length(); ++ i )
-	(*this)[i] = v.get_bit( i );
+        (*this)[i] = v.get_bit( i );
 
     return *this;
 }
@@ -188,7 +188,7 @@ sc_unsigned::operator = ( const sc_fxnum& v )
     }
 
     for( int i = 0; i < length(); ++ i )
-	(*this)[i] = v.get_bit( i );
+        (*this)[i] = v.get_bit( i );
 
     return *this;
 }
@@ -205,7 +205,7 @@ sc_unsigned::operator = ( const sc_fxnum_fast& v )
     }
 
     for( int i = 0; i < length(); ++ i )
-	(*this)[i] = v.get_bit( i );
+        (*this)[i] = v.get_bit( i );
 
     return *this;
 }
@@ -227,7 +227,7 @@ sc_int_base::operator = ( const sc_fxval& v )
         return *this;
     }
     for( int i = 0; i < m_len; ++ i ) {
-	set( i, v.get_bit( i ) );
+        set( i, v.get_bit( i ) );
     }
     extend_sign();
     return *this;
@@ -243,7 +243,7 @@ sc_int_base::operator = ( const sc_fxval_fast& v )
         return *this;
     }
     for( int i = 0; i < m_len; ++ i ) {
-	set( i, v.get_bit( i ) );
+        set( i, v.get_bit( i ) );
     }
     extend_sign();
     return *this;
@@ -259,7 +259,7 @@ sc_int_base::operator = ( const sc_fxnum& v )
         return *this;
     }
     for( int i = 0; i < m_len; ++ i ) {
-	set( i, v.get_bit( i ) );
+        set( i, v.get_bit( i ) );
     }
     extend_sign();
     return *this;
@@ -275,7 +275,7 @@ sc_int_base::operator = ( const sc_fxnum_fast& v )
         return *this;
     }
     for( int i = 0; i < m_len; ++ i ) {
-	set( i, v.get_bit( i ) );
+        set( i, v.get_bit( i ) );
     }
     extend_sign();
     return *this;
@@ -298,7 +298,7 @@ sc_uint_base::operator = ( const sc_fxval& v )
         return *this;
     }
     for( int i = 0; i < m_len; ++ i ) {
-	set( i, v.get_bit( i ) );
+        set( i, v.get_bit( i ) );
     }
     extend_sign();
     return *this;
@@ -314,7 +314,7 @@ sc_uint_base::operator = ( const sc_fxval_fast& v )
         return *this;
     }
     for( int i = 0; i < m_len; ++ i ) {
-	set( i, v.get_bit( i ) );
+        set( i, v.get_bit( i ) );
     }
     extend_sign();
     return *this;
@@ -330,7 +330,7 @@ sc_uint_base::operator = ( const sc_fxnum& v )
         return *this;
     }
     for( int i = 0; i < m_len; ++ i ) {
-	set( i, v.get_bit( i ) );
+        set( i, v.get_bit( i ) );
     }
     extend_sign();
     return *this;
@@ -346,7 +346,7 @@ sc_uint_base::operator = ( const sc_fxnum_fast& v )
         return *this;
     }
     for( int i = 0; i < m_len; ++ i ) {
-	set( i, v.get_bit( i ) );
+        set( i, v.get_bit( i ) );
     }
     extend_sign();
     return *this;

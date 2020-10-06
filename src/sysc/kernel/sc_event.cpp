@@ -256,11 +256,11 @@ sc_event::register_event( const char* leaf_name, bool is_kernel_event /* = false
 
     if ( !is_kernel_event )
     {
-	object_manager->insert_event(m_name, this);
-	if ( m_parent_p )
-	    m_parent_p->add_child_event( this );
-	else
-	    m_simc->add_child_event( this );
+        object_manager->insert_event(m_name, this);
+        if ( m_parent_p )
+            m_parent_p->add_child_event( this );
+        else
+            m_simc->add_child_event( this );
     }
 }
 
@@ -360,8 +360,8 @@ sc_event::~sc_event()
     cancel();
     if ( m_name.length() != 0 )
     {
-	sc_object_manager* object_manager_p = m_simc->get_object_manager();
-	object_manager_p->remove_event( m_name );
+        sc_object_manager* object_manager_p = m_simc->get_object_manager();
+        object_manager_p->remove_event( m_name );
     }
 
     for(auto & i : m_threads_dynamic) {
@@ -410,18 +410,18 @@ sc_event::trigger()
 
     if( ( size = m_methods_dynamic.size() ) != 0 )
     {
-	last_i = size - 1;
-	sc_method_handle* l_methods_dynamic = &m_methods_dynamic[0];
-	for ( int i = 0; i <= last_i; i++ )
-	{
-	    sc_method_handle method_h = l_methods_dynamic[i];
-	    if ( method_h->trigger_dynamic( this ) )
-	    {
-		l_methods_dynamic[i] = l_methods_dynamic[last_i];
-		last_i--;
-		i--;
-	    }
-	}
+        last_i = size - 1;
+        sc_method_handle* l_methods_dynamic = &m_methods_dynamic[0];
+        for ( int i = 0; i <= last_i; i++ )
+        {
+            sc_method_handle method_h = l_methods_dynamic[i];
+            if ( method_h->trigger_dynamic( this ) )
+            {
+                l_methods_dynamic[i] = l_methods_dynamic[last_i];
+                last_i--;
+                i--;
+            }
+        }
         m_methods_dynamic.resize(last_i+1);
     }
 
@@ -442,18 +442,18 @@ sc_event::trigger()
 
     if( ( size = m_threads_dynamic.size() ) != 0 )
     {
-	last_i = size - 1;
-	sc_thread_handle* l_threads_dynamic = &m_threads_dynamic[0];
-	for ( int i = 0; i <= last_i; i++ )
-	{
-	    sc_thread_handle thread_h = l_threads_dynamic[i];
-	    if ( thread_h->trigger_dynamic( this ) )
-	    {
-		l_threads_dynamic[i] = l_threads_dynamic[last_i];
-		i--;
-		last_i--;
-	    }
-	}
+        last_i = size - 1;
+        sc_thread_handle* l_threads_dynamic = &m_threads_dynamic[0];
+        for ( int i = 0; i <= last_i; i++ )
+        {
+            sc_thread_handle thread_h = l_threads_dynamic[i];
+            if ( thread_h->trigger_dynamic( this ) )
+            {
+                l_threads_dynamic[i] = l_threads_dynamic[last_i];
+                i--;
+                last_i--;
+            }
+        }
         m_threads_dynamic.resize(last_i+1);
     }
 }

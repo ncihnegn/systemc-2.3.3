@@ -52,11 +52,11 @@ void
 sc_in<bool>::end_of_elaboration()
 {
     if( m_traces != nullptr ) {
-	for(auto *p : *m_traces) {
-	    auto* iface = dynamic_cast<in_if_type*>( get_interface() );
-	    sc_trace( p->tf, iface->read(), p->name );
-	}
-	remove_traces();
+        for(auto *p : *m_traces) {
+            auto* iface = dynamic_cast<in_if_type*>( get_interface() );
+            sc_trace( p->tf, iface->read(), p->name );
+        }
+        remove_traces();
     }
 }
 
@@ -64,33 +64,33 @@ sc_in<bool>::end_of_elaboration()
 
 void
 sc_in<bool>::add_trace_internal(sc_trace_file* tf_,
-	const std::string& name_) const
+        const std::string& name_) const
 {
     if( tf_ != nullptr ) {
-	if( m_traces == nullptr ) {
-	    m_traces = new sc_trace_params_vec;
-	}
-	m_traces->push_back( new sc_trace_params( tf_, name_ ) );
+        if( m_traces == nullptr ) {
+            m_traces = new sc_trace_params_vec;
+        }
+        m_traces->push_back( new sc_trace_params( tf_, name_ ) );
     }
 }
 
 void
 sc_in<bool>::add_trace(sc_trace_file* tf_,
-	const std::string& name_) const
+        const std::string& name_) const
 {
     sc_deprecated_add_trace();
-	add_trace_internal(tf_, name_);
+        add_trace_internal(tf_, name_);
 }
 
 void
 sc_in<bool>::remove_traces() const
 {
     if( m_traces != nullptr ) {
-	for( int i = m_traces->size() - 1; i >= 0; -- i ) {
-	    delete (*m_traces)[i];
-	}
-	delete m_traces;
-	m_traces = nullptr;
+        for( int i = m_traces->size() - 1; i >= 0; -- i ) {
+            delete (*m_traces)[i];
+        }
+        delete m_traces;
+        m_traces = nullptr;
     }
 }
 
@@ -108,13 +108,13 @@ sc_in<bool>::vbind( sc_port_base& parent_ )
 {
     auto* in_parent = dynamic_cast<in_port_type*>( &parent_ );
     if( in_parent != nullptr ) {
-	sc_port_base::bind( *in_parent );
-	return 0;
+        sc_port_base::bind( *in_parent );
+        return 0;
     }
     auto* inout_parent = dynamic_cast<inout_port_type*>( &parent_ );
     if( inout_parent != nullptr ) {
-	sc_port_base::bind( *inout_parent );
-	return 0;
+        sc_port_base::bind( *inout_parent );
+        return 0;
     }
     // type mismatch
     return 2;
@@ -133,11 +133,11 @@ void
 sc_in<sc_dt::sc_logic>::end_of_elaboration()
 {
     if( m_traces != nullptr ) {
-	for(auto *p : *m_traces) {
-	    auto* iface = dynamic_cast<in_if_type*>( get_interface() );
-	    sc_trace( p->tf, iface->read(), p->name );
-	}
-	remove_traces();
+        for(auto *p : *m_traces) {
+            auto* iface = dynamic_cast<in_if_type*>( get_interface() );
+            sc_trace( p->tf, iface->read(), p->name );
+        }
+        remove_traces();
     }
 }
 
@@ -149,10 +149,10 @@ sc_in<sc_dt::sc_logic>::add_trace_internal( sc_trace_file* tf_,
     const std::string& name_ ) const
 {
     if( tf_ != nullptr ) {
-	if( m_traces == nullptr ) {
-	    m_traces = new sc_trace_params_vec;
-	}
-	m_traces->push_back( new sc_trace_params( tf_, name_ ) );
+        if( m_traces == nullptr ) {
+            m_traces = new sc_trace_params_vec;
+        }
+        m_traces->push_back( new sc_trace_params( tf_, name_ ) );
     }
 }
 
@@ -168,11 +168,11 @@ void
 sc_in<sc_dt::sc_logic>::remove_traces() const
 {
     if( m_traces != nullptr ) {
-	for( int i = m_traces->size() - 1; i >= 0; -- i ) {
-	    delete (*m_traces)[i];
-	}
-	delete m_traces;
-	m_traces = nullptr;
+        for( int i = m_traces->size() - 1; i >= 0; -- i ) {
+            delete (*m_traces)[i];
+        }
+        delete m_traces;
+        m_traces = nullptr;
     }
 }
 
@@ -190,13 +190,13 @@ sc_in<sc_dt::sc_logic>::vbind( sc_port_base& parent_ )
 {
     auto* in_parent = dynamic_cast<in_port_type*>( &parent_ );
     if( in_parent != nullptr ) {
-	sc_port_base::bind( *in_parent );
-	return 0;
+        sc_port_base::bind( *in_parent );
+        return 0;
     }
     auto* inout_parent = dynamic_cast<inout_port_type*>( &parent_ );
     if( inout_parent != nullptr ) {
-	sc_port_base::bind( *inout_parent );
-	return 0;
+        sc_port_base::bind( *inout_parent );
+        return 0;
     }
     // type mismatch
     return 2;
@@ -228,12 +228,12 @@ sc_inout<bool>::initialize( const data_type& value_ )
 {
     auto* iface = dynamic_cast<inout_if_type*>( get_interface() );
     if( iface != nullptr ) {
-	iface->write( value_ );
+        iface->write( value_ );
     } else {
-	if( m_init_val == nullptr ) {
-	    m_init_val = new data_type;
-	}
-	*m_init_val = value_;
+        if( m_init_val == nullptr ) {
+            m_init_val = new data_type;
+        }
+        *m_init_val = value_;
     }
 }
 
@@ -244,16 +244,16 @@ void
 sc_inout<bool>::end_of_elaboration()
 {
     if( m_init_val != nullptr ) {
-	write( *m_init_val );
-	delete m_init_val;
-	m_init_val = nullptr;
+        write( *m_init_val );
+        delete m_init_val;
+        m_init_val = nullptr;
     }
     if( m_traces != nullptr ) {
-	for(auto *p : *m_traces) {
-	    auto* iface = dynamic_cast<in_if_type*>( get_interface() );
-	    sc_trace( p->tf, iface->read(), p->name );
-	}
-	remove_traces();
+        for(auto *p : *m_traces) {
+            auto* iface = dynamic_cast<in_if_type*>( get_interface() );
+            sc_trace( p->tf, iface->read(), p->name );
+        }
+        remove_traces();
     }
 }
 
@@ -265,10 +265,10 @@ sc_inout<bool>::add_trace_internal( sc_trace_file* tf_,
     const std::string& name_ ) const
 {
     if( tf_ != nullptr ) {
-	if( m_traces == nullptr ) {
-	    m_traces = new sc_trace_params_vec;
-	}
-	m_traces->push_back( new sc_trace_params( tf_, name_ ) );
+        if( m_traces == nullptr ) {
+            m_traces = new sc_trace_params_vec;
+        }
+        m_traces->push_back( new sc_trace_params( tf_, name_ ) );
     }
 }
 
@@ -284,11 +284,11 @@ void
 sc_inout<bool>::remove_traces() const
 {
     if( m_traces != nullptr ) {
-	for( int i = m_traces->size() - 1; i >= 0; -- i ) {
-	    delete (*m_traces)[i];
-	}
-	delete m_traces;
-	m_traces = nullptr;
+        for( int i = m_traces->size() - 1; i >= 0; -- i ) {
+            delete (*m_traces)[i];
+        }
+        delete m_traces;
+        m_traces = nullptr;
     }
 }
 
@@ -318,12 +318,12 @@ sc_inout<sc_dt::sc_logic>::initialize( const data_type& value_ )
 {
     auto* iface = dynamic_cast<inout_if_type*>( get_interface() );
     if( iface != nullptr ) {
-	iface->write( value_ );
+        iface->write( value_ );
     } else {
-	if( m_init_val == nullptr ) {
-	    m_init_val = new data_type;
-	}
-	*m_init_val = value_;
+        if( m_init_val == nullptr ) {
+            m_init_val = new data_type;
+        }
+        *m_init_val = value_;
     }
 }
 
@@ -334,16 +334,16 @@ void
 sc_inout<sc_dt::sc_logic>::end_of_elaboration()
 {
     if( m_init_val != nullptr ) {
-	write( *m_init_val );
-	delete m_init_val;
-	m_init_val = nullptr;
+        write( *m_init_val );
+        delete m_init_val;
+        m_init_val = nullptr;
     }
     if( m_traces != nullptr ) {
-	for(auto *p : *m_traces) {
-	    auto* iface = dynamic_cast<in_if_type*>( get_interface() );
-	    sc_trace( p->tf, iface->read(), p->name );
-	}
-	remove_traces();
+        for(auto *p : *m_traces) {
+            auto* iface = dynamic_cast<in_if_type*>( get_interface() );
+            sc_trace( p->tf, iface->read(), p->name );
+        }
+        remove_traces();
     }
 }
 
@@ -352,20 +352,20 @@ sc_inout<sc_dt::sc_logic>::end_of_elaboration()
 
 void
 sc_inout<sc_dt::sc_logic>::add_trace_internal( sc_trace_file* tf_,
-			       const std::string& name_ ) const
+                               const std::string& name_ ) const
 {
     if( tf_ != nullptr ) {
-	if( m_traces == nullptr ) {
-	    m_traces = new sc_trace_params_vec;
-	}
-	m_traces->push_back( new sc_trace_params( tf_, name_ ) );
+        if( m_traces == nullptr ) {
+            m_traces = new sc_trace_params_vec;
+        }
+        m_traces->push_back( new sc_trace_params( tf_, name_ ) );
     }
 }
 
 
 void
 sc_inout<sc_dt::sc_logic>::add_trace( sc_trace_file* tf_,
-			       const std::string& name_ ) const
+                               const std::string& name_ ) const
 {
     sc_deprecated_add_trace();
     add_trace_internal(tf_, name_);
@@ -375,11 +375,11 @@ void
 sc_inout<sc_dt::sc_logic>::remove_traces() const
 {
     if( m_traces != nullptr ) {
-	for( int i = m_traces->size() - 1; i >= 0; -- i ) {
-	    delete (*m_traces)[i];
-	}
-	delete m_traces;
-	m_traces = nullptr;
+        for( int i = m_traces->size() - 1; i >= 0; -- i ) {
+            delete (*m_traces)[i];
+        }
+        delete m_traces;
+        m_traces = nullptr;
     }
 }
 
@@ -389,8 +389,8 @@ void sc_deprecated_add_trace()
     if ( warn_add_trace_deprecated )
     {
         warn_add_trace_deprecated=false;
-	SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_,
-	    "sc_signal<T>::addtrace() is deprecated");
+        SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_,
+            "sc_signal<T>::addtrace() is deprecated");
     }
 }
 } // namespace sc_core
@@ -412,7 +412,7 @@ void sc_deprecated_add_trace()
 //        methods, and operators to keep the Microsoft compiler happy.
 //    (2) Added delta_count() method to sc_prim_channel for use by
 //        sc_signal so that the friend declaration in sc_simcontext.h
-// 	   can be for a non-templated class (i.e., sc_prim_channel.)
+//            can be for a non-templated class (i.e., sc_prim_channel.)
 //
 // Revision 1.7  2006/04/18 18:01:26  acg
 //  Andy Goodrich: added an add_trace_internal() method to the various port

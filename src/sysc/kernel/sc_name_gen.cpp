@@ -49,7 +49,7 @@ sc_name_gen::~sc_name_gen()
 {
     sc_strhash<int*>::iterator it( m_unique_name_map );
     for( ; ! it.empty(); it ++ ) {
-	delete it.contents();
+        delete it.contents();
     }
     m_unique_name_map.erase();
 }

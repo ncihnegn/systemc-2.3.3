@@ -432,7 +432,7 @@ sc_event::notify_internal( const sc_time& t )
         m_notify_type = DELTA;
     } else {
         sc_event_timed* et =
-		new sc_event_timed( this, m_simc->time_stamp() + t );
+                new sc_event_timed( this, m_simc->time_stamp() + t );
         m_simc->add_timed_event( et );
         m_timed = et;
         m_notify_type = TIMED;

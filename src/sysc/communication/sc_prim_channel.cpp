@@ -159,7 +159,7 @@ public:
 
     [[nodiscard]] bool pending() const
     {
-	return !m_push_queue.empty();
+        return !m_push_queue.empty();
     }
 
     void suspend()
@@ -180,26 +180,26 @@ public:
 
     void accept_updates()
     {
-	sc_assert( m_pop_queue.empty() );
-	{
-	    sc_scoped_lock lock( m_mutex );
-	    m_push_queue.swap( m_pop_queue );
-	    // leaving the block releases the mutex
-	}
+        sc_assert( m_pop_queue.empty() );
+        {
+            sc_scoped_lock lock( m_mutex );
+            m_push_queue.swap( m_pop_queue );
+            // leaving the block releases the mutex
+        }
 
-	auto
-	    it = m_pop_queue.begin();
-	auto
-	    end = m_pop_queue.end();
-	while( it!= end )
-	{
-	    // we use request_update instead of perform_update
-	    // to skip duplicates
-	    (*it++)->request_update();
-	    int sem_trywait = m_suspend_semaphore.trywait(); // this must never block !
-	    sc_assert( sem_trywait == 0 );
-	}
-	m_pop_queue.clear();
+        auto
+            it = m_pop_queue.begin();
+        auto
+            end = m_pop_queue.end();
+        while( it!= end )
+        {
+            // we use request_update instead of perform_update
+            // to skip duplicates
+            (*it++)->request_update();
+            int sem_trywait = m_suspend_semaphore.trywait(); // this must never block !
+            sc_assert( sem_trywait == 0 );
+        }
+        m_pop_queue.clear();
     }
 
     bool attach_suspending( sc_prim_channel& p )
@@ -284,9 +284,9 @@ sc_prim_channel_registry::remove( sc_prim_channel& prim_channel_ )
 {
     int i;
     for( i = 0; i < size(); ++ i ) {
-	if( &prim_channel_ == m_prim_channel_vec[i] ) {
-	    break;
-	}
+        if( &prim_channel_ == m_prim_channel_vec[i] ) {
+            break;
+        }
     }
     if( i == size() ) {
         SC_REPORT_ERROR( SC_ID_REMOVE_PRIM_CHANNEL_, nullptr );
@@ -370,7 +370,7 @@ sc_prim_channel_registry::perform_update()
 
 #ifndef SC_DISABLE_ASYNC_UPDATES
     if( m_async_update_list_p->pending() )
-	m_async_update_list_p->accept_updates();
+        m_async_update_list_p->accept_updates();
 #endif
 
     sc_prim_channel* next_p; // Next update to perform.
@@ -381,10 +381,10 @@ sc_prim_channel_registry::perform_update()
     now_p = m_update_list_p;
     m_update_list_p = (sc_prim_channel*)sc_prim_channel::list_end;
     for ( ; now_p != (sc_prim_channel*)sc_prim_channel::list_end;
-	now_p = next_p )
+        now_p = next_p )
     {
-	next_p = now_p->m_update_next_p;
-	now_p->perform_update();
+        next_p = now_p->m_update_next_p;
+        now_p->perform_update();
     }
 }
 
@@ -433,7 +433,7 @@ void
 sc_prim_channel_registry::elaboration_done()
 {
     for( int i = 0; i < size(); ++ i ) {
-	m_prim_channel_vec[i]->elaboration_done();
+        m_prim_channel_vec[i]->elaboration_done();
     }
 }
 
@@ -443,7 +443,7 @@ void
 sc_prim_channel_registry::start_simulation()
 {
     for( int i = 0; i < size(); ++ i ) {
-	m_prim_channel_vec[i]->start_simulation();
+        m_prim_channel_vec[i]->start_simulation();
     }
 }
 
@@ -453,7 +453,7 @@ void
 sc_prim_channel_registry::simulation_done()
 {
     for( int i = 0; i < size(); ++ i ) {
-	m_prim_channel_vec[i]->simulation_done();
+        m_prim_channel_vec[i]->simulation_done();
     }
 }
 

@@ -149,8 +149,8 @@ protected:
 
     void initialize( const sc_int_base* obj_p, int index_ )
     {
-	m_obj_p = (sc_int_base*)obj_p;
-	m_index = index_;
+        m_obj_p = (sc_int_base*)obj_p;
+        m_index = index_;
     }
 
 public:
@@ -164,50 +164,50 @@ public:
     // destructor
 
     virtual ~sc_int_bitref_r()
-	{}
+        {}
 
     // capacity
 
     int length() const
-	{ return 1; }
+        { return 1; }
 
 #ifdef SC_DT_DEPRECATED
     int bitwidth() const
-	{ return length(); }
+        { return length(); }
 #endif
 
     // concatenation support
 
     virtual int concat_length( bool *xz_present_p ) const
-	{ if (xz_present_p) *xz_present_p = false; return 1; }
+        { if (xz_present_p) *xz_present_p = false; return 1; }
     virtual bool concat_get_ctrl( sc_digit* dst_p, int low_i ) const
         {
-	    int bit_mask = 1 << (low_i % BITS_PER_DIGIT);
-	    int word_i = low_i / BITS_PER_DIGIT;
+            int bit_mask = 1 << (low_i % BITS_PER_DIGIT);
+            int word_i = low_i / BITS_PER_DIGIT;
 
-	    dst_p[word_i] &= ~bit_mask;
-	    return false;
-	}
+            dst_p[word_i] &= ~bit_mask;
+            return false;
+        }
     virtual bool concat_get_data( sc_digit* dst_p, int low_i ) const
         {
-	    bool non_zero;
-	    int bit_mask = 1 << (low_i % BITS_PER_DIGIT);
-	    int word_i = low_i / BITS_PER_DIGIT;
+            bool non_zero;
+            int bit_mask = 1 << (low_i % BITS_PER_DIGIT);
+            int word_i = low_i / BITS_PER_DIGIT;
 
-	    if ( operator uint64() )
-	    {
-		dst_p[word_i] |= bit_mask;
-		non_zero = true;
-	    }
-	    else
-	    {
-		dst_p[word_i] &= ~bit_mask;
-		non_zero = false;
-	    }
-	    return non_zero;
-	}
+            if ( operator uint64() )
+            {
+                dst_p[word_i] |= bit_mask;
+                non_zero = true;
+            }
+            else
+            {
+                dst_p[word_i] &= ~bit_mask;
+                non_zero = false;
+            }
+            return non_zero;
+        }
     virtual uint64 concat_get_uint64() const
-	{ return operator uint64(); }
+        { return operator uint64(); }
 
 
 
@@ -222,16 +222,16 @@ public:
     // explicit conversions
 
     uint64 value() const
-	{ return operator uint64(); }
+        { return operator uint64(); }
 
     bool to_bool() const
-	{ return operator uint64(); }
+        { return operator uint64(); }
 
 
     // other methods
 
     void print( ::std::ostream& os = ::std::cout ) const
-	{ os << to_bool(); }
+        { os << to_bool(); }
 
 protected:
     int          m_index;
@@ -285,7 +285,7 @@ public:
     sc_int_bitref& operator |= ( bool b );
     sc_int_bitref& operator ^= ( bool b );
 
-	// concatenation methods
+        // concatenation methods
 
     virtual void concat_set(int64 src, int low_i);
     virtual void concat_set(const sc_signed& src, int low_i);
@@ -332,9 +332,9 @@ protected:
 
     void initialize( const sc_int_base* obj_p, int left_i, int right_i )
     {
-	m_obj_p = (sc_int_base*)obj_p;
-	m_left = left_i;
-	m_right = right_i;
+        m_obj_p = (sc_int_base*)obj_p;
+        m_left = left_i;
+        m_right = right_i;
     }
 
 
@@ -343,13 +343,13 @@ public:
 
     sc_int_subref_r( const sc_int_subref_r& a ) :
         sc_value_base(a), m_left( a.m_left ), m_obj_p( a.m_obj_p ),
-	m_right( a.m_right )
+        m_right( a.m_right )
         {}
 
     // destructor
 
     virtual ~sc_int_subref_r()
-	{}
+        {}
 
     // capacity
 
@@ -358,23 +358,23 @@ public:
 
 #ifdef SC_DT_DEPRECATED
     int bitwidth() const
-	{ return length(); }
+        { return length(); }
 #endif
 
     // concatenation support
 
     virtual int concat_length(bool* xz_present_p) const
-	{ if ( xz_present_p ) *xz_present_p = false; return length(); }
+        { if ( xz_present_p ) *xz_present_p = false; return length(); }
     virtual bool concat_get_ctrl( sc_digit* dst_p, int low_i ) const;
     virtual bool concat_get_data( sc_digit* dst_p, int low_i ) const;
     virtual uint64 concat_get_uint64() const
     {
-	int    len = length();
-	uint64 val = operator uint_type();
-	if ( len < 64 )
-	    return (uint64)(val & ~((uint_type)-1 << len));
-	else
-	    return (uint64)val;
+        int    len = length();
+        uint64 val = operator uint_type();
+        if ( len < 64 )
+            return (uint64)(val & ~((uint_type)-1 << len));
+        else
+            return (uint64)val;
     }
 
     // reduce methods
@@ -382,17 +382,17 @@ public:
     bool and_reduce() const;
 
     bool nand_reduce() const
-	{ return ( ! and_reduce() ); }
+        { return ( ! and_reduce() ); }
 
     bool or_reduce() const;
 
     bool nor_reduce() const
-	{ return ( ! or_reduce() ); }
+        { return ( ! or_reduce() ); }
 
     bool xor_reduce() const;
 
     bool xnor_reduce() const
-	{ return ( ! xor_reduce() ); }
+        { return ( ! xor_reduce() ); }
 
 
     // implicit conversion to uint_type
@@ -403,7 +403,7 @@ public:
     // explicit conversions
 
     uint_type value() const
-	{ return operator uint_type(); }
+        { return operator uint_type(); }
 
 
     int           to_int() const;
@@ -424,7 +424,7 @@ public:
     // other methods
 
     void print( ::std::ostream& os = ::std::cout ) const
-	{ os << to_string(sc_io_base(os,SC_DEC),sc_io_show_base(os)); }
+        { os << to_string(sc_io_base(os,SC_DEC),sc_io_show_base(os)); }
 
 protected:
 
@@ -475,10 +475,10 @@ public:
     sc_int_subref& operator = ( const sc_int_base& a );
 
     sc_int_subref& operator = ( const sc_int_subref_r& a )
-	{ return operator = ( a.operator uint_type() ); }
+        { return operator = ( a.operator uint_type() ); }
 
     sc_int_subref& operator = ( const sc_int_subref& a )
-	{ return operator = ( a.operator uint_type() ); }
+        { return operator = ( a.operator uint_type() ); }
 
     template< class T >
     sc_int_subref& operator = ( const sc_generic_base<T>& a )
@@ -487,29 +487,29 @@ public:
     sc_int_subref& operator = ( const char* a );
 
     sc_int_subref& operator = ( unsigned long a )
-	{ return operator = ( (int_type) a ); }
+        { return operator = ( (int_type) a ); }
 
     sc_int_subref& operator = ( long a )
-	{ return operator = ( (int_type) a ); }
+        { return operator = ( (int_type) a ); }
 
     sc_int_subref& operator = ( unsigned int a )
-	{ return operator = ( (int_type) a ); }
+        { return operator = ( (int_type) a ); }
 
     sc_int_subref& operator = ( int a )
-	{ return operator = ( (int_type) a ); }
+        { return operator = ( (int_type) a ); }
 
     sc_int_subref& operator = ( uint64 a )
-	{ return operator = ( (int_type) a ); }
+        { return operator = ( (int_type) a ); }
 
     sc_int_subref& operator = ( double a )
-	{ return operator = ( (int_type) a ); }
+        { return operator = ( (int_type) a ); }
 
     sc_int_subref& operator = ( const sc_signed& );
     sc_int_subref& operator = ( const sc_unsigned& );
     sc_int_subref& operator = ( const sc_bv_base& );
     sc_int_subref& operator = ( const sc_lv_base& );
 
-	// concatenation methods
+        // concatenation methods
 
     virtual void concat_set(int64 src, int low_i);
     virtual void concat_set(const sc_signed& src, int low_i);
@@ -553,40 +553,40 @@ class SC_API sc_int_base : public sc_value_base
     void invalid_range( int l, int r ) const;
 
     void check_length() const
-	{ if( m_len <= 0 || m_len > SC_INTWIDTH ) { invalid_length(); } }
+        { if( m_len <= 0 || m_len > SC_INTWIDTH ) { invalid_length(); } }
 
     void check_index( int i ) const
-	{ if( i < 0 || i >= m_len ) { invalid_index( i ); } }
+        { if( i < 0 || i >= m_len ) { invalid_index( i ); } }
 
     void check_range( int l, int r ) const
-	{ if( r < 0 || l >= m_len || l < r ) { invalid_range( l, r ); } }
+        { if( r < 0 || l >= m_len || l < r ) { invalid_range( l, r ); } }
 
     void check_value() const;
 
     void extend_sign()
-	{
+        {
 #ifdef DEBUG_SYSTEMC
-	    check_value();
+            check_value();
 #endif
-	    m_val = ( m_val << m_ulen >> m_ulen );
-	}
+            m_val = ( m_val << m_ulen >> m_ulen );
+        }
 
 public:
 
     // constructors
 
     explicit sc_int_base( int w = sc_length_param().len() )
-	: m_val( 0 ), m_len( w ), m_ulen( SC_INTWIDTH - m_len )
-	{ check_length(); }
+        : m_val( 0 ), m_len( w ), m_ulen( SC_INTWIDTH - m_len )
+        { check_length(); }
 
     sc_int_base( int_type v, int w )
-	: m_val( v ), m_len( w ), m_ulen( SC_INTWIDTH - m_len )
-	{ check_length(); extend_sign(); }
+        : m_val( v ), m_len( w ), m_ulen( SC_INTWIDTH - m_len )
+        { check_length(); extend_sign(); }
 
     sc_int_base( const sc_int_base& a )
-	: sc_value_base(a), m_val( a.m_val ), m_len( a.m_len ),
-	  m_ulen( a.m_ulen )
-	{}
+        : sc_value_base(a), m_val( a.m_val ), m_len( a.m_len ),
+          m_ulen( a.m_ulen )
+        {}
 
     explicit sc_int_base( const sc_int_subref_r& a )
         : m_val( a ), m_len( a.length() ), m_ulen( SC_INTWIDTH - m_len )
@@ -595,8 +595,8 @@ public:
     template< class T >
     explicit sc_int_base( const sc_generic_base<T>& a ) :
         m_val( a->to_int64() ), m_len( a->length() ),
-	m_ulen( SC_INTWIDTH - m_len )
-	{ check_length(); extend_sign(); }
+        m_ulen( SC_INTWIDTH - m_len )
+        { check_length(); extend_sign(); }
 
     explicit sc_int_base( const sc_signed& a );
     explicit sc_int_base( const sc_unsigned& a );
@@ -611,15 +611,15 @@ public:
     // destructor
 
     virtual ~sc_int_base()
-	{}
+        {}
 
     // assignment operators
 
     sc_int_base& operator = ( int_type v )
-	{ m_val = v; extend_sign(); return *this; }
+        { m_val = v; extend_sign(); return *this; }
 
     sc_int_base& operator = ( const sc_int_base& a )
-	{ m_val = a.m_val; extend_sign(); return *this; }
+        { m_val = a.m_val; extend_sign(); return *this; }
 
     sc_int_base& operator = ( const sc_int_subref_r& a )
         { m_val = a; extend_sign(); return *this; }
@@ -644,95 +644,95 @@ public:
     sc_int_base& operator = ( const char* a );
 
     sc_int_base& operator = ( unsigned long a )
-	{ m_val = a; extend_sign(); return *this; }
+        { m_val = a; extend_sign(); return *this; }
 
     sc_int_base& operator = ( long a )
-	{ m_val = a; extend_sign(); return *this; }
+        { m_val = a; extend_sign(); return *this; }
 
     sc_int_base& operator = ( unsigned int a )
-	{ m_val = a; extend_sign(); return *this; }
+        { m_val = a; extend_sign(); return *this; }
 
     sc_int_base& operator = ( int a )
-	{ m_val = a; extend_sign(); return *this; }
+        { m_val = a; extend_sign(); return *this; }
 
     sc_int_base& operator = ( uint64 a )
-	{ m_val = a; extend_sign(); return *this; }
+        { m_val = a; extend_sign(); return *this; }
 
     sc_int_base& operator = ( double a )
-	{ m_val = (int_type) a; extend_sign(); return *this; }
+        { m_val = (int_type) a; extend_sign(); return *this; }
 
 
     // arithmetic assignment operators
 
     sc_int_base& operator += ( int_type v )
-	{ m_val += v; extend_sign(); return *this; }
+        { m_val += v; extend_sign(); return *this; }
 
     sc_int_base& operator -= ( int_type v )
-	{ m_val -= v; extend_sign(); return *this; }
+        { m_val -= v; extend_sign(); return *this; }
 
     sc_int_base& operator *= ( int_type v )
-	{ m_val *= v; extend_sign(); return *this; }
+        { m_val *= v; extend_sign(); return *this; }
 
     sc_int_base& operator /= ( int_type v )
-	{ m_val /= v; extend_sign(); return *this; }
+        { m_val /= v; extend_sign(); return *this; }
 
     sc_int_base& operator %= ( int_type v )
-	{ m_val %= v; extend_sign(); return *this; }
+        { m_val %= v; extend_sign(); return *this; }
 
 
     // bitwise assignment operators
 
     sc_int_base& operator &= ( int_type v )
-	{ m_val &= v; extend_sign(); return *this; }
+        { m_val &= v; extend_sign(); return *this; }
 
     sc_int_base& operator |= ( int_type v )
-	{ m_val |= v; extend_sign(); return *this; }
+        { m_val |= v; extend_sign(); return *this; }
 
     sc_int_base& operator ^= ( int_type v )
-	{ m_val ^= v; extend_sign(); return *this; }
+        { m_val ^= v; extend_sign(); return *this; }
 
 
     sc_int_base& operator <<= ( int_type v )
-	{ m_val <<= v; extend_sign(); return *this; }
+        { m_val <<= v; extend_sign(); return *this; }
 
     sc_int_base& operator >>= ( int_type v )
-	{ m_val >>= v; /* no sign extension needed */ return *this; }
+        { m_val >>= v; /* no sign extension needed */ return *this; }
 
 
     // prefix and postfix increment and decrement operators
 
     sc_int_base& operator ++ () // prefix
-	{ ++ m_val; extend_sign(); return *this; }
+        { ++ m_val; extend_sign(); return *this; }
 
     const sc_int_base operator ++ ( int ) // postfix
-	{ sc_int_base tmp( *this ); ++ m_val; extend_sign(); return tmp; }
+        { sc_int_base tmp( *this ); ++ m_val; extend_sign(); return tmp; }
 
     sc_int_base& operator -- () // prefix
-	{ -- m_val; extend_sign(); return *this; }
+        { -- m_val; extend_sign(); return *this; }
 
     const sc_int_base operator -- ( int ) // postfix
-	{ sc_int_base tmp( *this ); -- m_val; extend_sign(); return tmp; }
+        { sc_int_base tmp( *this ); -- m_val; extend_sign(); return tmp; }
 
 
     // relational operators
 
     friend bool operator == ( const sc_int_base& a, const sc_int_base& b )
-	{ return a.m_val == b.m_val; }
+        { return a.m_val == b.m_val; }
 
     friend bool operator != ( const sc_int_base& a, const sc_int_base& b )
-	{ return a.m_val != b.m_val; }
+        { return a.m_val != b.m_val; }
 
     friend bool operator <  ( const sc_int_base& a, const sc_int_base& b )
-	{ return a.m_val < b.m_val; }
+        { return a.m_val < b.m_val; }
 
     friend bool operator <= ( const sc_int_base& a, const sc_int_base& b )
-	{ return a.m_val <= b.m_val; }
+        { return a.m_val <= b.m_val; }
 
     friend bool operator >  ( const sc_int_base& a, const sc_int_base& b )
-	{ return a.m_val > b.m_val; }
+        { return a.m_val > b.m_val; }
 
     friend bool operator >= ( const sc_int_base& a, const sc_int_base& b )
-	{ return a.m_val >= b.m_val; }
+        { return a.m_val >= b.m_val; }
 
 
     // bit selection
@@ -756,38 +756,38 @@ public:
     // bit access, without bounds checking or sign extension
 
     bool test( int i ) const
-	{ return ( 0 != (m_val & (UINT_ONE << i)) ); }
+        { return ( 0 != (m_val & (UINT_ONE << i)) ); }
 
     void set( int i )
-	{ m_val |= (UINT_ONE << i); }
+        { m_val |= (UINT_ONE << i); }
 
     void set( int i, bool v )
-	{ v ? m_val |= (UINT_ONE << i) : m_val &= ~(UINT_ONE << i); }
+        { v ? m_val |= (UINT_ONE << i) : m_val &= ~(UINT_ONE << i); }
 
 
     // capacity
 
     int length() const
-	{ return m_len; }
+        { return m_len; }
 
 #ifdef SC_DT_DEPRECATED
     int bitwidth() const
-	{ return length(); }
+        { return length(); }
 #endif
 
     // concatenation support
 
     virtual int concat_length(bool* xz_present_p) const
-	{ if ( xz_present_p ) *xz_present_p = false; return length(); }
+        { if ( xz_present_p ) *xz_present_p = false; return length(); }
     virtual bool concat_get_ctrl( sc_digit* dst_p, int low_i ) const;
     virtual bool concat_get_data( sc_digit* dst_p, int low_i ) const;
     virtual uint64 concat_get_uint64() const
-	{
-	    if ( m_len < 64 )
-		return (uint64)(m_val & ~((uint_type)-1 << m_len));
-	    else
-		return (uint64)m_val;
-	}
+        {
+            if ( m_len < 64 )
+                return (uint64)(m_val & ~((uint_type)-1 << m_len));
+            else
+                return (uint64)m_val;
+        }
     virtual void concat_set(int64 src, int low_i);
     virtual void concat_set(const sc_signed& src, int low_i);
     virtual void concat_set(const sc_unsigned& src, int low_i);
@@ -799,58 +799,58 @@ public:
     bool and_reduce() const;
 
     bool nand_reduce() const
-	{ return ( ! and_reduce() ); }
+        { return ( ! and_reduce() ); }
 
     bool or_reduce() const;
 
     bool nor_reduce() const
-	{ return ( ! or_reduce() ); }
+        { return ( ! or_reduce() ); }
 
     bool xor_reduce() const;
 
     bool xnor_reduce() const
-	{ return ( ! xor_reduce() ); }
+        { return ( ! xor_reduce() ); }
 
 
     // implicit conversion to int_type
 
     operator int_type() const
-	{ return m_val; }
+        { return m_val; }
 
 
     // explicit conversions
 
     int_type value() const
-	{ return operator int_type(); }
+        { return operator int_type(); }
 
 
     int to_int() const
-	{ return (int) m_val; }
+        { return (int) m_val; }
 
     unsigned int to_uint() const
-	{ return (unsigned int) m_val; }
+        { return (unsigned int) m_val; }
 
     long to_long() const
-	{ return (long) m_val; }
+        { return (long) m_val; }
 
     unsigned long to_ulong() const
-	{ return (unsigned long) m_val; }
+        { return (unsigned long) m_val; }
 
     int64 to_int64() const
-	{ return (int64) m_val; }
+        { return (int64) m_val; }
 
     uint64 to_uint64() const
-	{ return (uint64) m_val; }
+        { return (uint64) m_val; }
 
     double to_double() const
-	{ return (double) m_val; }
+        { return (double) m_val; }
 
 
     long long_low() const
-	{ return (long) (m_val & UINT64_32ONES); }
+        { return (long) (m_val & UINT64_32ONES); }
 
     long long_high() const
-	{ return (long) ((m_val >> 32) & UINT64_32ONES); }
+        { return (long) ((m_val >> 32) & UINT64_32ONES); }
 
 
     // explicit conversion to character string
@@ -862,7 +862,7 @@ public:
     // other methods
 
     void print( ::std::ostream& os = ::std::cout ) const
-	{ os << to_string(sc_io_base(os,SC_DEC),sc_io_show_base(os)); }
+        { os << to_string(sc_io_base(os,SC_DEC),sc_io_show_base(os)); }
 
     void scan( ::std::istream& is = ::std::cin );
 
@@ -965,8 +965,8 @@ sc_int_bitref&
 sc_int_bitref::operator &= ( bool b )
 {
     if( ! b ) {
-	m_obj_p->set( m_index, b );
-	m_obj_p->extend_sign();
+        m_obj_p->set( m_index, b );
+        m_obj_p->extend_sign();
     }
     return *this;
 }
@@ -976,8 +976,8 @@ sc_int_bitref&
 sc_int_bitref::operator |= ( bool b )
 {
     if( b ) {
-	m_obj_p->set( m_index, b );
-	m_obj_p->extend_sign();
+        m_obj_p->set( m_index, b );
+        m_obj_p->extend_sign();
     }
     return *this;
 }
@@ -987,8 +987,8 @@ sc_int_bitref&
 sc_int_bitref::operator ^= ( bool b )
 {
     if( b ) {
-	m_obj_p->m_val ^= (UINT_ONE << m_index);
-	m_obj_p->extend_sign();
+        m_obj_p->m_val ^= (UINT_ONE << m_index);
+        m_obj_p->extend_sign();
     }
     return *this;
 }
@@ -1055,56 +1055,56 @@ inline
 int
 sc_int_subref_r::to_int() const
 {
-	int result = static_cast<int>(operator uint_type());
-	return result;
+        int result = static_cast<int>(operator uint_type());
+        return result;
 }
 
 inline
 unsigned int
 sc_int_subref_r::to_uint() const
 {
-	unsigned int result = static_cast<unsigned int>(operator uint_type());
-	return result;
+        unsigned int result = static_cast<unsigned int>(operator uint_type());
+        return result;
 }
 
 inline
 long
 sc_int_subref_r::to_long() const
 {
-	long result = static_cast<long>(operator uint_type());
-	return result;
+        long result = static_cast<long>(operator uint_type());
+        return result;
 }
 
 inline
 unsigned long
 sc_int_subref_r::to_ulong() const
 {
-	unsigned long result = static_cast<unsigned long>(operator uint_type());
-	return result;
+        unsigned long result = static_cast<unsigned long>(operator uint_type());
+        return result;
 }
 
 inline
 int64
 sc_int_subref_r::to_int64() const
 {
-	int64 result = operator uint_type();
-	return result;
+        int64 result = operator uint_type();
+        return result;
 }
 
 inline
 uint64
 sc_int_subref_r::to_uint64() const
 {
-	uint64 result = operator uint_type();
-	return result;
+        uint64 result = operator uint_type();
+        return result;
 }
 
 inline
 double
 sc_int_subref_r::to_double() const
 {
-	double result = static_cast<double>(operator uint_type());
-	return result;
+        double result = static_cast<double>(operator uint_type());
+        return result;
 }
 
 
@@ -1114,7 +1114,7 @@ inline
 const std::string
 sc_int_subref_r::to_string( sc_numrep numrep ) const
 {
-	sc_uint_base a(length());
+        sc_uint_base a(length());
     a = operator uint_type();
     return a.to_string( numrep );
 }
@@ -1123,7 +1123,7 @@ inline
 const std::string
 sc_int_subref_r::to_string( sc_numrep numrep, bool w_prefix ) const
 {
-	sc_uint_base a(length());
+        sc_uint_base a(length());
     a = operator uint_type();
     return a.to_string( numrep, w_prefix );
 }

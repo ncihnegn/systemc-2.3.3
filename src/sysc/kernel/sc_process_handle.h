@@ -385,7 +385,7 @@ inline void sc_process_handle::reset( sc_descendant_inclusion_info descendants )
 {
     if ( m_target_p )
         m_target_p->reset_process( sc_process_b::reset_asynchronous,
-	                           descendants );
+                                   descendants );
     else
         SC_REPORT_WARNING( SC_ID_EMPTY_PROCESS_HANDLE_, "reset()");
 }
@@ -439,7 +439,7 @@ inline void sc_process_handle::sync_reset_off(
 {
     if ( m_target_p )
         m_target_p->reset_process( sc_process_b::reset_synchronous_off,
-	                           descendants);
+                                   descendants);
     else
         SC_REPORT_WARNING( SC_ID_EMPTY_PROCESS_HANDLE_, "sync_reset_off()");
 }
@@ -514,7 +514,7 @@ inline void sc_process_handle::throw_it( const EXCEPT& exception,
     if ( !m_target_p )
     {
         SC_REPORT_WARNING( SC_ID_EMPTY_PROCESS_HANDLE_, "throw_it()");
-	return;
+        return;
     }
     m_target_p->throw_user(helper, descendants);
 }

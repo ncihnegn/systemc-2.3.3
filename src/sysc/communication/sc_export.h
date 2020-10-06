@@ -128,12 +128,12 @@ class sc_export : public sc_export_base
 public: // constructors:
     sc_export() : sc_export_base()
     {
-	m_interface_p = 0;
+        m_interface_p = 0;
     }
 
     explicit sc_export( const char* name_ ) : sc_export_base(name_)
     {
-	m_interface_p = 0;
+        m_interface_p = 0;
     }
 
 public: // destructor:
@@ -145,7 +145,7 @@ public: // interface access:
 
     virtual sc_interface* get_interface() 
     {
-	return m_interface_p;
+        return m_interface_p;
     }
 
     virtual const sc_interface* get_interface() const
@@ -214,7 +214,7 @@ private: // disabled
     this_type& operator = ( const this_type& );
 
 protected: // data fields:
-    IF* m_interface_p;		// Interface this port provides.
+    IF* m_interface_p;                // Interface this port provides.
 };
 
 // ----------------------------------------------------------------------------

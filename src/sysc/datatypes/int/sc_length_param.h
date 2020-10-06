@@ -78,7 +78,7 @@ class sc_length_param; // IWYU pragma: keep
     SC_API bool operator == ( const sc_length_param&,
                               const sc_length_param& );
     SC_API bool operator != ( const sc_length_param&,
-			      const sc_length_param& );
+                              const sc_length_param& );
 
 
 // ----------------------------------------------------------------------------
@@ -101,7 +101,7 @@ public:
     friend SC_API bool operator == ( const sc_length_param&,
                               const sc_length_param& );
     friend SC_API bool operator != ( const sc_length_param&,
-			      const sc_length_param& );
+                              const sc_length_param& );
 
     int len() const;
     void len( int );
@@ -167,7 +167,7 @@ sc_length_param::operator = ( const sc_length_param& a )
 {
     if( &a != this )
     {
-	m_len = a.m_len;
+        m_len = a.m_len;
     }
     return *this;
 }

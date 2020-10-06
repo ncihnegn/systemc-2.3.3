@@ -137,7 +137,7 @@ public:
 
 
 wif_trace::wif_trace(std::string  name_,
-	std::string  wif_name_)
+        std::string  wif_name_)
         : name(std::move(name_)), wif_name(std::move(wif_name_)), wif_type(nullptr), bit_width(-1)
 {
     /* Intentionally blank */
@@ -316,8 +316,8 @@ class wif_bool_trace
 public:
 
     wif_bool_trace( const bool& object_,
-		    const std::string& name_,
-		    const std::string& wif_name_ );
+                    const std::string& name_,
+                    const std::string& wif_name_ );
     void write( FILE* f ) override;
     bool changed() override;
 
@@ -328,8 +328,8 @@ protected:
 };
 
 wif_bool_trace::wif_bool_trace( const bool& object_,
-				const std::string& name_,
-				const std::string& wif_name_ )
+                                const std::string& name_,
+                                const std::string& wif_name_ )
 : wif_trace( name_, wif_name_ ), object( object_ ), old_value( object_ )
 {
     bit_width = 0;
@@ -346,9 +346,9 @@ void
 wif_bool_trace::write( FILE* f )
 {
     if( object ) {
-	std::fprintf( f, "assign %s \'1\' ;\n", wif_name.c_str() );
+        std::fprintf( f, "assign %s \'1\' ;\n", wif_name.c_str() );
     } else {
-	std::fprintf( f, "assign %s \'0\' ;\n", wif_name.c_str() );
+        std::fprintf( f, "assign %s \'0\' ;\n", wif_name.c_str() );
     }
     old_value = object;
 }
@@ -369,8 +369,8 @@ protected:
 };
 
 wif_sc_bit_trace::wif_sc_bit_trace(const sc_dt::sc_bit& object_,
-				   const std::string& name_,
-				   const std::string& wif_name_)
+                                   const std::string& name_,
+                                   const std::string& wif_name_)
 : wif_trace(name_, wif_name_), object(object_), old_value(object_)
 {
     bit_width = 0;
@@ -387,7 +387,7 @@ void wif_sc_bit_trace::write(FILE* f)
     if (object == true) {
         std::fprintf(f, "assign %s \'1\' ;\n", wif_name.c_str());
     } else {
-	std::fprintf(f, "assign %s \'0\' ;\n", wif_name.c_str());
+        std::fprintf(f, "assign %s \'0\' ;\n", wif_name.c_str());
     }
     old_value = object;
 }
@@ -397,8 +397,8 @@ void wif_sc_bit_trace::write(FILE* f)
 class wif_sc_logic_trace: public wif_trace {
 public:
     wif_sc_logic_trace(const sc_dt::sc_logic& object_,
-		       const std::string& name_,
-		       const std::string& wif_name_);
+                       const std::string& name_,
+                       const std::string& wif_name_);
     void write(FILE* f) override;
     bool changed() override;
 
@@ -409,8 +409,8 @@ protected:
 
 
 wif_sc_logic_trace::wif_sc_logic_trace(const sc_dt::sc_logic& object_,
-				       const std::string& name_,
-				       const std::string& wif_name_)
+                                       const std::string& name_,
+                                       const std::string& wif_name_)
 : wif_trace(name_, wif_name_), object(object_), old_value(object_)
 {
     bit_width = 0;
@@ -440,8 +440,8 @@ void wif_sc_logic_trace::write(FILE* f)
 class wif_sc_unsigned_trace: public wif_trace {
 public:
     wif_sc_unsigned_trace(const sc_dt::sc_unsigned& object_,
-			  const std::string& name_,
-			  const std::string& wif_name_);
+                          const std::string& name_,
+                          const std::string& wif_name_);
     void write(FILE* f) override;
     bool changed() override;
     void set_width() override;
@@ -453,8 +453,8 @@ protected:
 
 
 wif_sc_unsigned_trace::wif_sc_unsigned_trace(const sc_dt::sc_unsigned& object_,
-					     const std::string& name_,
-					     const std::string& wif_name_)
+                                             const std::string& name_,
+                                             const std::string& wif_name_)
 : wif_trace(name_, wif_name_), object(object_), old_value(object_.length())
 {
     old_value = object;
@@ -496,8 +496,8 @@ void wif_sc_unsigned_trace::set_width()
 class wif_sc_signed_trace: public wif_trace {
 public:
     wif_sc_signed_trace(const sc_dt::sc_signed& object_,
-			const std::string& name_,
-			const std::string& wif_name_);
+                        const std::string& name_,
+                        const std::string& wif_name_);
     void write(FILE* f) override;
     bool changed() override;
     void set_width() override;
@@ -509,8 +509,8 @@ protected:
 
 
 wif_sc_signed_trace::wif_sc_signed_trace(const sc_dt::sc_signed& object_,
-					 const std::string& name_,
-					 const std::string& wif_name_)
+                                         const std::string& name_,
+                                         const std::string& wif_name_)
 : wif_trace(name_, wif_name_), object(object_), old_value(object_.length())
 {
     old_value = object;
@@ -552,8 +552,8 @@ void wif_sc_signed_trace::set_width()
 class wif_sc_uint_base_trace: public wif_trace {
 public:
     wif_sc_uint_base_trace(const sc_dt::sc_uint_base& object_,
-			   const std::string& name_,
-			   const std::string& wif_name_);
+                           const std::string& name_,
+                           const std::string& wif_name_);
     void write(FILE* f) override;
     bool changed() override;
     void set_width() override;
@@ -566,8 +566,8 @@ protected:
 
 wif_sc_uint_base_trace::wif_sc_uint_base_trace(
                                           const sc_dt::sc_uint_base& object_,
-					  const std::string& name_,
-					  const std::string& wif_name_)
+                                          const std::string& name_,
+                                          const std::string& wif_name_)
 : wif_trace(name_, wif_name_), object(object_), old_value(object_.length())
 {
     old_value = object;
@@ -604,8 +604,8 @@ void wif_sc_uint_base_trace::set_width()
 class wif_sc_int_base_trace: public wif_trace {
 public:
     wif_sc_int_base_trace(const sc_dt::sc_int_base& object_,
-			  const std::string& name_,
-			  const std::string& wif_name_);
+                          const std::string& name_,
+                          const std::string& wif_name_);
     void write(FILE* f) override;
     bool changed() override;
     void set_width() override;
@@ -617,8 +617,8 @@ protected:
 
 
 wif_sc_int_base_trace::wif_sc_int_base_trace(const sc_dt::sc_int_base& object_,
-					     const std::string& name_,
-					     const std::string& wif_name_)
+                                             const std::string& name_,
+                                             const std::string& wif_name_)
 : wif_trace(name_, wif_name_), object(object_), old_value(object_.length())
 {
     old_value = object;
@@ -658,8 +658,8 @@ class wif_sc_fxval_trace: public wif_trace
 public:
 
     wif_sc_fxval_trace( const sc_dt::sc_fxval& object_,
-			const std::string& name_,
-			const std::string& wif_name_ );
+                        const std::string& name_,
+                        const std::string& wif_name_ );
     void write( FILE* f ) override;
     bool changed() override;
 
@@ -671,8 +671,8 @@ protected:
 };
 
 wif_sc_fxval_trace::wif_sc_fxval_trace( const sc_dt::sc_fxval& object_,
-				        const std::string& name_,
-					const std::string& wif_name_ )
+                                        const std::string& name_,
+                                        const std::string& wif_name_ )
 : wif_trace( name_, wif_name_ ), object( object_ ), old_value( object_ )
 {
     bit_width = 0;
@@ -699,8 +699,8 @@ class wif_sc_fxval_fast_trace: public wif_trace
 public:
 
     wif_sc_fxval_fast_trace( const sc_dt::sc_fxval_fast& object_,
-			     const std::string& name_,
-			     const std::string& wif_name_ );
+                             const std::string& name_,
+                             const std::string& wif_name_ );
     void write( FILE* f ) override;
     bool changed() override;
 
@@ -713,8 +713,8 @@ protected:
 
 wif_sc_fxval_fast_trace::wif_sc_fxval_fast_trace(
                                 const sc_dt::sc_fxval_fast& object_,
-				const std::string& name_,
-				const std::string& wif_name_ )
+                                const std::string& name_,
+                                const std::string& wif_name_ )
 : wif_trace(name_, wif_name_), object( object_ ), old_value( object_ )
 {
     bit_width = 0;
@@ -741,8 +741,8 @@ class wif_sc_fxnum_trace: public wif_trace
 public:
 
     wif_sc_fxnum_trace( const sc_dt::sc_fxnum& object_,
-			const std::string& name_,
-			const std::string& wif_name_ );
+                        const std::string& name_,
+                        const std::string& wif_name_ );
     void write( FILE* f ) override;
     bool changed() override;
     void set_width() override;
@@ -755,14 +755,14 @@ protected:
 };
 
 wif_sc_fxnum_trace::wif_sc_fxnum_trace( const sc_dt::sc_fxnum& object_,
-				        const std::string& name_,
-					const std::string& wif_name_ )
+                                        const std::string& name_,
+                                        const std::string& wif_name_ )
 : wif_trace( name_, wif_name_ ),
   object( object_ ),
   old_value( object_.m_params.type_params(),
-	     object_.m_params.enc(),
-	     object_.m_params.cast_switch(),
-	     nullptr )
+             object_.m_params.enc(),
+             object_.m_params.cast_switch(),
+             nullptr )
 {
     old_value = object;
     wif_type = "BIT";
@@ -809,8 +809,8 @@ class wif_sc_fxnum_fast_trace: public wif_trace
 public:
 
     wif_sc_fxnum_fast_trace( const sc_dt::sc_fxnum_fast& object_,
-			     const std::string& name_,
-			     const std::string& wif_name_ );
+                             const std::string& name_,
+                             const std::string& wif_name_ );
     void write( FILE* f ) override;
     bool changed() override;
     void set_width() override;
@@ -823,15 +823,15 @@ protected:
 };
 
 wif_sc_fxnum_fast_trace::wif_sc_fxnum_fast_trace(
-				const sc_dt::sc_fxnum_fast& object_,
-				const std::string& name_,
-				const std::string& wif_name_ )
+                                const sc_dt::sc_fxnum_fast& object_,
+                                const std::string& name_,
+                                const std::string& wif_name_ )
 : wif_trace( name_, wif_name_ ),
   object( object_ ),
   old_value( object_.m_params.type_params(),
-	     object_.m_params.enc(),
-	     object_.m_params.cast_switch(),
-	     nullptr )
+             object_.m_params.enc(),
+             object_.m_params.cast_switch(),
+             nullptr )
 {
     old_value = object;
     wif_type = "BIT";
@@ -877,8 +877,8 @@ wif_sc_fxnum_fast_trace::set_width()
 class wif_unsigned_int_trace: public wif_trace {
 public:
     wif_unsigned_int_trace(const unsigned& object_,
-			   const std::string& name_,
-			   const std::string& wif_name_, int width_);
+                           const std::string& name_,
+                           const std::string& wif_name_, int width_);
     void write(FILE* f) override;
     bool changed() override;
 
@@ -890,9 +890,9 @@ protected:
 
 
 wif_unsigned_int_trace::wif_unsigned_int_trace(const unsigned& object_,
-					   const std::string& name_,
-					   const std::string& wif_name_,
-					   int width_)
+                                           const std::string& name_,
+                                           const std::string& wif_name_,
+                                           int width_)
 : wif_trace(name_, wif_name_), object(object_), old_value(object_),
   mask(~0U)
 {
@@ -940,9 +940,9 @@ void wif_unsigned_int_trace::write(FILE* f)
 class wif_unsigned_short_trace: public wif_trace {
 public:
     wif_unsigned_short_trace(const unsigned short& object_,
-			     const std::string& name_,
-			     const std::string& wif_name_,
-			     int width_);
+                             const std::string& name_,
+                             const std::string& wif_name_,
+                             int width_);
     void write(FILE* f) override;
     bool changed() override;
 
@@ -954,7 +954,7 @@ protected:
 
 
 wif_unsigned_short_trace::wif_unsigned_short_trace(
-	const unsigned short& object_,
+        const unsigned short& object_,
        const std::string& name_,
        const std::string& wif_name_,
        int width_)
@@ -1003,9 +1003,9 @@ void wif_unsigned_short_trace::write(FILE* f)
 class wif_unsigned_char_trace: public wif_trace {
 public:
     wif_unsigned_char_trace(const unsigned char& object_,
-			    const std::string& name_,
-			    const std::string& wif_name_,
-			    int width_);
+                            const std::string& name_,
+                            const std::string& wif_name_,
+                            int width_);
     void write(FILE* f) override;
     bool changed() override;
 
@@ -1017,9 +1017,9 @@ protected:
 
 
 wif_unsigned_char_trace::wif_unsigned_char_trace(const unsigned char& object_,
-					 const std::string& name_,
-					 const std::string& wif_name_,
-					 int width_)
+                                         const std::string& name_,
+                                         const std::string& wif_name_,
+                                         int width_)
 : wif_trace(name_, wif_name_), object(object_), old_value(object_), mask(static_cast<unsigned char>(~0U))
 {
     bit_width = width_;
@@ -1065,9 +1065,9 @@ void wif_unsigned_char_trace::write(FILE* f)
 class wif_unsigned_long_trace: public wif_trace {
 public:
     wif_unsigned_long_trace(const unsigned long& object_,
-			    const std::string& name_,
-			    const std::string& wif_name_,
-			    int width_);
+                            const std::string& name_,
+                            const std::string& wif_name_,
+                            int width_);
     void write(FILE* f) override;
     bool changed() override;
 
@@ -1079,9 +1079,9 @@ protected:
 
 
 wif_unsigned_long_trace::wif_unsigned_long_trace(const unsigned long& object_,
-					     const std::string& name_,
-					     const std::string& wif_name_,
-					     int width_)
+                                             const std::string& name_,
+                                             const std::string& wif_name_,
+                                             int width_)
 : wif_trace(name_, wif_name_), object(object_), old_value(object_),
   mask(~0UL)
 {
@@ -1128,9 +1128,9 @@ void wif_unsigned_long_trace::write(FILE* f)
 class wif_signed_int_trace: public wif_trace {
 public:
     wif_signed_int_trace(const int& object_,
-			 const std::string& name_,
-			 const std::string& wif_name_,
-			 int width_);
+                         const std::string& name_,
+                         const std::string& wif_name_,
+                         int width_);
     void write(FILE* f) override;
     bool changed() override;
 
@@ -1142,9 +1142,9 @@ protected:
 
 
 wif_signed_int_trace::wif_signed_int_trace(const signed& object_,
-					   const std::string& name_,
-					   const std::string& wif_name_,
-					   int width_)
+                                           const std::string& name_,
+                                           const std::string& wif_name_,
+                                           int width_)
 : wif_trace(name_, wif_name_), object(object_), old_value(object_),
   rem_bits(32 - width_)
 {
@@ -1187,9 +1187,9 @@ void wif_signed_int_trace::write(FILE* f)
 class wif_signed_short_trace: public wif_trace {
 public:
     wif_signed_short_trace(const short& object_,
-			   const std::string& name_,
-			   const std::string& wif_name_,
-			   int width_);
+                           const std::string& name_,
+                           const std::string& wif_name_,
+                           int width_);
     void write(FILE* f) override;
     bool changed() override;
 
@@ -1201,9 +1201,9 @@ protected:
 
 
 wif_signed_short_trace::wif_signed_short_trace(const short& object_,
-					   const std::string& name_,
-					   const std::string& wif_name_,
-					   int width_)
+                                           const std::string& name_,
+                                           const std::string& wif_name_,
+                                           int width_)
 : wif_trace(name_, wif_name_), object(object_), old_value(object_), rem_bits(32 - width_) 
 {
     bit_width = width_;
@@ -1245,9 +1245,9 @@ void wif_signed_short_trace::write(FILE* f)
 class wif_signed_char_trace: public wif_trace {
 public:
     wif_signed_char_trace(const char& object_,
-			  const std::string& name_,
-			  const std::string& wif_name_,
-			  int width_);
+                          const std::string& name_,
+                          const std::string& wif_name_,
+                          int width_);
     void write(FILE* f) override;
     bool changed() override;
 
@@ -1259,9 +1259,9 @@ protected:
 
 
 wif_signed_char_trace::wif_signed_char_trace(const char& object_,
-					     const std::string& name_,
-					     const std::string& wif_name_,
-					     int width_)
+                                             const std::string& name_,
+                                             const std::string& wif_name_,
+                                             int width_)
 : wif_trace(name_, wif_name_), object(object_), old_value(object_), rem_bits(32 - width_) 
 {
     bit_width = width_;
@@ -1303,9 +1303,9 @@ void wif_signed_char_trace::write(FILE* f)
 class wif_signed_long_trace: public wif_trace {
 public:
     wif_signed_long_trace(const long& object_,
-			  const std::string& name_,
-			  const std::string& wif_name_,
-			  int width_);
+                          const std::string& name_,
+                          const std::string& wif_name_,
+                          int width_);
     void write(FILE* f) override;
     bool changed() override;
 
@@ -1317,9 +1317,9 @@ protected:
 
 
 wif_signed_long_trace::wif_signed_long_trace(const long& object_,
-					     const std::string& name_,
-					     const std::string& wif_name_,
-					     int width_)
+                                             const std::string& name_,
+                                             const std::string& wif_name_,
+                                             int width_)
 : wif_trace(name_, wif_name_), object(object_), old_value(object_),
   rem_bits(std::numeric_limits<unsigned long>::digits - width_)
 {
@@ -1362,8 +1362,8 @@ void wif_signed_long_trace::write(FILE* f)
 class wif_float_trace: public wif_trace {
 public:
     wif_float_trace(const float& object_,
-		    const std::string& name_,
-		    const std::string& wif_name_);
+                    const std::string& name_,
+                    const std::string& wif_name_);
     void write(FILE* f) override;
     bool changed() override;
 
@@ -1373,8 +1373,8 @@ protected:
 };
 
 wif_float_trace::wif_float_trace(const float& object_,
-				 const std::string& name_,
-				 const std::string& wif_name_)
+                                 const std::string& name_,
+                                 const std::string& wif_name_)
 : wif_trace(name_, wif_name_), object(object_), old_value(object_)
 {
     bit_width = 0;
@@ -1397,8 +1397,8 @@ void wif_float_trace::write(FILE* f)
 class wif_double_trace: public wif_trace {
 public:
     wif_double_trace(const double& object_,
-		     const std::string& name_,
-		     const std::string& wif_name_);
+                     const std::string& name_,
+                     const std::string& wif_name_);
     void write(FILE* f) override;
     bool changed() override;
 
@@ -1408,8 +1408,8 @@ protected:
 };
 
 wif_double_trace::wif_double_trace(const double& object_,
-				   const std::string& name_,
-				   const std::string& wif_name_)
+                                   const std::string& name_,
+                                   const std::string& wif_name_)
 : wif_trace(name_, wif_name_), object(object_), old_value(object_)
 {
     bit_width = 0;
@@ -1433,9 +1433,9 @@ void wif_double_trace::write(FILE* f)
 class wif_enum_trace : public wif_trace {
 public:
     wif_enum_trace(const unsigned& object_,
-		   const std::string& name_,
-		   const std::string& wif_name_,
-		   const char** enum_literals);
+                   const std::string& name_,
+                   const std::string& wif_name_,
+                   const char** enum_literals);
     void write(FILE* f) override;
     bool changed() override;
     // Hides the definition of the same (virtual) function in wif_trace
@@ -1454,9 +1454,9 @@ protected:
 
 
 wif_enum_trace::wif_enum_trace(const unsigned& object_,
-			       const std::string& name_,
-			       const std::string& wif_name_,
-			       const char** enum_literals_)
+                               const std::string& name_,
+                               const std::string& wif_name_,
+                               const char** enum_literals_)
 : wif_trace(name_, wif_name_), object(object_), old_value(object_),
   literals(enum_literals_), nliterals(0), type_name(name_ + "__type__")
 {
@@ -1476,7 +1476,7 @@ void wif_enum_trace::print_variable_declaration_line(FILE* f)
     std::fprintf(f, "\"SC_WIF_UNDEF\" ;\n");
 
     std::fprintf(f, R"(declare  %s   "%s"  "%s" )",
-	    wif_name.c_str(), name.c_str(), wif_type);
+            wif_name.c_str(), name.c_str(), wif_type);
     std::fprintf(f, "variable ;\n");
     std::fprintf(f, "start_trace %s ;\n", wif_name.c_str());
 }
@@ -1520,9 +1520,9 @@ class wif_T_trace
 public:
 
     wif_T_trace( const T& object_,
-		 const std::string& name_,
-		 const std::string& wif_name_,
-		 wif_trace_file::wif_enum type_ )
+                 const std::string& name_,
+                 const std::string& wif_name_,
+                 wif_trace_file::wif_enum type_ )
     : wif_trace( name_, wif_name_),
       object( object_ ),
       old_value( object_ )
@@ -1531,9 +1531,9 @@ public:
     void write( FILE* f ) override
     {
        std::fprintf( f,
-		"assign %s \"%s\" ;\n",
-		wif_name.c_str(),
-		object.to_string().c_str() );
+                "assign %s \"%s\" ;\n",
+                wif_name.c_str(),
+                object.to_string().c_str() );
        old_value = object;
     }
 
@@ -1741,8 +1741,8 @@ DEFN_TRACE_METHOD_LONG_LONG(uint64)
 
 void
 wif_trace_file::trace( const unsigned& object_,
-		       const std::string& name_,
-		       const char** enum_literals_ )
+                       const std::string& name_,
+                       const char** enum_literals_ )
 {
     if( add_trace_check(name_) )
         traces.push_back( new wif_enum_trace( object_,

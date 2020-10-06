@@ -68,8 +68,8 @@
     { \
         if ( P && ( (std::strlen(NAME)==0) || !std::strcmp(NAME,P->name())) ) \
           std::cout << "**** " << sc_time_stamp() << " ("  \
-	            << sc_get_current_process_name("** NONE **") << "): " << MSG \
-		    << " - " << P->name() << std::endl; \
+                    << sc_get_current_process_name("** NONE **") << "): " << MSG \
+                    << " - " << P->name() << std::endl; \
     }
 #else
 #   define DEBUG_MSG(NAME,P,MSG) 

@@ -217,9 +217,9 @@ void*
 sc_plist_base::front() const
 {
 
-   if (head) {			
+   if (head) {                        
         return head->data;
-    }				
+    }                                
           SC_REPORT_ERROR( SC_ID_FRONT_ON_EMPTY_LIST_ , nullptr );
       // never reached
       return nullptr;

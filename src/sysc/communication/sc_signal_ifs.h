@@ -76,7 +76,7 @@ protected:
     // constructor
 
     sc_signal_in_if()
-	{}
+        {}
 
 private:
 
@@ -132,7 +132,7 @@ protected:
     // constructor
 
     sc_signal_in_if()
-	{}
+        {}
 
 private:
 
@@ -190,14 +190,14 @@ protected:
     // constructor
 
     sc_signal_in_if()
-	{}
+        {}
 
 private:
 
     // disabled
     sc_signal_in_if( const sc_signal_in_if<sc_dt::sc_logic>& );
     sc_signal_in_if<sc_dt::sc_logic>& operator = (
-	const sc_signal_in_if<sc_dt::sc_logic>& );
+        const sc_signal_in_if<sc_dt::sc_logic>& );
 };
 
 
@@ -238,7 +238,7 @@ protected:
     // constructor
 
     sc_signal_inout_if()
-	{}
+        {}
 
 private:
 

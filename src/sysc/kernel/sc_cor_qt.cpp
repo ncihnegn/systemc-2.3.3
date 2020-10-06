@@ -70,9 +70,9 @@ sc_cor_qt::stack_protect( bool enable )
 
     if( pagesize == 0 ) {
 #       if defined(__ppc__)
-	    pagesize = getpagesize();
+            pagesize = getpagesize();
 #       else
-	    pagesize = sysconf( _SC_PAGESIZE );
+            pagesize = sysconf( _SC_PAGESIZE );
 #       endif
     }
 
@@ -82,12 +82,12 @@ sc_cor_qt::stack_protect( bool enable )
 #ifdef QUICKTHREADS_GROW_DOWN
     // Stacks grow from high address down to low address
     auto *redzone = caddr_t( ( ( std::size_t( m_stack ) + pagesize - 1 ) /
-				 pagesize ) * pagesize );
+                                 pagesize ) * pagesize );
 #else
     // Stacks grow from low address up to high address
     caddr_t redzone = caddr_t( ( ( std::size_t( m_stack ) +
-				   m_stack_size - pagesize ) /
-				 pagesize ) * pagesize );
+                                   m_stack_size - pagesize ) /
+                                 pagesize ) * pagesize );
 #endif
 
     int ret;
@@ -139,9 +139,9 @@ sc_cor_pkg_qt::sc_cor_pkg_qt( sc_simcontext* simc )
 : sc_cor_pkg( simc )
 {
     if( ++ instance_count == 1 ) {
-	// initialize the current coroutine
-	sc_assert( curr_cor == nullptr );
-	curr_cor = &main_cor;
+        // initialize the current coroutine
+        sc_assert( curr_cor == nullptr );
+        curr_cor = &main_cor;
     }
 }
 
@@ -151,8 +151,8 @@ sc_cor_pkg_qt::sc_cor_pkg_qt( sc_simcontext* simc )
 sc_cor_pkg_qt::~sc_cor_pkg_qt()
 {
     if( -- instance_count == 0 ) {
-	// cleanup the current coroutine
-	curr_cor = nullptr;
+        // cleanup the current coroutine
+        curr_cor = nullptr;
     }
 }
 
@@ -180,7 +180,7 @@ sc_cor_pkg_qt::create( std::size_t stack_size, sc_cor_fn* fn, void* arg )
                              &cor->m_stack_size );
     cor->m_sp = QUICKTHREADS_SP(sto, cor->m_stack_size - QUICKTHREADS_STKALIGN);
     cor->m_sp = QUICKTHREADS_ARGS( cor->m_sp, arg, cor, (qt_userf_t*) fn,
-			           sc_cor_qt_wrapper );
+                                   sc_cor_qt_wrapper );
     return cor;
 }
 

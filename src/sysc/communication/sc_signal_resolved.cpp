@@ -72,8 +72,8 @@ sc_logic_resolve( sc_dt::sc_logic& result_,
     sc_assert( sz != 0 );
 
     if( sz == 1 ) {
-	result_ = values_[0];
-	return;
+        result_ = values_[0];
+        return;
     }
 
     sc_dt::sc_logic_value_t res = values_[0].value();
@@ -101,24 +101,24 @@ sc_signal_resolved::write( const value_type& value_ )
     bool found = false;
     
     for( int i = m_proc_vec.size() - 1; i >= 0; -- i ) {
-	if( cur_proc == m_proc_vec[i] ) {
-	    if( value_ != m_val_vec[i] ) {
-		m_val_vec[i] = value_;
-		value_changed = true;
-	    }
-	    found = true;
-	    break;
-	}
+        if( cur_proc == m_proc_vec[i] ) {
+            if( value_ != m_val_vec[i] ) {
+                m_val_vec[i] = value_;
+                value_changed = true;
+            }
+            found = true;
+            break;
+        }
     }
     
     if( ! found ) {
-	m_proc_vec.push_back( cur_proc );
-	m_val_vec.push_back( value_ );
-	value_changed = true;
+        m_proc_vec.push_back( cur_proc );
+        m_val_vec.push_back( value_ );
+        value_changed = true;
     }
     
     if( value_changed ) {
-	request_update();
+        request_update();
     }
 }
 

@@ -99,13 +99,13 @@ class SC_API sc_module
     friend class sc_module_registry;
     friend class sc_object;
     friend class sc_port_registry;
-	friend class sc_process_b;
+        friend class sc_process_b;
     friend class sc_simcontext;
 
 public:
 
     sc_simcontext* sc_get_curr_simcontext()
-	{ return simcontext(); }
+        { return simcontext(); }
 
     // to generate unique names for objects in an MT-Safe way
     const char* gen_unique_name( const char* basename_, bool preserve_first );
@@ -199,10 +199,10 @@ protected:
         { ::sc_core::wait( e, simcontext() ); }
 
     void wait( const sc_event_or_list& el )
-	{ ::sc_core::wait( el, simcontext() ); }
+        { ::sc_core::wait( el, simcontext() ); }
 
     void wait( const sc_event_and_list& el )
-	{ ::sc_core::wait( el, simcontext() ); }
+        { ::sc_core::wait( el, simcontext() ); }
 
     void wait( const sc_time& t )
         { ::sc_core::wait( t, simcontext() ); }
@@ -215,7 +215,7 @@ protected:
 
     void wait( double v, sc_time_unit tu, const sc_event& e )
         { ::sc_core::wait( 
-		sc_time( v, tu, simcontext() ), e, simcontext() ); }
+                sc_time( v, tu, simcontext() ), e, simcontext() ); }
 
     void wait( const sc_time& t, const sc_event_or_list& el )
         { ::sc_core::wait( t, el, simcontext() ); }
@@ -233,7 +233,7 @@ protected:
     // static sensitivity for SC_METHODs
 
     void next_trigger()
-	{ ::sc_core::next_trigger( simcontext() ); }
+        { ::sc_core::next_trigger( simcontext() ); }
 
 
     // dynamic sensitivty for SC_METHODs
@@ -252,28 +252,28 @@ protected:
 
     void next_trigger( double v, sc_time_unit tu )
         { ::sc_core::next_trigger( 
-	    sc_time( v, tu, simcontext() ), simcontext() ); }
+            sc_time( v, tu, simcontext() ), simcontext() ); }
 
     void next_trigger( const sc_time& t, const sc_event& e )
         { ::sc_core::next_trigger( t, e, simcontext() ); }
 
     void next_trigger( double v, sc_time_unit tu, const sc_event& e )
         { ::sc_core::next_trigger( 
-		sc_time( v, tu, simcontext() ), e, simcontext() ); }
+                sc_time( v, tu, simcontext() ), e, simcontext() ); }
 
     void next_trigger( const sc_time& t, const sc_event_or_list& el )
         { ::sc_core::next_trigger( t, el, simcontext() ); }
 
     void next_trigger( double v, sc_time_unit tu, const sc_event_or_list& el )
         { ::sc_core::next_trigger( 
-	    sc_time( v, tu, simcontext() ), el, simcontext() ); }
+            sc_time( v, tu, simcontext() ), el, simcontext() ); }
 
     void next_trigger( const sc_time& t, const sc_event_and_list& el )
         { ::sc_core::next_trigger( t, el, simcontext() ); }
 
     void next_trigger( double v, sc_time_unit tu, const sc_event_and_list& el )
         { ::sc_core::next_trigger( 
-	    sc_time( v, tu, simcontext() ), el, simcontext() ); }
+            sc_time( v, tu, simcontext() ), el, simcontext() ); }
 
 
     // for SC_METHODs and SC_THREADs and SC_CTHREADs
@@ -291,16 +291,16 @@ protected:
         { ::sc_core::wait( n, simcontext() ); }
 
     void at_posedge( const sc_signal_in_if<bool>& s )
-	{ ::sc_core::at_posedge( s, simcontext() ); }
+        { ::sc_core::at_posedge( s, simcontext() ); }
 
     void at_posedge( const sc_signal_in_if<sc_dt::sc_logic>& s )
-	{ ::sc_core::at_posedge( s, simcontext() ); }
+        { ::sc_core::at_posedge( s, simcontext() ); }
 
     void at_negedge( const sc_signal_in_if<bool>& s )
-	{ ::sc_core::at_negedge( s, simcontext() ); }
+        { ::sc_core::at_negedge( s, simcontext() ); }
 
     void at_negedge( const sc_signal_in_if<sc_dt::sc_logic>& s )
-	{ ::sc_core::at_negedge( s, simcontext() ); }
+        { ::sc_core::at_negedge( s, simcontext() ); }
 
     // Catch uses of watching:
     void watching( bool /* expr */ )
@@ -335,69 +335,69 @@ public:
     // positional binding methods (cont'd)
 
     void operator () ( const sc_bind_proxy& p001,
-		       const sc_bind_proxy& p002 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p003 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p004 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p005 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p006 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p007 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p008 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p009 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p010 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p011 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p012 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p013 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p014 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p015 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p016 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p017 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p018 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p019 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p020 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p021 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p022 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p023 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p024 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p025 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p026 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p027 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p028 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p029 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p030 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p031 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p032 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p033 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p034 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p035 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p036 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p037 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p038 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p039 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p040 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p041 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p042 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p043 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p044 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p045 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p046 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p047 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p048 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p049 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p050 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p051 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p052 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p053 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p054 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p055 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p056 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p057 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p058 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p059 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p060 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p061 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p062 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p063 = SC_BIND_PROXY_NIL,
-		       const sc_bind_proxy& p064 = SC_BIND_PROXY_NIL );
+                       const sc_bind_proxy& p002 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p003 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p004 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p005 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p006 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p007 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p008 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p009 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p010 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p011 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p012 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p013 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p014 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p015 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p016 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p017 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p018 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p019 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p020 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p021 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p022 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p023 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p024 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p025 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p026 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p027 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p028 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p029 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p030 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p031 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p032 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p033 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p034 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p035 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p036 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p037 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p038 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p039 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p040 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p041 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p042 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p043 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p044 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p045 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p046 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p047 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p048 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p049 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p050 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p051 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p052 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p053 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p054 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p055 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p056 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p057 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p058 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p059 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p060 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p061 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p062 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p063 = SC_BIND_PROXY_NIL,
+                       const sc_bind_proxy& p064 = SC_BIND_PROXY_NIL );
 
 };
 
@@ -430,11 +430,11 @@ extern SC_API sc_module* sc_module_dynalloc(sc_module*);
 // class A : public B<X>
 
 #define declare_method_process(handle, name, host_tag, func)        \
-    {		                                                    \
+    {                                                                    \
         ::sc_core::sc_process_handle handle =                      \
-	    sc_core::sc_get_curr_simcontext()->create_method_process( \
-		name,  false, SC_MAKE_FUNC_PTR( host_tag, func ), \
-		this, 0 ); \
+            sc_core::sc_get_curr_simcontext()->create_method_process( \
+                name,  false, SC_MAKE_FUNC_PTR( host_tag, func ), \
+                this, 0 ); \
         this->sensitive << handle;                                        \
         this->sensitive_pos << handle;                                    \
         this->sensitive_neg << handle;                                    \
@@ -443,7 +443,7 @@ extern SC_API sc_module* sc_module_dynalloc(sc_module*);
 #define declare_thread_process(handle, name, host_tag, func)        \
     {                                                               \
         ::sc_core::sc_process_handle handle =                      \
-	     sc_core::sc_get_curr_simcontext()->create_thread_process( \
+             sc_core::sc_get_curr_simcontext()->create_thread_process( \
                  name,  false,           \
                  SC_MAKE_FUNC_PTR( host_tag, func ), this, 0 ); \
         this->sensitive << handle;                                        \
@@ -454,7 +454,7 @@ extern SC_API sc_module* sc_module_dynalloc(sc_module*);
 #define declare_cthread_process(handle, name, host_tag, func, edge) \
     {                                                               \
         ::sc_core::sc_process_handle handle =                     \
-	     sc_core::sc_get_curr_simcontext()->create_cthread_process( \
+             sc_core::sc_get_curr_simcontext()->create_cthread_process( \
             name,  false,          \
                      SC_MAKE_FUNC_PTR( host_tag, func ), this, 0 ); \
         this->sensitive.operator() ( handle, edge );\

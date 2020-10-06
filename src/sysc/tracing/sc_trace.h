@@ -94,12 +94,12 @@ public:
 
 #define DECL_TRACE_METHOD_A(tp)                                               \
     virtual void trace( const tp& object,                                     \
-			const std::string& name ) = 0;
+                        const std::string& name ) = 0;
 
 #define DECL_TRACE_METHOD_B(tp)                                               \
     virtual void trace( const tp& object,                                     \
-			const std::string& name,                                     \
-			int width ) = 0;
+                        const std::string& name,                                     \
+                        int width ) = 0;
 
 
     DECL_TRACE_METHOD_A( sc_event )
@@ -143,8 +143,8 @@ public:
     // literals in the trace file. Enum literals is a null terminated array
     // of null terminated char* literal strings.
     virtual void trace( const unsigned int& object,
-			const std::string& name,
-			const char** enum_literals ) = 0;
+                        const std::string& name,
+                        const char** enum_literals ) = 0;
 
     // Output a comment to the trace file
     virtual void write_comment( const std::string& comment ) = 0;
@@ -169,7 +169,7 @@ protected:
 
     // Flush results and close file
     virtual ~sc_trace_file()
-	{ /* Intentionally blank */ }
+        { /* Intentionally blank */ }
 };
 
 /*****************************************************************************/
@@ -182,14 +182,14 @@ protected:
 #define DECL_TRACE_FUNC_REF_A(tp)     \
 SC_API void                           \
 sc_trace( sc_trace_file* tf,          \
-	  const tp& object,               \
-	  const std::string& name );
+          const tp& object,               \
+          const std::string& name );
 
 #define DECL_TRACE_FUNC_PTR_A(tp)     \
 SC_API void                           \
 sc_trace( sc_trace_file* tf,          \
-	  const tp* object,               \
-	  const std::string& name );      \
+          const tp* object,               \
+          const std::string& name );      \
 
 #define DECL_TRACE_FUNC_A(tp)         \
 DECL_TRACE_FUNC_REF_A(tp)             \
@@ -262,8 +262,8 @@ template <class T>
 inline
 void
 sc_trace( sc_trace_file* tf,
-	  const sc_signal_in_if<T>& object,
-	  const std::string& name )
+          const sc_signal_in_if<T>& object,
+          const std::string& name )
 {
     sc_trace( tf, object.read(), name );
 }
@@ -272,8 +272,8 @@ template< class T >
 inline
 void
 sc_trace( sc_trace_file* tf,
-	  const sc_signal_in_if<T>& object,
-	  const char* name )
+          const sc_signal_in_if<T>& object,
+          const char* name )
 {
     sc_trace( tf, object.read(), name );
 }
@@ -282,24 +282,24 @@ sc_trace( sc_trace_file* tf,
 // specializations for signals of type char, short, int, long
 
 SC_API void sc_trace( sc_trace_file* tf,
-	       const sc_signal_in_if<char>& object,
-	       const std::string& name,
-	       int width );
+               const sc_signal_in_if<char>& object,
+               const std::string& name,
+               int width );
 
 SC_API void sc_trace( sc_trace_file* tf,
-	       const sc_signal_in_if<short>& object,
-	       const std::string& name,
-	       int width );
+               const sc_signal_in_if<short>& object,
+               const std::string& name,
+               int width );
 
 SC_API void sc_trace( sc_trace_file* tf,
-	       const sc_signal_in_if<int>& object,
-	       const std::string& name,
-	       int width );
+               const sc_signal_in_if<int>& object,
+               const std::string& name,
+               int width );
 
 SC_API void sc_trace( sc_trace_file* tf,
-	       const sc_signal_in_if<long>& object,
-	       const std::string& name,
-	       int width );
+               const sc_signal_in_if<long>& object,
+               const std::string& name,
+               int width );
 
 
 // 1. non-template function is better than template
@@ -313,16 +313,16 @@ SC_API void sc_trace( sc_trace_file* tf,
 
 SC_API void
 sc_trace( sc_trace_file* tf,
-	  const unsigned int& object,
-	  const std::string& name,
-	  const char** enum_literals );
+          const unsigned int& object,
+          const std::string& name,
+          const char** enum_literals );
 
 
 // Dummy function for arbitrary types of value, does nothing
 
 extern SC_API void sc_trace( sc_trace_file* tf,
-		      const void* object,
-		      const std::string& name );
+                      const void* object,
+                      const std::string& name );
 
 
 // Turn on/off delta cycle tracing on trace file `tf'.

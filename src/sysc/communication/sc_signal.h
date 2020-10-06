@@ -204,7 +204,7 @@ public:
 
     // read the current value
     virtual const T& read() const
-	{ return m_cur_val; }
+        { return m_cur_val; }
 
     // get a reference to the current value (for tracing)
     virtual const T& get_data_ref() const
@@ -224,7 +224,7 @@ public:
     // other methods
 
     operator const T& () const
-	{ return read(); }
+        { return read(); }
 
 
     // assignment
@@ -246,14 +246,14 @@ public:
 
 
     void trace( sc_trace_file* tf ) const
-	{ 
+        { 
             deprecated_trace();
 #           ifdef DEBUG_SYSTEMC
-	        sc_trace( tf, read(), name() ); 
+                sc_trace( tf, read(), name() ); 
 #           else
                 if ( tf ) {}
-#	    endif
-	}
+#            endif
+        }
 
 
     virtual void print( ::std::ostream& = ::std::cout ) const;
@@ -630,7 +630,7 @@ private:
 //       methods, and operators to keep the Microsoft compiler happy.
 //   (2) Added delta_count() method to sc_prim_channel for use by
 //       sc_signal so that the friend declaration in sc_simcontext.h
-//	   can be for a non-templated class (i.e., sc_prim_channel.)
+//           can be for a non-templated class (i.e., sc_prim_channel.)
 //
 //Revision 1.12  2006/04/11 23:11:57  acg
 //  Andy Goodrich: Changes for reset support that only includes

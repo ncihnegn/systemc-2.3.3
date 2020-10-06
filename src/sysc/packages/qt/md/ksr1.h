@@ -35,7 +35,7 @@
    This is what we want on startup:
 
 
-   +------		<-- BOS: Bottom of stack (grows down)
+   +------                <-- BOS: Bottom of stack (grows down)
    | 80 (128 - 48) bytes of padding to a 128-byte boundary
    +---
    | only
@@ -43,8 +43,8 @@
    | t
    | u
    | qt_start$TXT
-   | (empty)     	<-- qt.sp
-   +------		<-- (BOS - 128)
+   | (empty)             <-- qt.sp
+   +------                <-- (BOS - 128)
 
    This is why we want this on startup:
    
@@ -89,7 +89,7 @@
    On varargs startup (still unimplemented):
 
    | padding to 128 byte boundary
-   | varargs		<-- padded to a 128-byte-boundary
+   | varargs                <-- padded to a 128-byte-boundary
    +---
    | caller's frame, 16 bytes
    | 80 bytes of padding (frame padded to a 128-byte boundary)
@@ -99,7 +99,7 @@
    | startup
    | t
    +---
-   | qt_start		<-- qt.sp
+   | qt_start                <-- qt.sp
    +---
 
    Of a suspended thread:
@@ -112,18 +112,18 @@
    |  :
    | 80 bytes of padding
    |  :
-   | qt_restore		<-- qt.sp
+   | qt_restore                <-- qt.sp
    +---
 
    */
 
 
-#define QUICKTHREADS_STKALIGN	128
+#define QUICKTHREADS_STKALIGN        128
 #define QUICKTHREADS_GROW_DOWN
 typedef unsigned long qt_word_t;
 
-#define QUICKTHREADS_STKBASE	QUICKTHREADS_STKALIGN
-#define QUICKTHREADS_VSTKBASE	QUICKTHREADS_STKBASE
+#define QUICKTHREADS_STKBASE        QUICKTHREADS_STKALIGN
+#define QUICKTHREADS_VSTKBASE        QUICKTHREADS_STKBASE
 
 extern void qt_start(void);
 /*
@@ -134,16 +134,16 @@ extern void qt_start(void);
  * first word in a procedure's constant block.  That's how the manual
  * says it will be arranged.
  */
-#define QUICKTHREADS_ARGS_MD(sp)	(QUICKTHREADS_SPUT (sp, 1, ((qt_word_t *)qt_start)[0]))
+#define QUICKTHREADS_ARGS_MD(sp)        (QUICKTHREADS_SPUT (sp, 1, ((qt_word_t *)qt_start)[0]))
 
 /* 
  * The *index* (positive offset) of where to put each value.
  * See the picture of the stack above that explains the offsets.
  */
-#define QUICKTHREADS_ONLY_INDEX	(5)
-#define QUICKTHREADS_USER_INDEX	(4)
-#define QUICKTHREADS_ARGT_INDEX	(3)
-#define QUICKTHREADS_ARGU_INDEX	(2)
+#define QUICKTHREADS_ONLY_INDEX        (5)
+#define QUICKTHREADS_USER_INDEX        (4)
+#define QUICKTHREADS_ARGT_INDEX        (3)
+#define QUICKTHREADS_ARGU_INDEX        (2)
 
 #define QUICKTHREADS_VARGS_DEFAULT
 #define QUICKTHREADS_VARGS(sp, nb, vargs, pt, startup, vuserf, cleanup) \
@@ -154,11 +154,11 @@ extern void qt_start(void);
   ((qt_t *)(((char *)(sp)) - 4*8 - QUICKTHREADS_STKROUNDUP(vabytes)))
 
 extern void qt_vstart(void);
-#define QUICKTHREADS_VARGS_MD1(sp)	(QUICKTHREADS_SPUT (sp, 0, ((qt_word_t *)qt_vstart)[0]))
+#define QUICKTHREADS_VARGS_MD1(sp)        (QUICKTHREADS_SPUT (sp, 0, ((qt_word_t *)qt_vstart)[0]))
 
-#define QUICKTHREADS_VCLEANUP_INDEX	(4)
-#define QUICKTHREADS_VUSERF_INDEX		(3)
-#define QUICKTHREADS_VSTARTUP_INDEX	(2)
-#define QUICKTHREADS_VARGT_INDEX		(1)
+#define QUICKTHREADS_VCLEANUP_INDEX        (4)
+#define QUICKTHREADS_VUSERF_INDEX                (3)
+#define QUICKTHREADS_VSTARTUP_INDEX        (2)
+#define QUICKTHREADS_VARGT_INDEX                (1)
 
 #endif /* def QUICKTHREADS_KSR1_H */

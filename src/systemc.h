@@ -347,11 +347,11 @@ using namespace sc_core;
 #endif // !defined( __HP_aCC )
 
 #ifdef SC_USE_SC_STRING_OLD
-	using   sc_dt::sc_string_old;
-	typedef sc_dt::sc_string_old sc_string;
+        using   sc_dt::sc_string_old;
+        typedef sc_dt::sc_string_old sc_string;
 #endif
 #ifdef SC_USE_STD_STRING
-	typedef ::std::string sc_string;
+        typedef ::std::string sc_string;
 #endif
 
 #undef SC_NO_STDGETS_

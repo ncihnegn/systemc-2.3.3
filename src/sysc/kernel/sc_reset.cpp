@@ -115,8 +115,8 @@ void sc_reset::notify_processes()
     for ( process_i = 0; process_i < process_n; process_i++ )
     {
         entry_p = &m_targets[process_i];
-	active = ( entry_p->m_level == value );
-	entry_p->m_process_p->reset_changed( entry_p->m_async, active );
+        active = ( entry_p->m_level == value );
+        entry_p->m_process_p->reset_changed( entry_p->m_async, active );
     }
 }
 
@@ -158,13 +158,13 @@ void sc_reset::reconcile_resets(sc_reset_finder* reset_finder_q)
         }
         sc_assert( iface_p != nullptr );
         reset_p = iface_p->is_reset();
-	now_p->m_target_p->m_resets.push_back(reset_p);
-	reset_target.m_async = now_p->m_async;
-	reset_target.m_level = now_p->m_level;
-	reset_target.m_process_p = now_p->m_target_p;
-	reset_p->m_targets.push_back(reset_target);
-	if ( iface_p->read() == now_p->m_level ) // see note 1 above
-	    now_p->m_target_p->initially_in_reset( now_p->m_async );
+        now_p->m_target_p->m_resets.push_back(reset_p);
+        reset_target.m_async = now_p->m_async;
+        reset_target.m_level = now_p->m_level;
+        reset_target.m_process_p = now_p->m_target_p;
+        reset_p->m_targets.push_back(reset_target);
+        if ( iface_p->read() == now_p->m_level ) // see note 1 above
+            now_p->m_target_p->initially_in_reset( now_p->m_async );
         delete now_p;
     }
 }
@@ -190,13 +190,13 @@ void sc_reset::remove_process( sc_process_b* process_p )
         if ( m_targets[process_i].m_process_p == process_p )
         {
             m_targets[process_i] = m_targets[process_n-1];
-	    process_n--;
+            process_n--;
             m_targets.resize(process_n);
         }
-	else
-	{
-	    process_i++;
-	}
+        else
+        {
+            process_i++;
+        }
     }
 }
 
@@ -324,13 +324,13 @@ void sc_reset::reset_signal_is(
       case SC_METHOD_PROC_:
       case SC_CTHREAD_PROC_:
       case SC_THREAD_PROC_:
-	reset_p = iface.is_reset();
-	process_p->m_resets.push_back(reset_p);
+        reset_p = iface.is_reset();
+        process_p->m_resets.push_back(reset_p);
         reset_target.m_async = async;
-	reset_target.m_level = level;
-	reset_target.m_process_p = process_p;
-	reset_p->m_targets.push_back(reset_target);
-	if ( iface.read() == level ) process_p->initially_in_reset( async );
+        reset_target.m_level = level;
+        reset_target.m_process_p = process_p;
+        reset_p->m_targets.push_back(reset_target);
+        if ( iface.read() == level ) process_p->initially_in_reset( async );
         break;
       default:
         SC_REPORT_ERROR(SC_ID_UNKNOWN_PROCESS_TYPE_, process_p->name());

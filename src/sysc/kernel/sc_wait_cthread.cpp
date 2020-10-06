@@ -52,12 +52,12 @@ halt( sc_simcontext* simc )
     sc_curr_proc_handle cpi = simc->get_curr_proc_info();
     switch( cpi->kind ) {
     case SC_CTHREAD_PROC_: {
-	reinterpret_cast<sc_cthread_handle>( cpi->process_handle )->wait_halt();
-	break;
+        reinterpret_cast<sc_cthread_handle>( cpi->process_handle )->wait_halt();
+        break;
     }
     default:
-	SC_REPORT_ERROR( SC_ID_HALT_NOT_ALLOWED_, nullptr );
-	break;
+        SC_REPORT_ERROR( SC_ID_HALT_NOT_ALLOWED_, nullptr );
+        break;
     }
 }
 
@@ -78,7 +78,7 @@ wait( int n, sc_simcontext* simc )
         break;
       default:
         SC_REPORT_ERROR( SC_ID_WAIT_NOT_ALLOWED_, "\n        "
-	                 "in SC_METHODs use next_trigger() instead" );
+                         "in SC_METHODs use next_trigger() instead" );
         break;
     }
 }

@@ -121,16 +121,16 @@ scfx_parse_sign( const char*& s, bool& sign_char )
     if( *s == '+' )
     {
         ++ s;
-	sign_char = true;
+        sign_char = true;
     }
     else if( *s == '-' )
     {
         sign = -1;
         ++ s;
-	sign_char = true;
+        sign_char = true;
     }
     else
-	sign_char = false;
+        sign_char = false;
 
     return sign;
 }
@@ -142,11 +142,11 @@ scfx_parse_prefix( const char*& s )
     if( s[0] == '0' ) {
         switch( s[1] )
         {
-	    case 'b':
-	    case 'B':
+            case 'b':
+            case 'B':
             {
-	        if( (s[2] == 'u' || s[2] == 'U') && (s[3] == 's' || s[3] == 'S') ) {
-		    s += 4;
+                if( (s[2] == 'u' || s[2] == 'U') && (s[3] == 's' || s[3] == 'S') ) {
+                    s += 4;
                     return SC_BIN_US;
                 }
                 if( (s[2] == 's' || s[2] == 'S') && (s[3] == 'm' || s[3] == 'M') ) {
@@ -156,9 +156,9 @@ scfx_parse_prefix( const char*& s )
                 s += 2;
                 return SC_BIN;
             }
-	    case 'o':
-	    case 'O':
-	    {
+            case 'o':
+            case 'O':
+            {
                 if( (s[2] == 'u' || s[2] == 'U') && (s[3] == 's' || s[3] == 'S') ) {
                     s += 4;
                     return SC_OCT_US;
@@ -170,8 +170,8 @@ scfx_parse_prefix( const char*& s )
                 s += 2;
                 return SC_OCT;
             }
-  	    case 'x':
-	    case 'X':
+              case 'x':
+            case 'X':
             {
                 if( (s[2] == 'u' || s[2] == 'U') && (s[3] == 's' || s[3] == 'S') ) {
                     s += 4;
@@ -184,14 +184,14 @@ scfx_parse_prefix( const char*& s )
                 s += 2;
                 return SC_HEX;
             }
-   	    case 'd':
-	    case 'D':
+               case 'd':
+            case 'D':
             {
                 s += 2;
                 return SC_DEC;
             }
-	    case 'c':
-	    case 'C':
+            case 'c':
+            case 'C':
             {
                 if( (s[2] == 's' || s[2] == 'S') && (s[3] == 'd' || s[3] == 'D') ) {
                     s += 4;
@@ -219,7 +219,7 @@ scfx_parse_base( const char*& s )
     if( *s == '0' )
     {
         switch( *s1 )
-	{
+        {
             case 'b':
             case 'B': base =  2; s += 2; break;
             case 'o':
@@ -282,87 +282,87 @@ scfx_is_digit( char c, sc_numrep numrep )
     switch( numrep )
     {
         case SC_DEC:
-	{
+        {
             switch( c )
-	    {
+            {
                 case '0': case '1': case '2': case '3': case '4':
                 case '5': case '6': case '7': case '8': case '9':
-		{
+                {
                     is_digit = true;
                     break;
-		}
+                }
                 default:
                     is_digit = false;
             }
             break;
-	}
-	case SC_BIN:
-	case SC_BIN_US:
-	case SC_BIN_SM:
-	{
+        }
+        case SC_BIN:
+        case SC_BIN_US:
+        case SC_BIN_SM:
+        {
             switch( c )
-	    {
+            {
                 case '0': case '1':
-		{
+                {
                     is_digit = true;
                     break;
-		}
+                }
                 default:
                     is_digit = false;
             }
             break;
-	}
-	case SC_OCT:
-	case SC_OCT_US:
-	case SC_OCT_SM:
-	{
+        }
+        case SC_OCT:
+        case SC_OCT_US:
+        case SC_OCT_SM:
+        {
             switch( c )
-	    {
+            {
                 case '0': case '1': case '2': case '3':
                 case '4': case '5': case '6': case '7':
-		{
+                {
                     is_digit = true;
                     break;
-		}
+                }
                 default:
                     is_digit = false;
             }
             break;
-	}
-	case SC_HEX:
-	case SC_HEX_US:
-	case SC_HEX_SM:
-	{
+        }
+        case SC_HEX:
+        case SC_HEX_US:
+        case SC_HEX_SM:
+        {
             switch( c )
-	    {
+            {
                 case '0': case '1': case '2': case '3': case '4':
                 case '5': case '6': case '7': case '8': case '9':
                 case 'a': case 'b': case 'c': case 'd': case 'e': case 'f':
                 case 'A': case 'B': case 'C': case 'D': case 'E': case 'F':
-		{
+                {
                     is_digit = true;
                     break;
-		}
+                }
                 default:
                     is_digit = false;
             }
             break;
-	}
-	case SC_CSD:
-	{
+        }
+        case SC_CSD:
+        {
             switch( c )
-	    {
-		case '0': case '1': case '-':
-		{
+            {
+                case '0': case '1': case '-':
+                {
                     is_digit = true;
                     break;
-		}
+                }
                 default:
                     is_digit = false;
             }
             break;
-	}
-	default:
+        }
+        default:
             is_digit = false;
     }
 
@@ -377,23 +377,23 @@ scfx_to_digit( char c, sc_numrep numrep )
     
     switch( numrep )
     {
-	case SC_DEC:
-	case SC_BIN:
-	case SC_BIN_US:
-	case SC_BIN_SM:
-	case SC_OCT:
-	case SC_OCT_US:
-	case SC_OCT_SM:
-	{
+        case SC_DEC:
+        case SC_BIN:
+        case SC_BIN_US:
+        case SC_BIN_SM:
+        case SC_OCT:
+        case SC_OCT_US:
+        case SC_OCT_SM:
+        {
             to_digit = c - '0';
             break;
-	}
-	case SC_HEX:
-	case SC_HEX_US:
-	case SC_HEX_SM:
-	{
+        }
+        case SC_HEX:
+        case SC_HEX_US:
+        case SC_HEX_SM:
+        {
             switch( c )
-	    {
+            {
                 case '0': case '1': case '2': case '3': case '4':
                 case '5': case '6': case '7': case '8': case '9':
                     to_digit = c - '0';
@@ -408,15 +408,15 @@ scfx_to_digit( char c, sc_numrep numrep )
                     to_digit = -2;
             }
             break;
-	}
-	case SC_CSD:
-	{
+        }
+        case SC_CSD:
+        {
             if( c == '-' )
                 to_digit = -1;
             else
                 to_digit = c - '0';
             break;
-	}
+        }
         default:
             to_digit = -2;
     }
@@ -453,40 +453,40 @@ scfx_print_prefix( scfx_string& s, sc_numrep numrep )
     switch( numrep )
     {
         case SC_DEC:
-	    s += "0d";
-	    break;
+            s += "0d";
+            break;
         case SC_BIN:
-	    s += "0b";
-	    break;
+            s += "0b";
+            break;
         case SC_BIN_US:
-	    s += "0bus";
-	    break;
+            s += "0bus";
+            break;
         case SC_BIN_SM:
-	    s += "0bsm";
-	    break;
+            s += "0bsm";
+            break;
         case SC_OCT:
-	    s += "0o";
-	    break;
+            s += "0o";
+            break;
         case SC_OCT_US:
-	    s += "0ous";
-	    break;
+            s += "0ous";
+            break;
         case SC_OCT_SM:
-	    s += "0osm";
-	    break;
+            s += "0osm";
+            break;
         case SC_HEX:
-	    s += "0x";
-	    break;
+            s += "0x";
+            break;
         case SC_HEX_US:
-	    s += "0xus";
-	    break;
+            s += "0xus";
+            break;
         case SC_HEX_SM:
-	    s += "0xsm";
-	    break;
+            s += "0xsm";
+            break;
         case SC_CSD:
-	    s += "0csd";
-	    break;
+            s += "0csd";
+            break;
         default:
-	    s += "unknown";
+            s += "unknown";
     }
 }
 
@@ -499,27 +499,27 @@ scfx_print_exp( scfx_string& s, int exp )
         s += 'e';
                 
         if( exp < 0 )
-	{
+        {
             exp = - exp;
             s += '-';
         }
-	else
+        else
             s += '+';
 
         bool first = true;
         int scale = 1000000000;
         do
-	{
+        {
             int digit = exp / scale;
             exp = exp % scale;
             if( digit != 0 || ! first )
-	    {
+            {
                 s += static_cast<char>( digit + '0' );
                 first = false;
             }
             scale /= 10;
         }
-	while( scale > 0 );
+        while( scale > 0 );
     }
 }
 

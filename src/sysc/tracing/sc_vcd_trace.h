@@ -92,10 +92,10 @@ public:
 
     enum vcd_enum {VCD_WIRE=0, VCD_REAL, VCD_EVENT, VCD_TIME, VCD_LAST};
 
-	// sc_set_vcd_time_unit is deprecated.
+        // sc_set_vcd_time_unit is deprecated.
 #if 0 // deprecated
     inline void sc_set_vcd_time_unit(int exponent10_seconds)
-    	{ set_time_unit(exponent10_seconds); }
+            { set_time_unit(exponent10_seconds); }
 #endif
 
     // Create a Vcd trace file.
@@ -119,26 +119,26 @@ protected:
 
     // Trace a sc_bit object (single bit)
     virtual void trace( const sc_dt::sc_bit& object,
-	    const std::string& name);
+            const std::string& name);
 
     // Trace a sc_logic object (single bit)
      void trace(const sc_dt::sc_logic& object, const std::string& name);
 
     // Trace an unsigned char with the given width
      void trace(const unsigned char& object, const std::string& name,
-     	int width);
+             int width);
 
     // Trace an unsigned short with the given width
      void trace(const unsigned short& object, const std::string& name,
-     	int width);
+             int width);
 
     // Trace an unsigned int with the given width
      void trace(const unsigned int& object, const std::string& name,
-     	int width);
+             int width);
 
     // Trace an unsigned long with the given width
      void trace(const unsigned long& object, const std::string& name,
-     	int width);
+             int width);
 
     // Trace a signed char with the given width
      void trace(const char& object, const std::string& name, int width);
@@ -168,15 +168,15 @@ protected:
 
     // Trace sc_dt::sc_uint_base
      void trace (const sc_dt::sc_uint_base& object,
-	 	const std::string& name);
+                 const std::string& name);
 
     // Trace sc_dt::sc_int_base
      void trace (const sc_dt::sc_int_base& object,
-	 	const std::string& name);
+                 const std::string& name);
 
     // Trace sc_dt::sc_unsigned
      void trace (const sc_dt::sc_unsigned& object,
-	 	const std::string& name);
+                 const std::string& name);
 
     // Trace sc_dt::sc_signed
      void trace (const sc_dt::sc_signed& object, const std::string& name);
@@ -186,18 +186,18 @@ protected:
 
     // Trace sc_dt::sc_fxval_fast
     void trace( const sc_dt::sc_fxval_fast& object,
-		const std::string& name );
+                const std::string& name );
 
     // Trace sc_dt::sc_fxnum
     void trace( const sc_dt::sc_fxnum& object, const std::string& name );
 
     // Trace sc_dt::sc_fxnum_fast
     void trace( const sc_dt::sc_fxnum_fast& object,
-		const std::string& name );
+                const std::string& name );
 
     template<class T>
     void traceT(const T& object, const std::string& name,
-    	vcd_enum type=VCD_WIRE)
+            vcd_enum type=VCD_WIRE)
     {
         if( add_trace_check(name) )
             traces.push_back(new vcd_T_trace<T>( object, name
@@ -206,17 +206,17 @@ protected:
 
    // Trace sc_dt::sc_bv_base (sc_dt::sc_bv)
     virtual void trace(const sc_dt::sc_bv_base& object,
-		const std::string& name);
+                const std::string& name);
 
     // Trace sc_dt::sc_lv_base (sc_dt::sc_lv)
     virtual void trace(const sc_dt::sc_lv_base& object,
-	    const std::string& name);
+            const std::string& name);
 
     // Trace an enumerated object - where possible output the enumeration literals
     // in the trace file. Enum literals is a null terminated array of null
     // terminated char* literal strings.
      void trace(const unsigned& object, const std::string& name,
-     	const char** enum_literals);
+             const char** enum_literals);
 
     // Output a comment to the trace file
      void write_comment(const std::string& comment);

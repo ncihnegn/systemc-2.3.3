@@ -43,10 +43,10 @@ sc_time_compare( const void* p1, const void* p2 )
     const auto* t2 = static_cast<const sc_time*>( p2 );
 
     if( *t1 < *t2 ) {
-	return 1;
+        return 1;
     } if( *t1 > *t2 ) {
-	return -1;
-    } 	return 0;
+        return -1;
+    }         return 0;
      
 }
 
@@ -73,7 +73,7 @@ void sc_event_queue::cancel_all()
 {
     m_pending_delta = 0;
     while( !m_ppq.empty() )
-	delete m_ppq.extract_top();
+        delete m_ppq.extract_top();
     m_e.cancel();
 }
 
@@ -82,7 +82,7 @@ void sc_event_queue::notify (const sc_time& when)
     m_change_stamp = simcontext()->change_stamp();
     auto* t = new sc_time( when+sc_time_stamp() );
     if ( m_ppq.empty() || *t < *m_ppq.top() ) {
-	m_e.notify( when );
+        m_e.notify( when );
     }
     m_ppq.insert( t );
 }
@@ -97,7 +97,7 @@ void sc_event_queue::fire_event()
     delete t;
 
     if ( !m_ppq.empty() ) {
-	m_e.notify( *m_ppq.top() - sc_time_stamp() );
+        m_e.notify( *m_ppq.top() - sc_time_stamp() );
     }
 }
 

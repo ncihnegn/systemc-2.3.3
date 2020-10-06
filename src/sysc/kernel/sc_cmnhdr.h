@@ -32,7 +32,7 @@
 #define SC_CMNHDR_H
 
 #if defined(_WIN32) || defined(_MSC_VER) || defined(__BORLANDC__) || \
-	defined(__MINGW32__)
+        defined(__MINGW32__)
 
 // all windows 32-bit compilers should define WIN32
 #if !defined(WIN32) && !defined(WIN64) && !defined(_WIN64)

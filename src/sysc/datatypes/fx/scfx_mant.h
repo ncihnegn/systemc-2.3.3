@@ -196,15 +196,15 @@ scfx_mant::operator = ( const scfx_mant& rhs )
     if( &rhs != this )
     {
         if( m_size != rhs.m_size )
-	{
-	    free( m_array, m_size );
-	    m_array = alloc( m_size = rhs.m_size );
-	}
+        {
+            free( m_array, m_size );
+            m_array = alloc( m_size = rhs.m_size );
+        }
 
-	for( int i = 0; i < m_size; i ++ )
-	{
-	    (*this)[i] = rhs[i];
-	}
+        for( int i = 0; i < m_size; i ++ )
+        {
+            (*this)[i] = rhs[i];
+        }
     }
     return *this;
 }
@@ -245,58 +245,58 @@ scfx_mant::resize_to( int size, int restore )
     {
         word* p = alloc( size );
 
-	if( restore )
-	{
-	    int end = sc_min( size, m_size );
-	    if( restore == 1 )		// msb resized -> align at 0
-	    {
-	        for( int i = 0; i < size; i ++ )
-		{
-		    if( i < end )
-		    {
+        if( restore )
+        {
+            int end = sc_min( size, m_size );
+            if( restore == 1 )                // msb resized -> align at 0
+            {
+                for( int i = 0; i < size; i ++ )
+                {
+                    if( i < end )
+                    {
 #if defined( SC_BIG_ENDIAN )
-		        p[-i] = m_array[-i];
+                        p[-i] = m_array[-i];
 #elif defined( SC_LITTLE_ENDIAN )
-			p[i] = m_array[i];
+                        p[i] = m_array[i];
 #endif
-		    }
-		    else
-		    {
+                    }
+                    else
+                    {
 #if defined( SC_BIG_ENDIAN )
-		        p[-i] = 0;
+                        p[-i] = 0;
 #elif defined( SC_LITTLE_ENDIAN )
-			p[i] = 0;
+                        p[i] = 0;
 #endif
-		    }
-		}
-	    }
-	    else			// lsb resized -> align at size-1
-	    {
-	        for( int i = 0; i < size; i ++ )
-		{
-		    if( i < end )
-		    {
+                    }
+                }
+            }
+            else                        // lsb resized -> align at size-1
+            {
+                for( int i = 0; i < size; i ++ )
+                {
+                    if( i < end )
+                    {
 #if defined( SC_BIG_ENDIAN )
-		        p[-size+1+i] = m_array[-m_size+1+i];
+                        p[-size+1+i] = m_array[-m_size+1+i];
 #elif defined( SC_LITTLE_ENDIAN )
-			p[size-1-i] = m_array[m_size-1-i];
+                        p[size-1-i] = m_array[m_size-1-i];
 #endif
-		    }
-		    else
-		    {
+                    }
+                    else
+                    {
 #if defined( SC_BIG_ENDIAN )
-		        p[-size+1+i] = 0;
+                        p[-size+1+i] = 0;
 #elif defined( SC_LITTLE_ENDIAN )
-			p[size-1-i] = 0;
+                        p[size-1-i] = 0;
 #endif
-		    }
-		}
-	    }
-	}
+                    }
+                }
+            }
+        }
 
-	free( m_array, m_size );
-	m_array = p;
-	m_size = size;
+        free( m_array, m_size );
+        m_array = p;
+        m_size = size;
     }
 }
 
@@ -305,7 +305,7 @@ half_word
 scfx_mant::half_at( int i ) const
 {
     SC_ASSERT_( ( i >> 1 ) >= 0 && ( i >> 1 ) < m_size,
-		"mantissa index out of range" );
+                "mantissa index out of range" );
 #if defined( SC_BIG_ENDIAN )
     return reinterpret_cast<half_word*>( m_array )[-i];
 #elif defined( SC_LITTLE_ENDIAN )
@@ -318,7 +318,7 @@ half_word&
 scfx_mant::half_at( int i )
 {
     SC_ASSERT_( ( i >> 1 ) >= 0 && ( i >> 1 ) < m_size,
-		"mantissa index out of range" );
+                "mantissa index out of range" );
 #if defined( SC_BIG_ENDIAN )
     return reinterpret_cast<half_word*>( m_array )[-i];
 #elif defined( SC_LITTLE_ENDIAN )
@@ -365,9 +365,9 @@ inc( scfx_mant& mant )
     for( int i = 0; i < mant.size(); i ++ )
     {
         if( ++ mant[i] )
-	{
-	    break;
-	}
+        {
+            break;
+        }
     }
 }
 

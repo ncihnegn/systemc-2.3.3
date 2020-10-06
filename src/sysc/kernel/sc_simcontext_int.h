@@ -51,8 +51,8 @@
     { \
         if ( P && ( (std::strlen(NAME)==0) || !std::strcmp(NAME,P->name())) ) \
           std::cout << "**** " << sc_time_stamp() << " ("  \
-	            << sc_get_current_process_name("** NONE **") << "): " << MSG \
-		    << " - " << P->name() << std::endl; \
+                    << sc_get_current_process_name("** NONE **") << "): " << MSG \
+                    << " - " << P->name() << std::endl; \
     }
 #else
 #   define DEBUG_MSG(NAME,P,MSG)
@@ -144,7 +144,7 @@ sc_simcontext::preempt_with( sc_thread_handle thread_h )
 
     active_p = dynamic_cast<sc_thread_handle>(sc_get_current_process_b());
     if ( thread_h->next_runnable() != NULL )
-	remove_runnable_thread( thread_h );
+        remove_runnable_thread( thread_h );
 
     // THE CALLER IS A METHOD:
     //
@@ -159,26 +159,26 @@ sc_simcontext::preempt_with( sc_thread_handle thread_h )
 
     if ( active_p == NULL )
     {
-	std::vector<sc_thread_handle>* invokers_p;  // active invokers stack.
-	sc_thread_handle           invoke_thread_p; // latest invocation thread.
+        std::vector<sc_thread_handle>* invokers_p;  // active invokers stack.
+        sc_thread_handle           invoke_thread_p; // latest invocation thread.
         sc_method_handle           method_p;        // active method.
 
-	method_p = dynamic_cast<sc_method_handle>(sc_get_current_process_b());
-	invokers_p = &get_active_invokers();
-	caller_info = m_curr_proc_info;
-	if ( invokers_p->size() != 0 )
-	{
-	    invoke_thread_p = invokers_p->back();
-	    DEBUG_MSG( DEBUG_NAME, invoke_thread_p,
-	        "queueing invocation thread to execute next" );
-	    execute_thread_next(invoke_thread_p);
-	}
+        method_p = dynamic_cast<sc_method_handle>(sc_get_current_process_b());
+        invokers_p = &get_active_invokers();
+        caller_info = m_curr_proc_info;
+        if ( invokers_p->size() != 0 )
+        {
+            invoke_thread_p = invokers_p->back();
+            DEBUG_MSG( DEBUG_NAME, invoke_thread_p,
+                "queueing invocation thread to execute next" );
+            execute_thread_next(invoke_thread_p);
+        }
         DEBUG_MSG( DEBUG_NAME, thread_h, "preempting method with thread" );
-	set_curr_proc( (sc_process_b*)thread_h );
-	m_cor_pkg->yield( thread_h->m_cor_p );
-	m_curr_proc_info = caller_info;
+        set_curr_proc( (sc_process_b*)thread_h );
+        m_cor_pkg->yield( thread_h->m_cor_p );
+        m_curr_proc_info = caller_info;
         DEBUG_MSG(DEBUG_NAME, thread_h, "back from preempting method w/thread");
-	method_p->check_for_throws();
+        method_p->check_for_throws();
     }
 
     // CALLER IS A THREAD, BUT NOT THE THREAD TO BE RUN:
@@ -192,10 +192,10 @@ sc_simcontext::preempt_with( sc_thread_handle thread_h )
     else if ( active_p != thread_h )
     {
         DEBUG_MSG( DEBUG_NAME, thread_h,
-	           "preempting active thread with thread" );
+                   "preempting active thread with thread" );
         execute_thread_next( active_p );
-	execute_thread_next( thread_h );
-	active_p->suspend_me();
+        execute_thread_next( thread_h );
+        active_p->suspend_me();
     }
 
     // CALLER IS THE THREAD TO BE RUN:
@@ -207,8 +207,8 @@ sc_simcontext::preempt_with( sc_thread_handle thread_h )
     else
     {
         DEBUG_MSG(DEBUG_NAME,thread_h,"self preemption of active thread");
-	execute_thread_next( thread_h );
-	active_p->suspend_me();
+        execute_thread_next( thread_h );
+        active_p->suspend_me();
     }
 }
 
@@ -248,8 +248,8 @@ sc_simcontext::pop_runnable_method()
 {
     sc_method_handle method_h = m_runnable->pop_method();
     if( method_h == 0 ) {
-	reset_curr_proc();
-	return 0;
+        reset_curr_proc();
+        return 0;
     }
     set_curr_proc( (sc_process_b*)method_h );
     return method_h;
@@ -261,8 +261,8 @@ sc_simcontext::pop_runnable_thread()
 {
     sc_thread_handle thread_h = m_runnable->pop_thread();
     if( thread_h == 0 ) {
-	reset_curr_proc();
-	return 0;
+        reset_curr_proc();
+        return 0;
     }
     set_curr_proc( (sc_process_b*)thread_h );
     return thread_h;

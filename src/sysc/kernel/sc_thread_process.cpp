@@ -54,8 +54,8 @@
     { \
         if ( P && ( (std::strlen(NAME)==0) || !std::strcmp(NAME,P->name())) ) \
           std::cout << "**** " << sc_time_stamp() << " ("  \
-	            << sc_get_current_process_name("** NONE **") << "): " << MSG \
-		    << " - " << P->name() << std::endl; \
+                    << sc_get_current_process_name("** NONE **") << "): " << MSG \
+                    << " - " << P->name() << std::endl; \
     }
 #else
 #   define DEBUG_MSG(NAME,P,MSG)
@@ -129,7 +129,7 @@ void sc_thread_cor_fn( void* arg )
                       << thread_h->name() << ::std::endl;
         }
         catch( const sc_unwind_exception& ex ) {
-	    ex.clear();
+            ex.clear();
             if ( ex.is_reset() ) continue;
         }
         catch( ... ) {
@@ -149,7 +149,7 @@ void sc_thread_cor_fn( void* arg )
 
     if ( thread_h->next_runnable() != nullptr )
     {
-	simc_p->remove_runnable_thread(thread_h);
+        simc_p->remove_runnable_thread(thread_h);
     }
 
     // IF WE ARE THE ACTIVE PROCESS ABORT OUR EXECUTION:
@@ -159,7 +159,7 @@ void sc_thread_cor_fn( void* arg )
     {
 
         sc_core::sc_cor* x = simc_p->next_cor();
-	simc_p->cor_pkg()->abort( x );
+        simc_p->cor_pkg()->abort( x );
     }
 
 }
@@ -217,7 +217,7 @@ void sc_thread_process::disable_process(
 
     if ( !sc_is_running() )
     {
-	m_state = m_state | ps_bit_ready_to_run;
+        m_state = m_state | ps_bit_ready_to_run;
         simcontext()->remove_runnable_thread(this);
     }
 }
@@ -257,8 +257,8 @@ void sc_thread_process::enable_process(
     if ( m_state == ps_bit_ready_to_run && sc_allow_process_control_corners )
     {
         m_state = ps_normal;
-	if ( next_runnable() == nullptr )
-	    simcontext()->push_runnable_thread(this);
+        if ( next_runnable() == nullptr )
+            simcontext()->push_runnable_thread(this);
     }
 }
 
@@ -387,10 +387,10 @@ void sc_thread_process::resume_process(
 
     if ( m_state & ps_bit_ready_to_run )
     {
-	m_state = m_state & ~ps_bit_ready_to_run;
-	if ( next_runnable() == nullptr )
-	    simcontext()->push_runnable_thread(this);
-	remove_dynamic_events();  // order important.
+        m_state = m_state & ~ps_bit_ready_to_run;
+        if ( next_runnable() == nullptr )
+            simcontext()->push_runnable_thread(this);
+        remove_dynamic_events();  // order important.
     }
 }
 
@@ -457,7 +457,7 @@ sc_thread_process::sc_thread_process( const char* name_p, bool free_host,
 
         // process any reset signal specification:
 
-	opt_p->specify_resets();
+        opt_p->specify_resets();
 
     }
 
@@ -558,13 +558,13 @@ void sc_thread_process::suspend_process(
     m_state = m_state | ps_bit_suspended;
     if ( next_runnable() != nullptr )
     {
-	m_state = m_state | ps_bit_ready_to_run;
-	simcontext()->remove_runnable_thread( this );
+        m_state = m_state | ps_bit_ready_to_run;
+        simcontext()->remove_runnable_thread( this );
     }
     if ( sc_get_current_process_b() == dynamic_cast<sc_process_b*>(this)  )
     {
-	m_state = m_state | ps_bit_ready_to_run;
-	suspend_me();
+        m_state = m_state | ps_bit_ready_to_run;
+        suspend_me();
     }
 }
 
@@ -607,16 +607,16 @@ void sc_thread_process::throw_reset( bool async )
     {
         m_state = m_state & ~ps_bit_ready_to_run;
         remove_dynamic_events();
-	if ( simcontext()->evaluation_phase() )
-	{
+        if ( simcontext()->evaluation_phase() )
+        {
             simcontext()->preempt_with( this );
-	}
-	else
-	{
-	    if ( is_runnable() )
-	        simcontext()->remove_runnable_thread(this);
-	    simcontext()->execute_thread_next(this);
-	}
+        }
+        else
+        {
+            if ( is_runnable() )
+                simcontext()->remove_runnable_thread(this);
+            simcontext()->execute_thread_next(this);
+        }
     }
 }
 
@@ -658,10 +658,10 @@ void sc_thread_process::throw_user( const sc_throw_it_helper& helper,
         {
             auto* child_p = dynamic_cast<sc_process_b*>(children[child_i]);
             if ( child_p )
-	    {
-	        DEBUG_MSG(DEBUG_NAME,child_p,"about to throw user on");
-	        child_p->throw_user(helper, descendants);
-	    }
+            {
+                DEBUG_MSG(DEBUG_NAME,child_p,"about to throw user on");
+                child_p->throw_user(helper, descendants);
+            }
         }
     }
 
@@ -670,7 +670,7 @@ void sc_thread_process::throw_user( const sc_throw_it_helper& helper,
     if ( m_unwinding )
     {
         SC_REPORT_WARNING( SC_ID_PROCESS_ALREADY_UNWINDING_, name() );
-	return;
+        return;
     }
 
     // SET UP THE THROW REQUEST FOR THIS OBJECT INSTANCE AND QUEUE IT FOR
@@ -739,12 +739,12 @@ bool sc_thread_process::trigger_dynamic( sc_event* e )
     if ( m_state & ps_bit_disabled )
     {
         if ( e == m_timeout_event_p )
-	{
-	    remove_dynamic_events( true );
-	    return true;
-	}
-	
-		    return false;
+        {
+            remove_dynamic_events( true );
+            return true;
+        }
+        
+                    return false;
 
     }
 
@@ -757,105 +757,105 @@ bool sc_thread_process::trigger_dynamic( sc_event* e )
     switch( m_trigger_type )
     {
       case EVENT:
-	m_event_p = nullptr;
-	m_trigger_type = STATIC;
-	break;
+        m_event_p = nullptr;
+        m_trigger_type = STATIC;
+        break;
 
       case AND_LIST:
         -- m_event_count;
-	if ( m_event_count == 0 )
-	{
-	    m_event_list_p->auto_delete();
-	    m_event_list_p = nullptr;
-	    m_trigger_type = STATIC;
-	}
-	else
-	{
-	    return true;
-	}
-	break;
+        if ( m_event_count == 0 )
+        {
+            m_event_list_p->auto_delete();
+            m_event_list_p = nullptr;
+            m_trigger_type = STATIC;
+        }
+        else
+        {
+            return true;
+        }
+        break;
 
       case OR_LIST:
-	m_event_list_p->remove_dynamic( this, e );
-	m_event_list_p->auto_delete();
-	m_event_list_p = nullptr;
-	m_trigger_type = STATIC;
-	break;
+        m_event_list_p->remove_dynamic( this, e );
+        m_event_list_p->auto_delete();
+        m_event_list_p = nullptr;
+        m_trigger_type = STATIC;
+        break;
 
       case TIMEOUT:
-	m_trigger_type = STATIC;
-	break;
+        m_trigger_type = STATIC;
+        break;
 
       case EVENT_TIMEOUT:
         if ( e == m_timeout_event_p )
-	{
-	    m_timed_out = true;
-	    m_event_p->remove_dynamic( this );
-	    m_event_p = nullptr;
-	    m_trigger_type = STATIC;
-	}
-	else
-	{
-	    m_timeout_event_p->cancel();
-	    m_timeout_event_p->reset();
-	    m_event_p = nullptr;
-	    m_trigger_type = STATIC;
-	}
-	break;
+        {
+            m_timed_out = true;
+            m_event_p->remove_dynamic( this );
+            m_event_p = nullptr;
+            m_trigger_type = STATIC;
+        }
+        else
+        {
+            m_timeout_event_p->cancel();
+            m_timeout_event_p->reset();
+            m_event_p = nullptr;
+            m_trigger_type = STATIC;
+        }
+        break;
 
       case OR_LIST_TIMEOUT:
         if ( e == m_timeout_event_p )
-	{
+        {
             m_timed_out = true;
             m_event_list_p->remove_dynamic( this, e );
             m_event_list_p->auto_delete();
             m_event_list_p = nullptr;
             m_trigger_type = STATIC;
-	}
+        }
 
-	else
-	{
+        else
+        {
             m_timeout_event_p->cancel();
             m_timeout_event_p->reset();
-	    m_event_list_p->remove_dynamic( this, e );
-	    m_event_list_p->auto_delete();
-	    m_event_list_p = nullptr;
-	    m_trigger_type = STATIC;
-	}
-	break;
+            m_event_list_p->remove_dynamic( this, e );
+            m_event_list_p->auto_delete();
+            m_event_list_p = nullptr;
+            m_trigger_type = STATIC;
+        }
+        break;
 
       case AND_LIST_TIMEOUT:
         if ( e == m_timeout_event_p )
-	{
+        {
             m_timed_out = true;
             m_event_list_p->remove_dynamic( this, e );
             m_event_list_p->auto_delete();
             m_event_list_p = nullptr;
             m_trigger_type = STATIC;
-	}
+        }
 
-	else
-	{
-	    -- m_event_count;
-	    if ( m_event_count == 0 )
-	    {
-		m_timeout_event_p->cancel();
-		m_timeout_event_p->reset();
-		// no need to remove_dynamic
-		m_event_list_p->auto_delete();
-		m_event_list_p = nullptr;
-		m_trigger_type = STATIC;
-	    }
-	    else
-	    {
-	        return true;
-	    }
-	}
-	break;
+        else
+        {
+            -- m_event_count;
+            if ( m_event_count == 0 )
+            {
+                m_timeout_event_p->cancel();
+                m_timeout_event_p->reset();
+                // no need to remove_dynamic
+                m_event_list_p->auto_delete();
+                m_event_list_p = nullptr;
+                m_trigger_type = STATIC;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        break;
 
       case STATIC: {
         // we should never get here, but throw_it() can make it happen.
-	SC_REPORT_WARNING(SC_ID_NOT_EXPECTING_DYNAMIC_EVENT_NOTIFY_, name());
+        SC_REPORT_WARNING(SC_ID_NOT_EXPECTING_DYNAMIC_EVENT_NOTIFY_, name());
         return true;
       }
     }
@@ -866,7 +866,7 @@ bool sc_thread_process::trigger_dynamic( sc_event* e )
 
     if ( (m_state & ps_bit_suspended) )
     {
-	m_state = m_state | ps_bit_ready_to_run;
+        m_state = m_state | ps_bit_ready_to_run;
     }
     else
     {

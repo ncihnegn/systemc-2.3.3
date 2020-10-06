@@ -72,7 +72,7 @@ public:
     // destructor
 
     virtual ~sc_fifo()
-	{ delete [] m_buf; }
+        { delete [] m_buf; }
 
 
     // interface methods
@@ -91,13 +91,13 @@ public:
     // get the number of available samples
 
     virtual int num_available() const
-	{ return ( m_num_readable - m_num_read ); }
+        { return ( m_num_readable - m_num_read ); }
 
 
     // get the data written event
 
     virtual const sc_event& data_written_event() const
-	{ return m_data_written_event; }
+        { return m_data_written_event; }
 
 
     // blocking write
@@ -110,19 +110,19 @@ public:
     // get the number of free spaces
 
     virtual int num_free() const
-	{ return ( m_size - m_num_readable - m_num_written ); }
+        { return ( m_size - m_num_readable - m_num_written ); }
 
 
     // get the data read event
 
     virtual const sc_event& data_read_event() const
-	{ return m_data_read_event; }
+        { return m_data_read_event; }
 
 
     // other methods
 
     operator T ()
-	{ return read(); }
+        { return read(); }
 
 
     sc_fifo<T>& operator = ( const T& a )
@@ -152,18 +152,18 @@ protected:
 
 protected:
 
-    int m_size;			// size of the buffer
-    T*  m_buf;			// the buffer
-    int m_free;			// number of free spaces
-    int m_ri;			// index of next read
-    int m_wi;			// index of next write
+    int m_size;                        // size of the buffer
+    T*  m_buf;                        // the buffer
+    int m_free;                        // number of free spaces
+    int m_ri;                        // index of next read
+    int m_wi;                        // index of next write
 
-    sc_port_base* m_reader;	// used for static design rule checking
-    sc_port_base* m_writer;	// used for static design rule checking
+    sc_port_base* m_reader;        // used for static design rule checking
+    sc_port_base* m_writer;        // used for static design rule checking
 
-    int m_num_readable;		// #samples readable
-    int m_num_read;		// #samples read during this delta cycle
-    int m_num_written;		// #samples written during this delta cycle
+    int m_num_readable;                // #samples readable
+    int m_num_read;                // #samples read during this delta cycle
+    int m_num_written;                // #samples written during this delta cycle
 
     sc_event m_data_read_event;
     sc_event m_data_written_event;
@@ -182,7 +182,7 @@ template <class T>
 inline
 void
 sc_fifo<T>::register_port( sc_port_base& port_,
-			    const char* if_typename_ )
+                            const char* if_typename_ )
 {
     std::string nm( if_typename_ );
     if( nm == typeid( sc_fifo_in_if<T> ).name() ||
@@ -221,7 +221,7 @@ void
 sc_fifo<T>::read( T& val_ )
 {
     while( num_available() == 0 ) {
-	sc_core::wait( m_data_written_event );
+        sc_core::wait( m_data_written_event );
     }
     bool read_success = sc_fifo<T>::nb_read(val_);
     sc_assert( read_success );
@@ -245,7 +245,7 @@ bool
 sc_fifo<T>::nb_read( T& val_ )
 {
     if( num_available() == 0 ) {
-	return false;
+        return false;
     }
     bool read_success = buf_read( val_ );
     if( SC_LIKELY_(read_success) ) {
@@ -264,7 +264,7 @@ void
 sc_fifo<T>::write( const T& val_ )
 {
     while( num_free() == 0 ) {
-	sc_core::wait( m_data_read_event );
+        sc_core::wait( m_data_read_event );
     }
     bool write_success = sc_fifo<T>::nb_write(val_);
     sc_assert( write_success );
@@ -278,7 +278,7 @@ bool
 sc_fifo<T>::nb_write( const T& val_ )
 {
     if( num_free() == 0 ) {
-	return false;
+        return false;
     }
     bool write_success = buf_write( val_ );
     if( SC_LIKELY_(write_success) ) {
@@ -299,8 +299,8 @@ sc_fifo<T>::trace( sc_trace_file* tf ) const
     char buf[32];
     std::string nm = name();
     for( int i = 0; i < m_size; ++ i ) {
-	std::sprintf( buf, "_%d", i );
-	sc_trace( tf, m_buf[i], nm + buf );
+        std::sprintf( buf, "_%d", i );
+        sc_trace( tf, m_buf[i], nm + buf );
     }
 #endif
 }
@@ -330,9 +330,9 @@ sc_fifo<T>::dump( ::std::ostream& os ) const
         int i = m_ri;
         int j = 0;
         do {
-	    os << "value[" << i << "] = " << m_buf[i] << ::std::endl;
-	    i = ( i + 1 ) % m_size;
-	    j ++;
+            os << "value[" << i << "] = " << m_buf[i] << ::std::endl;
+            i = ( i + 1 ) % m_size;
+            j ++;
         } while( i != m_wi );
     }
 }
@@ -344,11 +344,11 @@ void
 sc_fifo<T>::update()
 {
     if( m_num_read > 0 ) {
-	m_data_read_event.notify(SC_ZERO_TIME);
+        m_data_read_event.notify(SC_ZERO_TIME);
     }
 
     if( m_num_written > 0 ) {
-	m_data_written_event.notify(SC_ZERO_TIME);
+        m_data_written_event.notify(SC_ZERO_TIME);
     }
 
     m_num_readable = m_size - m_free;
@@ -397,7 +397,7 @@ bool
 sc_fifo<T>::buf_write( const T& val_ )
 {
     if( m_free == 0 ) {
-	return false;
+        return false;
     }
     m_buf[m_wi] = val_;
     m_wi = ( m_wi + 1 ) % m_size;
@@ -411,7 +411,7 @@ bool
 sc_fifo<T>::buf_read( T& val_ )
 {
     if( m_free == m_size ) {
-	return false;
+        return false;
     }
     val_ = m_buf[m_ri];
     m_buf[m_ri] = T(); // clear entry for boost::shared_ptr, et al.

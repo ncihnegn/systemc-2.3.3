@@ -299,8 +299,8 @@ void parse_binary_bits(
     else
     {
         for ( word_i = 0; word_i < dst_n; word_i++ ) data_p[word_i] = 0;
-	    if ( ctrl_p ) 
-		for ( word_i = 0; word_i < dst_n; word_i++ ) ctrl_p[word_i] = 0;
+            if ( ctrl_p ) 
+                for ( word_i = 0; word_i < dst_n; word_i++ ) ctrl_p[word_i] = 0;
     }
 
 
@@ -397,7 +397,7 @@ void parse_binary_bits(
 // Result is true if value was non-zero.
 //------------------------------------------------------------------------------
 void parse_hex_bits( 
-	const char* src_p, int dst_n, sc_digit* data_p, sc_digit* ctrl_p )
+        const char* src_p, int dst_n, sc_digit* data_p, sc_digit* ctrl_p )
 {
     sc_digit ctrl;     // Control word now assembling.
     sc_digit data;     // Data word now assembling.
@@ -435,8 +435,8 @@ void parse_hex_bits(
     else
     {
         for ( word_i = 0; word_i < dst_n; word_i++ ) data_p[word_i] = 0;
-		if ( ctrl_p ) 
-			for ( word_i = 0; word_i < dst_n; word_i++ ) ctrl_p[word_i] = 0;
+                if ( ctrl_p ) 
+                        for ( word_i = 0; word_i < dst_n; word_i++ ) ctrl_p[word_i] = 0;
     }
 
 
@@ -467,17 +467,17 @@ void parse_hex_bits(
                 {
                   case 'X':
                   case 'x': ctrl = ctrl | 15; data = data | 15; break;
-		  case 'F':
+                  case 'F':
                   case 'f': data = data | 15; break;
-		  case 'E':
+                  case 'E':
                   case 'e': data = data | 14; break;
-		  case 'D':
+                  case 'D':
                   case 'd': data = data | 13; break;
-		  case 'C':
+                  case 'C':
                   case 'c': data = data | 12; break;
-		  case 'B':
+                  case 'B':
                   case 'b': data = data | 11; break;
-		  case 'A':
+                  case 'A':
                   case 'a': data = data | 10; break;
                   case '9': data = data |  9; break;
                   case '8': data = data |  8; break;
@@ -517,32 +517,32 @@ void parse_hex_bits(
             data = data << 4;
             switch( src_p[src_i++] )
             {
-	      case 'X':
-	      case 'x': ctrl = ctrl | 15; data = data | 15; break;
-	      case 'F':
-	      case 'f': data = data | 15; break;
-	      case 'E':
-	      case 'e': data = data | 14; break;
-	      case 'D':
-	      case 'd': data = data | 13; break;
-	      case 'C':
-	      case 'c': data = data | 12; break;
-	      case 'B':
-	      case 'b': data = data | 11; break;
-	      case 'A':
-	      case 'a': data = data | 10; break;
-	      case '9': data = data |  9; break;
-	      case '8': data = data |  8; break;
-	      case '7': data = data |  7; break;
-	      case '6': data = data |  6; break;
-	      case '5': data = data |  5; break;
-	      case '4': data = data |  4; break;
-	      case '3': data = data |  3; break;
-	      case '2': data = data |  2; break;
-	      case '1': data = data |  1; break;
-	      case '0':                  break;
-	      case 'Z':
-	      case 'z': ctrl = ctrl | 15; break;
+              case 'X':
+              case 'x': ctrl = ctrl | 15; data = data | 15; break;
+              case 'F':
+              case 'f': data = data | 15; break;
+              case 'E':
+              case 'e': data = data | 14; break;
+              case 'D':
+              case 'd': data = data | 13; break;
+              case 'C':
+              case 'c': data = data | 12; break;
+              case 'B':
+              case 'b': data = data | 11; break;
+              case 'A':
+              case 'a': data = data | 10; break;
+              case '9': data = data |  9; break;
+              case '8': data = data |  8; break;
+              case '7': data = data |  7; break;
+              case '6': data = data |  6; break;
+              case '5': data = data |  5; break;
+              case '4': data = data |  4; break;
+              case '3': data = data |  3; break;
+              case '2': data = data |  2; break;
+              case '1': data = data |  1; break;
+              case '0':                  break;
+              case 'Z':
+              case 'z': ctrl = ctrl | 15; break;
               default:
                 {
                     std::stringstream msg;
@@ -725,9 +725,9 @@ vec_add_on(int ulen, sc_digit *ubegin,
 #ifdef DEBUG_SYSTEMC
   if( carry != 0 ) {
       SC_REPORT_WARNING( sc_core::SC_ID_WITHOUT_MESSAGE_,
-			 "vec_add_on( int, sc_digit*, int, const "
-			 "sc_digit* ) : "
-			 "result of addition is wrapped around" );
+                         "vec_add_on( int, sc_digit*, int, const "
+                         "sc_digit* ) : "
+                         "result of addition is wrapped around" );
   }
 #endif
 
@@ -767,8 +767,8 @@ vec_add_on2(int ulen, sc_digit *ubegin,
   if( carry != 0 ) {
       SC_REPORT_WARNING( sc_core::SC_ID_WITHOUT_MESSAGE_,
                          "vec_add_on2( int, sc_digit*, int, const "
-			 "sc_digit* ) : "
-			 "result of addition is wrapped around" );
+                         "sc_digit* ) : "
+                         "result of addition is wrapped around" );
   }
 #endif
 }
@@ -831,8 +831,8 @@ vec_add_small_on(int ulen, sc_digit *u, sc_digit v)
   if( v != 0 ) {
       SC_REPORT_WARNING( sc_core::SC_ID_WITHOUT_MESSAGE_,
                          "vec_add_small_on( int, sc_digit*, unsigned "
-			 "long ) : "
-			 "result of addition is wrapped around" );
+                         "long ) : "
+                         "result of addition is wrapped around" );
   }
 #endif
 
@@ -952,8 +952,8 @@ vec_sub_on2(int ulen, sc_digit *ubegin,
   if( borrow != 0 ) {
       SC_REPORT_WARNING( sc_core::SC_ID_WITHOUT_MESSAGE_,
                          "vec_sub_on2( int, sc_digit*, int, const "
-			 "sc_digit* ) : "
-			 "result of subtraction is wrapped around" );
+                         "sc_digit* ) : "
+                         "result of subtraction is wrapped around" );
   }
 #endif
 }
@@ -1219,8 +1219,8 @@ vec_mul_small_on(int ulen, sc_digit *u, sc_digit v)
   if( carry != 0 ) {
       SC_REPORT_WARNING( sc_core::SC_ID_WITHOUT_MESSAGE_,
                          "vec_mul_small_on( int, sc_digit*, unsigned "
-			 "long ) : "
-			 "result of multiplication is wrapped around" );
+                         "long ) : "
+                         "result of multiplication is wrapped around" );
   }
 #endif
 }

@@ -78,9 +78,9 @@ sc_module_registry::remove( sc_module& module_ )
 {
     int i;
     for( i = 0; i < size(); ++ i ) {
-	if( &module_ == m_module_vec[i] ) {
-	    break;
-	}
+        if( &module_ == m_module_vec[i] ) {
+            break;
+        }
     }
     if( i == size() ) {
         SC_REPORT_ERROR( SC_ID_REMOVE_MODULE_, nullptr );
@@ -127,7 +127,7 @@ sc_module_registry::elaboration_done()
 {
     bool error = false;
     for( int i = 0; i < size(); ++ i ) {
-	m_module_vec[i]->elaboration_done( error );
+        m_module_vec[i]->elaboration_done( error );
     }
 }
 
@@ -137,7 +137,7 @@ void
 sc_module_registry::start_simulation()
 {
     for( int i = 0; i < size(); ++ i ) {
-	m_module_vec[i]->start_simulation();
+        m_module_vec[i]->start_simulation();
     }
 }
 
@@ -147,7 +147,7 @@ void
 sc_module_registry::simulation_done()
 {
     for( int i = 0; i < size(); ++ i ) {
-	m_module_vec[i]->simulation_done();
+        m_module_vec[i]->simulation_done();
     }
 }
 

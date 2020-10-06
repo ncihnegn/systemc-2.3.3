@@ -53,7 +53,7 @@ public:
 
     sc_mutex();
     explicit sc_mutex( const char* name_ );
-	virtual ~sc_mutex();
+        virtual ~sc_mutex();
 
 
     // interface methods
@@ -75,7 +75,7 @@ protected:
     // support methods
 
     bool in_use() const
-	{ return ( m_owner != 0 ); }
+        { return ( m_owner != 0 ); }
 
 protected:
 

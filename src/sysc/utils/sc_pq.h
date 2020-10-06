@@ -52,28 +52,28 @@ public:
     ~sc_ppq_base();
 
     void* top() const
-	{ return m_heap[1]; }
+        { return m_heap[1]; }
 
     void* extract_top();
 
     void insert( void* elem );
 
     int size() const
-	{ return m_heap_size; }
+        { return m_heap_size; }
 
     bool empty() const
-	{ return (m_heap_size == 0); }
+        { return (m_heap_size == 0); }
 
 protected:
 
     int parent( int i ) const
-	{ return i >> 1; }
+        { return i >> 1; }
 
     int left( int i ) const
-	{ return i << 1; }
+        { return i << 1; }
 
     int right( int i ) const
-	{ return (i << 1) + 1; }
+        { return (i << 1) + 1; }
 
     void heapify( int i );
 
@@ -105,24 +105,24 @@ public:
 
     sc_ppq( int sz, compare_fn_t cmp )
         : sc_ppq_base( sz, cmp )
-	{}
+        {}
 
     ~sc_ppq()
-	{}
+        {}
 
     // returns the value of the top element in the priority queue.
     T top() const
-	{ return (T) sc_ppq_base::top(); }
+        { return (T) sc_ppq_base::top(); }
 
     // pops the first element of the priority queue.
 
     T extract_top()
-	{ return (T) sc_ppq_base::extract_top(); }
+        { return (T) sc_ppq_base::extract_top(); }
 
     // insert a new element to the priority queue.
 
     void insert( T elem )
-	{ sc_ppq_base::insert( (void*) elem ); }
+        { sc_ppq_base::insert( (void*) elem ); }
 
     // size() and empty() are inherited.
 };

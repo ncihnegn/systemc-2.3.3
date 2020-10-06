@@ -60,7 +60,7 @@ public:
         { return "sc_prim_channel"; }
 
     inline bool update_requested() 
-	{ return m_update_next_p != (sc_prim_channel*)list_end; }
+        { return m_update_next_p != (sc_prim_channel*)list_end; }
 
     // request the update method to be executed during the update phase
     inline void request_update();
@@ -115,10 +115,10 @@ protected:
         { sc_core::wait( e, simcontext() ); }
 
     void wait( const sc_event_or_list& el )
-	{ sc_core::wait( el, simcontext() ); }
+        { sc_core::wait( el, simcontext() ); }
 
     void wait( const sc_event_and_list& el )
-	{ sc_core::wait( el, simcontext() ); }
+        { sc_core::wait( el, simcontext() ); }
 
     void wait( const sc_time& t )
         { sc_core::wait( t, simcontext() ); }
@@ -151,7 +151,7 @@ protected:
     // static sensitivity for SC_METHODs
 
     void next_trigger()
-	{ sc_core::next_trigger( simcontext() ); }
+        { sc_core::next_trigger( simcontext() ); }
 
 
     // dynamic sensitivity for SC_METHODs
@@ -176,33 +176,33 @@ protected:
 
     void next_trigger( double v, sc_time_unit tu, const sc_event& e )
         { sc_core::next_trigger( 
-	    sc_time( v, tu, simcontext() ), e, simcontext() ); }
+            sc_time( v, tu, simcontext() ), e, simcontext() ); }
 
     void next_trigger( const sc_time& t, const sc_event_or_list& el )
         { sc_core::next_trigger( t, el, simcontext() ); }
 
     void next_trigger( double v, sc_time_unit tu, const sc_event_or_list& el )
         { sc_core::next_trigger( 
-	    sc_time( v, tu, simcontext() ), el, simcontext() ); }
+            sc_time( v, tu, simcontext() ), el, simcontext() ); }
 
     void next_trigger( const sc_time& t, const sc_event_and_list& el )
         { sc_core::next_trigger( t, el, simcontext() ); }
 
     void next_trigger( double v, sc_time_unit tu, const sc_event_and_list& el )
         { sc_core::next_trigger( 
-	    sc_time( v, tu, simcontext() ), el, simcontext() ); }
+            sc_time( v, tu, simcontext() ), el, simcontext() ); }
 
 
     // for SC_METHODs and SC_THREADs and SC_CTHREADs
 
     bool timed_out()
-	{ return sc_core::timed_out( simcontext() ); }
+        { return sc_core::timed_out( simcontext() ); }
 
 
 #if 0 // @@@@####
     // delta count maintenance
     sc_dt::uint64 delta_count()
-	{ return simcontext()->m_delta_count; }
+        { return simcontext()->m_delta_count; }
 #endif
 
 private:
@@ -347,7 +347,7 @@ void
 sc_prim_channel::request_update()
 {
     if( ! m_update_next_p ) {
-	m_registry->request_update( *this );
+        m_registry->request_update( *this );
     }
 }
 
@@ -442,7 +442,7 @@ sc_prim_channel::perform_update()
 //       methods, and operators to keep the Microsoft compiler happy.
 //   (2) Added delta_count() method to sc_prim_channel for use by
 //       sc_signal so that the friend declaration in sc_simcontext.h
-//	   can be for a non-templated class (i.e., sc_prim_channel.)
+//           can be for a non-templated class (i.e., sc_prim_channel.)
 //
 //Revision 1.2  2006/01/03 23:18:26  acg
 //Changed copyright to include 2006.

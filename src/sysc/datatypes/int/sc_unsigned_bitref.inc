@@ -96,7 +96,7 @@ const sc_unsigned_bitref&
 sc_unsigned_bitref::operator &= ( bool b )
 {
     if( ! b ) {
-	m_obj_p->clear( m_index );
+        m_obj_p->clear( m_index );
     }
     return *this;
 }
@@ -105,7 +105,7 @@ const sc_unsigned_bitref&
 sc_unsigned_bitref::operator |= ( bool b )
 {
     if( b ) {
-	m_obj_p->set( m_index );
+        m_obj_p->set( m_index );
     }
     return *this;
 }
@@ -114,7 +114,7 @@ const sc_unsigned_bitref&
 sc_unsigned_bitref::operator ^= ( bool b )
 {
     if( b ) {
-	m_obj_p->invert( m_index );
+        m_obj_p->invert( m_index );
     }
     return *this;
 }
@@ -122,7 +122,7 @@ sc_unsigned_bitref::operator ^= ( bool b )
 // #### OPTIMIZE
 void sc_unsigned_bitref::concat_set(int64 src, int low_i)
 {
-	bool value = 1 & ((low_i < 64) ? (src >> low_i) : (src >> 63));
+        bool value = 1 & ((low_i < 64) ? (src >> low_i) : (src >> 63));
     m_obj_p->set(m_index, value);
 }
 
@@ -144,7 +144,7 @@ void sc_unsigned_bitref::concat_set(const sc_unsigned& src, int low_i)
 
 void sc_unsigned_bitref::concat_set(uint64 src, int low_i)
 {
-	bool value = ((low_i < 64) ? (src >> low_i)&1 : 0);
+        bool value = ((low_i < 64) ? (src >> low_i)&1 : 0);
     m_obj_p->set(m_index, value);
 }
 

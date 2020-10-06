@@ -85,8 +85,8 @@ sc_cor_pthread::sc_cor_pthread()
 sc_cor_pthread::~sc_cor_pthread()
 {
     DEBUGF << this << ": sc_cor_pthread::~sc_cor_pthread()" << std::endl;
-	pthread_cond_destroy( &m_pt_condition);
-	pthread_mutex_destroy( &m_mutex );
+        pthread_cond_destroy( &m_pt_condition);
+        pthread_mutex_destroy( &m_mutex );
 }
 
 
@@ -111,7 +111,7 @@ void* sc_cor_pthread::invoke_module_method(void* context_p)
     // wait point.
 
     pthread_mutex_lock( &create_mutex );
-	DEBUGF << p << ": child signalling main thread " << endl;
+        DEBUGF << p << ": child signalling main thread " << endl;
     pthread_cond_signal( &create_condition );
     pthread_mutex_lock( &p->m_mutex );
     pthread_mutex_unlock( &create_mutex );
@@ -123,7 +123,7 @@ void* sc_cor_pthread::invoke_module_method(void* context_p)
 
     active_cor_p = p;
     DEBUGF << p << ": about to invoke real method " 
-	   << active_cor_p << std::endl;
+           << active_cor_p << std::endl;
     (p->m_cor_fn)(p->m_cor_fn_arg);
 
     return 0;
@@ -151,7 +151,7 @@ sc_cor_pkg_pthread::sc_cor_pkg_pthread( sc_simcontext* simc )
         pthread_mutex_init( &create_mutex, PTHREAD_NULL );
         sc_assert( active_cor_p == 0 );
         main_cor.m_pkg_p = this;
-		DEBUGF << &main_cor << ": is main co-routine" << std::endl;
+                DEBUGF << &main_cor << ": is main co-routine" << std::endl;
         active_cor_p = &main_cor;
     }
 }
@@ -174,7 +174,7 @@ sc_cor_pkg_pthread::create( std::size_t stack_size, sc_cor_fn* fn, void* arg )
 {
     sc_cor_pthread* cor_p = new sc_cor_pthread;
     DEBUGF << &main_cor << ": sc_cor_pkg_pthread::create(" 
-	       << cor_p << ")" << std::endl;
+               << cor_p << ")" << std::endl;
 
 
     // INITIALIZE OBJECT'S FIELDS FROM ARGUMENT LIST:
@@ -184,18 +184,18 @@ sc_cor_pkg_pthread::create( std::size_t stack_size, sc_cor_fn* fn, void* arg )
     cor_p->m_cor_fn_arg = arg;
 
 
-	// SET UP THREAD CREATION ATTRIBUTES:
-	//
-	// Use default values except for stack size. If stack size is non-zero
-	// set it.
+        // SET UP THREAD CREATION ATTRIBUTES:
+        //
+        // Use default values except for stack size. If stack size is non-zero
+        // set it.
 
     pthread_attr_t attr;
-	pthread_attr_init( &attr ); 
-	pthread_attr_setdetachstate( &attr, PTHREAD_CREATE_DETACHED );
-	if ( stack_size != 0 )
-	{
-		pthread_attr_setstacksize( &attr, stack_size );
-	}
+        pthread_attr_init( &attr ); 
+        pthread_attr_setdetachstate( &attr, PTHREAD_CREATE_DETACHED );
+        if ( stack_size != 0 )
+        {
+                pthread_attr_setstacksize( &attr, stack_size );
+        }
 
 
     // ALLOCATE THE POSIX THREAD TO USE AND FORCE SEQUENTIAL EXECUTION:
@@ -212,7 +212,7 @@ sc_cor_pkg_pthread::create( std::size_t stack_size, sc_cor_fn* fn, void* arg )
 
     pthread_mutex_lock( &create_mutex );
     DEBUGF << &main_cor << ": about to create actual thread " 
-	       << cor_p << std::endl;
+               << cor_p << std::endl;
     if ( pthread_create( &cor_p->m_thread, &attr,
              &sc_cor_pthread::invoke_module_method, (void*)cor_p ) )
     {
@@ -220,14 +220,14 @@ sc_cor_pkg_pthread::create( std::size_t stack_size, sc_cor_fn* fn, void* arg )
     }
 
     DEBUGF << &main_cor << ": main thread waiting for signal from " 
-	       << cor_p << std::endl;
+               << cor_p << std::endl;
     pthread_cond_wait( &create_condition, &create_mutex );
-	DEBUGF << &main_cor << ": main thread signaled by " 
-	       << cor_p << endl;
-	pthread_attr_destroy( &attr ); 
+        DEBUGF << &main_cor << ": main thread signaled by " 
+               << cor_p << endl;
+        pthread_attr_destroy( &attr ); 
     pthread_mutex_unlock( &create_mutex );
     DEBUGF << &main_cor << ": exiting sc_cor_pkg_pthread::create(" 
-	       << cor_p << ")" << std::endl;
+               << cor_p << ")" << std::endl;
 
     return cor_p;
 }
@@ -256,7 +256,7 @@ sc_cor_pkg_pthread::yield( sc_cor* next_cor_p )
     }
 
     active_cor_p = from_p; // When we come out of wait make ourselves active.
-	DEBUGF << from_p << " restarting after yield to " << to_p << std::endl;
+        DEBUGF << from_p << " restarting after yield to " << to_p << std::endl;
 }
 
 

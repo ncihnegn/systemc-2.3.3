@@ -61,30 +61,30 @@ public:
     explicit sc_clock( const char* name_ );
 
     sc_clock( const char* name_,
-	      const sc_time& period_,
-	      double         duty_cycle_ = 0.5,
-	      const sc_time& start_time_ = SC_ZERO_TIME,
-	      bool           posedge_first_ = true );
+              const sc_time& period_,
+              double         duty_cycle_ = 0.5,
+              const sc_time& start_time_ = SC_ZERO_TIME,
+              bool           posedge_first_ = true );
 
     sc_clock( const char* name_,
-	      double         period_v_,
-	      sc_time_unit   period_tu_,
-	      double         duty_cycle_ = 0.5 );
+              double         period_v_,
+              sc_time_unit   period_tu_,
+              double         duty_cycle_ = 0.5 );
 
     sc_clock( const char* name_,
-	      double         period_v_,
-	      sc_time_unit   period_tu_,
-	      double         duty_cycle_,
-	      double         start_time_v_,
-	      sc_time_unit   start_time_tu_,
-	      bool           posedge_first_ = true );
+              double         period_v_,
+              sc_time_unit   period_tu_,
+              double         duty_cycle_,
+              double         start_time_v_,
+              sc_time_unit   start_time_tu_,
+              bool           posedge_first_ = true );
 
     // for backward compatibility with 1.0
     sc_clock( const char* name_,
-	      double         period_,            // in default time units
-	      double         duty_cycle_ = 0.5,
-	      double         start_time_ = 0.0,  // in default time units
-	      bool           posedge_first_ = true );
+              double         period_,            // in default time units
+              double         duty_cycle_ = 0.5,
+              double         start_time_ = 0.0,  // in default time units
+              bool           posedge_first_ = true );
 
     // destructor (does nothing)
     virtual ~sc_clock();
@@ -94,11 +94,11 @@ public:
 
     // get the period
     const sc_time& period() const
-	{ return m_period; }
+        { return m_period; }
 
     // get the duty cycle
     double duty_cycle() const
-	{ return m_duty_cycle; }
+        { return m_duty_cycle; }
 
 
     // get the current time / clock characteristics
@@ -119,22 +119,22 @@ public:
     // for backward compatibility with 1.0
 
     sc_signal_in_if<bool>& signal()
-	{ return *this; }
+        { return *this; }
 
     const sc_signal_in_if<bool>& signal() const
-	{ return *this; }
+        { return *this; }
 
     static void start( const sc_time& duration )
-	{ sc_start( duration ); }
+        { sc_start( duration ); }
 
     static void start( double v, sc_time_unit tu )
-	{ sc_start( sc_time(v, tu) ); }
+        { sc_start( sc_time(v, tu) ); }
 
     static void start( double duration = -1 )
-	{ sc_start( duration ); }
+        { sc_start( duration ); }
 
     static void stop()
-	{ sc_stop(); }
+        { sc_stop(); }
 #endif
 
 protected:
@@ -156,12 +156,12 @@ protected:
 
 protected:
 
-    sc_time  m_period;		// the period of this clock
-    double   m_duty_cycle;	// the duty cycle (fraction of period)
-    sc_time  m_start_time;	// the start time of the first edge
+    sc_time  m_period;                // the period of this clock
+    double   m_duty_cycle;        // the duty cycle (fraction of period)
+    sc_time  m_start_time;        // the start time of the first edge
     bool     m_posedge_first;   // true if first edge is positive
-    sc_time  m_posedge_time;	// time till next positive edge
-    sc_time  m_negedge_time;	// time till next negative edge
+    sc_time  m_posedge_time;        // time till next positive edge
+    sc_time  m_negedge_time;        // time till next negative edge
 
     sc_event m_next_posedge_event;
     sc_event m_next_negedge_event;
@@ -183,8 +183,8 @@ void
 sc_clock::posedge_action()
 {
     m_next_negedge_event.notify_internal( m_negedge_time );
-	m_new_val = true;
-	request_update();
+    m_new_val = true;
+    request_update();
 }
 
 inline
@@ -192,8 +192,8 @@ void
 sc_clock::negedge_action()
 {
     m_next_posedge_event.notify_internal( m_posedge_time );
-	m_new_val = false;
-	request_update();
+    m_new_val = false;
+    request_update();
 }
 
 

@@ -60,7 +60,7 @@ protected:
     // constructor
 
     sc_mutex_if()
-	{}
+        {}
 
 private:
 

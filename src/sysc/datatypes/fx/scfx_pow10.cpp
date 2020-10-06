@@ -68,7 +68,7 @@ scfx_pow10::scfx_pow10()
     for( int i = 1; i < SCFX_POW10_TABLE_SIZE; i ++ )
     {
         m_pos[i].set_nan();
-	m_neg[i].set_nan();
+        m_neg[i].set_nan();
     }
 }
 
@@ -86,38 +86,38 @@ scfx_pow10::operator() ( int i )
     if( i > 0 )
     {
         int bit = scfx_find_msb( i );
-	scfx_rep result = *pos( bit );
-	if( bit )
-	{
-	    while( -- bit >= 0 )
-	    {
-	        if( ( 1 << bit ) & i )
-		{
-		    scfx_rep* tmp = mult_scfx_rep( result, *pos( bit ) );
-		    result = *tmp;
-		    delete tmp;
-		}
-	    }
-	}
-	return result;
+        scfx_rep result = *pos( bit );
+        if( bit )
+        {
+            while( -- bit >= 0 )
+            {
+                if( ( 1 << bit ) & i )
+                {
+                    scfx_rep* tmp = mult_scfx_rep( result, *pos( bit ) );
+                    result = *tmp;
+                    delete tmp;
+                }
+            }
+        }
+        return result;
     }
     
             i = -i;
-	int bit = scfx_find_msb( i );
-	scfx_rep result = *neg( bit );
-	if( bit )
-	{
-	    while( -- bit >= 0 )
-	    {
-	        if( ( 1 << bit ) & i )
-		{
-		    scfx_rep* tmp = mult_scfx_rep( result, *neg( bit ) );
-		    result = *tmp;
-		    delete tmp;
-		}
-	    }
-	}
-	return result;
+        int bit = scfx_find_msb( i );
+        scfx_rep result = *neg( bit );
+        if( bit )
+        {
+            while( -- bit >= 0 )
+            {
+                if( ( 1 << bit ) & i )
+                {
+                    scfx_rep* tmp = mult_scfx_rep( result, *neg( bit ) );
+                    result = *tmp;
+                    delete tmp;
+                }
+            }
+        }
+        return result;
    
 }
 
@@ -137,7 +137,7 @@ scfx_pow10::neg( int i )
 {
     if( ! m_neg[i].is_normal() )
     {
-	multiply( m_neg[i], *neg( i - 1 ), *neg( i - 1 ) );
+        multiply( m_neg[i], *neg( i - 1 ), *neg( i - 1 ) );
     }
     return &m_neg[i];
 }

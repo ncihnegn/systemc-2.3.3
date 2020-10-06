@@ -58,16 +58,16 @@ public:
     // constructors
 
     sc_buffer()
-	: base_type( sc_gen_unique_name( "buffer" ) )
-	{}
+        : base_type( sc_gen_unique_name( "buffer" ) )
+        {}
 
     explicit sc_buffer( const char* name_ )
-	: base_type( name_ )
-	{}
+        : base_type( name_ )
+        {}
 
     sc_buffer( const char* name_, const value_type& initial_value_ )
-      : base_type( name_, initial_value_ )
-    {}
+        : base_type( name_, initial_value_ )
+        {}
 
     // interface methods
 

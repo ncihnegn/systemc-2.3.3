@@ -53,10 +53,10 @@ static void sc_deprecated_report_ids(const char* method)
     if ( warn_report_ids_deprecated )
     {
         std::string message;
-	message = "integer report ids are deprecated, use string values: ";
-	message += method;
+        message = "integer report ids are deprecated, use string values: ";
+        message += method;
         warn_report_ids_deprecated=false;
-	SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_, message.c_str());
+        SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_, message.c_str());
     }
 }
 
@@ -90,11 +90,11 @@ sc_report::sc_report()
 }
 
 sc_report::sc_report(sc_severity severity_,
-		     const sc_msg_def* md_,
-		     const char* msg_,
-		     const char* file_,
-		     int line_,
-		     int verbosity_level)
+                     const sc_msg_def* md_,
+                     const char* msg_,
+                     const char* file_,
+                     int line_,
+                     int verbosity_level)
 : severity(severity_),
   md(md_),
   msg(empty_dup(msg_)),
@@ -146,14 +146,14 @@ sc_report::swap( sc_report & that )
 sc_report::~sc_report() SC_NOEXCEPT_
 {
     if ( file != empty_str )
-	delete[] file;
+        delete[] file;
     if ( msg != empty_str )
-	delete[] msg;
+        delete[] msg;
     delete timestamp;
     if ( process_name != empty_str )
         delete[] process_name;
     if ( m_what != empty_str )
-	delete[] m_what;
+        delete[] m_what;
 }
 
 const char * sc_report::get_msg_type() const
@@ -179,32 +179,32 @@ static bool warnings_are_errors = false;
 static const char unknown_id[] = "unknown id";
 
 void sc_report_handler::report(sc_severity severity_,
-			       int         id_,
-			       const char* msg_,
-			       const char* file_,
-			       int         line_ )
+                               int         id_,
+                               const char* msg_,
+                               const char* file_,
+                               int         line_ )
 {
     sc_msg_def * md = sc_report_handler::mdlookup(id_);
 
     if ( !md )
     {
-	md = sc_report_handler::add_msg_type(unknown_id);
-	md->id = id_;
+        md = sc_report_handler::add_msg_type(unknown_id);
+        md->id = id_;
     }
 
     if ( severity_ == SC_WARNING && warnings_are_errors )
-	severity_ = SC_ERROR;
+        severity_ = SC_ERROR;
 
     sc_actions actions = execute(md, severity_);
     sc_report rep(severity_, md, msg_, file_, line_);
 
     if ( actions & SC_CACHE_REPORT )
-	cache_report(rep);
+        cache_report(rep);
 
     if ( severity_ == SC_ERROR )
-	actions |= SC_THROW;
+        actions |= SC_THROW;
     else if ( severity_ == SC_FATAL )
-	actions |= SC_ABORT;
+        actions |= SC_ABORT;
 
     handler(rep, actions);
 }
@@ -213,32 +213,32 @@ void sc_report::register_id( int id, const char* msg )
 {
     sc_deprecated_report_ids("sc_report::register_id()");
     if( id < 0 ) {
-	SC_REPORT_ERROR( SC_ID_REGISTER_ID_FAILED_,
-			 "invalid report id" );
+        SC_REPORT_ERROR( SC_ID_REGISTER_ID_FAILED_,
+                         "invalid report id" );
         return;
     }
     if( msg == nullptr ) {
-	SC_REPORT_ERROR( SC_ID_REGISTER_ID_FAILED_,
-			 "invalid report message" );
+        SC_REPORT_ERROR( SC_ID_REGISTER_ID_FAILED_,
+                         "invalid report message" );
         return;
     }
     sc_msg_def * md = sc_report_handler::mdlookup(id);
 
     if ( !md )
-	md = sc_report_handler::add_msg_type(msg);
+        md = sc_report_handler::add_msg_type(msg);
 
     if ( !md ) {
-	SC_REPORT_ERROR( SC_ID_REGISTER_ID_FAILED_,
-			 "report_map insertion error" );
+        SC_REPORT_ERROR( SC_ID_REGISTER_ID_FAILED_,
+                         "report_map insertion error" );
         return;
     }
 
     if( md->id != -1 ) {
-	if( strcmp( msg, md->msg_type ) != 0 ) {
-	    SC_REPORT_ERROR( SC_ID_REGISTER_ID_FAILED_,
-			     "report id already exists" );
-	}
-	return;
+        if( strcmp( msg, md->msg_type ) != 0 ) {
+            SC_REPORT_ERROR( SC_ID_REGISTER_ID_FAILED_,
+                             "report id already exists" );
+        }
+        return;
     }
     md->id = id;
 }
@@ -265,21 +265,21 @@ void sc_report::suppress_id(int id_, bool suppress)
     sc_msg_def* md = sc_report_handler::mdlookup(id_);
 
     if ( md )
-	md->actions = suppress ? SC_DO_NOTHING: SC_UNSPECIFIED;
+        md->actions = suppress ? SC_DO_NOTHING: SC_UNSPECIFIED;
 }
 
 void sc_report::suppress_infos(bool suppress)
 {
     sc_deprecated_report_ids("sc_report::supress_infos");
     sc_report_handler::sev_actions[SC_INFO] =
-	suppress ? SC_DO_NOTHING: SC_DEFAULT_INFO_ACTIONS;
+        suppress ? SC_DO_NOTHING: SC_DEFAULT_INFO_ACTIONS;
 }
 
 void sc_report::suppress_warnings(bool suppress)
 {
     sc_deprecated_report_ids("sc_report::suppress_warnings");
     sc_report_handler::sev_actions[SC_WARNING] =
-	suppress ? SC_DO_NOTHING: SC_DEFAULT_WARNING_ACTIONS;
+        suppress ? SC_DO_NOTHING: SC_DEFAULT_WARNING_ACTIONS;
 }
 
 void sc_report::make_warnings_errors(bool flag)

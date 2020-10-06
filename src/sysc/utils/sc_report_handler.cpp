@@ -52,7 +52,7 @@ int sc_report_handler::verbosity_level = SC_MEDIUM;
 std::string sc_report_compose_message(const sc_report& rep)
 {
     static const char * severity_names[] = {
-	"Info", "Warning", "Error", "Fatal"
+        "Info", "Warning", "Error", "Fatal"
     };
     std::string str;
 
@@ -61,40 +61,40 @@ std::string sc_report_compose_message(const sc_report& rep)
 
     if ( rep.get_id() >= 0 ) // backward compatibility with 2.0+
     {
-	char idstr[64];
-	std::sprintf(idstr, "(%c%d) ",
-		"IWEF"[rep.get_severity()], rep.get_id());
-	str += idstr;
+        char idstr[64];
+        std::sprintf(idstr, "(%c%d) ",
+                "IWEF"[rep.get_severity()], rep.get_id());
+        str += idstr;
     }
     str += rep.get_msg_type();
 
     if( *rep.get_msg() )
     {
-	str += ": ";
-	str += rep.get_msg();
+        str += ": ";
+        str += rep.get_msg();
     }
     if( rep.get_severity() > SC_INFO )
     {
         char line_number_str[16];
-	str += "\nIn file: ";
-	str += rep.get_file_name();
-	str += ":";
-	std::sprintf(line_number_str, "%d", rep.get_line_number());
-	str += line_number_str;
-	sc_simcontext* simc = sc_get_curr_simcontext();
+        str += "\nIn file: ";
+        str += rep.get_file_name();
+        str += ":";
+        std::sprintf(line_number_str, "%d", rep.get_line_number());
+        str += line_number_str;
+        sc_simcontext* simc = sc_get_curr_simcontext();
 
-	if( simc && sc_is_running() )
-	{
-	    const char* proc_name = rep.get_process_name();
+        if( simc && sc_is_running() )
+        {
+            const char* proc_name = rep.get_process_name();
 
-	    if( proc_name )
-	    {
-		str += "\nIn process: ";
-		str += proc_name;
-		str += " @ ";
-		str += rep.get_time().to_string();
-	    }
-	}
+            if( proc_name )
+            {
+                str += "\nIn process: ";
+                str += proc_name;
+                str += " @ ";
+                str += rep.get_time().to_string();
+            }
+        }
     }
 
     return str;
@@ -106,22 +106,22 @@ std::string sc_report_compose_message(const sc_report& rep)
 class sc_log_file_handle
 {
 protected:
-	// not CopyConstructible
-	sc_log_file_handle(sc_log_file_handle const &);	
-	
-	// not CopyAssignable
-	void operator=(sc_log_file_handle const &);
+        // not CopyConstructible
+        sc_log_file_handle(sc_log_file_handle const &);        
+        
+        // not CopyAssignable
+        void operator=(sc_log_file_handle const &);
 
 public:
-	sc_log_file_handle();
-	sc_log_file_handle(const char *);
-	void update_file_name(const char *);
-	bool release();
-	::std::ofstream& operator*();
+        sc_log_file_handle();
+        sc_log_file_handle(const char *);
+        void update_file_name(const char *);
+        bool release();
+        ::std::ofstream& operator*();
 
 private:
-	std::string log_file_name;
-	::std::ofstream log_stream; 
+        std::string log_file_name;
+        ::std::ofstream log_stream; 
 };
 
 sc_log_file_handle::sc_log_file_handle()
@@ -135,52 +135,52 @@ sc_log_file_handle::sc_log_file_handle(const char * fname)
 void
 sc_log_file_handle::update_file_name(const char * fname)
 {
-	if (!fname)
-	{
-		release();
-	}
-	else //fname != NULL
-	{
-		if (log_file_name.empty())
-		{
-			if (log_stream.is_open()) //should be closed already
-				log_stream.close();
-			log_file_name = fname;
-			log_stream.open(fname);
-		}
-		else // log_file_name not empty
-		{
-			// filename changed?
-			if (log_file_name != fname)
-			{
-				// new filename
-				release();
-				log_file_name = fname;
-				log_stream.open(fname);
-			}
-			else
-			{
-				// nothing to do
-			}
-		}
-	}
+        if (!fname)
+        {
+                release();
+        }
+        else //fname != NULL
+        {
+                if (log_file_name.empty())
+                {
+                        if (log_stream.is_open()) //should be closed already
+                                log_stream.close();
+                        log_file_name = fname;
+                        log_stream.open(fname);
+                }
+                else // log_file_name not empty
+                {
+                        // filename changed?
+                        if (log_file_name != fname)
+                        {
+                                // new filename
+                                release();
+                                log_file_name = fname;
+                                log_stream.open(fname);
+                        }
+                        else
+                        {
+                                // nothing to do
+                        }
+                }
+        }
 }
 
 bool
 sc_log_file_handle::release()
 {
-	if (log_stream.is_open())
-	{
-		log_stream.close();
-		log_file_name.clear();
-		return false;
-	}
-	return true;
+        if (log_stream.is_open())
+        {
+                log_stream.close();
+                log_file_name.clear();
+                return false;
+        }
+        return true;
 }
 
 ::std::ofstream& 
 sc_log_file_handle::operator*()
-{ return log_stream;	}
+{ return log_stream;        }
 
 static sc_log_file_handle log_stream;
 
@@ -190,26 +190,26 @@ static sc_log_file_handle log_stream;
 //
 
 void sc_report_handler::default_handler(const sc_report& rep,
-					const sc_actions& actions)
+                                        const sc_actions& actions)
 {
     if ( actions & SC_DISPLAY )
-	::std::cout << ::std::endl << sc_report_compose_message(rep) << 
-		::std::endl;
+        ::std::cout << ::std::endl << sc_report_compose_message(rep) << 
+                ::std::endl;
 
     if ( (actions & SC_LOG) && get_log_file_name() )
     {
-		log_stream.update_file_name(get_log_file_name());
+                log_stream.update_file_name(get_log_file_name());
 
-	*log_stream << rep.get_time() << ": "
-	    << sc_report_compose_message(rep) << ::std::endl;
+        *log_stream << rep.get_time() << ": "
+            << sc_report_compose_message(rep) << ::std::endl;
     }
     if ( actions & SC_STOP )
     {
-	sc_stop_here(rep.get_msg_type(), rep.get_severity());
-	sc_stop();
+        sc_stop_here(rep.get_msg_type(), rep.get_severity());
+        sc_stop();
     }
     if ( actions & SC_INTERRUPT )
-	sc_interrupt_here(rep.get_msg_type(), rep.get_severity());
+        sc_interrupt_here(rep.get_msg_type(), rep.get_severity());
 
     if ( actions & SC_ABORT )
         sc_abort();
@@ -269,9 +269,9 @@ sc_msg_def * sc_report_handler::mdlookup(const char * msg_type_)
 
     for ( msg_def_items * item = messages; item; item = item->next )
     {
-	for ( int i = 0; i < item->count; ++i )
-	    if ( !strcmp(msg_type_, item->md[i].msg_type) )
-		return item->md + i;
+        for ( int i = 0; i < item->count; ++i )
+            if ( !strcmp(msg_type_, item->md[i].msg_type) )
+                return item->md + i;
     }
     return nullptr;
 }
@@ -282,10 +282,10 @@ sc_actions sc_report_handler::execute(sc_msg_def* md, sc_severity severity_)
     sc_actions actions = md->sev_actions[severity_]; // high prio
 
     if ( SC_UNSPECIFIED == actions ) // middle prio
-	actions = md->actions;
+        actions = md->actions;
 
     if ( SC_UNSPECIFIED == actions ) // the lowest prio
-	actions = sev_actions[severity_];
+        actions = sev_actions[severity_];
 
     actions &= ~suppress_mask; // higher than the high prio
     actions |= force_mask; // higher than above, and the limit is the highest
@@ -295,45 +295,45 @@ sc_actions sc_report_handler::execute(sc_msg_def* md, sc_severity severity_)
 
     // just increment counters and check for overflow
     if ( md->sev_call_count[severity_] < UINT_MAX )
-	md->sev_call_count[severity_]++;
+        md->sev_call_count[severity_]++;
     if ( md->call_count < UINT_MAX )
-	md->call_count++;
+        md->call_count++;
     if ( sev_call_count[severity_] < UINT_MAX )
-	sev_call_count[severity_]++;
+        sev_call_count[severity_]++;
 
     if ( md->limit_mask & (1 << (severity_ + 1)) )
     {
-	limit = md->sev_limit + severity_;
-	call_count = md->sev_call_count + severity_;
+        limit = md->sev_limit + severity_;
+        call_count = md->sev_call_count + severity_;
     }
     if ( !limit && (md->limit_mask & 1) )
     {
-	limit = &md->limit;
-	call_count = &md->call_count;
+        limit = &md->limit;
+        call_count = &md->call_count;
     }
     if ( !limit )
     {
-	limit = sev_limit + severity_;
-	call_count = sev_call_count + severity_;
+        limit = sev_limit + severity_;
+        call_count = sev_call_count + severity_;
     }
     if ( *limit == 0 )
     {
-	// stop limit disabled
+        // stop limit disabled
     }
     else if ( *limit != UINT_MAX )
     {
-	if ( *call_count >= *limit )
-	    actions |= SC_STOP; // force sc_stop()
+        if ( *call_count >= *limit )
+            actions |= SC_STOP; // force sc_stop()
     }
     return actions;
 }
 
 void sc_report_handler::report( sc_severity severity_, 
                                 const char* msg_type_, 
-				const char* msg_, 
-				int verbosity_, 
-				const char* file_, 
-				int line_ )
+                                const char* msg_, 
+                                int verbosity_, 
+                                const char* file_, 
+                                int line_ )
 {
     sc_msg_def * md = mdlookup(msg_type_);
 
@@ -346,22 +346,22 @@ void sc_report_handler::report( sc_severity severity_,
     // Process the report:
 
     if ( !md )
-	md = add_msg_type(msg_type_);
+        md = add_msg_type(msg_type_);
 
     sc_actions actions = execute(md, severity_);
     sc_report rep(severity_, md, msg_, file_, line_, verbosity_);
 
     if ( actions & SC_CACHE_REPORT )
-	cache_report(rep);
+        cache_report(rep);
 
     handler(rep, actions);
 }
 
 void sc_report_handler::report(sc_severity severity_,
-			       const char * msg_type_,
-			       const char * msg_,
-			       const char * file_,
-			       int line_)
+                               const char * msg_type_,
+                               const char * msg_,
+                               const char * file_,
+                               int line_)
 {
     sc_msg_def * md = mdlookup(msg_type_);
 
@@ -374,13 +374,13 @@ void sc_report_handler::report(sc_severity severity_,
 
 
     if ( !md )
-	md = add_msg_type(msg_type_);
+        md = add_msg_type(msg_type_);
 
     sc_actions actions = execute(md, severity_);
     sc_report rep(severity_, md, msg_, file_, line_);
 
     if ( actions & SC_CACHE_REPORT )
-	cache_report(rep);
+        cache_report(rep);
 
     handler(rep, actions);
 }
@@ -407,15 +407,15 @@ void sc_report_handler::initialize()
 
     while ( items != &msg_terminator )
     {
-	for ( int i = 0; i < items->count; ++i )
-	{
-	    items->md[i].call_count = 0;
-	    items->md[i].sev_call_count[SC_INFO]    = 0;
-	    items->md[i].sev_call_count[SC_WARNING] = 0;
-	    items->md[i].sev_call_count[SC_ERROR]   = 0;
-	    items->md[i].sev_call_count[SC_FATAL]   = 0;
-	}
-	items = items->next;
+        for ( int i = 0; i < items->count; ++i )
+        {
+            items->md[i].call_count = 0;
+            items->md[i].sev_call_count[SC_INFO]    = 0;
+            items->md[i].sev_call_count[SC_WARNING] = 0;
+            items->md[i].sev_call_count[SC_ERROR]   = 0;
+            items->md[i].sev_call_count[SC_FATAL]   = 0;
+        }
+        items = items->next;
     }
 
     // PROCESS ANY ENVIRONMENTAL OVERRIDES:
@@ -442,23 +442,23 @@ void sc_report_handler::release()
 
     while ( items != &msg_terminator )
     {
-	for ( int i = 0; i < items->count; ++i )
-	    if ( items->md[i].msg_type == items->md[i].msg_type_data )
-		free(items->md[i].msg_type_data);
+        for ( int i = 0; i < items->count; ++i )
+            if ( items->md[i].msg_type == items->md[i].msg_type_data )
+                free(items->md[i].msg_type_data);
 
-	msg_def_items * prev = items;
-	items = items->next;
+        msg_def_items * prev = items;
+        items = items->next;
 
-	if ( prev->allocated )
-	{
-	    delete [] prev->md;
-	    delete prev;
-	}
-	else
-	{
-	    prev->next = newitems;
-	    newitems = prev;
-	}
+        if ( prev->allocated )
+        {
+            delete [] prev->md;
+            delete prev;
+        }
+        else
+        {
+            prev->next = newitems;
+            newitems = prev;
+        }
     }
     messages = newitems;
 }
@@ -469,34 +469,34 @@ sc_msg_def * sc_report_handler::add_msg_type(const char * msg_type_)
     int          msg_type_len;
 
     if ( md )
-	return md;
+        return md;
 
     auto * items = new msg_def_items;
 
     if ( !items )
-	return nullptr;
+        return nullptr;
 
     items->count = 1;
     items->md = new sc_msg_def[items->count];
 
     if ( !items->md )
     {
-	delete items;
-	return nullptr;
+        delete items;
+        return nullptr;
     }
     memset(items->md, 0, sizeof(sc_msg_def) * items->count);
     msg_type_len = strlen(msg_type_);
     if ( msg_type_len > 0 )
     {
-	items->md->msg_type_data = (char*) malloc(msg_type_len+1);
-	strcpy( items->md->msg_type_data, msg_type_ );
-	items->md->id = -1; // backward compatibility with 2.0+
+        items->md->msg_type_data = (char*) malloc(msg_type_len+1);
+        strcpy( items->md->msg_type_data, msg_type_ );
+        items->md->id = -1; // backward compatibility with 2.0+
     }
     else
     {
-	delete [] items->md;
-	delete items;
-	return nullptr;
+        delete [] items->md;
+        delete items;
+        return nullptr;
     }
     items->md->msg_type = items->md->msg_type_data;
     add_static_msg_types(items);
@@ -513,7 +513,7 @@ void sc_report_handler::add_static_msg_types(msg_def_items * items)
 }
 
 sc_actions sc_report_handler::set_actions(sc_severity severity_,
-					  sc_actions actions_)
+                                          sc_actions actions_)
 {
     sc_actions old = sev_actions[severity_];
     sev_actions[severity_] = actions_;
@@ -521,12 +521,12 @@ sc_actions sc_report_handler::set_actions(sc_severity severity_,
 }
 
 sc_actions sc_report_handler::set_actions(const char * msg_type_,
-					  sc_actions actions_)
+                                          sc_actions actions_)
 {
     sc_msg_def * md = mdlookup(msg_type_);
 
     if ( !md )
-	md = add_msg_type(msg_type_);
+        md = add_msg_type(msg_type_);
 
     sc_actions old = md->actions;
     md->actions = actions_;
@@ -535,13 +535,13 @@ sc_actions sc_report_handler::set_actions(const char * msg_type_,
 }
 
 sc_actions sc_report_handler::set_actions(const char * msg_type_,
-					  sc_severity severity_,
-					  sc_actions actions_)
+                                          sc_severity severity_,
+                                          sc_actions actions_)
 {
     sc_msg_def * md = mdlookup(msg_type_);
 
     if ( !md )
-	md = add_msg_type(msg_type_);
+        md = add_msg_type(msg_type_);
 
     sc_actions old = md->sev_actions[severity_];
     md->sev_actions[severity_] = actions_;
@@ -563,38 +563,38 @@ int sc_report_handler::stop_after(const char * msg_type_, int limit)
     sc_msg_def * md = mdlookup(msg_type_);
 
     if ( !md )
-	md = add_msg_type(msg_type_);
+        md = add_msg_type(msg_type_);
 
     int old = md->limit_mask & 1 ? md->limit: UINT_MAX;
 
     if ( limit < 0 )
-	md->limit_mask &= ~1;
+        md->limit_mask &= ~1;
     else
     {
-	md->limit_mask |= 1;
-	md->limit = limit;
+        md->limit_mask |= 1;
+        md->limit = limit;
     }
     return old;
 }
 
 int sc_report_handler::stop_after(const char * msg_type_,
-				  sc_severity severity_,
-				  int limit)
+                                  sc_severity severity_,
+                                  int limit)
 {
     sc_msg_def * md = mdlookup(msg_type_);
 
     if ( !md )
-	md = add_msg_type(msg_type_);
+        md = add_msg_type(msg_type_);
 
     int mask = 1 << (severity_ + 1);
     int old = md->limit_mask & mask ?  md->sev_limit[severity_]: UINT_MAX;
 
     if ( limit < 0 )
-	md->limit_mask &= ~mask;
+        md->limit_mask &= ~mask;
     else
     {
-	md->limit_mask |= mask;
-	md->sev_limit[severity_] = limit;
+        md->limit_mask |= mask;
+        md->sev_limit[severity_] = limit;
     }
     return old;
 }
@@ -642,7 +642,7 @@ sc_report* sc_report_handler::get_cached_report()
     sc_process_b * proc = sc_get_current_process_b();
 
     if ( proc )
-	return proc->get_last_report();
+        return proc->get_last_report();
 
     return last_global_report;
 }
@@ -652,11 +652,11 @@ void sc_report_handler::clear_cached_report()
     sc_process_b * proc = sc_get_current_process_b();
 
     if ( proc )
-	proc->set_last_report(nullptr);
+        proc->set_last_report(nullptr);
     else
     {
-	delete last_global_report;
-	last_global_report = nullptr;
+        delete last_global_report;
+        last_global_report = nullptr;
     }
 }
 
@@ -664,11 +664,11 @@ sc_actions sc_report_handler::get_new_action_id()
 {
     for ( sc_actions p = 1; p; p <<= 1 )
     {
-	if ( !(p & available_actions) ) // free
-	{
-	    available_actions |= p;
-	    return p;
-	}
+        if ( !(p & available_actions) ) // free
+        {
+            available_actions |= p;
+            return p;
+        }
     }
     return SC_UNSPECIFIED;
 }
@@ -677,12 +677,12 @@ bool sc_report_handler::set_log_file_name(const char* name_)
 {
     if ( !name_ )
     {
-	free(log_file_name);
-	log_file_name = nullptr;
-	return false;
+        free(log_file_name);
+        log_file_name = nullptr;
+        return false;
     }
     if ( log_file_name )
-	return false;
+        return false;
 
     log_file_name = (char*)malloc(strlen(name_)+1);
     strcpy(log_file_name, name_);
@@ -698,11 +698,11 @@ void sc_report_handler::cache_report(const sc_report& rep)
 {
     sc_process_b * proc = sc_get_current_process_b();
     if ( proc )
-	proc->set_last_report(new sc_report(rep));
+        proc->set_last_report(new sc_report(rep));
     else
     {
-	delete last_global_report;
-	last_global_report = new sc_report(rep);
+        delete last_global_report;
+        last_global_report = new sc_report(rep);
     }
 }
 
@@ -714,9 +714,9 @@ sc_msg_def * sc_report_handler::mdlookup(int id)
 {
     for ( msg_def_items * item = messages; item; item = item->next )
     {
-	for ( int i = 0; i < item->count; ++i )
-	    if ( id == item->md[i].id )
-		return item->md + i;
+        for ( int i = 0; i < item->count; ++i )
+            if ( id == item->md[i].id )
+                return item->md + i;
     }
     return nullptr;
 }
@@ -804,11 +804,11 @@ SC_API const char SC_ID_ABORT_[]              = "simulation aborted";
 
 #define DEFINE_MSG(id,n)                                                     \
     {                                                                        \
-	(id),                                                                \
-	0u, {0u}, /* actions */                                              \
-	0u, {0u}, 0u, /* limits */                                           \
-	0u, {0u}, NULL, /* call counters */                                  \
-	n                                                                    \
+        (id),                                                                \
+        0u, {0u}, /* actions */                                              \
+        0u, {0u}, 0u, /* limits */                                           \
+        0u, {0u}, NULL, /* call counters */                                  \
+        n                                                                    \
     }
 
 static sc_msg_def default_msgs[] = {

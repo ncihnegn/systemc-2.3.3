@@ -95,53 +95,53 @@ sc_trace_file::event_trigger_stamp(const sc_event& ev)
 
 SC_API void
 sc_trace( sc_trace_file* tf,
-	  const sc_signal_in_if<char>& object,
-	  const std::string& name,
-	  int width )
+          const sc_signal_in_if<char>& object,
+          const std::string& name,
+          int width )
 {
     if( tf ) {
-	tf->trace( object.read(), name, width );
+        tf->trace( object.read(), name, width );
     }
 }
 
 SC_API void
 sc_trace( sc_trace_file* tf,
-	  const sc_signal_in_if<short>& object,
-	  const std::string& name,
-	  int width )
+          const sc_signal_in_if<short>& object,
+          const std::string& name,
+          int width )
 {
     if( tf ) {
-	tf->trace( object.read(), name, width );
+        tf->trace( object.read(), name, width );
     }
 }
 
 SC_API void
 sc_trace( sc_trace_file* tf,
-	  const sc_signal_in_if<int>& object,
-	  const std::string& name,
-	  int width )
+          const sc_signal_in_if<int>& object,
+          const std::string& name,
+          int width )
 {
     if( tf ) {
-	tf->trace( object.read(), name, width );
+        tf->trace( object.read(), name, width );
     }
 }
 
 SC_API void
 sc_trace( sc_trace_file* tf,
-	  const sc_signal_in_if<long>& object,
-	  const std::string& name,
-	  int width )
+          const sc_signal_in_if<long>& object,
+          const std::string& name,
+          int width )
 {
     if( tf ) {
-	tf->trace( object.read(), name, width );
+        tf->trace( object.read(), name, width );
     }
 }
 
 
 SC_API void
 sc_trace(sc_trace_file* /* not used */,
-	 const void* /* not used */,
-	 const std::string& name)
+         const void* /* not used */,
+         const std::string& name)
 {
     SC_REPORT_WARNING( SC_ID_TRACING_OBJECT_IGNORED_, name.c_str() );
 }
@@ -154,7 +154,7 @@ SC_API void                                                                   \
 sc_trace( sc_trace_file* tf, const tp& object, const std::string& name )      \
 {                                                                             \
     if( tf ) {                                                                \
-	tf->trace( object, name );                                                \
+        tf->trace( object, name );                                                \
     }                                                                         \
 }
 
@@ -163,7 +163,7 @@ SC_API void                                                                   \
 sc_trace( sc_trace_file* tf, const tp* object, const std::string& name )      \
 {                                                                             \
     if( tf ) {                                                                \
-	tf->trace( *object, name );                                               \
+        tf->trace( *object, name );                                               \
     }                                                                         \
 }
 
@@ -178,7 +178,7 @@ sc_trace( sc_trace_file* tf, const tp& object, const std::string& name,       \
           int width)                                                          \
 {                                                                             \
     if( tf ) {                                                                \
-	tf->trace( object, name, width );                                         \
+        tf->trace( object, name, width );                                         \
     }                                                                         \
 }
 
@@ -188,7 +188,7 @@ sc_trace( sc_trace_file* tf, const tp* object, const std::string& name,       \
           int width)                                                          \
 {                                                                             \
     if( tf ) {                                                                \
-	tf->trace( *object, name, width );                                        \
+        tf->trace( *object, name, width );                                        \
     }                                                                         \
 }
 
@@ -247,9 +247,9 @@ DEFN_TRACE_FUNC_A( sc_dt::sc_fxnum_fast )
 
 SC_API void
 sc_trace( sc_trace_file* tf,
-	  const unsigned int& object,
-	  const std::string& name,
-	  const char** enum_literals )
+          const unsigned int& object,
+          const std::string& name,
+          const char** enum_literals )
 {
     static bool warn_sc_trace_literals=true;
     if ( warn_sc_trace_literals )

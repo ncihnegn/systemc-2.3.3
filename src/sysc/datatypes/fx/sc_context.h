@@ -66,7 +66,7 @@
 
 
 namespace sc_core {
-	class sc_process_b;
+        class sc_process_b;
 }
 
 using sc_core::default_ptr_hash_fn; // To keep HP aCC happy.
@@ -244,8 +244,8 @@ sc_context<T>::sc_context( const T& value_, sc_context_begin begin_ )
 {
     if( begin_ == SC_NOW )
     {
-	m_old_value_ptr = m_def_value_ptr;
-	m_def_value_ptr = &m_value;
+        m_old_value_ptr = m_def_value_ptr;
+        m_def_value_ptr = &m_value;
     }
 }
 
@@ -256,7 +256,7 @@ sc_context<T>::~sc_context()
     if( m_old_value_ptr != 0 )
     {
         m_def_value_ptr = m_old_value_ptr;
-	m_old_value_ptr = 0;
+        m_old_value_ptr = 0;
     }
 }
 
@@ -268,8 +268,8 @@ sc_context<T>::begin()
 {
     if( m_old_value_ptr == 0 )
     {
-	m_old_value_ptr = m_def_value_ptr;
-	m_def_value_ptr = &m_value;
+        m_old_value_ptr = m_def_value_ptr;
+        m_def_value_ptr = &m_value;
     }
     else
     {
@@ -285,7 +285,7 @@ sc_context<T>::end()
     if( m_old_value_ptr != 0 )
     {
         m_def_value_ptr = m_old_value_ptr;
-	m_old_value_ptr = 0;
+        m_old_value_ptr = 0;
     }
     else
     {

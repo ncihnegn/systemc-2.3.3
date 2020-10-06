@@ -92,7 +92,7 @@ public:
     // interface methods
 
     virtual void register_port( sc_port_base&, const char* )
-	{}
+        {}
 
 
     // write the new value

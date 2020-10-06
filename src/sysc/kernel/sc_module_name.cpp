@@ -61,7 +61,7 @@ sc_module_name::~sc_module_name()
         if( this != smn ) {
             SC_REPORT_ERROR( SC_ID_SC_MODULE_NAME_USE_, nullptr );
         }
-	if ( m_module_p ) m_module_p->end_module();
+        if ( m_module_p ) m_module_p->end_module();
     }
 }
 

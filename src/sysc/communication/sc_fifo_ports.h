@@ -137,7 +137,7 @@ public:
     // get the data written event
 
     const sc_event& data_written_event() const
-	{ return (*this)->data_written_event(); }
+        { return (*this)->data_written_event(); }
 
 
     // use for static sensitivity to data written event
@@ -261,7 +261,7 @@ public:
     // get the data read event
 
     const sc_event& data_read_event() const
-	{ return (*this)->data_read_event(); }
+        { return (*this)->data_read_event(); }
 
 
     // use for static sensitivity to data read event

@@ -133,19 +133,19 @@ public:
     const char * get_msg_type() const;
 
     const char * get_msg() const
-	{ return msg; }
+        { return msg; }
 
     sc_severity get_severity() const
-	{ return severity; }
+        { return severity; }
 
     const char * get_file_name() const
-	{ return file; }
+        { return file; }
 
     int get_line_number() const
-	{ return line; }
+        { return line; }
 
     const sc_time & get_time() const
-	{ return *timestamp; }
+        { return *timestamp; }
 
     const char* get_process_name() const;
 
@@ -155,19 +155,19 @@ public:
 
     virtual const char* what() const SC_NOEXCEPT_
         {
-	    return m_what;
-	}
+            return m_what;
+        }
 
     void swap( sc_report& );
 
 protected:
 
     sc_report(sc_severity,
-	      const sc_msg_def*,
-	      const char* msg,
-	      const char* file,
-	      int line,
-	      int verbosity_level=SC_MEDIUM);
+              const sc_msg_def*,
+              const char* msg,
+              const char* file,
+              int line,
+              int verbosity_level=SC_MEDIUM);
 
     sc_severity        severity;
     const sc_msg_def*  md;

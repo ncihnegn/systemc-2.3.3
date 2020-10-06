@@ -62,27 +62,27 @@ class SC_API sc_report_handler
 {
 public:
     static void report(sc_severity,
-		       const char* msg_type,
-		       const char* msg,
-		       const char* file,
-		       int line);
+                       const char* msg_type,
+                       const char* msg,
+                       const char* file,
+                       int line);
 
     static void report( sc_severity, 
                         const char* msg_type, 
-			const char* msg, 
+                        const char* msg, 
                         int verbosity, 
-			const char* file, 
-			int line );
+                        const char* file, 
+                        int line );
 
     static sc_actions set_actions(sc_severity,
-				  sc_actions = SC_UNSPECIFIED);
+                                  sc_actions = SC_UNSPECIFIED);
 
     static sc_actions set_actions(const char * msg_type,
-				  sc_actions = SC_UNSPECIFIED);
+                                  sc_actions = SC_UNSPECIFIED);
 
     static sc_actions set_actions(const char * msg_type,
-				  sc_severity,
-				  sc_actions = SC_UNSPECIFIED);
+                                  sc_severity,
+                                  sc_actions = SC_UNSPECIFIED);
 
     static int stop_after(sc_severity, int limit = -1);
     static int stop_after(const char* msg_type, int limit = -1);
@@ -128,10 +128,10 @@ public: // private, actually
 
     struct msg_def_items
     {
-	sc_msg_def*     md;        // have to point to sc_msg_def-s
-	int             count;     // set to number of items in md[]
-	bool            allocated; // used internally, previous value ignored
-	msg_def_items*  next;      // used internally, previous value ignored
+        sc_msg_def*     md;        // have to point to sc_msg_def-s
+        int             count;     // set to number of items in md[]
+        bool            allocated; // used internally, previous value ignored
+        msg_def_items*  next;      // used internally, previous value ignored
     };
 
     static void add_static_msg_types(msg_def_items *);
@@ -168,10 +168,10 @@ private: // backward compatibility with 2.0+
 public:
 
     static void report(sc_severity,
-		       int         id,
-		       const char* msg_,
-		       const char* file,
-		       int         line);
+                       int         id,
+                       const char* msg_,
+                       const char* file,
+                       int         line);
 
 };
 

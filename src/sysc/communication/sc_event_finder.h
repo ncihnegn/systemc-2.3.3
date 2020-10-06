@@ -104,7 +104,7 @@ public:
     // constructor
 
     sc_event_finder_t( const sc_port_base& port_,
-		       const sc_event& (IF::*event_method_) () const )
+                       const sc_event& (IF::*event_method_) () const )
         : sc_event_finder( port_ ), m_event_method( event_method_ )
         {}
 

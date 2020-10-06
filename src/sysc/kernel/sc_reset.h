@@ -128,14 +128,14 @@ class SC_API sc_reset {
   protected:
     static void reconcile_resets(sc_reset_finder* reset_finder_q);
     static void 
-	reset_signal_is(bool async, const sc_signal_in_if<bool>& iface, 
-	                bool level);
+        reset_signal_is(bool async, const sc_signal_in_if<bool>& iface, 
+                        bool level);
     static void 
-	reset_signal_is( bool async, const sc_in<bool>& port, bool level);
+        reset_signal_is( bool async, const sc_in<bool>& port, bool level);
     static void 
-	reset_signal_is( bool async, const sc_inout<bool>& port, bool level);
+        reset_signal_is( bool async, const sc_inout<bool>& port, bool level);
     static void 
-	reset_signal_is( bool async, const sc_out<bool>& port, bool level);
+        reset_signal_is( bool async, const sc_out<bool>& port, bool level);
 
   protected:
     sc_reset( const sc_signal_in_if<bool>* iface_p ) :

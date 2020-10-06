@@ -326,12 +326,12 @@ sc_string_old sc_string_old::make_str(long n) // convert integer to string
 
 #define DEFINE_RELOP(op) \
 bool sc_string_old::operator op( const char* s ) const \
-{						\
-    return strcmp( rep->str, s ) op 0;		\
-}						\
+{                                                \
+    return strcmp( rep->str, s ) op 0;                \
+}                                                \
 bool sc_string_old::operator op( const sc_string_old& s ) const \
-{						\
-    return strcmp( rep->str, s.rep->str ) op 0;	\
+{                                                \
+    return strcmp( rep->str, s.rep->str ) op 0;        \
 }
 
 DEFINE_RELOP(==)
@@ -445,25 +445,25 @@ sc_string_old::fmt_length()const
 {
     unsigned result=0;
     if((*this)[0]!='%')
-	return 0;
-    	result++;
+        return 0;
+            result++;
     if(is_delimiter("-+0 #",result)) // flags
-	result++;
+        result++;
     while(is_delimiter("0123456789*",result)) // width
-	result++;
+        result++;
     if(rep->str[result]=='.') // precision
     {
-	result++;
-	unsigned old_result = result;
-	while(is_delimiter("0123456789*",result)) result++;
-	if(old_result == result) //error in format
-	    return 0;
+        result++;
+        unsigned old_result = result;
+        while(is_delimiter("0123456789*",result)) result++;
+        if(old_result == result) //error in format
+            return 0;
     }
     if(is_delimiter("hlL",result)) result++; // I64 is not supported
     if(is_delimiter("cCdiouxXeEfgGnpsS",result)) 
-	result++;
+        result++;
     else // error in format
-	return 0;
+        return 0;
     return result;
 }
 
@@ -499,7 +499,7 @@ sc_string_old::remove(unsigned index, unsigned length)
 {
     test((int)index);
     if(length!=0)
-	(*this) = substr(0,index-1) + substr(index+length,this->length()-1);
+        (*this) = substr(0,index-1) + substr(index+length,this->length()-1);
     return *this;
 }
 
@@ -527,7 +527,7 @@ sc_string_old::contains(char c)const
     int i=0;
     bool found = false;
     while(!found && i<len)
-	found = rep->str[i++]==c;
+        found = rep->str[i++]==c;
     return found;
 }
 
@@ -538,9 +538,9 @@ sc_string_old::uppercase()const
     sc_string_old temp(*this);
     for(int i=0; i<len; i++)
     {
-	char c = temp.rep->str[i];
-	if(c>='a' && c<='z')
-	    temp.rep->str[i] = static_cast<char>( c-32 );
+        char c = temp.rep->str[i];
+        if(c>='a' && c<='z')
+            temp.rep->str[i] = static_cast<char>( c-32 );
     }
     return temp;
 }
@@ -552,9 +552,9 @@ sc_string_old::lowercase()const
     sc_string_old temp(*this);
     for(int i=0; i<len; i++)
     {
-	char c = temp.rep->str[i];
-	if(c>='A' && c<='Z')
-	    temp.rep->str[i] = static_cast<char>( c+32 );
+        char c = temp.rep->str[i];
+        if(c>='A' && c<='Z')
+            temp.rep->str[i] = static_cast<char>( c+32 );
     }
     return temp;
 }
@@ -580,7 +580,7 @@ operator >> ( ::std::istream& is, sc_string_old& s )
 
     for( ; is.good() && ! isspace( c ); is.get( c ) ) {
         if( i > s.rep->alloc - 2 ) {
-	    s.rep->str[i] = '\0';
+            s.rep->str[i] = '\0';
             s.rep->resize( (int) (s.rep->alloc * 1.5) );
             p = s.rep->str + i;
         }

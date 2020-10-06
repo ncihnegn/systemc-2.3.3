@@ -138,27 +138,27 @@ next_trigger( sc_simcontext* = sc_get_curr_simcontext() );
 extern
 SC_API void
 next_trigger( const sc_event&,
-	      sc_simcontext* = sc_get_curr_simcontext() );
+              sc_simcontext* = sc_get_curr_simcontext() );
 
 extern
 SC_API void
 next_trigger( const sc_event_or_list&,
-	      sc_simcontext* = sc_get_curr_simcontext() );
+              sc_simcontext* = sc_get_curr_simcontext() );
 
 extern
 SC_API void
 next_trigger( const sc_event_and_list&,
-	      sc_simcontext* = sc_get_curr_simcontext() );
+              sc_simcontext* = sc_get_curr_simcontext() );
 
 extern
 SC_API void
 next_trigger( const sc_time&,
-	      sc_simcontext* = sc_get_curr_simcontext() );
+              sc_simcontext* = sc_get_curr_simcontext() );
 
 inline
 SC_API void
 next_trigger( double v, sc_time_unit tu,
-	      sc_simcontext* simc = sc_get_curr_simcontext() )
+              sc_simcontext* simc = sc_get_curr_simcontext() )
 {
     next_trigger( sc_time( v, tu, simc ), simc );
 }
@@ -166,14 +166,14 @@ next_trigger( double v, sc_time_unit tu,
 extern
 SC_API void
 next_trigger( const sc_time&,
-	      const sc_event&,
-	      sc_simcontext* = sc_get_curr_simcontext() );
+              const sc_event&,
+              sc_simcontext* = sc_get_curr_simcontext() );
 
 inline
 SC_API void
 next_trigger( double v, sc_time_unit tu,
-	      const sc_event& e,
-	      sc_simcontext* simc = sc_get_curr_simcontext() )
+              const sc_event& e,
+              sc_simcontext* simc = sc_get_curr_simcontext() )
 {
     next_trigger( sc_time( v, tu, simc ), e, simc );
 }
@@ -181,14 +181,14 @@ next_trigger( double v, sc_time_unit tu,
 extern
 SC_API void
 next_trigger( const sc_time&,
-	      const sc_event_or_list&,
-	      sc_simcontext* = sc_get_curr_simcontext() );
+              const sc_event_or_list&,
+              sc_simcontext* = sc_get_curr_simcontext() );
 
 inline
 SC_API void
 next_trigger( double v, sc_time_unit tu,
-	      const sc_event_or_list& el,
-	      sc_simcontext* simc = sc_get_curr_simcontext() )
+              const sc_event_or_list& el,
+              sc_simcontext* simc = sc_get_curr_simcontext() )
 {
     next_trigger( sc_time( v, tu, simc ), el, simc );
 }
@@ -196,14 +196,14 @@ next_trigger( double v, sc_time_unit tu,
 extern
 SC_API void
 next_trigger( const sc_time&,
-	      const sc_event_and_list&,
-	      sc_simcontext* = sc_get_curr_simcontext() );
+              const sc_event_and_list&,
+              sc_simcontext* = sc_get_curr_simcontext() );
 
 inline
 void
 next_trigger( double v, sc_time_unit tu,
-	      const sc_event_and_list& el,
-	      sc_simcontext* simc = sc_get_curr_simcontext() )
+              const sc_event_and_list& el,
+              sc_simcontext* simc = sc_get_curr_simcontext() )
 {
     next_trigger( sc_time( v, tu, simc ), el, simc );
 }
@@ -220,8 +220,8 @@ timed_out( sc_simcontext* = sc_get_curr_simcontext() );
 extern
 SC_API void
 sc_set_location( const char*,
-		 int,
-		 sc_simcontext* = sc_get_curr_simcontext() );
+                 int,
+                 sc_simcontext* = sc_get_curr_simcontext() );
 
 } // namespace sc_core
 

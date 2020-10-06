@@ -85,7 +85,7 @@
  * On MacOS X, more documentation is available by installing the "Developer
  * Tools". Useful macros and documentation can be found in the system headers
  * files such as asm.h, asm_help.h etc. (see /usr/architecture/ppc/ or
- * /System/Library/Frameworks/Kernel.framework/Headers/architecture/ppc/).	
+ * /System/Library/Frameworks/Kernel.framework/Headers/architecture/ppc/).        
 
  *****************************************************************************/
 
@@ -302,19 +302,19 @@
 typedef unsigned long PPC_W;
 
 /* Stack pointer must always be a multiple of 16 */
-#define	PPC_STACK_INCR	16		
-#define	PPC_ROUND_STACK(length)	\
-	(((length)+PPC_STACK_INCR-1) & ~(PPC_STACK_INCR-1))
+#define        PPC_STACK_INCR        16                
+#define        PPC_ROUND_STACK(length)        \
+        (((length)+PPC_STACK_INCR-1) & ~(PPC_STACK_INCR-1))
 
 
-#define PPC_LINKAGE_AREA 24					
+#define PPC_LINKAGE_AREA 24                                        
 #define PPC_CR_SAVE 4
 #define PPC_LR_SAVE 8
 
 #define PPC_PARAM_AREA(n) (4*(n))
 
-#define PPC_GPR_SAVE_AREA (4*19)		/* GPR13-GPR31 must be saved */
-#define PPC_FPR_SAVE_AREA (8*18)		/* FPR14-FPR31 must be saved */
+#define PPC_GPR_SAVE_AREA (4*19)                /* GPR13-GPR31 must be saved */
+#define PPC_FPR_SAVE_AREA (8*18)                /* FPR14-FPR31 must be saved */
 
 /* Define parameter offset on the stack.
  * NOTICE: Parameters are numbered 0, 1, ..., n. 
@@ -361,7 +361,7 @@ typedef unsigned long PPC_W;
  */
 
 #define QUICKTHREADS_BLOCKI_FRAME_SIZE \
-	PPC_ROUND_STACK(PPC_LINKAGE_AREA+PPC_PARAM_AREA(4)+PPC_GPR_SAVE_AREA)
+        PPC_ROUND_STACK(PPC_LINKAGE_AREA+PPC_PARAM_AREA(4)+PPC_GPR_SAVE_AREA)
 
 /* Offset to the base of the GPR save area. Save from GPR13 to GPR31
  * increasing address. 
@@ -403,7 +403,7 @@ typedef unsigned long PPC_W;
  */
 
 #define QUICKTHREADS_BLOCK_FRAME_SIZE \
-	PPC_ROUND_STACK(PPC_LINKAGE_AREA+PPC_PARAM_AREA(4)+PPC_FPR_SAVE_AREA)
+        PPC_ROUND_STACK(PPC_LINKAGE_AREA+PPC_PARAM_AREA(4)+PPC_FPR_SAVE_AREA)
 
 /* Offset to the location where registers are saved.
  */
@@ -482,7 +482,7 @@ typedef unsigned long PPC_W;
                         +==========================+
 
  */
-#define QUICKTHREADS_VARGS_LOCAL_AREA (4*4)		/* local variable area */
+#define QUICKTHREADS_VARGS_LOCAL_AREA (4*4)                /* local variable area */
 
 /* The offset the stack will be moved back before to call "userf(...)".
  * The linckage area must be moved to be adiacent to the part of the variant
@@ -491,8 +491,8 @@ typedef unsigned long PPC_W;
 #define QUICKTHREADS_VARGS_BKOFF PPC_PARAM_AREA(4)
 
 #define QUICKTHREADS_VSTART_FRAME_SIZE(varbytes) \
-	PPC_ROUND_STACK(PPC_LINKAGE_AREA+PPC_PARAM_AREA(4)+(varbytes)+ \
-		QUICKTHREADS_VARGS_LOCAL_AREA)
+        PPC_ROUND_STACK(PPC_LINKAGE_AREA+PPC_PARAM_AREA(4)+(varbytes)+ \
+                QUICKTHREADS_VARGS_LOCAL_AREA)
 
 /* Offset to the base of the varian argument list */
 #define QUICKTHREADS_VSTART_LIST_BASE (PPC_LINKAGE_AREA+PPC_PARAM_AREA(4))
@@ -520,13 +520,13 @@ extern void qt_vstart(void);
 
 /*****************************************************************************
 
-	QuickThreads needed definitions
+        QuickThreads needed definitions
 
  *****************************************************************************/
 
 
 #define QUICKTHREADS_GROW_DOWN
-#define QUICKTHREADS_STKALIGN	PPC_STACK_INCR
+#define QUICKTHREADS_STKALIGN        PPC_STACK_INCR
 typedef PPC_W qt_word_t;
 
 
@@ -536,10 +536,10 @@ typedef PPC_W qt_word_t;
  * - set the next backchain (not needed, but just to be "clean").   
  */
 #define QUICKTHREADS_ARGS_MD(sp) \
-	(QUICKTHREADS_SPUT (sp, QUICKTHREADS_RETURN_INDEX, qt_start), \
-	QUICKTHREADS_SPUT (sp, 0, sp+QUICKTHREADS_BLOCKI_FRAME_SIZE), \
-	QUICKTHREADS_SPUT (sp, QUICKTHREADS_BLOCKI_FRAME_SIZE/sizeof(PPC_W), \
-		sp+QUICKTHREADS_BLOCKI_FRAME_SIZE+QUICKTHREADS_START_FRAME_SIZE))
+        (QUICKTHREADS_SPUT (sp, QUICKTHREADS_RETURN_INDEX, qt_start), \
+        QUICKTHREADS_SPUT (sp, 0, sp+QUICKTHREADS_BLOCKI_FRAME_SIZE), \
+        QUICKTHREADS_SPUT (sp, QUICKTHREADS_BLOCKI_FRAME_SIZE/sizeof(PPC_W), \
+                sp+QUICKTHREADS_BLOCKI_FRAME_SIZE+QUICKTHREADS_START_FRAME_SIZE))
 
 
 /* This macro is used by "QUICKTHREADS_VARGS" to initialize a variant argument thread. 
@@ -553,7 +553,7 @@ typedef PPC_W qt_word_t;
 #define QUICKTHREADS_VARGS_MD0(sp, varbytes) \
   ((qt_sp_bottom_save = sp), \
   ((qt_t *)(((char *)(sp)) - \
-		(QUICKTHREADS_VSTART_FRAME_SIZE(varbytes)-QUICKTHREADS_VSTART_LIST_BASE))))
+                (QUICKTHREADS_VSTART_FRAME_SIZE(varbytes)-QUICKTHREADS_VSTART_LIST_BASE))))
 
 
 /* This macro is used by "QUICKTHREADS_VARGS" to initialize a variant argument thread.
@@ -562,10 +562,10 @@ typedef PPC_W qt_word_t;
  * - set the next backchain (it points the stack botton).   
  */
 #define QUICKTHREADS_VARGS_MD1(sp) \
-	(QUICKTHREADS_SPUT (sp, QUICKTHREADS_RETURN_INDEX, qt_vstart), \
-	QUICKTHREADS_SPUT (sp, 0, sp+QUICKTHREADS_BLOCKI_FRAME_SIZE), \
-	QUICKTHREADS_SPUT (sp, (QUICKTHREADS_BLOCKI_FRAME_SIZE)/sizeof(PPC_W), \
-		qt_sp_bottom_save))
+        (QUICKTHREADS_SPUT (sp, QUICKTHREADS_RETURN_INDEX, qt_vstart), \
+        QUICKTHREADS_SPUT (sp, 0, sp+QUICKTHREADS_BLOCKI_FRAME_SIZE), \
+        QUICKTHREADS_SPUT (sp, (QUICKTHREADS_BLOCKI_FRAME_SIZE)/sizeof(PPC_W), \
+                qt_sp_bottom_save))
 
 
 /* Activate "qt_vargs" as the initialization routine for the variant 
@@ -587,25 +587,25 @@ typedef PPC_W qt_word_t;
  * frame for the block routine ("qt_block" or "qt_blocki") and for "qt_start".
  */
 #define QUICKTHREADS_STKBASE \
-	(QUICKTHREADS_BLOCKI_FRAME_SIZE+QUICKTHREADS_START_FRAME_SIZE)
+        (QUICKTHREADS_BLOCKI_FRAME_SIZE+QUICKTHREADS_START_FRAME_SIZE)
 
 /* This macro is used by "QUICKTHREADS_VADJ(sp)" to get the stack top from the base
  * of the variant argument list during a variant argument thread initialization.
  */
-#define QUICKTHREADS_VSTKBASE	(QUICKTHREADS_BLOCKI_FRAME_SIZE+QUICKTHREADS_VSTART_LIST_BASE)
+#define QUICKTHREADS_VSTKBASE        (QUICKTHREADS_BLOCKI_FRAME_SIZE+QUICKTHREADS_VSTART_LIST_BASE)
 
 /* The *index* (positive offset) of where to put each value. */
 
-#define QUICKTHREADS_ARGU_INDEX	QUICKTHREADS_ARG_INDEX(0)
-#define QUICKTHREADS_ARGT_INDEX	QUICKTHREADS_ARG_INDEX(1)
-#define QUICKTHREADS_USER_INDEX	QUICKTHREADS_ARG_INDEX(2)
-#define QUICKTHREADS_ONLY_INDEX	QUICKTHREADS_ARG_INDEX(3)
+#define QUICKTHREADS_ARGU_INDEX        QUICKTHREADS_ARG_INDEX(0)
+#define QUICKTHREADS_ARGT_INDEX        QUICKTHREADS_ARG_INDEX(1)
+#define QUICKTHREADS_USER_INDEX        QUICKTHREADS_ARG_INDEX(2)
+#define QUICKTHREADS_ONLY_INDEX        QUICKTHREADS_ARG_INDEX(3)
 
 
-#define QUICKTHREADS_VARGT_INDEX		QUICKTHREADS_ARG_INDEX(0)
-#define QUICKTHREADS_VSTARTUP_INDEX	QUICKTHREADS_ARG_INDEX(1)
-#define QUICKTHREADS_VUSERF_INDEX		QUICKTHREADS_ARG_INDEX(2)
-#define QUICKTHREADS_VCLEANUP_INDEX	QUICKTHREADS_ARG_INDEX(3)
+#define QUICKTHREADS_VARGT_INDEX                QUICKTHREADS_ARG_INDEX(0)
+#define QUICKTHREADS_VSTARTUP_INDEX        QUICKTHREADS_ARG_INDEX(1)
+#define QUICKTHREADS_VUSERF_INDEX                QUICKTHREADS_ARG_INDEX(2)
+#define QUICKTHREADS_VCLEANUP_INDEX        QUICKTHREADS_ARG_INDEX(3)
 
 #endif /* ndef QUICKTHREADS_POWERPC_H */
 

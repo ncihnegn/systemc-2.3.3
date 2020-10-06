@@ -270,8 +270,8 @@ sc_module::~sc_module()
     orphan_child_objects();
     if ( m_module_name_p )
     {
-	m_module_name_p->clear_module( this ); // must be before end_module()
-    	end_module();
+        m_module_name_p->clear_module( this ); // must be before end_module()
+            end_module();
     }
     simcontext()->get_module_registry()->remove( *this );
 }
@@ -288,40 +288,40 @@ sc_module::get_child_objects() const
 void
 sc_module::async_reset_signal_is( const sc_in<bool>& port, bool level )
 {
-	sc_reset::reset_signal_is(true, port, level);
+        sc_reset::reset_signal_is(true, port, level);
 }
 
 void
 sc_module::async_reset_signal_is( const sc_inout<bool>& port, bool level )
 {
-	sc_reset::reset_signal_is(true, port, level);
+        sc_reset::reset_signal_is(true, port, level);
 }
 
 void
 sc_module::async_reset_signal_is( const sc_out<bool>& port, bool level )
 {
-	sc_reset::reset_signal_is(true, port, level);
+        sc_reset::reset_signal_is(true, port, level);
 }
 
 void
 sc_module::async_reset_signal_is(const sc_signal_in_if<bool>& iface, bool level)
 {
-	sc_reset::reset_signal_is(true, iface, level);
+        sc_reset::reset_signal_is(true, iface, level);
 }
 
 void
 sc_module::end_module()
 {
     if( ! m_end_module_called ) {
-	/* TBD: Can check here to alert the user that end_module
+        /* TBD: Can check here to alert the user that end_module
                 was not called for a previous module. */
-	(void)sc_get_curr_simcontext()->hierarchy_pop();
-	sc_get_curr_simcontext()->reset_curr_proc(); 
-	sensitive.reset();
-	sensitive_pos.reset();
-	sensitive_neg.reset();
-	m_end_module_called = true;
-	m_module_name_p = nullptr; // make sure we are not called in ~sc_module().
+        (void)sc_get_curr_simcontext()->hierarchy_pop();
+        sc_get_curr_simcontext()->reset_curr_proc(); 
+        sensitive.reset();
+        sensitive_pos.reset();
+        sensitive_neg.reset();
+        m_end_module_called = true;
+        m_module_name_p = nullptr; // make sure we are not called in ~sc_module().
     }
 }
 
@@ -340,25 +340,25 @@ sc_module::dont_initialize()
 void
 sc_module::reset_signal_is( const sc_in<bool>& port, bool level )
 {
-	sc_reset::reset_signal_is(false, port, level);
+        sc_reset::reset_signal_is(false, port, level);
 }
 
 void
 sc_module::reset_signal_is( const sc_inout<bool>& port, bool level )
 {
-	sc_reset::reset_signal_is(false, port, level);
+        sc_reset::reset_signal_is(false, port, level);
 }
 
 void
 sc_module::reset_signal_is( const sc_out<bool>& port, bool level )
 {
-	sc_reset::reset_signal_is(false, port, level);
+        sc_reset::reset_signal_is(false, port, level);
 }
 
 void
 sc_module::reset_signal_is( const sc_signal_in_if<bool>& iface, bool level )
 {
-	sc_reset::reset_signal_is(false, iface, level);
+        sc_reset::reset_signal_is(false, iface, level);
 }
 
 // to generate unique names for objects in an MT-Safe way
@@ -443,9 +443,9 @@ void
 sc_module::set_stack_size( std::size_t size )
 {
     sc_process_handle  proc_h(
-    	sc_is_running() ?
-	sc_get_current_process_handle() :
-	sc_get_last_created_process_handle()
+            sc_is_running() ?
+        sc_get_current_process_handle() :
+        sc_get_last_created_process_handle()
     );
     sc_thread_handle thread_h;  // Current process as thread.
 
@@ -453,11 +453,11 @@ sc_module::set_stack_size( std::size_t size )
     thread_h = (sc_thread_handle)proc_h;
     if ( thread_h ) 
     {
-	thread_h->set_stack_size( size );
+        thread_h->set_stack_size( size );
     }
     else
     {
-	SC_REPORT_WARNING( SC_ID_SET_STACK_SIZE_, nullptr );
+        SC_REPORT_WARNING( SC_ID_SET_STACK_SIZE_, nullptr );
     }
 }
 
@@ -478,9 +478,9 @@ static void sc_warn_arrow_arrow_bind()
     static bool warn_arrow_arrow_bind=true;
     if ( warn_arrow_arrow_bind )
     {
-    	warn_arrow_arrow_bind = false;
-	SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_,
-	    "positional binding using << or , is deprecated, use () instead.");
+            warn_arrow_arrow_bind = false;
+        SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_,
+            "positional binding using << or , is deprecated, use () instead.");
     }
 }
 
@@ -582,76 +582,76 @@ sc_module::positional_bind( sc_port_base& port_ )
 
 void
 sc_module::operator () ( const sc_bind_proxy& p001,
-			 const sc_bind_proxy& p002,
-			 const sc_bind_proxy& p003,
-			 const sc_bind_proxy& p004,
-			 const sc_bind_proxy& p005,
-			 const sc_bind_proxy& p006,
-			 const sc_bind_proxy& p007,
-			 const sc_bind_proxy& p008,
-			 const sc_bind_proxy& p009,
-			 const sc_bind_proxy& p010,
-			 const sc_bind_proxy& p011,
-			 const sc_bind_proxy& p012,
-			 const sc_bind_proxy& p013,
-			 const sc_bind_proxy& p014,
-			 const sc_bind_proxy& p015,
-			 const sc_bind_proxy& p016,
-			 const sc_bind_proxy& p017,
-			 const sc_bind_proxy& p018,
-			 const sc_bind_proxy& p019,
-			 const sc_bind_proxy& p020,
-			 const sc_bind_proxy& p021,
-			 const sc_bind_proxy& p022,
-			 const sc_bind_proxy& p023,
-			 const sc_bind_proxy& p024,
-			 const sc_bind_proxy& p025,
-			 const sc_bind_proxy& p026,
-			 const sc_bind_proxy& p027,
-			 const sc_bind_proxy& p028,
-			 const sc_bind_proxy& p029,
-			 const sc_bind_proxy& p030,
-			 const sc_bind_proxy& p031,
-			 const sc_bind_proxy& p032,
-			 const sc_bind_proxy& p033,
-			 const sc_bind_proxy& p034,
-			 const sc_bind_proxy& p035,
-			 const sc_bind_proxy& p036,
-			 const sc_bind_proxy& p037,
-			 const sc_bind_proxy& p038,
-			 const sc_bind_proxy& p039,
-			 const sc_bind_proxy& p040,
-			 const sc_bind_proxy& p041,
-			 const sc_bind_proxy& p042,
-			 const sc_bind_proxy& p043,
-			 const sc_bind_proxy& p044,
-			 const sc_bind_proxy& p045,
-			 const sc_bind_proxy& p046,
-			 const sc_bind_proxy& p047,
-			 const sc_bind_proxy& p048,
-			 const sc_bind_proxy& p049,
-			 const sc_bind_proxy& p050,
-			 const sc_bind_proxy& p051,
-			 const sc_bind_proxy& p052,
-			 const sc_bind_proxy& p053,
-			 const sc_bind_proxy& p054,
-			 const sc_bind_proxy& p055,
-			 const sc_bind_proxy& p056,
-			 const sc_bind_proxy& p057,
-			 const sc_bind_proxy& p058,
-			 const sc_bind_proxy& p059,
-			 const sc_bind_proxy& p060,
-			 const sc_bind_proxy& p061,
-			 const sc_bind_proxy& p062,
-			 const sc_bind_proxy& p063,
-			 const sc_bind_proxy& p064 )
+                         const sc_bind_proxy& p002,
+                         const sc_bind_proxy& p003,
+                         const sc_bind_proxy& p004,
+                         const sc_bind_proxy& p005,
+                         const sc_bind_proxy& p006,
+                         const sc_bind_proxy& p007,
+                         const sc_bind_proxy& p008,
+                         const sc_bind_proxy& p009,
+                         const sc_bind_proxy& p010,
+                         const sc_bind_proxy& p011,
+                         const sc_bind_proxy& p012,
+                         const sc_bind_proxy& p013,
+                         const sc_bind_proxy& p014,
+                         const sc_bind_proxy& p015,
+                         const sc_bind_proxy& p016,
+                         const sc_bind_proxy& p017,
+                         const sc_bind_proxy& p018,
+                         const sc_bind_proxy& p019,
+                         const sc_bind_proxy& p020,
+                         const sc_bind_proxy& p021,
+                         const sc_bind_proxy& p022,
+                         const sc_bind_proxy& p023,
+                         const sc_bind_proxy& p024,
+                         const sc_bind_proxy& p025,
+                         const sc_bind_proxy& p026,
+                         const sc_bind_proxy& p027,
+                         const sc_bind_proxy& p028,
+                         const sc_bind_proxy& p029,
+                         const sc_bind_proxy& p030,
+                         const sc_bind_proxy& p031,
+                         const sc_bind_proxy& p032,
+                         const sc_bind_proxy& p033,
+                         const sc_bind_proxy& p034,
+                         const sc_bind_proxy& p035,
+                         const sc_bind_proxy& p036,
+                         const sc_bind_proxy& p037,
+                         const sc_bind_proxy& p038,
+                         const sc_bind_proxy& p039,
+                         const sc_bind_proxy& p040,
+                         const sc_bind_proxy& p041,
+                         const sc_bind_proxy& p042,
+                         const sc_bind_proxy& p043,
+                         const sc_bind_proxy& p044,
+                         const sc_bind_proxy& p045,
+                         const sc_bind_proxy& p046,
+                         const sc_bind_proxy& p047,
+                         const sc_bind_proxy& p048,
+                         const sc_bind_proxy& p049,
+                         const sc_bind_proxy& p050,
+                         const sc_bind_proxy& p051,
+                         const sc_bind_proxy& p052,
+                         const sc_bind_proxy& p053,
+                         const sc_bind_proxy& p054,
+                         const sc_bind_proxy& p055,
+                         const sc_bind_proxy& p056,
+                         const sc_bind_proxy& p057,
+                         const sc_bind_proxy& p058,
+                         const sc_bind_proxy& p059,
+                         const sc_bind_proxy& p060,
+                         const sc_bind_proxy& p061,
+                         const sc_bind_proxy& p062,
+                         const sc_bind_proxy& p063,
+                         const sc_bind_proxy& p064 )
 {
     static bool warn_only_once=true;
     if ( m_port_index > 0 && warn_only_once )
     {
         warn_only_once = false;
-	SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_,
-	 "multiple () binding deprecated, use explicit port binding instead." );
+        SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_,
+         "multiple () binding deprecated, use explicit port binding instead." );
     }
 
     TRY_BIND( p001 );

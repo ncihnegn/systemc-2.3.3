@@ -118,9 +118,9 @@ extern SC_API void sc_stop();
 SC_API sc_dt::uint64 sc_delta_count();
 SC_API sc_dt::uint64 sc_delta_count_at_current_time();
 SC_API const std::vector<sc_event*>& sc_get_top_level_events(
-				const   sc_simcontext* simc_p);
+                                const   sc_simcontext* simc_p);
 SC_API const std::vector<sc_object*>& sc_get_top_level_objects(
-				const   sc_simcontext* simc_p);
+                                const   sc_simcontext* simc_p);
 SC_API bool    sc_is_running( const sc_simcontext* simc_p );
 SC_API void    sc_pause();
 SC_API bool    sc_end_of_simulation_invoked();
@@ -446,7 +446,7 @@ inline sc_status sc_simcontext::get_status() const
 {
     return m_simulation_status != SC_RUNNING ? 
                   m_simulation_status :
-		  (m_in_simulator_control ? SC_RUNNING : SC_PAUSED);
+                  (m_in_simulator_control ? SC_RUNNING : SC_PAUSED);
 }
 
 inline

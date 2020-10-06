@@ -35,9 +35,9 @@
 extern "C" int sc_main( int argc, char* argv[] );
 
 namespace sc_core {
-	extern "C" int sc_elab_and_sim( int argc, char* argv[] );
-	extern "C" int sc_argc();
-	extern "C" const char* const* sc_argv();
+        extern "C" int sc_elab_and_sim( int argc, char* argv[] );
+        extern "C" int sc_argc();
+        extern "C" const char* const* sc_argv();
 
 } // namespace sc_core
 

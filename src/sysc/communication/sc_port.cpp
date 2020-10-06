@@ -103,7 +103,7 @@ struct sc_bind_ef
 // constructor
 
 sc_bind_ef::sc_bind_ef( sc_process_b* handle_,
-			sc_event_finder* event_finder_ )
+                        sc_event_finder* event_finder_ )
 : handle( handle_ ),
   event_finder( event_finder_ )
 {}
@@ -124,7 +124,7 @@ struct sc_bind_info
 
     // constructor
     explicit sc_bind_info( int max_size_, 
-	sc_port_policy policy_=SC_ONE_OR_MORE_BOUND );
+        sc_port_policy policy_=SC_ONE_OR_MORE_BOUND );
 
     // destructor
     ~sc_bind_info();
@@ -168,7 +168,7 @@ sc_bind_info::sc_bind_info( int max_size_, sc_port_policy policy_ )
 sc_bind_info::~sc_bind_info()
 {
     for( int i = size() - 1; i >= 0; -- i ) {
-	delete vec[i];
+        delete vec[i];
     }
 }
 
@@ -220,9 +220,9 @@ void sc_port_base::add_static_event(
 int sc_port_base::bind_count()
 {
     if ( m_bind_info )
-	return m_bind_info->size();
+        return m_bind_info->size();
     
-	return interface_count();
+    return interface_count();
 }
 
 // error reporting
@@ -285,9 +285,9 @@ sc_port_base::bind( sc_interface& interface_ )
     m_bind_info->vec.push_back( new sc_bind_elem( &interface_ ) );
     
     if( ! m_bind_info->has_parent ) {
-	// add (cache) the interface
-	add_interface( &interface_ );
-	m_bind_info->last_add ++;
+        // add (cache) the interface
+        add_interface( &interface_ );
+        m_bind_info->last_add ++;
     }
 }
 
@@ -357,8 +357,8 @@ sc_port_base::pbind( sc_interface& interface_ )
     }
 
     if( m_bind_info->size() != 0 ) {
-	// first interface already bound
-	return 1;
+        // first interface already bound
+        return 1;
     }
 
     return vbind( interface_ );
@@ -374,8 +374,8 @@ sc_port_base::pbind( sc_port_base& parent_ )
     }
 
     if( m_bind_info->size() != 0 ) {
-	// first interface already bound
-	return 1;
+        // first interface already bound
+        return 1;
     }
 
     return vbind( parent_ );
@@ -386,20 +386,20 @@ sc_port_base::pbind( sc_port_base& parent_ )
 
 void
 sc_port_base::make_sensitive( sc_thread_handle handle_,
-			      sc_event_finder* event_finder_ ) const
+                              sc_event_finder* event_finder_ ) const
 {
     sc_assert( m_bind_info != nullptr );
     m_bind_info->thread_vec.push_back( 
-	new sc_bind_ef( (sc_process_b*)handle_, event_finder_ ) );
+        new sc_bind_ef( (sc_process_b*)handle_, event_finder_ ) );
 }
 
 void
 sc_port_base::make_sensitive( sc_method_handle handle_,
-			      sc_event_finder* event_finder_ ) const
+                              sc_event_finder* event_finder_ ) const
 {
     sc_assert( m_bind_info != nullptr );
     m_bind_info->method_vec.push_back( 
-	new sc_bind_ef( (sc_process_b*)handle_, event_finder_ ) );
+        new sc_bind_ef( (sc_process_b*)handle_, event_finder_ ) );
 }
 
 
@@ -409,9 +409,9 @@ int
 sc_port_base::first_parent()
 {
     for( int i = 0; i < m_bind_info->size(); ++ i ) {
-	if( m_bind_info->vec[i]->parent != nullptr ) {
-	    return i;
-	}
+        if( m_bind_info->vec[i]->parent != nullptr ) {
+            return i;
+        }
     }
     return -1;
 }
@@ -435,20 +435,20 @@ sc_port_base::insert_parent( int i )
     vec[i]->iface = parent->m_bind_info->vec[0]->iface;
     int n = parent->m_bind_info->size() - 1;
     if( n > 0 ) {
-	// resize the bind vector (by adding new elements)
-	for( int k = 0; k < n; ++ k ) {
-	    vec.push_back( new sc_bind_elem() );
-	}
-	// move elements in the bind vector
-	for( int k = m_bind_info->size() - n - 1; k > i; -- k ) {
-	    vec[k + n]->iface = vec[k]->iface;
-	    vec[k + n]->parent = vec[k]->parent;
-	}
-	// insert parent interfaces into the bind vector
-	for( int k = i + 1; k <= i + n; ++ k ) {
-	    vec[k]->iface = parent->m_bind_info->vec[k - i]->iface;
-	    vec[k]->parent = nullptr;
-	}
+        // resize the bind vector (by adding new elements)
+        for( int k = 0; k < n; ++ k ) {
+            vec.push_back( new sc_bind_elem() );
+        }
+        // move elements in the bind vector
+        for( int k = m_bind_info->size() - n - 1; k > i; -- k ) {
+            vec[k + n]->iface = vec[k]->iface;
+            vec[k + n]->parent = vec[k]->parent;
+        }
+        // insert parent interfaces into the bind vector
+        for( int k = i + 1; k <= i + n; ++ k ) {
+            vec[k]->iface = parent->m_bind_info->vec[k - i]->iface;
+            vec[k]->parent = nullptr;
+        }
     }
 }
 
@@ -480,15 +480,15 @@ sc_port_base::complete_binding()
     for( int j = 0; j < m_bind_info->size(); ++ j ) {
         sc_interface* iface = m_bind_info->vec[j]->iface;
 
-	// if the interface is zero this was for an unbound port.
-	if ( iface == nullptr ) continue;
+        // if the interface is zero this was for an unbound port.
+        if ( iface == nullptr ) continue;
 
-	// add (cache) the interface
+        // add (cache) the interface
         if( j > m_bind_info->last_add ) {
             add_interface( iface );
         }
         
-	// only register "leaf" ports (ports without children)
+        // only register "leaf" ports (ports without children)
         if( m_bind_info->is_leaf ) {
             iface->register_port( *this, if_typename() );
         }
@@ -663,9 +663,9 @@ sc_port_registry::remove( sc_port_base* port_ )
 {
     int i;
     for( i = size() - 1; i >= 0; -- i ) {
-	if( port_ == m_port_vec[i] ) {
-	    break;
-	}
+        if( port_ == m_port_vec[i] ) {
+            break;
+        }
     }
     if( i == -1 ) {
         port_->report_error( SC_ID_REMOVE_PORT_, "port not registered" );
@@ -767,8 +767,8 @@ void sc_warn_port_constructor()
     {
         warn_port_constructor = false;
         SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_, 
-	    "interface and/or port binding in port constructors is deprecated" 
-	);
+            "interface and/or port binding in port constructors is deprecated" 
+        );
     }
 }
 
@@ -786,7 +786,7 @@ void sc_warn_port_constructor()
   Description of Modification: phase callbacks
 
       Name, Affiliation, Date: Andy Goodrich, Forte Design Systems
-	  						   12 December, 2005
+                                                             12 December, 2005
   Description of Modification: multiport binding policy changes
     
  *****************************************************************************/
@@ -832,7 +832,7 @@ void sc_warn_port_constructor()
 //        methods, and operators to keep the Microsoft compiler happy.
 //    (2) Added delta_count() method to sc_prim_channel for use by
 //        sc_signal so that the friend declaration in sc_simcontext.h
-// 	   can be for a non-templated class (i.e., sc_prim_channel.)
+//            can be for a non-templated class (i.e., sc_prim_channel.)
 //
 // Revision 1.9  2006/02/02 20:43:09  acg
 //  Andy Goodrich: Added an existence linked list to sc_event_finder so that

@@ -61,22 +61,22 @@ wait( int,
 extern
 void
 at_posedge( const sc_signal_in_if<bool>&,
-	    sc_simcontext* = sc_get_curr_simcontext() );
+            sc_simcontext* = sc_get_curr_simcontext() );
 
 extern
 void
 at_posedge( const sc_signal_in_if<sc_dt::sc_logic>&,
-	    sc_simcontext* = sc_get_curr_simcontext() );
+            sc_simcontext* = sc_get_curr_simcontext() );
 
 extern
 void
 at_negedge( const sc_signal_in_if<bool>&,
-	    sc_simcontext* = sc_get_curr_simcontext() );
+            sc_simcontext* = sc_get_curr_simcontext() );
 
 extern
 void
 at_negedge( const sc_signal_in_if<sc_dt::sc_logic>&,
-	    sc_simcontext* = sc_get_curr_simcontext() );
+            sc_simcontext* = sc_get_curr_simcontext() );
 
 
 } // namespace sc_core

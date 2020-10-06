@@ -178,7 +178,7 @@ extern bool sc_enable_name_checking;
 inline 
 sc_object* sc_get_parent( const sc_object* obj_p ) 
 { 
-	return obj_p->get_parent_object(); 
+        return obj_p->get_parent_object(); 
 }
 
 } // namespace sc_core

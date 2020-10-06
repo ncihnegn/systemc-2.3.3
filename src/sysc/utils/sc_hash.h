@@ -83,7 +83,7 @@ protected:
       if( cmpr == 0 )
         return ((sc_phash_base*)this)->find_entry_q( hv, k, plast );
       else
-	return ((sc_phash_base*)this)->find_entry_c( hv, k, plast );
+        return ((sc_phash_base*)this)->find_entry_c( hv, k, plast );
     }
 
 public:

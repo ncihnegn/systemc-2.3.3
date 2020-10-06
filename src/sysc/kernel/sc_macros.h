@@ -62,11 +62,11 @@ sc_abs( const T& a )
     T z( a );
     z = 0;
     if( a >= z ) {
-	return a;
+        return a;
     } else {
-	T c( a );
-	c = -a;
-	return c;
+        T c( a );
+        c = -a;
+        return c;
     }
 }
 

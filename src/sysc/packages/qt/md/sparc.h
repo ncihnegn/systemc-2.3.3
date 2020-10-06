@@ -38,7 +38,7 @@ typedef unsigned long qt_word_t;
    | %l3
    | %l2
    | %l1
-   | %l0	<--- qt_t.sp
+   | %l0        <--- qt_t.sp
    +---
 
    varargs:
@@ -65,7 +65,7 @@ typedef unsigned long qt_word_t;
    | %l3
    | %l2
    | %l1
-   | %l0	<--- qt_t.sp
+   | %l0        <--- qt_t.sp
    +---
 
    */
@@ -77,30 +77,30 @@ extern void qt_vstart (void);
 
 
 /* Hold 17 saved registers + 1 word for alignment. */
-#define QUICKTHREADS_STKBASE	(18 * 4)
-#define QUICKTHREADS_VSTKBASE	QUICKTHREADS_STKBASE
+#define QUICKTHREADS_STKBASE        (18 * 4)
+#define QUICKTHREADS_VSTKBASE        QUICKTHREADS_STKBASE
 
 
 /* Stack must be doubleword aligned. */
-#define QUICKTHREADS_STKALIGN	(8)	/* Doubleword aligned. */
+#define QUICKTHREADS_STKALIGN        (8)        /* Doubleword aligned. */
 
-#define QUICKTHREADS_ONLY_INDEX	(QUICKTHREADS_I5)
-#define QUICKTHREADS_USER_INDEX	(QUICKTHREADS_I4)
-#define QUICKTHREADS_ARGT_INDEX	(QUICKTHREADS_I2)
-#define QUICKTHREADS_ARGU_INDEX	(QUICKTHREADS_I1)
+#define QUICKTHREADS_ONLY_INDEX        (QUICKTHREADS_I5)
+#define QUICKTHREADS_USER_INDEX        (QUICKTHREADS_I4)
+#define QUICKTHREADS_ARGT_INDEX        (QUICKTHREADS_I2)
+#define QUICKTHREADS_ARGU_INDEX        (QUICKTHREADS_I1)
 
-#define QUICKTHREADS_VSTARTUP_INDEX	(QUICKTHREADS_I5)
-#define QUICKTHREADS_VUSERF_INDEX		(QUICKTHREADS_I4)
-#define QUICKTHREADS_VCLEANUP_INDEX	(QUICKTHREADS_I3)
-#define QUICKTHREADS_VARGT_INDEX		(QUICKTHREADS_I2)
+#define QUICKTHREADS_VSTARTUP_INDEX        (QUICKTHREADS_I5)
+#define QUICKTHREADS_VUSERF_INDEX                (QUICKTHREADS_I4)
+#define QUICKTHREADS_VCLEANUP_INDEX        (QUICKTHREADS_I3)
+#define QUICKTHREADS_VARGT_INDEX                (QUICKTHREADS_I2)
 
-#define QUICKTHREADS_O7	(16)
-#define QUICKTHREADS_I6	(14)
-#define QUICKTHREADS_I5	(13)
-#define QUICKTHREADS_I4	(12)
-#define QUICKTHREADS_I3	(11)
-#define QUICKTHREADS_I2	(10)
-#define QUICKTHREADS_I1	( 9)
+#define QUICKTHREADS_O7        (16)
+#define QUICKTHREADS_I6        (14)
+#define QUICKTHREADS_I5        (13)
+#define QUICKTHREADS_I4        (12)
+#define QUICKTHREADS_I3        (11)
+#define QUICKTHREADS_I2        (10)
+#define QUICKTHREADS_I1        ( 9)
 
 
 /* The thread will ``return'' to the `qt_start' routine to get things
@@ -130,7 +130,7 @@ extern void qt_vstart (void);
 /* The SPARC has wierdo calling conventions which stores a hidden
    parameter for returning aggregate values, so the rest of the
    parameters are shoved up the stack by one place. */
-#define QUICKTHREADS_VARGS_ADJUST(sp)	(((char *)sp)+4)
+#define QUICKTHREADS_VARGS_ADJUST(sp)        (((char *)sp)+4)
 
 #define QUICKTHREADS_VARGS_DEFAULT
 

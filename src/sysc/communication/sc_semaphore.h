@@ -68,7 +68,7 @@ public:
 
     // get the value of the semaphore
     virtual int get_value() const
-	{ return m_value; }
+        { return m_value; }
 
     virtual const char* kind() const
         { return "sc_semaphore"; }
@@ -78,7 +78,7 @@ protected:
     // support methods
 
     bool in_use() const
-	{ return ( m_value <= 0 ); }
+        { return ( m_value <= 0 ); }
 
 
     // error reporting

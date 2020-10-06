@@ -21,18 +21,18 @@ typedef unsigned long qt_word_t;
    non-varargs:
 
    +---
-   | arg[2]	=== `userf' on startup
-   | arg[1]	=== `pt' on startup
-   | arg[0]	=== `pu' on startup
+   | arg[2]        === `userf' on startup
+   | arg[1]        === `pt' on startup
+   | arg[0]        === `pu' on startup
    +---
    | ret pc === qt_error
    +---
-   | ret pc	=== `only' on startup
+   | ret pc        === `only' on startup
    +---
    | %ebp
    | %esi
    | %edi
-   | %ebx				<--- qt_t.sp
+   | %ebx                                <--- qt_t.sp
    +---
 
    When a non-varargs thread is started, it ``returns'' directly to
@@ -45,12 +45,12 @@ typedef unsigned long qt_word_t;
    | ..
    | arg[0]
    +---
-   | ret pc	=== `qt_vstart'
+   | ret pc        === `qt_vstart'
    +---
-   | %ebp	=== `startup'
-   | %esi	=== `cleanup'
-   | %edi	=== `pt'
-   | %ebx	=== `vuserf'		<--- qt_t.sp
+   | %ebp        === `startup'
+   | %esi        === `cleanup'
+   | %edi        === `pt'
+   | %ebx        === `vuserf'                <--- qt_t.sp
    +---
 
    When a varargs thread is started, it ``returns'' to the `qt_vstart'
@@ -63,26 +63,26 @@ extern void qt_vstart (void);
 
 /* Hold four return pcs (qt_error, qt_start and twice qt_align)
    plus ten args and two qt_word_t's for correct alignment. */
-#define QUICKTHREADS_STKBASE	(16 * sizeof(long))
+#define QUICKTHREADS_STKBASE        (16 * sizeof(long))
 
 /* Hold 4 saved regs plus one return pc (qt_vstart). */
-#define QUICKTHREADS_VSTKBASE	(5 * sizeof(long))
+#define QUICKTHREADS_VSTKBASE        (5 * sizeof(long))
 
 
 /* Stack must be 16-byte aligned at function call instr. (SSE data support) */
-#define QUICKTHREADS_STKALIGN	(16)
+#define QUICKTHREADS_STKALIGN        (16)
 
 
 /* Where to place various arguments. */
-#define QUICKTHREADS_ONLY_INDEX	(QUICKTHREADS_PC)
-#define QUICKTHREADS_USER_INDEX	(QUICKTHREADS_ARG2)
-#define QUICKTHREADS_ARGT_INDEX	(QUICKTHREADS_ARG1)
-#define QUICKTHREADS_ARGU_INDEX	(QUICKTHREADS_ARG0)
+#define QUICKTHREADS_ONLY_INDEX        (QUICKTHREADS_PC)
+#define QUICKTHREADS_USER_INDEX        (QUICKTHREADS_ARG2)
+#define QUICKTHREADS_ARGT_INDEX        (QUICKTHREADS_ARG1)
+#define QUICKTHREADS_ARGU_INDEX        (QUICKTHREADS_ARG0)
 
-#define QUICKTHREADS_VSTARTUP_INDEX	(QUICKTHREADS_EBP)
-#define QUICKTHREADS_VUSERF_INDEX	(QUICKTHREADS_EBX)
-#define QUICKTHREADS_VCLEANUP_INDEX	(QUICKTHREADS_ESI)
-#define QUICKTHREADS_VARGT_INDEX	(QUICKTHREADS_EDI)
+#define QUICKTHREADS_VSTARTUP_INDEX        (QUICKTHREADS_EBP)
+#define QUICKTHREADS_VUSERF_INDEX        (QUICKTHREADS_EBX)
+#define QUICKTHREADS_VCLEANUP_INDEX        (QUICKTHREADS_ESI)
+#define QUICKTHREADS_VARGT_INDEX        (QUICKTHREADS_EDI)
 
 
 /* Stack layout offsets relative to stack at initial stack setup. */

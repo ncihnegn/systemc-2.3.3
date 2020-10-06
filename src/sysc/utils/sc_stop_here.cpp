@@ -54,18 +54,18 @@ sc_interrupt_here( const char* id, sc_severity severity )
 
     switch( severity ) {
       case SC_INFO: 
-	info_id = id;
-	break;
+        info_id = id;
+        break;
       case SC_WARNING: 
-	warning_id = id;
-	break;
+        warning_id = id;
+        break;
       case SC_ERROR: 
-	error_id = id;
-	break;
+        error_id = id;
+        break;
       default:
       case SC_FATAL: 
-	fatal_id = id;
-	break;
+        fatal_id = id;
+        break;
     }
 }
 
@@ -85,18 +85,18 @@ sc_stop_here( const char* id, sc_severity severity )
 
     switch( severity ) {
       case SC_INFO: 
-	info_id = id;
-	break;
+        info_id = id;
+        break;
       case SC_WARNING: 
-	warning_id = id;
-	break;
+        warning_id = id;
+        break;
       case SC_ERROR: 
-	error_id = id;
-	break;
+        error_id = id;
+        break;
       default:
       case SC_FATAL: 
-	fatal_id = id;
-	break;
+        fatal_id = id;
+        break;
     }
 }
 

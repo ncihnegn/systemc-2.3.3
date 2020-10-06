@@ -106,39 +106,39 @@ private:
     static void invalid_value( int );
 
     static sc_logic_value_t to_value( sc_logic_value_t v )
-	{
-	    if( v < Log_0 || v > Log_X ) {
-		invalid_value( v );
-		// may continue, if suppressed
-		v = Log_X;
-	    }
-	    return v;
-	}
+        {
+            if( v < Log_0 || v > Log_X ) {
+                invalid_value( v );
+                // may continue, if suppressed
+                v = Log_X;
+            }
+            return v;
+        }
 
     static sc_logic_value_t to_value( bool b )
-	{ return ( b ? Log_1 : Log_0 ); }
+        { return ( b ? Log_1 : Log_0 ); }
 
     static sc_logic_value_t to_value( char c )
-	{
-	    unsigned int index = (int)c;
-	    if ( index > 127 )
-	    {
-		invalid_value( c );
-		// may continue, if suppressed
-		index = 127; // aka Log_X
-	    }
-	    return char_to_logic[index];
-	}
+        {
+            unsigned int index = (int)c;
+            if ( index > 127 )
+            {
+                invalid_value( c );
+                // may continue, if suppressed
+                index = 127; // aka Log_X
+            }
+            return char_to_logic[index];
+        }
 
     static sc_logic_value_t to_value( int i )
-	{
-	    if( i < Log_0 || i > Log_X ) {
-		invalid_value( i );
-		// may continue, if suppressed
-		i = Log_X;
-	    }
-	    return sc_logic_value_t( i );
-	}
+        {
+            if( i < Log_0 || i > Log_X ) {
+                invalid_value( i );
+                // may continue, if suppressed
+                i = Log_X;
+            }
+            return sc_logic_value_t( i );
+        }
 
 
     void invalid_01() const;
@@ -158,38 +158,38 @@ public:
     // constructors
 
     sc_logic()
-	: m_val( Log_X )
-	{}
+        : m_val( Log_X )
+        {}
 
     sc_logic( const sc_logic& a )
-	: m_val( a.m_val )
-	{}
+        : m_val( a.m_val )
+        {}
 
     sc_logic( sc_logic_value_t v )
-	: m_val( to_value( v ) )
-	{}
+        : m_val( to_value( v ) )
+        {}
 
     explicit sc_logic( bool a )
-	: m_val( to_value( a ) )
-	{}
+        : m_val( to_value( a ) )
+        {}
 
     explicit sc_logic( char a )
-	: m_val( to_value( a ) )
-	{}
+        : m_val( to_value( a ) )
+        {}
 
     explicit sc_logic( int a )
-	: m_val( to_value( a ) )
-	{}
+        : m_val( to_value( a ) )
+        {}
 
     explicit sc_logic( const sc_bit& a )
-	: m_val( to_value( a.to_bool() ) )
-	{}
+        : m_val( to_value( a.to_bool() ) )
+        {}
 
 
     // destructor
 
     ~sc_logic()
-	{}
+        {}
 
 
     // (bitwise) assignment operators
@@ -241,32 +241,32 @@ public:
     // bitwise complement
 
     const sc_logic operator ~ () const
-	{ return sc_logic( not_table[m_val] ); }
+        { return sc_logic( not_table[m_val] ); }
 
     sc_logic& b_not()
-	{ m_val = not_table[m_val]; return *this; }
+        { m_val = not_table[m_val]; return *this; }
 
 
     // explicit conversions
 
     sc_logic_value_t value() const
-	{ return m_val; }
+        { return m_val; }
 
 
     bool is_01() const
-	{ return ( (int) m_val == Log_0 || (int) m_val == Log_1 ); }
+        { return ( (int) m_val == Log_0 || (int) m_val == Log_1 ); }
 
     bool to_bool() const
-	{ if( ! is_01() ) { invalid_01(); } return ( (int) m_val != Log_0 ); }
+        { if( ! is_01() ) { invalid_01(); } return ( (int) m_val != Log_0 ); }
 
     char to_char() const
-	{ return logic_to_char[m_val]; }
+        { return logic_to_char[m_val]; }
 
 
     // other methods
 
     void print( ::std::ostream& os = ::std::cout ) const
-	{ os << to_char(); }
+        { os << to_char(); }
 
     void scan( ::std::istream& is = ::std::cin );
 
@@ -274,19 +274,19 @@ public:
     // memory (de)allocation
 
     static void* operator new( std::size_t, void* p ) // placement new
-	{ return p; }
+        { return p; }
 
     static void* operator new( std::size_t sz )
-	{ return sc_core::sc_mempool::allocate( sz ); }
+        { return sc_core::sc_mempool::allocate( sz ); }
 
     static void operator delete( void* p, std::size_t sz )
-	{ sc_core::sc_mempool::release( p, sz ); }
+        { sc_core::sc_mempool::release( p, sz ); }
 
     static void* operator new [] ( std::size_t sz )
-	{ return sc_core::sc_mempool::allocate( sz ); }
+        { return sc_core::sc_mempool::allocate( sz ); }
 
     static void operator delete [] ( void* p, std::size_t sz )
-	{ sc_core::sc_mempool::release( p, sz ); }
+        { sc_core::sc_mempool::release( p, sz ); }
 
 private:
 

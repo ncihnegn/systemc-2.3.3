@@ -513,7 +513,7 @@ public:
 
 #define DECL_BIN_OP(op,dummy)                                                 \
     friend const sc_fxval_fast operator op ( const sc_fxval_fast&,            \
-					     const sc_fxval_fast& );          \
+                                             const sc_fxval_fast& );          \
     DECL_BIN_OP_T(op,int)                                                     \
     DECL_BIN_OP_T(op,unsigned int)                                            \
     DECL_BIN_OP_T(op,long)                                                    \
@@ -529,7 +529,7 @@ public:
 // don't use macro
 //    DECL_BIN_OP(/,div)
     friend const sc_fxval_fast operator / ( const sc_fxval_fast&,
-					     const sc_fxval_fast& );
+                                             const sc_fxval_fast& );
     DECL_BIN_OP_T(/,int)
     DECL_BIN_OP_T(/,unsigned int)
     DECL_BIN_OP_T(/,long)
@@ -807,7 +807,7 @@ sc_fxval::sc_fxval( sc_fxval_observer* observer_ )
 
 inline
 sc_fxval::sc_fxval( const sc_fxval& a,
-		    sc_fxval_observer* observer_ )
+                    sc_fxval_observer* observer_ )
 : m_rep( new scfx_rep( *a.m_rep ) ),
   m_observer( observer_ )
 {
@@ -1189,9 +1189,9 @@ sc_fxval::operator = ( const sc_fxval& a )
 {
     if( &a != this )
     {
-	SC_FXVAL_OBSERVER_READ_( a )
-	*m_rep = *a.m_rep;
-	SC_FXVAL_OBSERVER_WRITE_( *this )
+        SC_FXVAL_OBSERVER_READ_( a )
+        *m_rep = *a.m_rep;
+        SC_FXVAL_OBSERVER_WRITE_( *this )
     }
     return *this;
 }
@@ -1569,7 +1569,7 @@ sc_fxval_fast::sc_fxval_fast( sc_fxval_fast_observer* observer_ )
 
 inline
 sc_fxval_fast::sc_fxval_fast( const sc_fxval_fast& a,
-			      sc_fxval_fast_observer* observer_ )
+                              sc_fxval_fast_observer* observer_ )
 : m_val( a.m_val ),
   m_observer( observer_ )
 {
@@ -1938,9 +1938,9 @@ sc_fxval_fast::operator = ( const sc_fxval_fast& a )
 {
     if( &a != this )
     {
-	SC_FXVAL_FAST_OBSERVER_READ_( a )
-	m_val = a.m_val;
-	SC_FXVAL_FAST_OBSERVER_WRITE_( *this )
+        SC_FXVAL_FAST_OBSERVER_READ_( a )
+        m_val = a.m_val;
+        SC_FXVAL_FAST_OBSERVER_WRITE_( *this )
     }
     return *this;
 }

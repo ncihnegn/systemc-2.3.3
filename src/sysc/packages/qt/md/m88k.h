@@ -26,7 +26,7 @@ typedef unsigned long qt_word_t;
    Non-varargs:
 
    +---
-   | r30 (fp)	on startup === 0
+   | r30 (fp)        on startup === 0
    | r25
    | r24
    | r23
@@ -35,17 +35,17 @@ typedef unsigned long qt_word_t;
    | r20
    | r19
    | r18
-   | r17	on startup === `only'
-   | r16	on startup === `userf'
-   | r15	on startup === `pt'
-   | r14	on startup === `pu'
-   | r1		on startup === `qt_start'
+   | r17        on startup === `only'
+   | r16        on startup === `userf'
+   | r15        on startup === `pt'
+   | r14        on startup === `pu'
+   | r1                on startup === `qt_start'
    | 0
    | 0
    +---
    | 0
    | ... (8 regs worth === 32 bytes of homing area)
-   | 0						<--- sp
+   | 0                                                <--- sp
    +---
 
    Conventions for varargs:
@@ -53,33 +53,33 @@ typedef unsigned long qt_word_t;
    |  :
    | arg8
    +---
-   | r30 (fp)	arg7
-   | r25	arg6
-   | r24	arg5
-   | r23	arg4
-   | r22	arg3
-   | r21	arg2
-   | r20	arg1
-   | r19	arg0
+   | r30 (fp)        arg7
+   | r25        arg6
+   | r24        arg5
+   | r23        arg4
+   | r22        arg3
+   | r21        arg2
+   | r20        arg1
+   | r19        arg0
    | r18
-   | r17	on startup === `startup'
-   | r16	on startup === `vuserf'
-   | r15	on startup === `pt'
-   | r14	on startup === `cleanup'
-   | r1		on startup === `qt_vstart'
+   | r17        on startup === `startup'
+   | r16        on startup === `vuserf'
+   | r15        on startup === `pt'
+   | r14        on startup === `cleanup'
+   | r1                on startup === `qt_vstart'
    | 0
    | 0
    +---
    | 0
    | ... (8 regs worth === 32 bytes of homing area)
-   | 0						<--- sp
+   | 0                                                <--- sp
    +---
 
    */
 
 
 /* Stack must be doubleword aligned. */
-#define QUICKTHREADS_STKALIGN	(16)	/* Doubleword aligned. */
+#define QUICKTHREADS_STKALIGN        (16)        /* Doubleword aligned. */
 
 /* How much space is allocated to hold all the crud for
    initialization: saved registers plus padding to keep the stack
@@ -90,17 +90,17 @@ typedef unsigned long qt_word_t;
    parameter list is less than 8 args, QUICKTHREADS_ARGS_MD0 adds some dead
    space at the top of the stack. */
 
-#define QUICKTHREADS_STKBASE	(16*4 + 8*4)
-#define QUICKTHREADS_VSTKBASE	(8*4 + 8*4)
+#define QUICKTHREADS_STKBASE        (16*4 + 8*4)
+#define QUICKTHREADS_VSTKBASE        (8*4 + 8*4)
 
 
 /* Index of various registers. */
-#define QUICKTHREADS_1	(8+2)
-#define QUICKTHREADS_14	(8+3)
-#define QUICKTHREADS_15	(8+4)
-#define QUICKTHREADS_16	(8+5)
-#define QUICKTHREADS_17	(8+6)
-#define QUICKTHREADS_30	(8+15)
+#define QUICKTHREADS_1        (8+2)
+#define QUICKTHREADS_14        (8+3)
+#define QUICKTHREADS_15        (8+4)
+#define QUICKTHREADS_16        (8+5)
+#define QUICKTHREADS_17        (8+6)
+#define QUICKTHREADS_30        (8+15)
 
 
 /* When a never-before-run thread is restored, the return pc points
@@ -135,25 +135,25 @@ typedef void (qt_function_t)(void);
 
 struct qt_t;
 extern struct qt_t *qt_vargs (struct qt_t *sp, int nbytes,
-			      void *vargs, void *pt,
-			      qt_function_t *startup,
-			      qt_function_t *vuserf,
-			      qt_function_t *cleanup);
+                              void *vargs, void *pt,
+                              qt_function_t *startup,
+                              qt_function_t *vuserf,
+                              qt_function_t *cleanup);
 
 #define QUICKTHREADS_VARGS(sp, nbytes, vargs, pt, startup, vuserf, cleanup) \
   (qt_vargs (sp, nbytes, &(vargs), pt, (qt_function_t *)startup, \
-	     (qt_function_t *)vuserf, (qt_function_t *)cleanup))
+             (qt_function_t *)vuserf, (qt_function_t *)cleanup))
 
 
 /* The *index* (positive offset) of where to put each value. */
-#define QUICKTHREADS_ONLY_INDEX	(QUICKTHREADS_17)
-#define QUICKTHREADS_USER_INDEX	(QUICKTHREADS_16)
-#define QUICKTHREADS_ARGT_INDEX	(QUICKTHREADS_15)
-#define QUICKTHREADS_ARGU_INDEX	(QUICKTHREADS_14)
+#define QUICKTHREADS_ONLY_INDEX        (QUICKTHREADS_17)
+#define QUICKTHREADS_USER_INDEX        (QUICKTHREADS_16)
+#define QUICKTHREADS_ARGT_INDEX        (QUICKTHREADS_15)
+#define QUICKTHREADS_ARGU_INDEX        (QUICKTHREADS_14)
 
-#define QUICKTHREADS_VCLEANUP_INDEX	(QUICKTHREADS_14)
-#define QUICKTHREADS_VUSERF_INDEX		(QUICKTHREADS_16)
-#define QUICKTHREADS_VSTARTUP_INDEX	(QUICKTHREADS_17)
-#define QUICKTHREADS_VARGT_INDEX		(QUICKTHREADS_15)
+#define QUICKTHREADS_VCLEANUP_INDEX        (QUICKTHREADS_14)
+#define QUICKTHREADS_VUSERF_INDEX                (QUICKTHREADS_16)
+#define QUICKTHREADS_VSTARTUP_INDEX        (QUICKTHREADS_17)
+#define QUICKTHREADS_VARGT_INDEX                (QUICKTHREADS_15)
 
 #endif /* ndef QUICKTHREADS_M88K_H */

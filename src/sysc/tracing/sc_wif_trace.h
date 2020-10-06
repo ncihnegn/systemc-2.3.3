@@ -119,7 +119,7 @@ protected:
 
     // Trace an unsigned char with the given width
      void trace(const unsigned char& object, const std::string& name,
-	int width);
+        int width);
 
     // Trace an unsigned short with the given width
      void trace(const unsigned short& object, const std::string& name,
@@ -161,11 +161,11 @@ protected:
 
     // Trace sc_unsigned
      void trace (const sc_dt::sc_unsigned& object,
-	 const std::string& name);
+         const std::string& name);
 
     // Trace sc_signed
      void trace (const sc_dt::sc_signed& object,
-	 const std::string& name);
+         const std::string& name);
 
     // Trace sc_uint_base
      void trace (const sc_dt::sc_uint_base& object,
@@ -179,14 +179,14 @@ protected:
 
     // Trace sc_fxval_fast
     void trace( const sc_dt::sc_fxval_fast& object,
-    	const std::string& name );
+            const std::string& name );
 
     // Trace sc_fxnum
     void trace( const sc_dt::sc_fxnum& object, const std::string& name );
 
     // Trace sc_fxnum_fast
     void trace( const sc_dt::sc_fxnum_fast& object,
-    	const std::string& name );
+            const std::string& name );
 
     template<class T>
     void traceT(const T& object, const std::string& name, wif_enum type)
@@ -198,11 +198,11 @@ protected:
 
     // Trace sc_bv_base (sc_bv)
     virtual void trace( const sc_dt::sc_bv_base& object,
-    	const std::string& name );
+            const std::string& name );
 
     // Trace sc_lv_base (sc_lv)
     virtual void trace( const sc_dt::sc_lv_base& object,
-    	const std::string& name );
+            const std::string& name );
 
     // Trace an enumerated object - where possible output the enumeration literals
     // in the trace file. Enum literals is a null terminated array of null

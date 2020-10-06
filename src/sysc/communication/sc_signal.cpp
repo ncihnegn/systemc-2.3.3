@@ -107,8 +107,8 @@ sc_signal_channel::deprecated_get_data_ref()
     if ( warn_get_data_ref_deprecated )
     {
         warn_get_data_ref_deprecated=false;
-	SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_,
-	    "sc_signal<T>::get_data_ref() is deprecated, use read() instead" );
+        SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_,
+            "sc_signal<T>::get_data_ref() is deprecated, use read() instead" );
     }
 }
 
@@ -119,8 +119,8 @@ sc_signal_channel::deprecated_get_new_value()
     if ( warn_new_value )
     {
         warn_new_value=false;
-	SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_,
-	    "sc_signal<T>::get_new_value() is deprecated");
+        SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_,
+            "sc_signal<T>::get_new_value() is deprecated");
     }
 }
 
@@ -131,8 +131,8 @@ sc_signal_channel::deprecated_trace()
     if ( warn_trace_deprecated )
     {
         warn_trace_deprecated=false;
-	SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_,
-	    "sc_signal<T>::trace() is deprecated");
+        SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_,
+            "sc_signal<T>::trace() is deprecated");
     }
 }
 

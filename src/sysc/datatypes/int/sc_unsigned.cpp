@@ -220,55 +220,55 @@ bool sc_unsigned::concat_get_data( sc_digit* dst_p, int low_i ) const
       // POSITIVE SOURCE VALUE:
 
       case SC_POS:
-	result = true;
+        result = true;
 
-	// ALL DATA TO BE MOVED IS IN A SINGLE WORD:
+        // ALL DATA TO BE MOVED IS IN A SINGLE WORD:
 
-	if ( dst_i == end_i )
-	{
-	    mask = ~(~0U << left_shift);
-	    dst_p[dst_i] = ( ( dst_p[dst_i] & mask ) |
-		(digit[0] << left_shift) ) & DIGIT_MASK;
-	}
-
-
-	// DATA IS IN MORE THAN ONE WORD, BUT IS WORD ALIGNED:
-
-	else if ( left_shift == 0 )
-	{
-	    for ( src_i = 0; dst_i < end_i; dst_i++, src_i++ )
-	    {
-		dst_p[dst_i] = digit[src_i];
-	    }
-	    high_i = high_i % BITS_PER_DIGIT;
-	    mask = ~(~1U << high_i) & DIGIT_MASK;
-	    dst_p[dst_i] = digit[src_i] & mask;
-	}
+        if ( dst_i == end_i )
+        {
+            mask = ~(~0U << left_shift);
+            dst_p[dst_i] = ( ( dst_p[dst_i] & mask ) |
+                (digit[0] << left_shift) ) & DIGIT_MASK;
+        }
 
 
-	// DATA IS IN MORE THAN ONE WORD, AND NOT WORD ALIGNED:
+        // DATA IS IN MORE THAN ONE WORD, BUT IS WORD ALIGNED:
 
-	else
-	{
-	    high_i = high_i % BITS_PER_DIGIT;
-	    right_shift = BITS_PER_DIGIT - left_shift;
-	    mask = ~(~0U << left_shift);
-	    right_word = digit[0];
-	    dst_p[dst_i] = (dst_p[dst_i] & mask) |
-		((right_word << left_shift) & DIGIT_MASK);
-	    for ( src_i = 1, dst_i++; dst_i < end_i; dst_i++, src_i++ )
-	    {
-		left_word = digit[src_i];
-		dst_p[dst_i] = ((left_word << left_shift)&DIGIT_MASK) |
-		    (right_word >> right_shift);
-		right_word = left_word;
-	    }
-	    left_word = (src_i < ndigits) ? digit[src_i] : 0;
-	    mask = ~(~1U << high_i) & DIGIT_MASK;
-	    dst_p[dst_i] = ((left_word << left_shift) |
-		(right_word >> right_shift)) & mask;
-	}
-	break;
+        else if ( left_shift == 0 )
+        {
+            for ( src_i = 0; dst_i < end_i; dst_i++, src_i++ )
+            {
+                dst_p[dst_i] = digit[src_i];
+            }
+            high_i = high_i % BITS_PER_DIGIT;
+            mask = ~(~1U << high_i) & DIGIT_MASK;
+            dst_p[dst_i] = digit[src_i] & mask;
+        }
+
+
+        // DATA IS IN MORE THAN ONE WORD, AND NOT WORD ALIGNED:
+
+        else
+        {
+            high_i = high_i % BITS_PER_DIGIT;
+            right_shift = BITS_PER_DIGIT - left_shift;
+            mask = ~(~0U << left_shift);
+            right_word = digit[0];
+            dst_p[dst_i] = (dst_p[dst_i] & mask) |
+                ((right_word << left_shift) & DIGIT_MASK);
+            for ( src_i = 1, dst_i++; dst_i < end_i; dst_i++, src_i++ )
+            {
+                left_word = digit[src_i];
+                dst_p[dst_i] = ((left_word << left_shift)&DIGIT_MASK) |
+                    (right_word >> right_shift);
+                right_word = left_word;
+            }
+            left_word = (src_i < ndigits) ? digit[src_i] : 0;
+            mask = ~(~1U << high_i) & DIGIT_MASK;
+            dst_p[dst_i] = ((left_word << left_shift) |
+                (right_word >> right_shift)) & mask;
+        }
+        break;
 
       // SOURCE VALUE IS NEGATIVE:
 
@@ -276,7 +276,7 @@ bool sc_unsigned::concat_get_data( sc_digit* dst_p, int low_i ) const
 
         // ALL DATA TO BE MOVED IS IN A SINGLE WORD:
 
-	result = true;
+        result = true;
         if ( dst_i == end_i )
         {
             mask = ~(~0U << nbits);
@@ -301,7 +301,7 @@ bool sc_unsigned::concat_get_data( sc_digit* dst_p, int low_i ) const
             high_i = high_i % BITS_PER_DIGIT;
             mask = (~(~1U << high_i)) & DIGIT_MASK;
             right_word = (src_i < ndigits) ?
-		(digit[src_i] ^ DIGIT_MASK) + carry : DIGIT_MASK + carry;
+                (digit[src_i] ^ DIGIT_MASK) + carry : DIGIT_MASK + carry;
             dst_p[dst_i] = right_word & mask;
         }
 
@@ -317,8 +317,8 @@ bool sc_unsigned::concat_get_data( sc_digit* dst_p, int low_i ) const
             right_word = (digit[0] ^ DIGIT_MASK) + carry;
             dst_p[dst_i] = (dst_p[dst_i] & mask) |
                 ((right_word << left_shift) & DIGIT_MASK);
-	    carry = right_word >> BITS_PER_DIGIT;
-	    right_word &= DIGIT_MASK;
+            carry = right_word >> BITS_PER_DIGIT;
+            right_word &= DIGIT_MASK;
             for ( src_i = 1, dst_i++; dst_i < end_i; dst_i++, src_i++ )
             {
                 left_word = (digit[src_i] ^ DIGIT_MASK) + carry;
@@ -328,18 +328,18 @@ bool sc_unsigned::concat_get_data( sc_digit* dst_p, int low_i ) const
                 right_word = left_word & DIGIT_MASK;
             }
             left_word = (src_i < ndigits) ?
-		(digit[src_i] ^ DIGIT_MASK) + carry : carry;
+                (digit[src_i] ^ DIGIT_MASK) + carry : carry;
             mask = ~(~1U << high_i) & DIGIT_MASK;
             dst_p[dst_i] = ((left_word << left_shift) |
                 (right_word >> right_shift)) & mask;
         }
-	break;
+        break;
 
 
       // VALUE IS ZERO:
 
       default:
-	result = false;
+        result = false;
 
         // ALL DATA TO BE MOVED IS IN A SINGLE WORD:
 
@@ -437,7 +437,7 @@ bool sc_unsigned::and_reduce() const
 {
     int i;   // Digit examining.
 
-	if ( sgn == SC_ZERO ) return false;
+        if ( sgn == SC_ZERO ) return false;
     for ( i = 0; i < ndigits-1; i++ )
         if ( (digit[i] & DIGIT_MASK) != DIGIT_MASK ) return false;
     return (digit[i] & ~(~0U << ((nbits-1) % BITS_PER_DIGIT))) ==
@@ -446,7 +446,7 @@ bool sc_unsigned::and_reduce() const
 
 bool sc_unsigned::or_reduce() const
 {
-	return sgn != SC_ZERO;
+        return sgn != SC_ZERO;
 }
 
 bool sc_unsigned::xor_reduce() const
@@ -456,7 +456,7 @@ bool sc_unsigned::xor_reduce() const
 
     odd = 0;
     for ( i = 0; i < nbits-1; i++ )
-	if ( test(i) ) odd = ~odd;
+        if ( test(i) ) odd = ~odd;
     return odd != 0;
 }
 
@@ -576,10 +576,10 @@ sc_unsigned::operator = ( const sc_bv_base& v )
     int minlen = sc_min( nbits, v.length() );
     int i = 0;
     for( ; i < minlen; ++ i ) {
-	safe_set( i, v.get_bit( i ), digit );
+        safe_set( i, v.get_bit( i ), digit );
     }
     for( ; i < nbits; ++ i ) {
-	safe_set( i, false, digit );  // zero-extend
+        safe_set( i, false, digit );  // zero-extend
     }
     convert_2C_to_SM();
     return *this;
@@ -591,10 +591,10 @@ sc_unsigned::operator = ( const sc_lv_base& v )
     int minlen = sc_min( nbits, v.length() );
     int i = 0;
     for( ; i < minlen; ++ i ) {
-	safe_set( i, sc_logic( v.get_bit( i ) ).to_bool(), digit );
+        safe_set( i, sc_logic( v.get_bit( i ) ).to_bool(), digit );
     }
     for( ; i < nbits; ++ i ) {
-	safe_set( i, false, digit );  // zero-extend
+        safe_set( i, false, digit );  // zero-extend
     }
     convert_2C_to_SM();
     return *this;
@@ -2047,11 +2047,11 @@ compare_unsigned(small_type us,
       return 0;
 
     
-      int cmp_res = vec_skip_and_cmp(und, ud, vnd, vd);
+    int cmp_res = vec_skip_and_cmp(und, ud, vnd, vd);
 
-      if (us == SC_POS)
-        return cmp_res;
-              return -cmp_res;
+    if (us == SC_POS)
+      return cmp_res;
+    return -cmp_res;
 
    
   }

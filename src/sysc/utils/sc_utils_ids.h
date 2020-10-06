@@ -44,13 +44,13 @@ namespace sc_core {
 #endif
 
 SC_DEFINE_MESSAGE(SC_ID_STRING_TOO_LONG_,
-		  801, "string is too long")
+                  801, "string is too long")
 SC_DEFINE_MESSAGE(SC_ID_FRONT_ON_EMPTY_LIST_,
-		  802, "attempt to take front() on an empty list")
+                  802, "attempt to take front() on an empty list")
 SC_DEFINE_MESSAGE(SC_ID_BACK_ON_EMPTY_LIST_,
-		  803, "attempt to take back() on an empty list")
+                  803, "attempt to take back() on an empty list")
 SC_DEFINE_MESSAGE(SC_ID_IEEE_1666_DEPRECATION_,
-		  804, "/IEEE_Std_1666/deprecated" )
+                  804, "/IEEE_Std_1666/deprecated" )
 SC_DEFINE_MESSAGE(SC_ID_VECTOR_INIT_CALLED_TWICE_,
                   805, "sc_vector::init has already been called" )
 // available message number 806

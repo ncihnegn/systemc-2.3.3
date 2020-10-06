@@ -95,12 +95,12 @@ bool
 sc_attr_cltn::push_back( sc_attr_base* attribute_ )
 {
     if( attribute_ == nullptr ) {
-	return false;
+        return false;
     }
     for( int i = m_cltn.size() - 1; i >= 0; -- i ) {
-	if( attribute_->name() == m_cltn[i]->name() ) {
-	    return false;
-	}
+        if( attribute_->name() == m_cltn[i]->name() ) {
+            return false;
+        }
     }
     m_cltn.push_back( attribute_ );
     return true;
@@ -114,9 +114,9 @@ sc_attr_base*
 sc_attr_cltn::operator [] ( const std::string& name_ )
 {
     for( int i = m_cltn.size() - 1; i >= 0; -- i ) {
-	if( name_ == m_cltn[i]->name() ) {
-	    return m_cltn[i];
-	}
+        if( name_ == m_cltn[i]->name() ) {
+            return m_cltn[i];
+        }
     }
     return nullptr;
 }
@@ -125,9 +125,9 @@ const sc_attr_base*
 sc_attr_cltn::operator [] ( const std::string& name_ ) const
 {
     for( int i = m_cltn.size() - 1; i >= 0; -- i ) {
-	if( name_ == m_cltn[i]->name() ) {
-	    return m_cltn[i];
-	}
+        if( name_ == m_cltn[i]->name() ) {
+            return m_cltn[i];
+        }
     }
     return nullptr;
 }
@@ -140,12 +140,12 @@ sc_attr_base*
 sc_attr_cltn::remove( const std::string& name_ )
 {
     for( int i = m_cltn.size() - 1; i >= 0; -- i ) {
-	if( name_ == m_cltn[i]->name() ) {
-	    sc_attr_base* attribute = m_cltn[i];
-	    std::swap( m_cltn[i], m_cltn.back() );
-	    m_cltn.pop_back();
-	    return attribute;
-	}
+        if( name_ == m_cltn[i]->name() ) {
+            sc_attr_base* attribute = m_cltn[i];
+            std::swap( m_cltn[i], m_cltn.back() );
+            m_cltn.pop_back();
+            return attribute;
+        }
     }
     return nullptr;
 }

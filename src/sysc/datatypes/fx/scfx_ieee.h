@@ -651,11 +651,11 @@ double scfx_pow2( int exp )
         // handle subnormal case
         exp -= SCFX_IEEE_DOUBLE_E_MIN;
         if( ( exp += 20 ) >= 0 )
-	{
+        {
             r.mantissa0( 1U << exp );
         }
-	else if( ( exp += 32 ) >= 0 )
-	{
+        else if( ( exp += 32 ) >= 0 )
+        {
             r.mantissa1( 1U << exp );
         }
     }

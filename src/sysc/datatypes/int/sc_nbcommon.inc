@@ -53,7 +53,7 @@ CLASS_TYPE::CLASS_TYPE( int nb ) :
 {
     sgn = default_sign();
     if( nb > 0 ) {
-	nbits = num_bits( nb );
+        nbits = num_bits( nb );
     } else {
         invalid_init( "int nb", nb );
         sc_core::sc_abort(); // can't recover from here

@@ -65,7 +65,7 @@ sc_semaphore::sc_semaphore( int init_value_ )
   m_value( init_value_ )
 {
     if( m_value < 0 ) {
-	report_error( SC_ID_INVALID_SEMAPHORE_VALUE_ );
+        report_error( SC_ID_INVALID_SEMAPHORE_VALUE_ );
     }
 }
 
@@ -75,7 +75,7 @@ sc_semaphore::sc_semaphore( const char* name_, int init_value_ )
   m_value( init_value_ )
 {
     if( m_value < 0 ) {
-	report_error( SC_ID_INVALID_SEMAPHORE_VALUE_ );
+        report_error( SC_ID_INVALID_SEMAPHORE_VALUE_ );
     }
 }
 
@@ -88,7 +88,7 @@ int
 sc_semaphore::wait()
 {
     while( in_use() ) {
-	sc_core::wait( m_free, sc_get_curr_simcontext() );
+        sc_core::wait( m_free, sc_get_curr_simcontext() );
     }
     -- m_value;
     return 0;
@@ -101,7 +101,7 @@ int
 sc_semaphore::trywait()
 {
     if( in_use() ) {
-	return -1;
+        return -1;
     }
     -- m_value;
     return 0;

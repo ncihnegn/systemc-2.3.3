@@ -106,8 +106,8 @@ std::string sc_object_manager::create_name(const char* leaf_name)
     leafname_string = leaf_name; 
     if (parent_p) {
         result_string = parentname_string;
-	result_string += SC_HIERARCHY_CHAR;
-	result_string += leafname_string;
+        result_string += SC_HIERARCHY_CHAR;
+        result_string += leafname_string;
     } else { 
         result_string = leafname_string;
     } 
@@ -123,24 +123,24 @@ std::string sc_object_manager::create_name(const char* leaf_name)
     clash = false; 
     for (;;)
     {
-	    if ( !name_exists(result_string) )
-	    {
-	        break;
-	    }
+            if ( !name_exists(result_string) )
+            {
+                break;
+            }
         clash = true; 
         leafname_string = sc_gen_unique_name(leafname_string.c_str(), false); 
-	if (parent_p) {
-	    result_string = parentname_string;
-	    result_string += SC_HIERARCHY_CHAR;
-	    result_string += leafname_string;
-	} else { 
-	    result_string = leafname_string;
-	} 
+        if (parent_p) {
+            result_string = parentname_string;
+            result_string += SC_HIERARCHY_CHAR;
+            result_string += leafname_string;
+        } else { 
+            result_string = leafname_string;
+        } 
     } 
     if (clash) { 
-	std::string message = result_orig_string;
-	message += ". Latter declaration will be renamed to ";
-	message += result_string;
+        std::string message = result_orig_string;
+        message += ". Latter declaration will be renamed to ";
+        message += result_string;
         SC_REPORT_WARNING( SC_ID_INSTANCE_EXISTS_, message.c_str());
     } 
 
@@ -249,7 +249,7 @@ sc_object_manager::first_object()
     result_p = nullptr;
     for ( m_object_it = m_instance_table.begin(); 
           m_object_it != m_instance_table.end(); 
-	  m_object_it++ )
+          m_object_it++ )
     {
         if(m_object_it->second.m_name_origin == SC_NAME_OBJECT) {
             return static_cast<sc_object*>(m_object_it->second.m_element_p);
@@ -399,7 +399,7 @@ sc_object_manager::next_object()
     m_object_it++;
 
     for ( result_p = nullptr; m_object_it != m_instance_table.end(); 
-	  m_object_it++ )
+          m_object_it++ )
     {
         if(m_object_it->second.m_name_origin == SC_NAME_OBJECT) {
             return static_cast<sc_object*>(m_object_it->second.m_element_p);
@@ -447,7 +447,7 @@ sc_module_name*
 sc_object_manager::top_of_module_name_stack()
 {
     if( m_module_name_stack == nullptr ) {
-	SC_REPORT_ERROR( SC_ID_MODULE_NAME_STACK_EMPTY_, nullptr );
+        SC_REPORT_ERROR( SC_ID_MODULE_NAME_STACK_EMPTY_, nullptr );
     }
     return m_module_name_stack;
 }

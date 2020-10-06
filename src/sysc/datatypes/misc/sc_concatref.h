@@ -257,7 +257,7 @@ public:
             bool           right_non_zero;
 
             result_p->nbits = result_p->num_bits(m_len);
-	    result_p->ndigits = DIV_CEIL(result_p->nbits);
+            result_p->ndigits = DIV_CEIL(result_p->nbits);
             result_p->digit = (sc_digit*)sc_core::sc_temp_heap.allocate( 
                 sizeof(sc_digit)*result_p->ndigits );
 #if defined(_MSC_VER)

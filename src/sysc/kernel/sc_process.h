@@ -301,17 +301,17 @@ class SC_API sc_process_b : public sc_object {
   public:
     enum process_throw_type {
         THROW_NONE = 0,
-	THROW_KILL,
+        THROW_KILL,
         THROW_USER,
         THROW_ASYNC_RESET,
         THROW_SYNC_RESET
     };
 
     enum process_state {
-	ps_bit_disabled = 1,      // process is disabled.
-	ps_bit_ready_to_run = 2,  // process is ready to run.
+        ps_bit_disabled = 1,      // process is disabled.
+        ps_bit_ready_to_run = 2,  // process is ready to run.
         ps_bit_suspended = 4,     // process is suspended.
-	ps_bit_zombie = 8,        // process is a zombie.
+        ps_bit_zombie = 8,        // process is a zombie.
         ps_normal = 0             // must be zero.
     };
 
@@ -480,7 +480,7 @@ inline bool
 sc_process_b::remove_child_object( sc_object* object_p )
 {
     if ( sc_object::remove_child_object( object_p ) ) {
-	    reference_decrement();
+            reference_decrement();
             return true;
     }
     else
@@ -556,17 +556,17 @@ inline bool sc_process_b::start_unwinding()
 {
     if ( !m_unwinding )
     {
-	switch( m_throw_status )
-	{
-	  case THROW_KILL:
-	  case THROW_ASYNC_RESET:
-	  case THROW_SYNC_RESET:
-	    m_unwinding = true;
-	     return true;
-	  case THROW_USER:
-	   default:
-	     break;
-	 }
+        switch( m_throw_status )
+        {
+          case THROW_KILL:
+          case THROW_ASYNC_RESET:
+          case THROW_SYNC_RESET:
+            m_unwinding = true;
+             return true;
+          case THROW_USER:
+           default:
+             break;
+         }
     }
     return false;
 }
@@ -669,7 +669,7 @@ inline void sc_process_b::semantics()
 
     if ( m_reset_event_p &&
          ( (m_throw_status == THROW_SYNC_RESET) ||
-	   (m_throw_status == THROW_ASYNC_RESET) )
+           (m_throw_status == THROW_ASYNC_RESET) )
     ) {
         trigger_reset_event();
     }

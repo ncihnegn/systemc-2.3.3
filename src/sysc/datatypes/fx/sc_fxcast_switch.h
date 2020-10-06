@@ -84,9 +84,9 @@ public:
     sc_fxcast_switch& operator = ( const sc_fxcast_switch& );
 
     friend bool operator == ( const sc_fxcast_switch&,
-			      const sc_fxcast_switch& );
+                              const sc_fxcast_switch& );
     friend bool operator != ( const sc_fxcast_switch&,
-			      const sc_fxcast_switch& );
+                              const sc_fxcast_switch& );
 
     std::string to_string() const;
 

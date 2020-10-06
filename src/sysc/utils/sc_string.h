@@ -40,14 +40,14 @@
 #include "sysc/kernel/sc_cmnhdr.h"
 
 namespace sc_dt {
-	class sc_string_old;
+        class sc_string_old;
 }
 
 #ifdef SC_USE_SC_STRING_OLD
-	typedef sc_dt::sc_string_old sc_string;
+        typedef sc_dt::sc_string_old sc_string;
 #endif
 #ifdef SC_USE_STD_STRING
-	typedef ::std::string sc_string;
+        typedef ::std::string sc_string;
 #endif
 
 namespace sc_dt {
@@ -156,22 +156,22 @@ public:
     //
     // must have it inlined because of some compilers
     template<class T> sc_string_old& fmt(const T& t)
-	{
-	    // search %
-	    int index;
-	    int last_char = length()-1;
-	    sc_string_old temp(*this);
-	    do
-	    {
-		index = temp.pos("%");
-		if(index == last_char)
-		    return *this;
-		temp = substr(index,last_char);
-	    } while(temp[0] != '%');
-	    int f_len = (int)temp.fmt_length(); // length of format field
-	    temp = to_string(substr(0,index+f_len-1).c_str(),t);
-	    return (*this) = temp + substr(index+f_len,last_char);
-	}
+        {
+            // search %
+            int index;
+            int last_char = length()-1;
+            sc_string_old temp(*this);
+            do
+            {
+                index = temp.pos("%");
+                if(index == last_char)
+                    return *this;
+                temp = substr(index,last_char);
+            } while(temp[0] != '%');
+            int f_len = (int)temp.fmt_length(); // length of format field
+            temp = to_string(substr(0,index+f_len-1).c_str(),t);
+            return (*this) = temp + substr(index+f_len,last_char);
+        }
     sc_string_old& fmt(const sc_string_old& s);
     //
     // find position of substring in this string

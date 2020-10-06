@@ -172,7 +172,7 @@ static const int MAX_NDIGITS = DIV_CEIL(SC_MAX_NBITS) + 2;
 // since the unsigned long data type varies in size between 32-bit and 64-bit
 // machines.
 
-typedef unsigned int sc_digit;	// 32-bit unsigned integer
+typedef unsigned int sc_digit;        // 32-bit unsigned integer
 
 // Support for the long long type. This type is not in the standard
 // but is usually supported by compilers.

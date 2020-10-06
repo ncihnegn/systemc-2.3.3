@@ -136,7 +136,7 @@ void sc_process_b::disconnect_process()
             for ( int mon_i = 0; mon_i < mon_n; mon_i++ )
             {
                 thread_h->m_monitor_q[mon_i]->signal( thread_h,
-			      sc_process_monitor::spm_exit);
+                              sc_process_monitor::spm_exit);
             }
         }
         break;
@@ -275,10 +275,10 @@ sc_process_b::remove_dynamic_events( bool skip_timeout )
       case SC_THREAD_PROC_:
       case SC_CTHREAD_PROC_:
         thread_h = dynamic_cast<sc_thread_handle>(this);
-	if ( thread_h->m_timeout_event_p && !skip_timeout ) {
-	    thread_h->m_timeout_event_p->remove_dynamic(thread_h);
-	    thread_h->m_timeout_event_p->cancel();
-	}
+        if ( thread_h->m_timeout_event_p && !skip_timeout ) {
+            thread_h->m_timeout_event_p->remove_dynamic(thread_h);
+            thread_h->m_timeout_event_p->cancel();
+        }
         if ( m_event_p )
         {
             m_event_p->remove_dynamic( thread_h );
@@ -288,15 +288,15 @@ sc_process_b::remove_dynamic_events( bool skip_timeout )
         {
             m_event_list_p->remove_dynamic( thread_h, nullptr );
             m_event_list_p->auto_delete();
-	    m_event_list_p = nullptr;
+            m_event_list_p = nullptr;
         }
         break;
       case SC_METHOD_PROC_:
         method_h = dynamic_cast<sc_method_handle>(this);
-	if ( method_h->m_timeout_event_p && !skip_timeout ) {
-	    method_h->m_timeout_event_p->remove_dynamic(method_h);
-	    method_h->m_timeout_event_p->cancel();
-	}
+        if ( method_h->m_timeout_event_p && !skip_timeout ) {
+            method_h->m_timeout_event_p->remove_dynamic(method_h);
+            method_h->m_timeout_event_p->cancel();
+        }
         if ( m_event_p )
         {
             m_event_p->remove_dynamic( method_h );
@@ -306,7 +306,7 @@ sc_process_b::remove_dynamic_events( bool skip_timeout )
         {
             m_event_list_p->remove_dynamic( method_h, nullptr );
             m_event_list_p->auto_delete();
-	    m_event_list_p = nullptr;
+            m_event_list_p = nullptr;
         }
         break;
       default: // Some other type, it needs to clean up itself.
@@ -408,8 +408,8 @@ void sc_process_b::reset_changed( bool async, bool asserted )
     if ( !sc_allow_process_control_corners && !async &&
          (m_state & ps_bit_suspended) )
     {
-	report_error( SC_ID_PROCESS_CONTROL_CORNER_CASE_,
-	              "synchronous reset changed on a suspended process" );
+        report_error( SC_ID_PROCESS_CONTROL_CORNER_CASE_,
+                      "synchronous reset changed on a suspended process" );
     }
 
     // IF THIS OBJECT IS PUSHING UP DAISIES WE ARE DONE:
@@ -422,15 +422,15 @@ void sc_process_b::reset_changed( bool async, bool asserted )
     {
         // if ( m_reset_event_p ) m_reset_event_p->notify();
         if ( async )
-	{
-	    m_active_areset_n++;
-	    if ( sc_is_running() ) throw_reset(true);
-	}
-	else
-	{
-	    m_active_reset_n++;
-	    if ( sc_is_running() ) throw_reset(false);
-	}
+        {
+            m_active_areset_n++;
+            if ( sc_is_running() ) throw_reset(true);
+        }
+        else
+        {
+            m_active_reset_n++;
+            if ( sc_is_running() ) throw_reset(false);
+        }
     }
 
     // Reset is being deasserted:
@@ -438,13 +438,13 @@ void sc_process_b::reset_changed( bool async, bool asserted )
     else
     {
         if ( async )
-	{
-	    m_active_areset_n--;
-	}
-	else
-	{
-	    m_active_reset_n--;
-	}
+        {
+            m_active_areset_n--;
+        }
+        else
+        {
+            m_active_reset_n--;
+        }
     }
 
     // Clear the throw type if there are no active resets.
@@ -517,35 +517,35 @@ void sc_process_b::reset_process( reset_type rt,
       // If this is an sc_method only throw if it is active.
 
       case reset_asynchronous:
-	if ( sc_get_status() != SC_RUNNING )
-	{
-	    report_error(SC_ID_RESET_PROCESS_WHILE_NOT_RUNNING_);
-	}
-	else
-	{
-	    remove_dynamic_events();
-	    throw_reset(true);
-	}
+        if ( sc_get_status() != SC_RUNNING )
+        {
+            report_error(SC_ID_RESET_PROCESS_WHILE_NOT_RUNNING_);
+        }
+        else
+        {
+            remove_dynamic_events();
+            throw_reset(true);
+        }
         break;
 
       // Turn on sticky synchronous reset: use standard reset mechanism.
 
       case reset_synchronous_on:
-	if ( !m_sticky_reset )
-	{
-	    m_sticky_reset = true;
-	    reset_changed( false, true );
-	}
+        if ( !m_sticky_reset )
+        {
+            m_sticky_reset = true;
+            reset_changed( false, true );
+        }
         break;
 
       // Turn off sticky synchronous reset: use standard reset mechanism.
 
       default:
-	if ( m_sticky_reset )
-	{
-	    m_sticky_reset = false;
-	    reset_changed( false, false );
-	}
+        if ( m_sticky_reset )
+        {
+            m_sticky_reset = false;
+            reset_changed( false, false );
+        }
         break;
     }
 }

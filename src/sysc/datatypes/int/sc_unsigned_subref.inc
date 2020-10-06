@@ -163,7 +163,7 @@ const sc_unsigned_subref&
 sc_unsigned_subref::operator = ( const sc_unsigned_subref& a )
 {
     if( this == &a ) {
-	return *this;
+        return *this;
     }
     return operator = ( (sc_unsigned)( a ) );
 }
@@ -200,8 +200,8 @@ const sc_unsigned_subref&
 sc_unsigned_subref::operator = ( unsigned long v )
 {
     for( int i = m_right; i <= m_left; ++ i ) {
-	m_obj_p->set( i, static_cast<bool>( v & 1 ) );
-	v >>= 1;
+        m_obj_p->set( i, static_cast<bool>( v & 1 ) );
+        v >>= 1;
     }
     return *this;
 }
@@ -211,8 +211,8 @@ sc_unsigned_subref::operator = ( long v )
 {
     unsigned long v2 = (unsigned long) v;
     for( int i = m_right; i <= m_left; ++ i ) {
-	m_obj_p->set( i, static_cast<bool>( v2 & 1 ) );
-	v2 >>= 1;
+        m_obj_p->set( i, static_cast<bool>( v2 & 1 ) );
+        v2 >>= 1;
     }
     return *this;
 }
@@ -221,8 +221,8 @@ const sc_unsigned_subref&
 sc_unsigned_subref::operator = ( uint64  v )
 {
     for( int i = m_right; i <= m_left; ++ i ) {
-	m_obj_p->set( i, static_cast<bool>( v & 1 ) );
-	v >>= 1;
+        m_obj_p->set( i, static_cast<bool>( v & 1 ) );
+        v >>= 1;
     }
     return *this;
 }
@@ -232,8 +232,8 @@ sc_unsigned_subref::operator = ( int64 v )
 {
     uint64 v2 = (uint64) v;
     for( int i = m_right; i <= m_left; ++ i ) {
-	m_obj_p->set( i, static_cast<bool>( v2 & 1 ) );
-	v2 >>= 1;
+        m_obj_p->set( i, static_cast<bool>( v2 & 1 ) );
+        v2 >>= 1;
     }
     return *this;
 }
@@ -253,17 +253,17 @@ sc_unsigned_subref::operator = ( double v )
 #endif
 
     if (v < 0)
-	v = -v;
+        v = -v;
 
     int i = 0;
 
     while (std::floor(v) && (i < nd)) {
 #ifndef _WIN32
-	d[i++] = (sc_digit) std::floor(remainder(v, DIGIT_RADIX));
+        d[i++] = (sc_digit) std::floor(remainder(v, DIGIT_RADIX));
 #else
-	d[i++] = (sc_digit) std::floor(std::fmod(v, DIGIT_RADIX));
+        d[i++] = (sc_digit) std::floor(std::fmod(v, DIGIT_RADIX));
 #endif
-	v /= DIGIT_RADIX;
+        v /= DIGIT_RADIX;
     }
 
     vec_zero(i, nd, d);
@@ -275,16 +275,16 @@ sc_unsigned_subref::operator = ( double v )
 
     while (i < nb) {
 
-	m_obj_p->set(i + m_right, (bool) (d[j] & val));
+        m_obj_p->set(i + m_right, (bool) (d[j] & val));
 
-	++i;
+        ++i;
 
-	if (i % BITS_PER_DIGIT == 0) {
-	    val = 1;
-	    ++j;
-	}
-	else
-	    val <<= 1;
+        if (i % BITS_PER_DIGIT == 0) {
+            val = 1;
+            ++j;
+        }
+        else
+            val <<= 1;
     }
 
 #ifndef SC_MAX_NBITS
@@ -316,17 +316,17 @@ void sc_unsigned_subref::concat_set( int64 src, int low_i )
 
     if ( low_i < 64 )    
     {    
-	src = src >> low_i;
-	l = sc_min( m_left, (63-low_i) + m_right );    
-	for( i = m_right; i <= l; ++ i ) {    
-		m_obj_p->set( i, src & 1 );    
-		src = src >> 1;    
-	}    
-	for ( ; i <= m_left; i++ ) m_obj_p->set(sign);     
+        src = src >> low_i;
+        l = sc_min( m_left, (63-low_i) + m_right );    
+        for( i = m_right; i <= l; ++ i ) {    
+                m_obj_p->set( i, src & 1 );    
+                src = src >> 1;    
+        }    
+        for ( ; i <= m_left; i++ ) m_obj_p->set(sign);     
     }    
     else    
     {    
-	for( i = m_right; i <= m_left; ++ i ) m_obj_p->set(sign);     
+        for( i = m_right; i <= m_left; ++ i ) m_obj_p->set(sign);     
     }    
 }
 
@@ -339,16 +339,16 @@ void sc_unsigned_subref::concat_set( const sc_signed& src, int low_i )
     l = src.nbits - (low_i+1);
     if ( l >= 0 )
     {
-	src_i = low_i;
-	l = sc_min( m_left, l + m_right );
-	for( i = m_right; i <= l; ++ i, src_i++ ) {
-	    m_obj_p->set( i, src.test( src_i ) );
-	}
-	for ( ; i <= m_left; i++ ) m_obj_p->set(i, sign);
+        src_i = low_i;
+        l = sc_min( m_left, l + m_right );
+        for( i = m_right; i <= l; ++ i, src_i++ ) {
+            m_obj_p->set( i, src.test( src_i ) );
+        }
+        for ( ; i <= m_left; i++ ) m_obj_p->set(i, sign);
     }
     else
     {    
-	for( i = m_right; i <= m_left; ++ i ) m_obj_p->set(i, sign);     
+        for( i = m_right; i <= m_left; ++ i ) m_obj_p->set(i, sign);     
     }    
 }
 
@@ -360,16 +360,16 @@ void sc_unsigned_subref::concat_set( const sc_unsigned& src, int low_i )
     l = src.nbits - (low_i+2);
     if ( l >= 0 )
     {
-	src_i = low_i;
-	l = sc_min( m_left, l + m_right );
-	for( i = m_right; i <= l; ++ i, src_i++ ) {
-	    m_obj_p->set( i, src.test( src_i ) );
-	}
-	for ( ; i <= m_left; i++ ) m_obj_p->set(i, false);
+        src_i = low_i;
+        l = sc_min( m_left, l + m_right );
+        for( i = m_right; i <= l; ++ i, src_i++ ) {
+            m_obj_p->set( i, src.test( src_i ) );
+        }
+        for ( ; i <= m_left; i++ ) m_obj_p->set(i, false);
     }
     else
     {    
-	for( i = m_right; i <= m_left; ++ i ) m_obj_p->set(i, false);     
+        for( i = m_right; i <= m_left; ++ i ) m_obj_p->set(i, false);     
     }    
 }
 
@@ -380,17 +380,17 @@ void sc_unsigned_subref::concat_set( uint64 src, int low_i )
 
     if ( low_i < 64 )    
     {    
-	src = src >> low_i;
-	l = sc_min( m_left, (63-low_i) + m_right );    
-	for( i = m_right; i <= l; ++ i ) {    
-		m_obj_p->set( i, src & 1 );    
-		src = src >> 1;    
-	}    
-	for ( ; i <= m_left; i++ ) m_obj_p->set(false);     
+        src = src >> low_i;
+        l = sc_min( m_left, (63-low_i) + m_right );    
+        for( i = m_right; i <= l; ++ i ) {    
+                m_obj_p->set( i, src & 1 );    
+                src = src >> 1;    
+        }    
+        for ( ; i <= m_left; i++ ) m_obj_p->set(false);     
     }    
     else    
     {    
-	for( i = m_right; i <= m_left; ++ i ) m_obj_p->set(false);     
+        for( i = m_right; i <= m_left; ++ i ) m_obj_p->set(false);     
     }    
 }
 // other methods

@@ -68,8 +68,8 @@ namespace sc_dt
 
 enum sc_enc
 {
-    SC_TC_,	// two's complement
-    SC_US_	// unsigned
+    SC_TC_,        // two's complement
+    SC_US_        // unsigned
 };
 
 
@@ -92,13 +92,13 @@ operator << ( ::std::ostream& os, sc_enc enc )
 
 enum sc_q_mode
 {
-    SC_RND,		// rounding to plus infinity
-    SC_RND_ZERO,	// rounding to zero
-    SC_RND_MIN_INF,	// rounding to minus infinity
-    SC_RND_INF,		// rounding to infinity
-    SC_RND_CONV,	// convergent rounding
-    SC_TRN,		// truncation
-    SC_TRN_ZERO		// truncation to zero
+    SC_RND,                // rounding to plus infinity
+    SC_RND_ZERO,        // rounding to zero
+    SC_RND_MIN_INF,        // rounding to minus infinity
+    SC_RND_INF,                // rounding to infinity
+    SC_RND_CONV,        // convergent rounding
+    SC_TRN,                // truncation
+    SC_TRN_ZERO                // truncation to zero
 };
 
 
@@ -121,11 +121,11 @@ operator << ( ::std::ostream& os, sc_q_mode q_mode )
 
 enum sc_o_mode
 {
-    SC_SAT,		// saturation
-    SC_SAT_ZERO,	// saturation to zero
-    SC_SAT_SYM,		// symmetrical saturation
-    SC_WRAP,		// wrap-around (*)
-    SC_WRAP_SM		// sign magnitude wrap-around (*)
+    SC_SAT,                // saturation
+    SC_SAT_ZERO,        // saturation to zero
+    SC_SAT_SYM,                // symmetrical saturation
+    SC_WRAP,                // wrap-around (*)
+    SC_WRAP_SM                // sign magnitude wrap-around (*)
 };
 
 // (*) uses the number of saturated bits argument, see the documentation.
@@ -174,8 +174,8 @@ operator << ( ::std::ostream& os, sc_switch sw )
 
 enum sc_fmt
 {
-    SC_F,	// fixed
-    SC_E	// scientific
+    SC_F,        // fixed
+    SC_E        // scientific
 };
 
 
@@ -282,7 +282,7 @@ const int SC_DEFAULT_MAX_WL_ = SC_BUILTIN_MAX_WL_;
 
 #define SC_CHECK_MAX_WL_(max_wl)                                              \
     SC_ERROR_IF_( (max_wl) <= 0 && (max_wl) != -1,                            \
-	    sc_core::SC_ID_INVALID_MAX_WL_ )
+            sc_core::SC_ID_INVALID_MAX_WL_ )
 
 
 // ----------------------------------------------------------------------------
@@ -293,9 +293,9 @@ const int SC_DEFAULT_MAX_WL_ = SC_BUILTIN_MAX_WL_;
 {                                                                             \
     if( (object).observer() != 0 )                                            \
     {                                                                         \
-	observer_type observer = (object).lock_observer();                    \
-	observer->event( (object) );                                          \
-	(object).unlock_observer( observer );                                 \
+        observer_type observer = (object).lock_observer();                    \
+        observer->event( (object) );                                          \
+        (object).unlock_observer( observer );                                 \
     }                                                                         \
 }
 

@@ -21,16 +21,16 @@ typedef unsigned long qt_word_t;
    non-varargs:
 
    +---
-   | arg[2]	=== `userf' on startup
-   | arg[1]	=== `pt' on startup
-   | arg[0]	=== `pu' on startup
-   | ...	=== `only' on startup.
+   | arg[2]        === `userf' on startup
+   | arg[1]        === `pt' on startup
+   | arg[0]        === `pu' on startup
+   | ...        === `only' on startup.
    +---
-   | ret pc	=== `qt_start' on startup
-   | fp		=== 0 on startup
-   | ap		=== 0 on startup
+   | ret pc        === `qt_start' on startup
+   | fp                === 0 on startup
+   | ap                === 0 on startup
    | <mask>
-   | 0 (handler)			<--- qt_t.sp
+   | 0 (handler)                        <--- qt_t.sp
    +---
 
    When a non-varargs thread is started, it ``returns'' to the start
@@ -47,16 +47,16 @@ typedef unsigned long qt_word_t;
    | arg[0]
    | nargs
    +---
-   |		=== `cleanup'
-   |		=== `vuserf'
-   |		=== `startup'
-   |		=== `pt'
+   |                === `cleanup'
+   |                === `vuserf'
+   |                === `startup'
+   |                === `pt'
    +---
-   | ret pc	=== `qt_start' on startup
-   | fp		=== 0 on startup
-   | ap		=== 0 on startup
+   | ret pc        === `qt_start' on startup
+   | fp                === 0 on startup
+   | ap                === 0 on startup
    | <mask>
-   | 0 (handler)			<--- qt_t.sp
+   | 0 (handler)                        <--- qt_t.sp
    +---
 
    When a varargs thread is started, it ``returns'' to the `qt_vstart'
@@ -70,26 +70,26 @@ extern void qt_vstart (void);
 
 
 /* Initial call frame for non-varargs and varargs cases. */
-#define QUICKTHREADS_STKBASE	(10 * 4)
-#define QUICKTHREADS_VSTKBASE	(9 * 4)
+#define QUICKTHREADS_STKBASE        (10 * 4)
+#define QUICKTHREADS_VSTKBASE        (9 * 4)
 
 
 /* Stack "must be" 4-byte aligned.  (Actually, no, but it's
    easiest and probably fastest to do so.) */
 
-#define QUICKTHREADS_STKALIGN	(4)
+#define QUICKTHREADS_STKALIGN        (4)
 
 
 /* Where to place various arguments. */
-#define QUICKTHREADS_ONLY_INDEX	(5)
-#define QUICKTHREADS_USER_INDEX	(8)
-#define QUICKTHREADS_ARGT_INDEX	(7)
-#define QUICKTHREADS_ARGU_INDEX	(6)
+#define QUICKTHREADS_ONLY_INDEX        (5)
+#define QUICKTHREADS_USER_INDEX        (8)
+#define QUICKTHREADS_ARGT_INDEX        (7)
+#define QUICKTHREADS_ARGU_INDEX        (6)
 
-#define QUICKTHREADS_VSTARTUP_INDEX	(6)
-#define QUICKTHREADS_VUSERF_INDEX		(7)
-#define QUICKTHREADS_VCLEANUP_INDEX	(8)
-#define QUICKTHREADS_VARGT_INDEX		(5)
+#define QUICKTHREADS_VSTARTUP_INDEX        (6)
+#define QUICKTHREADS_VUSERF_INDEX                (7)
+#define QUICKTHREADS_VCLEANUP_INDEX        (8)
+#define QUICKTHREADS_VARGT_INDEX                (5)
 
 
 /* Stack grows down.  The top of the stack is the first thing to
@@ -99,7 +99,7 @@ extern void qt_vstart (void);
 
 extern void qt_error (void);
 
-#define QUICKTHREADS_VAX_GMASK_NOREGS	(0)
+#define QUICKTHREADS_VAX_GMASK_NOREGS        (0)
 
 /* Push on the error return address, null termination to call chains,
    number of arguments to `only', register save mask (save no
@@ -116,7 +116,7 @@ extern void qt_error (void);
     (QUICKTHREADS_SPUT (sto, (-(nbytes)/4)-1, (nbytes)/4), \
      ((char *)(((sto)-4) - QUICKTHREADS_STKROUNDUP(nbytes))))
 
-#define QUICKTHREADS_VARGS_ADJUST(sp)	((char *)sp + 4)
+#define QUICKTHREADS_VARGS_ADJUST(sp)        ((char *)sp + 4)
 
 #define QUICKTHREADS_VARGS_MD1(sto) \
     (QUICKTHREADS_SPUT (sto, 0, 0), \

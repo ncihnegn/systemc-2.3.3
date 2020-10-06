@@ -51,9 +51,9 @@ void warn_cthread_wait()
     {
         warn_wait = false;
         SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_,
-	    "all waits except wait() and wait(N)\n" \
-	    "             are deprecated for SC_CTHREAD, " \
-	    "use an SC_THREAD instead");
+            "all waits except wait() and wait(N)\n" \
+            "             are deprecated for SC_CTHREAD, " \
+            "use an SC_THREAD instead");
     }
 }
 
@@ -68,8 +68,8 @@ wait( sc_simcontext* simc )
         break;
     }
     default:
-	SC_REPORT_ERROR( SC_ID_WAIT_NOT_ALLOWED_, "\n        "
-			 "in SC_METHODs use next_trigger() instead" );
+        SC_REPORT_ERROR( SC_ID_WAIT_NOT_ALLOWED_, "\n        "
+                         "in SC_METHODs use next_trigger() instead" );
         break;
     }
 }
@@ -82,20 +82,20 @@ wait( const sc_event& e, sc_simcontext* simc )
     sc_curr_proc_handle cpi = simc->get_curr_proc_info();
     switch( cpi->kind ) {
     case SC_THREAD_PROC_: {
-	reinterpret_cast<sc_thread_handle>( cpi->process_handle )->wait( e );
-	break;
+        reinterpret_cast<sc_thread_handle>( cpi->process_handle )->wait( e );
+        break;
     }
     case SC_CTHREAD_PROC_: {
         warn_cthread_wait();
-	auto *cthread_h =
+        auto *cthread_h =
             reinterpret_cast<sc_cthread_handle>( cpi->process_handle );
-	cthread_h->wait( e );
-	cthread_h->wait_cycles();
-	break;
+        cthread_h->wait( e );
+        cthread_h->wait_cycles();
+        break;
     }
     default:
-	SC_REPORT_ERROR( SC_ID_WAIT_NOT_ALLOWED_, "\n        "
-			 "in SC_METHODs use next_trigger() instead" );
+        SC_REPORT_ERROR( SC_ID_WAIT_NOT_ALLOWED_, "\n        "
+                         "in SC_METHODs use next_trigger() instead" );
         break;
     }
 }
@@ -112,22 +112,22 @@ wait( const sc_event_or_list& el, sc_simcontext* simc )
     sc_curr_proc_handle cpi = simc->get_curr_proc_info();
     switch( cpi->kind ) {
     case SC_THREAD_PROC_: {
-	reinterpret_cast<sc_thread_handle>( cpi->process_handle )->wait( el );
-	break;
+        reinterpret_cast<sc_thread_handle>( cpi->process_handle )->wait( el );
+        break;
     }
     case SC_CTHREAD_PROC_: {
         warn_cthread_wait();
         SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_,
-	    "wait(event_list) is deprecated for SC_CTHREAD, use SC_THREAD");
-	auto *cthread_h =
+            "wait(event_list) is deprecated for SC_CTHREAD, use SC_THREAD");
+        auto *cthread_h =
             reinterpret_cast<sc_cthread_handle>( cpi->process_handle );
-	cthread_h->wait( el );
-	cthread_h->wait_cycles();
-	break;
+        cthread_h->wait( el );
+        cthread_h->wait_cycles();
+        break;
     }
     default:
-	SC_REPORT_ERROR( SC_ID_WAIT_NOT_ALLOWED_, "\n        "
-			 "in SC_METHODs use next_trigger() instead" );
+        SC_REPORT_ERROR( SC_ID_WAIT_NOT_ALLOWED_, "\n        "
+                         "in SC_METHODs use next_trigger() instead" );
         break;
     }
 }
@@ -144,20 +144,20 @@ wait( const sc_event_and_list& el, sc_simcontext* simc )
     sc_curr_proc_handle cpi = simc->get_curr_proc_info();
     switch( cpi->kind ) {
     case SC_THREAD_PROC_: {
-	reinterpret_cast<sc_thread_handle>( cpi->process_handle )->wait( el );
-	break;
+        reinterpret_cast<sc_thread_handle>( cpi->process_handle )->wait( el );
+        break;
     }
     case SC_CTHREAD_PROC_: {
         warn_cthread_wait();
-	auto *cthread_h =
+        auto *cthread_h =
             reinterpret_cast<sc_cthread_handle>( cpi->process_handle );
-	cthread_h->wait( el );
-	cthread_h->wait_cycles();
-	break;
+        cthread_h->wait( el );
+        cthread_h->wait_cycles();
+        break;
     }
     default:
-	SC_REPORT_ERROR( SC_ID_WAIT_NOT_ALLOWED_, "\n        "
-			 "in SC_METHODs use next_trigger() instead" );
+        SC_REPORT_ERROR( SC_ID_WAIT_NOT_ALLOWED_, "\n        "
+                         "in SC_METHODs use next_trigger() instead" );
         break;
     }
 }
@@ -168,20 +168,20 @@ wait( const sc_time& t, sc_simcontext* simc )
     sc_curr_proc_handle cpi = simc->get_curr_proc_info();
     switch( cpi->kind ) {
     case SC_THREAD_PROC_: {
-	reinterpret_cast<sc_thread_handle>( cpi->process_handle )->wait( t );
-	break;
+        reinterpret_cast<sc_thread_handle>( cpi->process_handle )->wait( t );
+        break;
     }
     case SC_CTHREAD_PROC_: {
         warn_cthread_wait();
-	auto *cthread_h =
+        auto *cthread_h =
             reinterpret_cast<sc_cthread_handle>( cpi->process_handle );
-	cthread_h->wait( t );
-	cthread_h->wait_cycles();
-	break;
+        cthread_h->wait( t );
+        cthread_h->wait_cycles();
+        break;
     }
     default:
-	SC_REPORT_ERROR( SC_ID_WAIT_NOT_ALLOWED_, "\n        "
-			 "in SC_METHODs use next_trigger() instead" );
+        SC_REPORT_ERROR( SC_ID_WAIT_NOT_ALLOWED_, "\n        "
+                         "in SC_METHODs use next_trigger() instead" );
         break;
     }
 }
@@ -192,20 +192,20 @@ wait( const sc_time& t, const sc_event& e, sc_simcontext* simc )
     sc_curr_proc_handle cpi = simc->get_curr_proc_info();
     switch( cpi->kind ) {
     case SC_THREAD_PROC_: {
-	reinterpret_cast<sc_thread_handle>( cpi->process_handle )->wait( t, e );
-	break;
+        reinterpret_cast<sc_thread_handle>( cpi->process_handle )->wait( t, e );
+        break;
     }
     case SC_CTHREAD_PROC_: {
         warn_cthread_wait();
-	auto *cthread_h =
+        auto *cthread_h =
             reinterpret_cast<sc_cthread_handle>( cpi->process_handle );
-	cthread_h->wait( t, e );
-	cthread_h->wait_cycles();
-	break;
+        cthread_h->wait( t, e );
+        cthread_h->wait_cycles();
+        break;
     }
     default:
-	SC_REPORT_ERROR( SC_ID_WAIT_NOT_ALLOWED_, "\n        "
-			 "in SC_METHODs use next_trigger() instead" );
+        SC_REPORT_ERROR( SC_ID_WAIT_NOT_ALLOWED_, "\n        "
+                         "in SC_METHODs use next_trigger() instead" );
         break;
     }
 }
@@ -222,20 +222,20 @@ wait( const sc_time& t, const sc_event_or_list& el, sc_simcontext* simc )
     sc_curr_proc_handle cpi = simc->get_curr_proc_info();
     switch( cpi->kind ) {
     case SC_THREAD_PROC_: {
-	reinterpret_cast<sc_thread_handle>( cpi->process_handle )->wait( t, el );
-	break;
+        reinterpret_cast<sc_thread_handle>( cpi->process_handle )->wait( t, el );
+        break;
     }
     case SC_CTHREAD_PROC_: {
         warn_cthread_wait();
-	auto *cthread_h =
+        auto *cthread_h =
             reinterpret_cast<sc_cthread_handle>( cpi->process_handle );
-	cthread_h->wait( t, el );
-	cthread_h->wait_cycles();
-	break;
+        cthread_h->wait( t, el );
+        cthread_h->wait_cycles();
+        break;
     }
     default:
-	SC_REPORT_ERROR( SC_ID_WAIT_NOT_ALLOWED_, "\n        "
-			 "in SC_METHODs use next_trigger() instead" );
+        SC_REPORT_ERROR( SC_ID_WAIT_NOT_ALLOWED_, "\n        "
+                         "in SC_METHODs use next_trigger() instead" );
         break;
     }
 }
@@ -252,20 +252,20 @@ wait( const sc_time& t, const sc_event_and_list& el, sc_simcontext* simc )
     sc_curr_proc_handle cpi = simc->get_curr_proc_info();
     switch( cpi->kind ) {
     case SC_THREAD_PROC_: {
-	reinterpret_cast<sc_thread_handle>( cpi->process_handle )->wait( t, el );
-	break;
+        reinterpret_cast<sc_thread_handle>( cpi->process_handle )->wait( t, el );
+        break;
     }
     case SC_CTHREAD_PROC_: {
         warn_cthread_wait();
-	auto *cthread_h =
+        auto *cthread_h =
             reinterpret_cast<sc_cthread_handle>( cpi->process_handle );
-	cthread_h->wait( t, el );
-	cthread_h->wait_cycles();
-	break;
+        cthread_h->wait( t, el );
+        cthread_h->wait_cycles();
+        break;
     }
     default:
-	SC_REPORT_ERROR( SC_ID_WAIT_NOT_ALLOWED_, "\n        "
-			 "in SC_METHODs use next_trigger() instead" );
+        SC_REPORT_ERROR( SC_ID_WAIT_NOT_ALLOWED_, "\n        "
+                         "in SC_METHODs use next_trigger() instead" );
         break;
     }
 }
@@ -278,10 +278,10 @@ next_trigger( sc_simcontext* simc )
 {
     sc_curr_proc_handle cpi = simc->get_curr_proc_info();
     if( cpi->kind == SC_METHOD_PROC_ ) {
-	reinterpret_cast<sc_method_handle>( cpi->process_handle )->clear_trigger();
+        reinterpret_cast<sc_method_handle>( cpi->process_handle )->clear_trigger();
     } else {
-	SC_REPORT_ERROR( SC_ID_NEXT_TRIGGER_NOT_ALLOWED_, "\n        "
-			 "in SC_THREADs and SC_CTHREADs use wait() instead" );
+        SC_REPORT_ERROR( SC_ID_NEXT_TRIGGER_NOT_ALLOWED_, "\n        "
+                         "in SC_THREADs and SC_CTHREADs use wait() instead" );
     }
 }
 
@@ -293,10 +293,10 @@ next_trigger( const sc_event& e, sc_simcontext* simc )
 {
     sc_curr_proc_handle cpi = simc->get_curr_proc_info();
     if( cpi->kind == SC_METHOD_PROC_ ) {
-	reinterpret_cast<sc_method_handle>( cpi->process_handle )->next_trigger( e );
+        reinterpret_cast<sc_method_handle>( cpi->process_handle )->next_trigger( e );
     } else {
-	SC_REPORT_ERROR( SC_ID_NEXT_TRIGGER_NOT_ALLOWED_, "\n        "
-			 "in SC_THREADs and SC_CTHREADs use wait() instead" );
+        SC_REPORT_ERROR( SC_ID_NEXT_TRIGGER_NOT_ALLOWED_, "\n        "
+                         "in SC_THREADs and SC_CTHREADs use wait() instead" );
     }
 }
 
@@ -311,10 +311,10 @@ next_trigger( const sc_event_or_list& el, sc_simcontext* simc )
 
     sc_curr_proc_handle cpi = simc->get_curr_proc_info();
     if( cpi->kind == SC_METHOD_PROC_ ) {
-	reinterpret_cast<sc_method_handle>( cpi->process_handle )->next_trigger( el );
+        reinterpret_cast<sc_method_handle>( cpi->process_handle )->next_trigger( el );
     } else {
-	SC_REPORT_ERROR( SC_ID_NEXT_TRIGGER_NOT_ALLOWED_, "\n        "
-			 "in SC_THREADs and SC_CTHREADs use wait() instead" );
+        SC_REPORT_ERROR( SC_ID_NEXT_TRIGGER_NOT_ALLOWED_, "\n        "
+                         "in SC_THREADs and SC_CTHREADs use wait() instead" );
     }
 }
 
@@ -329,10 +329,10 @@ next_trigger( const sc_event_and_list& el, sc_simcontext* simc )
 
     sc_curr_proc_handle cpi = simc->get_curr_proc_info();
     if( cpi->kind == SC_METHOD_PROC_ ) {
-	reinterpret_cast<sc_method_handle>( cpi->process_handle )->next_trigger( el );
+        reinterpret_cast<sc_method_handle>( cpi->process_handle )->next_trigger( el );
     } else {
-	SC_REPORT_ERROR( SC_ID_NEXT_TRIGGER_NOT_ALLOWED_, "\n        "
-			 "in SC_THREADs and SC_CTHREADs use wait() instead" );
+        SC_REPORT_ERROR( SC_ID_NEXT_TRIGGER_NOT_ALLOWED_, "\n        "
+                         "in SC_THREADs and SC_CTHREADs use wait() instead" );
     }
 }
 
@@ -341,10 +341,10 @@ next_trigger( const sc_time& t, sc_simcontext* simc )
 {
     sc_curr_proc_handle cpi = simc->get_curr_proc_info();
     if( cpi->kind == SC_METHOD_PROC_ ) {
-	reinterpret_cast<sc_method_handle>( cpi->process_handle )->next_trigger( t );
+        reinterpret_cast<sc_method_handle>( cpi->process_handle )->next_trigger( t );
     } else {
-	SC_REPORT_ERROR( SC_ID_NEXT_TRIGGER_NOT_ALLOWED_, "\n        "
-			 "in SC_THREADs and SC_CTHREADs use wait() instead" );
+        SC_REPORT_ERROR( SC_ID_NEXT_TRIGGER_NOT_ALLOWED_, "\n        "
+                         "in SC_THREADs and SC_CTHREADs use wait() instead" );
     }
 }
 
@@ -353,10 +353,10 @@ next_trigger( const sc_time& t, const sc_event& e, sc_simcontext* simc )
 {
     sc_curr_proc_handle cpi = simc->get_curr_proc_info();
     if( cpi->kind == SC_METHOD_PROC_ ) {
-	reinterpret_cast<sc_method_handle>( cpi->process_handle )->next_trigger( t, e );
+        reinterpret_cast<sc_method_handle>( cpi->process_handle )->next_trigger( t, e );
     } else {
-	SC_REPORT_ERROR( SC_ID_NEXT_TRIGGER_NOT_ALLOWED_, "\n        "
-			 "in SC_THREADs and SC_CTHREADs use wait() instead" );
+        SC_REPORT_ERROR( SC_ID_NEXT_TRIGGER_NOT_ALLOWED_, "\n        "
+                         "in SC_THREADs and SC_CTHREADs use wait() instead" );
     }
 }
 
@@ -371,10 +371,10 @@ next_trigger( const sc_time& t, const sc_event_or_list& el, sc_simcontext* simc)
 
     sc_curr_proc_handle cpi = simc->get_curr_proc_info();
     if( cpi->kind == SC_METHOD_PROC_ ) {
-	reinterpret_cast<sc_method_handle>( cpi->process_handle )->next_trigger( t, el );
+        reinterpret_cast<sc_method_handle>( cpi->process_handle )->next_trigger( t, el );
     } else {
-	SC_REPORT_ERROR( SC_ID_NEXT_TRIGGER_NOT_ALLOWED_, "\n        "
-			 "in SC_THREADs and SC_CTHREADs use wait() instead" );
+        SC_REPORT_ERROR( SC_ID_NEXT_TRIGGER_NOT_ALLOWED_, "\n        "
+                         "in SC_THREADs and SC_CTHREADs use wait() instead" );
     }
 }
 
@@ -389,10 +389,10 @@ next_trigger(const sc_time& t, const sc_event_and_list& el, sc_simcontext* simc)
 
     sc_curr_proc_handle cpi = simc->get_curr_proc_info();
     if( cpi->kind == SC_METHOD_PROC_ ) {
-	reinterpret_cast<sc_method_handle>( cpi->process_handle )->next_trigger( t, el );
+        reinterpret_cast<sc_method_handle>( cpi->process_handle )->next_trigger( t, el );
     } else {
-	SC_REPORT_ERROR( SC_ID_NEXT_TRIGGER_NOT_ALLOWED_, "\n        "
-			 "in SC_THREADs and SC_CTHREADs use wait() instead" );
+        SC_REPORT_ERROR( SC_ID_NEXT_TRIGGER_NOT_ALLOWED_, "\n        "
+                         "in SC_THREADs and SC_CTHREADs use wait() instead" );
     }
 }
 
@@ -407,7 +407,7 @@ timed_out( sc_simcontext* simc )
     {
         warn_timed_out = false;
         SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_,
-	    "timed_out() function is deprecated" );
+            "timed_out() function is deprecated" );
     }
 
     sc_curr_proc_handle cpi = simc->get_curr_proc_info();

@@ -160,10 +160,10 @@ sc_uint_bitref::scan( ::std::istream& is )
 
 bool sc_uint_subref_r::concat_get_ctrl( sc_digit* dst_p, int low_i ) const
 {
-    int       dst_i;	   // Word in dst_p now processing.
-    int       end_i;	   // Highest order word in dst_p to process.
+    int       dst_i;           // Word in dst_p now processing.
+    int       end_i;           // Highest order word in dst_p to process.
     int       left_shift;  // Left shift for val.
-    uint_type mask;	   // Mask for bits to extract or keep.
+    uint_type mask;           // Mask for bits to extract or keep.
 
     dst_i = low_i / BITS_PER_DIGIT;
     left_shift = low_i % BITS_PER_DIGIT;
@@ -180,13 +180,13 @@ bool sc_uint_subref_r::concat_get_ctrl( sc_digit* dst_p, int low_i ) const
 
 bool sc_uint_subref_r::concat_get_data( sc_digit* dst_p, int low_i ) const
 {
-    int       dst_i;	   // Word in dst_p now processing.
-    int       end_i;	   // Highest order word in dst_p to process.
-    int       high_i;	   // Index of high order bit in dst_p to set.
+    int       dst_i;           // Word in dst_p now processing.
+    int       end_i;           // Highest order word in dst_p to process.
+    int       high_i;           // Index of high order bit in dst_p to set.
     int       left_shift;  // Left shift for val.
-    uint_type mask;	   // Mask for bits to extract or keep.
-    bool      result;	   // True if inserting non-zero value.
-    uint_type val;	   // Selection value extracted from m_obj_p.
+    uint_type mask;           // Mask for bits to extract or keep.
+    bool      result;           // True if inserting non-zero value.
+    uint_type val;           // Selection value extracted from m_obj_p.
 
     dst_i = low_i / BITS_PER_DIGIT;
     left_shift = low_i % BITS_PER_DIGIT;
@@ -201,7 +201,7 @@ bool sc_uint_subref_r::concat_get_data( sc_digit* dst_p, int low_i ) const
 
     mask = ~(~UINT_ZERO << left_shift);
     dst_p[dst_i] = (sc_digit)(((dst_p[dst_i] & mask)) |
-	((val << left_shift) & DIGIT_MASK));
+        ((val << left_shift) & DIGIT_MASK));
 
     switch ( end_i - dst_i )
     {
@@ -423,7 +423,7 @@ sc_uint_base::sc_uint_base( const sc_signed& a )
     check_length();
 #if 0
     for( int i = m_len - 1; i >= 0; -- i ) {
-	set( i, a.test( i ) );
+        set( i, a.test( i ) );
     }
     extend_sign();
 #else
@@ -437,7 +437,7 @@ sc_uint_base::sc_uint_base( const sc_unsigned& a )
     check_length();
 #if 0
     for( int i = m_len - 1; i >= 0; -- i ) {
-	set( i, a.test( i ) );
+        set( i, a.test( i ) );
     }
     extend_sign();
 #else
@@ -453,12 +453,12 @@ sc_uint_base::operator = ( const sc_signed& a )
     int minlen = sc_min( m_len, a.length() );
     int i = 0;
     for( ; i < minlen; ++ i ) {
-	set( i, a.test( i ) );
+        set( i, a.test( i ) );
     }
     bool sgn = a.sign();
     for( ; i < m_len; ++ i ) {
-	// sign extension
-	set( i, sgn );
+        // sign extension
+        set( i, sgn );
     }
     extend_sign();
     return *this;
@@ -470,11 +470,11 @@ sc_uint_base::operator = ( const sc_unsigned& a )
     int minlen = sc_min( m_len, a.length() );
     int i = 0;
     for( ; i < minlen; ++ i ) {
-	set( i, a.test( i ) );
+        set( i, a.test( i ) );
     }
     for( ; i < m_len; ++ i ) {
-	// zero extension
-	set( i, false );
+        // zero extension
+        set( i, false );
     }
     extend_sign();
     return *this;
@@ -487,11 +487,11 @@ sc_uint_base::operator = ( const sc_bv_base& a )
     int minlen = sc_min( m_len, a.length() );
     int i = 0;
     for( ; i < minlen; ++ i ) {
-	set( i, a.get_bit( i ) );
+        set( i, a.get_bit( i ) );
     }
     for( ; i < m_len; ++ i ) {
-	// zero extension
-	set( i, false );
+        // zero extension
+        set( i, false );
     }
     extend_sign();
     return *this;
@@ -503,11 +503,11 @@ sc_uint_base::operator = ( const sc_lv_base& a )
     int minlen = sc_min( m_len, a.length() );
     int i = 0;
     for( ; i < minlen; ++ i ) {
-	set( i, sc_logic( a.get_bit( i ) ).to_bool() );
+        set( i, sc_logic( a.get_bit( i ) ).to_bool() );
     }
     for( ; i < m_len; ++ i ) {
-	// zero extension
-	set( i, false );
+        // zero extension
+        set( i, false );
     }
     extend_sign();
     return *this;
@@ -517,17 +517,17 @@ sc_uint_base&
 sc_uint_base::operator = ( const char* a )
 {
     if( a == nullptr ) {
-	SC_REPORT_ERROR( sc_core::SC_ID_CONVERSION_FAILED_,
-			 "character string is zero" );
+        SC_REPORT_ERROR( sc_core::SC_ID_CONVERSION_FAILED_,
+                         "character string is zero" );
     }
     else if( *a == 0 ) {
-	SC_REPORT_ERROR( sc_core::SC_ID_CONVERSION_FAILED_,
-			 "character string is empty" );
+        SC_REPORT_ERROR( sc_core::SC_ID_CONVERSION_FAILED_,
+                         "character string is empty" );
     }
     else try {
-	int len = m_len;
-	sc_ufix aa( a, len, len, SC_TRN, SC_WRAP, 0, SC_ON );
-	return this->operator = ( aa );
+        int len = m_len;
+        sc_ufix aa( a, len, len, SC_TRN, SC_WRAP, 0, SC_ON );
+        return this->operator = ( aa );
     } catch( const sc_core::sc_report & ) {
         std::stringstream msg;
         msg << "character string '" << a << "' is not valid";
@@ -577,9 +577,9 @@ sc_uint_base::xor_reduce() const
     uint_type val = m_val;
     int n = SC_INTWIDTH;
     do {
-	n >>= 1;
-	mask >>= n;
-	val = ((val & (mask << n)) >> n) ^ (val & mask);
+        n >>= 1;
+        mask >>= n;
+        val = ((val & (mask << n)) >> n) ^ (val & mask);
     } while( n != 1 );
     return ( val != uint_type( 0 ) );
 }
@@ -628,7 +628,7 @@ bool sc_uint_base::concat_get_data( sc_digit* dst_p, int low_i ) const
     int       high_i;      // Index of high order bit in dst_p to set.
     int       left_shift;  // Left shift for val.
     uint_type mask;        // Mask for bits to extract or keep.
-    bool      result;	   // True if inserting non-zero value.
+    bool      result;           // True if inserting non-zero value.
     uint_type val;         // Value for this object.
 
     dst_i = low_i / BITS_PER_DIGIT;
@@ -642,7 +642,7 @@ bool sc_uint_base::concat_get_data( sc_digit* dst_p, int low_i ) const
 
     if ( m_len < 64 )
     {
-	mask = ~(~UINT_ZERO << m_len);
+        mask = ~(~UINT_ZERO << m_len);
         val &=  mask;
     }
 
@@ -650,27 +650,27 @@ bool sc_uint_base::concat_get_data( sc_digit* dst_p, int low_i ) const
 
     mask = ~(~UINT_ZERO << left_shift);
     dst_p[dst_i] = (sc_digit)(((dst_p[dst_i] & mask)) |
-	((val << left_shift) & DIGIT_MASK));
+        ((val << left_shift) & DIGIT_MASK));
 
     switch ( end_i - dst_i )
     {
      // BITS ARE ACROSS TWO WORDS:
 
      case 1:
-	dst_i++;
-	val >>= (BITS_PER_DIGIT-left_shift);
-	dst_p[dst_i] = (sc_digit)val;
-	break;
+        dst_i++;
+        val >>= (BITS_PER_DIGIT-left_shift);
+        dst_p[dst_i] = (sc_digit)val;
+        break;
 
      // BITS ARE ACROSS THREE WORDS:
 
      case 2:
-	dst_i++;
-	val >>= (BITS_PER_DIGIT-left_shift);
-	dst_p[dst_i++] = (sc_digit)(val & DIGIT_MASK);
-	val >>= BITS_PER_DIGIT;
-	dst_p[dst_i] = (sc_digit)val;
-	break;
+        dst_i++;
+        val >>= (BITS_PER_DIGIT-left_shift);
+        dst_p[dst_i++] = (sc_digit)(val & DIGIT_MASK);
+        val >>= BITS_PER_DIGIT;
+        dst_p[dst_i] = (sc_digit)val;
+        break;
 
      // BITS ARE ACROSS FOUR WORDS:
 

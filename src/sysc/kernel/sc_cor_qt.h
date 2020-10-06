@@ -60,8 +60,8 @@ public:
 
     // constructor
     sc_cor_qt()
-	: m_stack_size( 0 ), m_stack( 0 ), m_sp( 0 ), m_pkg( 0 )
-	{}
+        : m_stack_size( 0 ), m_stack( 0 ), m_sp( 0 ), m_pkg( 0 )
+        {}
 
     // destructor
     virtual ~sc_cor_qt()

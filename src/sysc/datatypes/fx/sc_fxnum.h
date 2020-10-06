@@ -88,10 +88,10 @@
 
 
 namespace sc_core {
-	class vcd_sc_fxnum_trace;
-	class vcd_sc_fxnum_fast_trace;
-	class wif_sc_fxnum_trace;
-	class wif_sc_fxnum_fast_trace;
+        class vcd_sc_fxnum_trace;
+        class vcd_sc_fxnum_fast_trace;
+        class wif_sc_fxnum_trace;
+        class wif_sc_fxnum_fast_trace;
 }
 
 
@@ -654,16 +654,16 @@ protected:
     // constructors
 
     sc_fxnum( const sc_fxtype_params&,
-	      sc_enc,
-	      const sc_fxcast_switch&,
-	      sc_fxnum_observer* );
+              sc_enc,
+              const sc_fxcast_switch&,
+              sc_fxnum_observer* );
 
 #define DECL_CTOR_T(tp)                                                       \
     sc_fxnum( tp,                                                             \
-	      const sc_fxtype_params&,                                        \
-	      sc_enc,                                                         \
-	      const sc_fxcast_switch&,                                        \
-	      sc_fxnum_observer* );
+              const sc_fxtype_params&,                                        \
+              sc_enc,                                                         \
+              const sc_fxcast_switch&,                                        \
+              sc_fxnum_observer* );
 
     DECL_CTOR_T(int)
     DECL_CTOR_T(unsigned int)
@@ -949,7 +949,7 @@ public:
 
     // implicit conversion
 
-    operator double() const;		// necessary evil!
+    operator double() const;                // necessary evil!
 
 
     // explicit conversion to primitive types
@@ -1083,16 +1083,16 @@ protected:
     // constructors
 
     sc_fxnum_fast( const sc_fxtype_params&,
-		   sc_enc,
-		   const sc_fxcast_switch&,
-		   sc_fxnum_fast_observer* );
+                   sc_enc,
+                   const sc_fxcast_switch&,
+                   sc_fxnum_fast_observer* );
 
 #define DECL_CTOR_T(tp)                                                       \
     sc_fxnum_fast( tp,                                                        \
-	           const sc_fxtype_params&,                                   \
-	           sc_enc,                                                    \
-	           const sc_fxcast_switch&,                                   \
-	           sc_fxnum_fast_observer* );
+                   const sc_fxtype_params&,                                   \
+                   sc_enc,                                                    \
+                   const sc_fxcast_switch&,                                   \
+                   sc_fxnum_fast_observer* );
 
     DECL_CTOR_T(int)
     DECL_CTOR_T(unsigned int)
@@ -1156,7 +1156,7 @@ public:
 
 #define DECL_BIN_OP(op,dummy)                                                 \
     friend const sc_fxval_fast operator op ( const sc_fxnum_fast&,            \
-					     const sc_fxnum_fast& );          \
+                                             const sc_fxnum_fast& );          \
     DECL_BIN_OP_T(op,int)                                                     \
     DECL_BIN_OP_T(op,unsigned int)                                            \
     DECL_BIN_OP_T(op,long)                                                    \
@@ -1172,7 +1172,7 @@ public:
     DECL_BIN_OP(-,sub)
 //    DECL_BIN_OP(/,div)
     friend const sc_fxval_fast operator / ( const sc_fxnum_fast&,
-					     const sc_fxnum_fast& );
+                                             const sc_fxnum_fast& );
     DECL_BIN_OP_T(/,int)
     DECL_BIN_OP_T(/,unsigned int)
     DECL_BIN_OP_T(/,long)
@@ -1221,9 +1221,9 @@ public:
 
 #define DECL_BIN_FNC(fnc)                                                     \
     friend void fnc ( sc_fxval_fast&, const sc_fxnum_fast&,                   \
-		                      const sc_fxnum_fast& );                 \
+                                      const sc_fxnum_fast& );                 \
     friend void fnc ( sc_fxnum_fast&, const sc_fxnum_fast&,                   \
-		                      const sc_fxnum_fast& );                 \
+                                      const sc_fxnum_fast& );                 \
     DECL_BIN_FNC_T(fnc,int)                                                   \
     DECL_BIN_FNC_T(fnc,unsigned int)                                          \
     DECL_BIN_FNC_T(fnc,long)                                                  \
@@ -1375,7 +1375,7 @@ public:
 
     // implicit conversion
 
-    operator double() const;		// necessary evil!
+    operator double() const;                // necessary evil!
 
 
     // explicit conversion to primitive types
@@ -1545,9 +1545,9 @@ sc_fxnum_bitref::operator = ( const sc_fxnum_bitref& a )
 {
     if( &a != this )
     {
-	SC_FXNUM_OBSERVER_READ_( a.m_num )
-	set( a.get() );
-	SC_FXNUM_OBSERVER_WRITE_( m_num )
+        SC_FXNUM_OBSERVER_READ_( a.m_num )
+        set( a.get() );
+        SC_FXNUM_OBSERVER_WRITE_( m_num )
     }
     return *this;
 }
@@ -1790,9 +1790,9 @@ sc_fxnum_fast_bitref::operator = ( const sc_fxnum_fast_bitref& a )
 {
     if( &a != this )
     {
-	SC_FXNUM_FAST_OBSERVER_READ_( a.m_num )
-	set( a.get() );
-	SC_FXNUM_FAST_OBSERVER_WRITE_( m_num )
+        SC_FXNUM_FAST_OBSERVER_READ_( a.m_num )
+        set( a.get() );
+        SC_FXNUM_FAST_OBSERVER_WRITE_( m_num )
     }
     return *this;
 }
@@ -2203,9 +2203,9 @@ sc_fxnum_subref::operator = ( const sc_fxnum_subref& a )
 {
     if( &a != this )
     {
-	m_bv = static_cast<sc_bv_base>( a );
-	set();
-	SC_FXNUM_OBSERVER_WRITE_( m_num )
+        m_bv = static_cast<sc_bv_base>( a );
+        set();
+        SC_FXNUM_OBSERVER_WRITE_( m_num )
     }
     return *this;
 }
@@ -2584,9 +2584,9 @@ sc_fxnum_fast_subref::operator = ( const sc_fxnum_fast_subref& a )
 {
     if( &a != this )
     {
-	m_bv = static_cast<sc_bv_base>( a );
-	set();
-	SC_FXNUM_FAST_OBSERVER_WRITE_( m_num )
+        m_bv = static_cast<sc_bv_base>( a );
+        set();
+        SC_FXNUM_FAST_OBSERVER_WRITE_( m_num )
     }
     return *this;
 }
@@ -2700,7 +2700,7 @@ sc_fxnum::cast()
     SC_ERROR_IF_( ! m_rep->is_normal(), sc_core::SC_ID_INVALID_FX_VALUE_ );
 
     if( m_params.cast_switch() == SC_ON )
-	m_rep->cast( m_params, m_q_flag, m_o_flag );
+        m_rep->cast( m_params, m_q_flag, m_o_flag );
 }
 
 
@@ -2708,9 +2708,9 @@ sc_fxnum::cast()
 
 inline
 sc_fxnum::sc_fxnum( const sc_fxtype_params& type_params_,
-		    sc_enc enc_,
-		    const sc_fxcast_switch& cast_sw,
-		    sc_fxnum_observer* observer_ )
+                    sc_enc enc_,
+                    const sc_fxcast_switch& cast_sw,
+                    sc_fxnum_observer* observer_ )
 : m_rep( new scfx_rep ),
   m_params( type_params_, enc_, cast_sw ),
   m_q_flag( false ),
@@ -2724,10 +2724,10 @@ sc_fxnum::sc_fxnum( const sc_fxtype_params& type_params_,
 #define DEFN_CTOR_T(tp,arg)                                                   \
 inline                                                                        \
 sc_fxnum::sc_fxnum( tp a,                                                     \
-		    const sc_fxtype_params& type_params_,                     \
-		    sc_enc enc_,                                              \
-		    const sc_fxcast_switch& cast_sw,                          \
-		    sc_fxnum_observer* observer_ )                            \
+                    const sc_fxtype_params& type_params_,                     \
+                    sc_enc enc_,                                              \
+                    const sc_fxcast_switch& cast_sw,                          \
+                    sc_fxnum_observer* observer_ )                            \
 : m_rep( new scfx_rep( arg ) ),                                               \
   m_params( type_params_, enc_, cast_sw ),                                    \
   m_q_flag( false ),                                                          \
@@ -3245,9 +3245,9 @@ sc_fxnum::operator = ( const sc_fxnum& a )
     if( &a != this )
     {
         SC_FXNUM_OBSERVER_READ_( a )
-	*m_rep = *a.m_rep;
-	cast();
-	SC_FXNUM_OBSERVER_WRITE_( *this )
+        *m_rep = *a.m_rep;
+        cast();
+        SC_FXNUM_OBSERVER_WRITE_( *this )
     }
     return *this;
 }
@@ -3439,7 +3439,7 @@ sc_fxnum::operator [] ( int i ) const
 {
     SC_ERROR_IF_( i < 0 || i >= m_params.wl(), sc_core::SC_ID_OUT_OF_RANGE_ );
     return sc_fxnum_bitref_r( const_cast<sc_fxnum&>( *this ),
-			    i - m_params.fwl() );
+                            i - m_params.fwl() );
 }
 
 inline
@@ -3456,7 +3456,7 @@ sc_fxnum::bit( int i ) const
 {
     SC_ERROR_IF_( i < 0 || i >= m_params.wl(), sc_core::SC_ID_OUT_OF_RANGE_ );
     return sc_fxnum_bitref_r( const_cast<sc_fxnum&>( *this ),
-			    i - m_params.fwl() );
+                            i - m_params.fwl() );
 }
 
 inline
@@ -3478,7 +3478,7 @@ sc_fxnum::operator () ( int i, int j ) const
     SC_ERROR_IF_( j < 0 || j >= m_params.wl(), sc_core::SC_ID_OUT_OF_RANGE_ );
 
     return sc_fxnum_subref_r( const_cast<sc_fxnum&>( *this ),
-			    i - m_params.fwl(), j - m_params.fwl() );
+                            i - m_params.fwl(), j - m_params.fwl() );
 }
 
 inline
@@ -3499,7 +3499,7 @@ sc_fxnum::range( int i, int j ) const
     SC_ERROR_IF_( j < 0 || j >= m_params.wl(), sc_core::SC_ID_OUT_OF_RANGE_ );
 
     return sc_fxnum_subref_r( const_cast<sc_fxnum&>( *this ),
-			    i - m_params.fwl(), j - m_params.fwl() );
+                            i - m_params.fwl(), j - m_params.fwl() );
 }
 
 inline
@@ -3821,9 +3821,9 @@ sc_fxnum_fast::observer() const
 
 inline
 sc_fxnum_fast::sc_fxnum_fast( const sc_fxtype_params& type_params_,
-			      sc_enc enc_,
-			      const sc_fxcast_switch& cast_sw,
-			      sc_fxnum_fast_observer* observer_ )
+                              sc_enc enc_,
+                              const sc_fxcast_switch& cast_sw,
+                              sc_fxnum_fast_observer* observer_ )
 : m_val( 0.0 ),
   m_params( type_params_, enc_, cast_sw ),
   m_q_flag( false ),
@@ -3836,10 +3836,10 @@ sc_fxnum_fast::sc_fxnum_fast( const sc_fxtype_params& type_params_,
 
 inline
 sc_fxnum_fast::sc_fxnum_fast( const sc_fxnum_fast& a,
-			      const sc_fxtype_params& type_params_,
-			      sc_enc enc_,
-			      const sc_fxcast_switch& cast_sw,
-			      sc_fxnum_fast_observer* observer_ )
+                              const sc_fxtype_params& type_params_,
+                              sc_enc enc_,
+                              const sc_fxcast_switch& cast_sw,
+                              sc_fxnum_fast_observer* observer_ )
 : m_val( a.m_val ),
   m_params( type_params_, enc_, cast_sw ),
   m_q_flag( false ),
@@ -3856,10 +3856,10 @@ sc_fxnum_fast::sc_fxnum_fast( const sc_fxnum_fast& a,
 #define DEFN_CTOR_T(tp,arg)                                                   \
 inline                                                                        \
 sc_fxnum_fast::sc_fxnum_fast( tp a,                                           \
-		              const sc_fxtype_params& type_params_,           \
-		              sc_enc enc_,                                    \
-		              const sc_fxcast_switch& cast_sw,                \
-		              sc_fxnum_fast_observer* observer_ )             \
+                              const sc_fxtype_params& type_params_,           \
+                              sc_enc enc_,                                    \
+                              const sc_fxcast_switch& cast_sw,                \
+                              sc_fxnum_fast_observer* observer_ )             \
 : m_val( arg ),                                                               \
   m_params( type_params_, enc_, cast_sw ),                                    \
   m_q_flag( false ),                                                          \
@@ -4354,10 +4354,10 @@ sc_fxnum_fast::operator = ( const sc_fxnum_fast& a )
 {
     if( &a != this )
     {
-	SC_FXNUM_FAST_OBSERVER_READ_( a )
-	m_val = a.m_val;
-	cast();
-	SC_FXNUM_FAST_OBSERVER_WRITE_( *this )
+        SC_FXNUM_FAST_OBSERVER_READ_( a )
+        m_val = a.m_val;
+        cast();
+        SC_FXNUM_FAST_OBSERVER_WRITE_( *this )
     }
     return *this;
 }
@@ -4557,7 +4557,7 @@ sc_fxnum_fast::operator [] ( int i ) const
 {
     SC_ERROR_IF_( i < 0 || i >= m_params.wl(), sc_core::SC_ID_OUT_OF_RANGE_ );
     return sc_fxnum_fast_bitref_r( const_cast<sc_fxnum_fast&>( *this ),
-				 i - m_params.fwl() );
+                                 i - m_params.fwl() );
 }
 
 inline
@@ -4574,7 +4574,7 @@ sc_fxnum_fast::bit( int i ) const
 {
     SC_ERROR_IF_( i < 0 || i >= m_params.wl(), sc_core::SC_ID_OUT_OF_RANGE_ );
     return sc_fxnum_fast_bitref_r( const_cast<sc_fxnum_fast&>( *this ),
-				 i - m_params.fwl() );
+                                 i - m_params.fwl() );
 }
 
 inline
@@ -4596,7 +4596,7 @@ sc_fxnum_fast::operator () ( int i, int j ) const
     SC_ERROR_IF_( j < 0 || j >= m_params.wl(), sc_core::SC_ID_OUT_OF_RANGE_ );
 
     return sc_fxnum_fast_subref_r( const_cast<sc_fxnum_fast&>( *this ),
-				 i - m_params.fwl(), j - m_params.fwl() );
+                                 i - m_params.fwl(), j - m_params.fwl() );
 }
 
 inline
@@ -4607,7 +4607,7 @@ sc_fxnum_fast::operator () ( int i, int j )
     SC_ERROR_IF_( j < 0 || j >= m_params.wl(), sc_core::SC_ID_OUT_OF_RANGE_ );
 
     return sc_fxnum_fast_subref( *this,
-				 i - m_params.fwl(), j - m_params.fwl() );
+                                 i - m_params.fwl(), j - m_params.fwl() );
 }
 
 inline
@@ -4618,7 +4618,7 @@ sc_fxnum_fast::range( int i, int j ) const
     SC_ERROR_IF_( j < 0 || j >= m_params.wl(), sc_core::SC_ID_OUT_OF_RANGE_ );
 
     return sc_fxnum_fast_subref_r( const_cast<sc_fxnum_fast&>( *this ),
-				 i - m_params.fwl(), j - m_params.fwl() );
+                                 i - m_params.fwl(), j - m_params.fwl() );
 }
 
 inline
@@ -4629,7 +4629,7 @@ sc_fxnum_fast::range( int i, int j )
     SC_ERROR_IF_( j < 0 || j >= m_params.wl(), sc_core::SC_ID_OUT_OF_RANGE_ );
 
     return sc_fxnum_fast_subref( *this,
-				 i - m_params.fwl(), j - m_params.fwl() );
+                                 i - m_params.fwl(), j - m_params.fwl() );
 }
 
 inline
@@ -4916,7 +4916,7 @@ operator >> ( ::std::istream& is, sc_fxnum_fast& a )
 
 inline
 sc_fxval::sc_fxval( const sc_fxnum& a,
-		    sc_fxval_observer* observer_ )
+                    sc_fxval_observer* observer_ )
 : m_rep( new scfx_rep( *a.get_rep() ) ),
   m_observer( observer_ )
 {
@@ -4927,7 +4927,7 @@ sc_fxval::sc_fxval( const sc_fxnum& a,
 
 inline
 sc_fxval::sc_fxval( const sc_fxnum_fast& a,
-		    sc_fxval_observer* observer_ )
+                    sc_fxval_observer* observer_ )
 : m_rep( new scfx_rep( a.to_double() ) ),
   m_observer( observer_ )
 {
@@ -5121,7 +5121,7 @@ DEFN_ASN_OP(-=,sub)
 
 inline
 sc_fxval_fast::sc_fxval_fast( const sc_fxnum& a,
-			      sc_fxval_fast_observer* observer_ )
+                              sc_fxval_fast_observer* observer_ )
 : m_val( a.to_double() ),
   m_observer( observer_ )
 {
@@ -5132,7 +5132,7 @@ sc_fxval_fast::sc_fxval_fast( const sc_fxnum& a,
 
 inline
 sc_fxval_fast::sc_fxval_fast( const sc_fxnum_fast& a,
-			      sc_fxval_fast_observer* observer_ )
+                              sc_fxval_fast_observer* observer_ )
 : m_val( a.get_val() ),
   m_observer( observer_ )
 {

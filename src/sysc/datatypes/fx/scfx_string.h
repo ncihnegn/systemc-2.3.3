@@ -114,13 +114,13 @@ void
 scfx_string::resize( std::size_t i )
 {
     do {
-	m_alloc *= 2;
+        m_alloc *= 2;
     } while( i >= m_alloc );
 
     char* temp = new char[m_alloc];
 
     for( int j = 0; j < (int) m_len; ++ j ) {
-	temp[j] = m_buffer[j];
+        temp[j] = m_buffer[j];
     }
     temp[m_len] = 0;
 
@@ -166,7 +166,7 @@ char&
 scfx_string::operator [] ( int i )
 {
     if( i >= (int) m_alloc ) {
-	resize( i );
+        resize( i );
     }
     return m_buffer[i];
 }
@@ -193,7 +193,7 @@ void
 scfx_string::remove( int i )
 {
     for( int j = i + 1; j < (int) m_len; ++ j )
-	m_buffer[j - 1] = m_buffer[j];
+        m_buffer[j - 1] = m_buffer[j];
     -- m_len;
     m_buffer[m_len] = 0;
 }
@@ -213,7 +213,7 @@ void
 scfx_string::operator += ( const char* s )
 {
     while( *s )
-	(*this) += *s ++;
+        (*this) += *s ++;
 }
 
 

@@ -141,7 +141,7 @@ class SC_API sc_event_queue:
 inline
 void sc_event_queue::notify (double when, sc_time_unit base )
 {
-	notify( sc_time(when,base) );
+        notify( sc_time(when,base) );
 }
     
 inline

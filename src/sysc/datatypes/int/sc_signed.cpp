@@ -187,7 +187,7 @@ bool sc_signed::concat_get_data( sc_digit* dst_p, int low_i ) const
     int      left_shift;   // Amount to shift value left.
     sc_digit left_word;    // High word component for set.
     sc_digit mask;         // Mask for partial word sets.
-    bool     result;	 // True if inserted non-zero data.
+    bool     result;         // True if inserted non-zero data.
     int      right_shift;  // Amount to shift value right.
     sc_digit right_word;   // Low word component for set.
     int      src_i;        // Index to next word to get from digit.
@@ -207,7 +207,7 @@ bool sc_signed::concat_get_data( sc_digit* dst_p, int low_i ) const
 
       case SC_POS:
 
-	result = true;
+        result = true;
 
         // ALL DATA TO BE MOVED IS IN A SINGLE WORD:
 
@@ -264,7 +264,7 @@ bool sc_signed::concat_get_data( sc_digit* dst_p, int low_i ) const
 
         // ALL DATA TO BE MOVED IS IN A SINGLE WORD:
 
-	result = true;
+        result = true;
         if ( dst_i == end_i )
         {
             mask = ~(~0U << nbits);
@@ -289,7 +289,7 @@ bool sc_signed::concat_get_data( sc_digit* dst_p, int low_i ) const
             high_i = high_i % BITS_PER_DIGIT;
             mask = (~(~1U << high_i)) & DIGIT_MASK;
             right_word = (src_i < ndigits) ?
-	        (digit[src_i] ^ DIGIT_MASK) + carry : DIGIT_MASK + carry;
+                (digit[src_i] ^ DIGIT_MASK) + carry : DIGIT_MASK + carry;
             dst_p[dst_i] = right_word & mask;
         }
 
@@ -305,8 +305,8 @@ bool sc_signed::concat_get_data( sc_digit* dst_p, int low_i ) const
             right_word = (digit[0] ^ DIGIT_MASK) + carry;
             dst_p[dst_i] = (dst_p[dst_i] & mask) |
                 ((right_word << left_shift) & DIGIT_MASK);
-	    carry = right_word >> BITS_PER_DIGIT;
-	    right_word &= DIGIT_MASK;
+            carry = right_word >> BITS_PER_DIGIT;
+            right_word &= DIGIT_MASK;
             for ( src_i = 1, dst_i++; dst_i < end_i; dst_i++, src_i++ )
             {
                 left_word = (digit[src_i] ^ DIGIT_MASK) + carry;
@@ -316,18 +316,18 @@ bool sc_signed::concat_get_data( sc_digit* dst_p, int low_i ) const
                 right_word = left_word & DIGIT_MASK;
             }
             left_word = (src_i < ndigits) ?
-	        (digit[src_i] ^ DIGIT_MASK) + carry : carry;
+                (digit[src_i] ^ DIGIT_MASK) + carry : carry;
             mask = ~(~1U << high_i) & DIGIT_MASK;
             dst_p[dst_i] = ((left_word << left_shift) |
                 (right_word >> right_shift)) & mask;
         }
-	break;
+        break;
 
 
       // VALUE IS ZERO:
 
       default:
-	result = false;
+        result = false;
 
 
         // ALL DATA TO BE MOVED IS IN A SINGLE WORD:
@@ -362,7 +362,7 @@ bool sc_signed::concat_get_data( sc_digit* dst_p, int low_i ) const
                 dst_p[dst_i] = 0;
             }
         }
-	break;
+        break;
     }
     return result;
 }
@@ -376,30 +376,30 @@ uint64 sc_signed::concat_get_uint64() const
     switch ( sgn )
     {
       case SC_POS:
-	result = 0;
-	if ( ndigits > 2 )
-	    result = digit[2];
-	if ( ndigits > 1 )
-	    result = (result << BITS_PER_DIGIT) | digit[1];
-	result = (result << BITS_PER_DIGIT) | digit[0];
-	break;
+        result = 0;
+        if ( ndigits > 2 )
+            result = digit[2];
+        if ( ndigits > 1 )
+            result = (result << BITS_PER_DIGIT) | digit[1];
+        result = (result << BITS_PER_DIGIT) | digit[0];
+        break;
       case SC_NEG:
-	result = 0;
-	if ( ndigits > 2 )
-	    result = digit[2];
-	if ( ndigits > 1 )
-	    result = (result << BITS_PER_DIGIT) | digit[1];
-	result = (result << BITS_PER_DIGIT) | digit[0];
-	result = -result;
-	if ( nbits < 64 )
-	{
-	    uint64 mask = ~0;
-	    result = result & ~(mask << nbits);
-	}
-	break;
+        result = 0;
+        if ( ndigits > 2 )
+            result = digit[2];
+        if ( ndigits > 1 )
+            result = (result << BITS_PER_DIGIT) | digit[1];
+        result = (result << BITS_PER_DIGIT) | digit[0];
+        result = -result;
+        if ( nbits < 64 )
+        {
+            uint64 mask = ~0;
+            result = result & ~(mask << nbits);
+        }
+        break;
       default:
-	result = 0;
-	break;
+        result = 0;
+        break;
     }
     return result;
 }
@@ -442,16 +442,16 @@ bool sc_signed::and_reduce() const
 
     if ( sgn == SC_NEG )
     {
-	current = (1 << BITS_PER_DIGIT);
-	for ( i = 0; i < ndigits-1; i++ )
-	{
-	    current = (current >> BITS_PER_DIGIT) + (digit[i]^DIGIT_MASK);
-	    if ( (current & DIGIT_MASK) != DIGIT_MASK ) return false;
-	}
-	current = (current >> BITS_PER_DIGIT) + (digit[i]^DIGIT_MASK);
-	if ( (current & ~(~0U << (nbits % BITS_PER_DIGIT))) ==
-	     static_cast<sc_digit>(~(~0U << (nbits % BITS_PER_DIGIT))) )
-		return true;
+        current = (1 << BITS_PER_DIGIT);
+        for ( i = 0; i < ndigits-1; i++ )
+        {
+            current = (current >> BITS_PER_DIGIT) + (digit[i]^DIGIT_MASK);
+            if ( (current & DIGIT_MASK) != DIGIT_MASK ) return false;
+        }
+        current = (current >> BITS_PER_DIGIT) + (digit[i]^DIGIT_MASK);
+        if ( (current & ~(~0U << (nbits % BITS_PER_DIGIT))) ==
+             static_cast<sc_digit>(~(~0U << (nbits % BITS_PER_DIGIT))) )
+                return true;
     }
     return false;
 }
@@ -594,10 +594,10 @@ sc_signed::operator = ( const sc_bv_base& v )
     int minlen = sc_min( nbits, v.length() );
     int i = 0;
     for( ; i < minlen; ++ i ) {
-	safe_set( i, v.get_bit( i ), digit );
+        safe_set( i, v.get_bit( i ), digit );
     }
     for( ; i < nbits; ++ i ) {
-	safe_set( i, false, digit );  // zero-extend
+        safe_set( i, false, digit );  // zero-extend
     }
     convert_2C_to_SM();
     return *this;
@@ -609,10 +609,10 @@ sc_signed::operator = ( const sc_lv_base& v )
     int minlen = sc_min( nbits, v.length() );
     int i = 0;
     for( ; i < minlen; ++ i ) {
-	safe_set( i, sc_logic( v.get_bit( i ) ).to_bool(), digit );
+        safe_set( i, sc_logic( v.get_bit( i ) ).to_bool(), digit );
     }
     for( ; i < nbits; ++ i ) {
-	safe_set( i, false, digit );  // zero-extend
+        safe_set( i, false, digit );  // zero-extend
     }
     convert_2C_to_SM();
     return *this;

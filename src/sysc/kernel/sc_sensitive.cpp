@@ -69,9 +69,9 @@ warn_no_parens()
     static bool warn_no_parentheses=true;
     if ( warn_no_parentheses )
     {
-	warn_no_parentheses=false;
-	SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_,
-	    "use of () to specify sensitivity is deprecated, use << instead" );
+        warn_no_parentheses=false;
+        SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_,
+            "use of () to specify sensitivity is deprecated, use << instead" );
     }
 }
 
@@ -101,16 +101,16 @@ sc_sensitive&
 sc_sensitive::operator << ( sc_process_handle handle_ )
 {
     switch ( handle_.proc_kind() )
-	{
+        {
       case SC_CTHREAD_PROC_:
       case SC_THREAD_PROC_:
         m_mode = SC_THREAD_;
-	break;
+        break;
       case SC_METHOD_PROC_:
-	m_mode = SC_METHOD_;
-	break;
+        m_mode = SC_METHOD_;
+        break;
       default:
-	sc_assert(0);
+        sc_assert(0);
     }
     m_handle = (sc_process_b*)handle_;
     return *this;
@@ -121,15 +121,15 @@ sc_sensitive::operator << ( const sc_event& event_ )
 {
     // check
     if( sc_is_running() ) {
-	SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_, "simulation running" );
+        SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_, "simulation running" );
     }
 
     // make sensitive
     switch( m_mode ) {
     case SC_METHOD_:
     case SC_THREAD_: {
-	m_handle->add_static_event( event_ );
-	break;
+        m_handle->add_static_event( event_ );
+        break;
     }
     case SC_NONE_:
         /* do nothing */
@@ -152,15 +152,15 @@ sc_sensitive::operator << ( const sc_interface& interface_ )
 {
     // check
     if( sc_is_running() ) {
-	SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_, "simulation running" );
+        SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_, "simulation running" );
     }
 
     // make sensitive
     switch( m_mode ) {
     case SC_METHOD_:
     case SC_THREAD_: {
-	m_handle->add_static_event( interface_.default_event() );
-	break;
+        m_handle->add_static_event( interface_.default_event() );
+        break;
     }
     case SC_NONE_:
         /* do nothing */
@@ -182,18 +182,18 @@ sc_sensitive::operator << ( const sc_port_base& port_ )
 {
     // check
     if( sc_is_running() ) {
-	SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_, "simulation running" );
+        SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_, "simulation running" );
     }
 
     // make sensitive
     switch( m_mode ) {
     case SC_METHOD_: {
-	port_.make_sensitive( as_method_handle( m_handle ) );
-	break;
+        port_.make_sensitive( as_method_handle( m_handle ) );
+        break;
     }
     case SC_THREAD_: {
-	port_.make_sensitive( as_thread_handle( m_handle ) );
-	break;
+        port_.make_sensitive( as_thread_handle( m_handle ) );
+        break;
     }
     case SC_NONE_:
         /* do nothing */
@@ -209,8 +209,8 @@ sc_sensitive::make_static_sensitivity(
 {
     sc_method_handle handle_m = as_method_handle( handle_ );
     if ( handle_m ) {
-	port_.make_sensitive( handle_m );
-	return;
+        port_.make_sensitive( handle_m );
+        return;
     }
     sc_thread_handle handle_t = as_thread_handle( handle_ );
     // sc_assert(handle_t);
@@ -222,20 +222,20 @@ sc_sensitive::operator << ( sc_event_finder& event_finder_ )
 {
     // check
     if( sc_is_running() ) {
-	SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_, "simulation running" );
+        SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_, "simulation running" );
     }
 
     // make sensitive
     switch( m_mode ) {
     case SC_METHOD_: {
-	event_finder_.port().make_sensitive( as_method_handle( m_handle ),
-					     &event_finder_ );
-	break;
+        event_finder_.port().make_sensitive( as_method_handle( m_handle ),
+                                             &event_finder_ );
+        break;
     }
     case SC_THREAD_: {
-	event_finder_.port().make_sensitive( as_thread_handle( m_handle ),
-					     &event_finder_ );
-	break;
+        event_finder_.port().make_sensitive( as_thread_handle( m_handle ),
+                                             &event_finder_ );
+        break;
     }
     case SC_NONE_:
         /* do nothing */
@@ -252,14 +252,14 @@ sc_sensitive::make_static_sensitivity(
     if (sc_is_running()) {
       handle_->add_static_event( event_finder_.find_event() );
     } else {
-	sc_method_handle handle_m = as_method_handle( handle_ );
-	if ( handle_m ) {
-	    event_finder_.port().make_sensitive( handle_m, &event_finder_ );
-	    return;
+        sc_method_handle handle_m = as_method_handle( handle_ );
+        if ( handle_m ) {
+            event_finder_.port().make_sensitive( handle_m, &event_finder_ );
+            return;
         }
-	sc_thread_handle handle_t = as_thread_handle( handle_ );
-	// sc_assert(handle_t);
-	event_finder_.port().make_sensitive( handle_t, &event_finder_);
+        sc_thread_handle handle_t = as_thread_handle( handle_ );
+        // sc_assert(handle_t);
+        event_finder_.port().make_sensitive( handle_t, &event_finder_);
     }
 }
 
@@ -295,7 +295,7 @@ sc_sensitive::operator () ( sc_event_finder& event_finder_ )
 
 sc_sensitive&
 sc_sensitive::operator () ( sc_cthread_handle handle_,
-			    sc_event_finder& event_finder_ )
+                            sc_event_finder& event_finder_ )
 {
     event_finder_.port().make_sensitive( handle_, &event_finder_ );
     return *this;
@@ -303,7 +303,7 @@ sc_sensitive::operator () ( sc_cthread_handle handle_,
 
 sc_sensitive&
 sc_sensitive::operator () ( sc_cthread_handle handle_,
-			    const in_if_b_type& interface_ )
+                            const in_if_b_type& interface_ )
 {
     handle_->add_static_event( interface_.posedge_event() );
     return *this;
@@ -311,7 +311,7 @@ sc_sensitive::operator () ( sc_cthread_handle handle_,
 
 sc_sensitive&
 sc_sensitive::operator () ( sc_cthread_handle handle_,
-			    const in_if_l_type& interface_ )
+                            const in_if_l_type& interface_ )
 {
     handle_->add_static_event( interface_.posedge_event() );
     return *this;
@@ -319,7 +319,7 @@ sc_sensitive::operator () ( sc_cthread_handle handle_,
 
 sc_sensitive&
 sc_sensitive::operator () ( sc_cthread_handle handle_,
-			    const in_port_b_type& port_ )
+                            const in_port_b_type& port_ )
 {
     port_.make_sensitive( handle_, &port_.pos() );
     return *this;
@@ -327,7 +327,7 @@ sc_sensitive::operator () ( sc_cthread_handle handle_,
 
 sc_sensitive&
 sc_sensitive::operator () ( sc_cthread_handle handle_,
-			    const in_port_l_type& port_ )
+                            const in_port_l_type& port_ )
 {
     port_.make_sensitive( handle_, &port_.pos() );
     return *this;
@@ -335,7 +335,7 @@ sc_sensitive::operator () ( sc_cthread_handle handle_,
 
 sc_sensitive&
 sc_sensitive::operator () ( sc_cthread_handle handle_,
-			    const inout_port_b_type& port_ )
+                            const inout_port_b_type& port_ )
 {
     port_.make_sensitive( handle_, &port_.pos() );
     return *this;
@@ -343,7 +343,7 @@ sc_sensitive::operator () ( sc_cthread_handle handle_,
 
 sc_sensitive&
 sc_sensitive::operator () ( sc_cthread_handle handle_,
-			    const inout_port_l_type& port_ )
+                            const inout_port_l_type& port_ )
 {
     port_.make_sensitive( handle_, &port_.pos() );
     return *this;
@@ -368,7 +368,7 @@ static void sc_deprecated_sensitive_pos()
     {
         warn_sensitive_pos=false;
         SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_,
-	 "sc_sensitive_pos is deprecated use sc_sensitive << with pos() instead" );
+         "sc_sensitive_pos is deprecated use sc_sensitive << with pos() instead" );
     }
 }
 
@@ -392,16 +392,16 @@ sc_sensitive_pos&
 sc_sensitive_pos::operator << ( sc_process_handle handle_ )
 {
     switch ( handle_.proc_kind() )
-	{
+        {
       case SC_CTHREAD_PROC_:
       case SC_THREAD_PROC_:
         m_mode = SC_THREAD_;
-	break;
+        break;
       case SC_METHOD_PROC_:
-	m_mode = SC_METHOD_;
-	break;
+        m_mode = SC_METHOD_;
+        break;
       default:
-	sc_assert(0);
+        sc_assert(0);
     }
     m_handle = (sc_process_b*)handle_;
     return *this;
@@ -430,15 +430,15 @@ sc_sensitive_pos::operator << ( const in_if_b_type& interface_ )
     sc_deprecated_sensitive_pos();
     // check
     if( sc_is_running() ) {
-	SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_POS_, "simulation running" );
+        SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_POS_, "simulation running" );
     }
 
     // make sensitive
     switch( m_mode ) {
     case SC_METHOD_:
     case SC_THREAD_: {
-	m_handle->add_static_event( interface_.posedge_event() );
-	break;
+        m_handle->add_static_event( interface_.posedge_event() );
+        break;
     }
     case SC_NONE_:
         /* do nothing */
@@ -454,15 +454,15 @@ sc_sensitive_pos::operator << ( const in_if_l_type& interface_ )
     sc_deprecated_sensitive_pos();
     // check
     if( sc_is_running() ) {
-	SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_POS_, "simulation running" );
+        SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_POS_, "simulation running" );
     }
 
     // make sensitive
     switch( m_mode ) {
     case SC_METHOD_:
     case SC_THREAD_: {
-	m_handle->add_static_event( interface_.posedge_event() );
-	break;
+        m_handle->add_static_event( interface_.posedge_event() );
+        break;
     }
     case SC_NONE_:
         /* do nothing */
@@ -478,18 +478,18 @@ sc_sensitive_pos::operator << ( const in_port_b_type& port_ )
     sc_deprecated_sensitive_pos();
     // check
     if( sc_is_running() ) {
-	SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_POS_, "simulation running" );
+        SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_POS_, "simulation running" );
     }
 
     // make sensitive
     switch( m_mode ) {
     case SC_METHOD_: {
-	port_.make_sensitive( as_method_handle( m_handle ), &port_.pos() );
-	break;
+        port_.make_sensitive( as_method_handle( m_handle ), &port_.pos() );
+        break;
     }
     case SC_THREAD_: {
-	port_.make_sensitive( as_thread_handle( m_handle ), &port_.pos() );
-	break;
+        port_.make_sensitive( as_thread_handle( m_handle ), &port_.pos() );
+        break;
     }
     case SC_NONE_:
         /* do nothing */
@@ -505,18 +505,18 @@ sc_sensitive_pos::operator << ( const in_port_l_type& port_ )
     sc_deprecated_sensitive_pos();
     // check
     if( sc_is_running() ) {
-	SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_POS_, "simulation running" );
+        SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_POS_, "simulation running" );
     }
 
     // make sensitive
     switch( m_mode ) {
     case SC_METHOD_: {
-	port_.make_sensitive( as_method_handle( m_handle ), &port_.pos() );
-	break;
+        port_.make_sensitive( as_method_handle( m_handle ), &port_.pos() );
+        break;
     }
     case SC_THREAD_: {
-	port_.make_sensitive( as_thread_handle( m_handle ), &port_.pos() );
-	break;
+        port_.make_sensitive( as_thread_handle( m_handle ), &port_.pos() );
+        break;
     }
     case SC_NONE_:
         /* do nothing */
@@ -532,18 +532,18 @@ sc_sensitive_pos::operator << ( const inout_port_b_type& port_ )
     sc_deprecated_sensitive_pos();
     // check
     if( sc_is_running() ) {
-	SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_POS_, "simulation running" );
+        SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_POS_, "simulation running" );
     }
 
     // make sensitive
     switch( m_mode ) {
     case SC_METHOD_: {
-	port_.make_sensitive( as_method_handle( m_handle ), &port_.pos() );
-	break;
+        port_.make_sensitive( as_method_handle( m_handle ), &port_.pos() );
+        break;
     }
     case SC_THREAD_: {
-	port_.make_sensitive( as_thread_handle( m_handle ), &port_.pos() );
-	break;
+        port_.make_sensitive( as_thread_handle( m_handle ), &port_.pos() );
+        break;
     }
     case SC_NONE_:
         /* do nothing */
@@ -559,18 +559,18 @@ sc_sensitive_pos::operator << ( const inout_port_l_type& port_ )
     sc_deprecated_sensitive_pos();
     // check
     if( sc_is_running() ) {
-	SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_POS_, "simulation running" );
+        SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_POS_, "simulation running" );
     }
 
     // make sensitive
     switch( m_mode ) {
     case SC_METHOD_: {
-	port_.make_sensitive( as_method_handle( m_handle ), &port_.pos() );
-	break;
+        port_.make_sensitive( as_method_handle( m_handle ), &port_.pos() );
+        break;
     }
     case SC_THREAD_: {
-	port_.make_sensitive( as_thread_handle( m_handle ), &port_.pos() );
-	break;
+        port_.make_sensitive( as_thread_handle( m_handle ), &port_.pos() );
+        break;
     }
     case SC_NONE_:
         /* do nothing */
@@ -642,7 +642,7 @@ static void sc_deprecated_sensitive_neg()
     {
         warn_sensitive_neg=false;
         SC_REPORT_INFO(SC_ID_IEEE_1666_DEPRECATION_,
-	 "sc_sensitive_neg is deprecated use sc_sensitive << with neg() instead" );
+         "sc_sensitive_neg is deprecated use sc_sensitive << with neg() instead" );
     }
 }
 
@@ -666,16 +666,16 @@ sc_sensitive_neg&
 sc_sensitive_neg::operator << ( sc_process_handle handle_ )
 {
     switch ( handle_.proc_kind() )
-	{
+        {
       case SC_CTHREAD_PROC_:
       case SC_THREAD_PROC_:
         m_mode = SC_THREAD_;
-	break;
+        break;
       case SC_METHOD_PROC_:
-	m_mode = SC_METHOD_;
-	break;
+        m_mode = SC_METHOD_;
+        break;
       default:
-	sc_assert(0);
+        sc_assert(0);
     }
     m_handle = (sc_process_b*)handle_;
     return *this;
@@ -704,15 +704,15 @@ sc_sensitive_neg::operator << ( const in_if_b_type& interface_ )
     sc_deprecated_sensitive_neg();
     // check
     if( sc_is_running() ) {
-	SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_NEG_, "simulation running" );
+        SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_NEG_, "simulation running" );
     }
 
     // make sensitive
     switch( m_mode ) {
     case SC_METHOD_:
     case SC_THREAD_: {
-	m_handle->add_static_event( interface_.negedge_event() );
-	break;
+        m_handle->add_static_event( interface_.negedge_event() );
+        break;
     }
     case SC_NONE_:
         /* do nothing */
@@ -728,15 +728,15 @@ sc_sensitive_neg::operator << ( const in_if_l_type& interface_ )
     sc_deprecated_sensitive_neg();
     // check
     if( sc_is_running() ) {
-	SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_NEG_, "simulation running" );
+        SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_NEG_, "simulation running" );
     }
 
     // make sensitive
     switch( m_mode ) {
     case SC_METHOD_:
     case SC_THREAD_: {
-	m_handle->add_static_event( interface_.negedge_event() );
-	break;
+        m_handle->add_static_event( interface_.negedge_event() );
+        break;
     }
     case SC_NONE_:
         /* do nothing */
@@ -752,18 +752,18 @@ sc_sensitive_neg::operator << ( const in_port_b_type& port_ )
     sc_deprecated_sensitive_neg();
     // check
     if( sc_is_running() ) {
-	SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_NEG_, "simulation running" );
+        SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_NEG_, "simulation running" );
     }
 
     // make sensitive
     switch( m_mode ) {
     case SC_METHOD_: {
-	port_.make_sensitive( as_method_handle( m_handle ), &port_.neg() );
-	break;
+        port_.make_sensitive( as_method_handle( m_handle ), &port_.neg() );
+        break;
     }
     case SC_THREAD_: {
-	port_.make_sensitive( as_thread_handle( m_handle ), &port_.neg() );
-	break;
+        port_.make_sensitive( as_thread_handle( m_handle ), &port_.neg() );
+        break;
     }
     case SC_NONE_:
         /* do nothing */
@@ -779,18 +779,18 @@ sc_sensitive_neg::operator << ( const in_port_l_type& port_ )
     sc_deprecated_sensitive_neg();
     // check
     if( sc_is_running() ) {
-	SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_NEG_, "simulation running" );
+        SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_NEG_, "simulation running" );
     }
 
     // make sensitive
     switch( m_mode ) {
     case SC_METHOD_: {
-	port_.make_sensitive( as_method_handle( m_handle ), &port_.neg() );
-	break;
+        port_.make_sensitive( as_method_handle( m_handle ), &port_.neg() );
+        break;
     }
     case SC_THREAD_: {
-	port_.make_sensitive( as_thread_handle( m_handle ), &port_.neg() );
-	break;
+        port_.make_sensitive( as_thread_handle( m_handle ), &port_.neg() );
+        break;
     }
     case SC_NONE_:
         /* do nothing */
@@ -806,18 +806,18 @@ sc_sensitive_neg::operator << ( const inout_port_b_type& port_ )
     sc_deprecated_sensitive_neg();
     // check
     if( sc_is_running() ) {
-	SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_NEG_, "simulation running" );
+        SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_NEG_, "simulation running" );
     }
 
     // make sensitive
     switch( m_mode ) {
     case SC_METHOD_: {
-	port_.make_sensitive( as_method_handle( m_handle ), &port_.neg() );
-	break;
+        port_.make_sensitive( as_method_handle( m_handle ), &port_.neg() );
+        break;
     }
     case SC_THREAD_: {
-	port_.make_sensitive( as_thread_handle( m_handle ), &port_.neg() );
-	break;
+        port_.make_sensitive( as_thread_handle( m_handle ), &port_.neg() );
+        break;
     }
     case SC_NONE_:
         /* do nothing */
@@ -833,18 +833,18 @@ sc_sensitive_neg::operator << ( const inout_port_l_type& port_ )
     sc_deprecated_sensitive_neg();
     // check
     if( sc_is_running() ) {
-	SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_NEG_, "simulation running" );
+        SC_REPORT_ERROR( SC_ID_MAKE_SENSITIVE_NEG_, "simulation running" );
     }
 
     // make sensitive
     switch( m_mode ) {
     case SC_METHOD_: {
-	port_.make_sensitive( as_method_handle( m_handle ), &port_.neg() );
-	break;
+        port_.make_sensitive( as_method_handle( m_handle ), &port_.neg() );
+        break;
     }
     case SC_THREAD_: {
-	port_.make_sensitive( as_thread_handle( m_handle ), &port_.neg() );
-	break;
+        port_.make_sensitive( as_thread_handle( m_handle ), &port_.neg() );
+        break;
     }
     case SC_NONE_:
         /* do nothing */

@@ -63,23 +63,23 @@ template <int W>
 inline
 void
 sc_lv_resolve<W>::resolve( sc_dt::sc_lv<W>& result_,
-			   const std::vector<sc_dt::sc_lv<W>*>& values_ )
+                           const std::vector<sc_dt::sc_lv<W>*>& values_ )
 {
     int sz = values_.size();
 
     sc_assert( sz != 0 );
 
     if( sz == 1 ) {
-	result_ = *values_[0];
-	return;
+        result_ = *values_[0];
+        return;
     }
 
     for( int j = result_.length() - 1; j >= 0; -- j ) {
-	sc_dt::sc_logic_value_t res = (*values_[0])[j].value();
-	for( int i = sz - 1; i > 0 && res != 3; -- i ) {
-	    res = sc_logic_resolution_tbl[res][(*values_[i])[j].value()];
-	}
-	result_[j] = res;
+        sc_dt::sc_logic_value_t res = (*values_[0])[j].value();
+        for( int i = sz - 1; i > 0 && res != 3; -- i ) {
+            res = sc_logic_resolution_tbl[res][(*values_[i])[j].value()];
+        }
+        result_[j] = res;
     }
 }
 
@@ -126,7 +126,7 @@ public:
     // interface methods
 
     virtual void register_port( sc_port_base&, const char* )
-	{}
+        {}
 
 
     // write the new value
@@ -174,7 +174,7 @@ inline
 sc_signal_rv<W>::~sc_signal_rv()
 {
     for( int i = m_val_vec.size() - 1; i >= 0; -- i ) {
-	delete m_val_vec[i];
+        delete m_val_vec[i];
     }
 }
 
@@ -192,24 +192,24 @@ sc_signal_rv<W>::write( const value_type& value_ )
     bool found = false;
     
     for( int i = m_proc_vec.size() - 1; i >= 0; -- i ) {
-	if( cur_proc == m_proc_vec[i] ) {
-	    if( value_ != *m_val_vec[i] ) {
-		*m_val_vec[i] = value_;
-		value_changed = true;
-	    }
-	    found = true;
-	    break;
-	}
+        if( cur_proc == m_proc_vec[i] ) {
+            if( value_ != *m_val_vec[i] ) {
+                *m_val_vec[i] = value_;
+                value_changed = true;
+            }
+            found = true;
+            break;
+        }
     }
     
     if( ! found ) {
-	m_proc_vec.push_back( cur_proc );
-	m_val_vec.push_back( new value_type( value_ ) );
-	value_changed = true;
+        m_proc_vec.push_back( cur_proc );
+        m_val_vec.push_back( new value_type( value_ ) );
+        value_changed = true;
     }
     
     if( value_changed ) {
-	this->request_update();
+        this->request_update();
     }
 }
 

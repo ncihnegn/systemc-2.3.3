@@ -102,8 +102,8 @@ sc_lv_base::init( int length_, const sc_logic& init_value )
     sc_digit cw = ctrl_array[init_value.value()];
     int sz = m_size;
     for( int i = 0; i < sz; ++ i ) {
-	m_data[i] = dw;
-	m_ctrl[i] = cw;
+        m_data[i] = dw;
+        m_ctrl[i] = cw;
     }
     clean_tail();
 }
@@ -118,14 +118,14 @@ sc_lv_base::assign_from_string( const std::string& s )
     int min_len = sc_min( len, s_len );
     int i = 0;
     for( ; i < min_len; ++ i ) {
-	char c = s[s_len - i - 1];
-	set_bit( i, sc_logic::char_to_logic[(int)c] );
+        char c = s[s_len - i - 1];
+        set_bit( i, sc_logic::char_to_logic[(int)c] );
     }
     // if formatted, fill the rest with sign(s), otherwise fill with zeros
     sc_logic_value_t fill = (s[s_len] == 'F' ? sc_logic_value_t( s[0] - '0' )
-		                             : sc_logic_value_t( 0 ));
+                                             : sc_logic_value_t( 0 ));
     for( ; i < len; ++ i ) {
-	set_bit( i, fill );
+        set_bit( i, fill );
     }
 }
 
@@ -157,8 +157,8 @@ sc_lv_base::sc_lv_base( const sc_lv_base& a )
     // copy the bits
     int sz = m_size;
     for( int i = 0; i < sz; ++ i ) {
-	m_data[i] = a.m_data[i];
-	m_ctrl[i] = a.m_ctrl[i];
+        m_data[i] = a.m_data[i];
+        m_ctrl[i] = a.m_ctrl[i];
     }
 }
 
@@ -180,9 +180,9 @@ sc_lv_base::is_01() const
 {
     int sz = m_size;
     for( int i = 0; i < sz; ++ i ) {
-	if( m_ctrl[i] != 0 ) {
-	    return false;
-	}
+        if( m_ctrl[i] != 0 ) {
+            return false;
+        }
     }
     return true;
 }

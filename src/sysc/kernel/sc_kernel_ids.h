@@ -48,79 +48,79 @@ namespace sc_core {
 #endif
 
 SC_DEFINE_MESSAGE(SC_ID_NO_BOOL_RETURNED_            , 500, 
-	"operator does not return boolean")
+        "operator does not return boolean")
 SC_DEFINE_MESSAGE(SC_ID_NO_INT_RETURNED_             , 501,
-	"operator does not return int")
+        "operator does not return int")
 SC_DEFINE_MESSAGE(SC_ID_NO_SC_LOGIC_RETURNED_        , 502,
-	"operator does not return sc_logic")
+        "operator does not return sc_logic")
 SC_DEFINE_MESSAGE(SC_ID_OPERAND_NOT_SC_LOGIC_        , 503,
-	"operand is not sc_logic")
+        "operand is not sc_logic")
 SC_DEFINE_MESSAGE(SC_ID_OPERAND_NOT_BOOL_            , 504,
-	"operand is not bool")
+        "operand is not bool")
 SC_DEFINE_MESSAGE(SC_ID_INSTANCE_EXISTS_             , 505,
-	"object already exists")       
+        "object already exists")       
 SC_DEFINE_MESSAGE(SC_ID_ILLEGAL_CHARACTERS_          , 506,
-	"illegal characters" )
+        "illegal characters" )
 SC_DEFINE_MESSAGE(SC_ID_VC6_PROCESS_HELPER_          , 507,
-	"internal error: sc_vc6_process_helper" )
+        "internal error: sc_vc6_process_helper" )
 SC_DEFINE_MESSAGE(SC_ID_VC6_MAX_PROCESSES_EXCEEDED_  , 508,
-	"maximum number of processes per module exceeded (VC6)" )
+        "maximum number of processes per module exceeded (VC6)" )
 SC_DEFINE_MESSAGE(SC_ID_END_MODULE_NOT_CALLED_       , 509,
-	"module construction not properly completed: did "
-	"you forget to add a sc_module_name parameter to "
-	"your module constructor?" )
+        "module construction not properly completed: did "
+        "you forget to add a sc_module_name parameter to "
+        "your module constructor?" )
 SC_DEFINE_MESSAGE(SC_ID_HIER_NAME_INCORRECT_         , 510,
-	"hierarchical name as shown may be incorrect due to previous errors" )
+        "hierarchical name as shown may be incorrect due to previous errors" )
 SC_DEFINE_MESSAGE(SC_ID_SET_STACK_SIZE_              , 511,
-	"set_stack_size() is only allowed for SC_THREADs and SC_CTHREADs" )
+        "set_stack_size() is only allowed for SC_THREADs and SC_CTHREADs" )
 SC_DEFINE_MESSAGE(SC_ID_SC_MODULE_NAME_USE_          , 512,
-	"incorrect use of sc_module_name" )
+        "incorrect use of sc_module_name" )
 SC_DEFINE_MESSAGE(SC_ID_SC_MODULE_NAME_REQUIRED_     , 513,
-	"an sc_module_name parameter for your constructor is required" )
+        "an sc_module_name parameter for your constructor is required" )
 SC_DEFINE_MESSAGE(SC_ID_SET_TIME_RESOLUTION_         , 514,
-	"set time resolution failed" )
+        "set time resolution failed" )
 SC_DEFINE_MESSAGE(SC_ID_SET_DEFAULT_TIME_UNIT_       , 515,
-	"set default time unit failed" )
+        "set default time unit failed" )
 SC_DEFINE_MESSAGE(SC_ID_DEFAULT_TIME_UNIT_CHANGED_   , 516,
-	"default time unit changed to time resolution" )
+        "default time unit changed to time resolution" )
 SC_DEFINE_MESSAGE(SC_ID_INCONSISTENT_API_CONFIG_     , 517,
-	"inconsistent library configuration detected" )
+        "inconsistent library configuration detected" )
 // available message number 518
 SC_DEFINE_MESSAGE(SC_ID_WAIT_NOT_ALLOWED_            , 519,
-	"wait() is only allowed in SC_THREADs and SC_CTHREADs" )
+        "wait() is only allowed in SC_THREADs and SC_CTHREADs" )
 SC_DEFINE_MESSAGE(SC_ID_NEXT_TRIGGER_NOT_ALLOWED_    , 520,
-	"next_trigger() is only allowed in SC_METHODs" )
+        "next_trigger() is only allowed in SC_METHODs" )
 SC_DEFINE_MESSAGE(SC_ID_IMMEDIATE_NOTIFICATION_      , 521,
-	"immediate notification is not allowed during update phase or elaboration" )
+        "immediate notification is not allowed during update phase or elaboration" )
 SC_DEFINE_MESSAGE(SC_ID_HALT_NOT_ALLOWED_            , 522,
-	"halt() is only allowed in SC_CTHREADs" )
+        "halt() is only allowed in SC_CTHREADs" )
 SC_DEFINE_MESSAGE(SC_ID_WATCHING_NOT_ALLOWED_        , 523,
-	"watching() has been deprecated, use reset_signal_is()" )
+        "watching() has been deprecated, use reset_signal_is()" )
 SC_DEFINE_MESSAGE(SC_ID_DONT_INITIALIZE_             , 524,
-	"dont_initialize() has no effect for SC_CTHREADs" )
+        "dont_initialize() has no effect for SC_CTHREADs" )
 SC_DEFINE_MESSAGE(SC_ID_WAIT_N_INVALID_              , 525,
-	"wait(n) is only valid for n > 0" )
+        "wait(n) is only valid for n > 0" )
 SC_DEFINE_MESSAGE(SC_ID_MAKE_SENSITIVE_              , 526,
-	"make sensitive failed" )
+        "make sensitive failed" )
 SC_DEFINE_MESSAGE(SC_ID_MAKE_SENSITIVE_POS_          , 527,
-	"make sensitive pos failed" )
+        "make sensitive pos failed" )
 SC_DEFINE_MESSAGE(SC_ID_MAKE_SENSITIVE_NEG_          , 528,
-	"make sensitive neg failed" )
+        "make sensitive neg failed" )
 SC_DEFINE_MESSAGE(SC_ID_INSERT_MODULE_               , 529,
-	"insert module failed" )
+        "insert module failed" )
 SC_DEFINE_MESSAGE(SC_ID_REMOVE_MODULE_               , 530,
-	"remove module failed" )
+        "remove module failed" )
 SC_DEFINE_MESSAGE(SC_ID_NOTIFY_DELAYED_              , 531,
-	"notify_delayed() cannot be called on events "
-	"that have pending notifications" )
+        "notify_delayed() cannot be called on events "
+        "that have pending notifications" )
 SC_DEFINE_MESSAGE(SC_ID_GEN_UNIQUE_NAME_             , 532,
-	"cannot generate unique name from null string" )
+        "cannot generate unique name from null string" )
 SC_DEFINE_MESSAGE(SC_ID_MODULE_NAME_STACK_EMPTY_     , 533,
-	"module name stack is empty: did you forget to "
-	"add a sc_module_name parameter to your module "
-	"constructor?" )
+        "module name stack is empty: did you forget to "
+        "add a sc_module_name parameter to your module "
+        "constructor?" )
 SC_DEFINE_MESSAGE(SC_ID_NAME_EXISTS_                 , 534,
-	"name already exists")
+        "name already exists")
 SC_DEFINE_MESSAGE( SC_ID_WAIT_NEGATIVE_CYCLES_       , 535,
          "wait(n) not allowed for n <= 0" )
 SC_DEFINE_MESSAGE( SC_ID_IMMEDIATE_SELF_NOTIFICATION_, 536,
@@ -130,25 +130,25 @@ SC_DEFINE_MESSAGE( SC_ID_WAIT_DURING_UNWINDING_      , 537,
 SC_DEFINE_MESSAGE(SC_ID_CYCLE_MISSES_EVENTS_         , 538,
          "the simulation contains timed-events but they are "
          "ignored by sc_cycle() ==> the simulation will be "
-	 "incorrect" )
+         "incorrect" )
 SC_DEFINE_MESSAGE( SC_ID_RETHROW_UNWINDING_          , 539,
          "sc_unwind_exception not re-thrown during kill/reset" )
 SC_DEFINE_MESSAGE( SC_ID_PROCESS_ALREADY_UNWINDING_  , 540,
          "kill/reset ignored during unwinding" )
 SC_DEFINE_MESSAGE(SC_ID_MODULE_METHOD_AFTER_START_   , 541,
-	"call to SC_METHOD in sc_module while simulation running" )
+        "call to SC_METHOD in sc_module while simulation running" )
 SC_DEFINE_MESSAGE(SC_ID_MODULE_THREAD_AFTER_START_   , 542,
-	"call to SC_THREAD in sc_module while simulation running" )
+        "call to SC_THREAD in sc_module while simulation running" )
 SC_DEFINE_MESSAGE(SC_ID_MODULE_CTHREAD_AFTER_START_   , 543,
-	"call to SC_CTHREAD in sc_module while simulation running" )
+        "call to SC_CTHREAD in sc_module while simulation running" )
 SC_DEFINE_MESSAGE(SC_ID_SIMULATION_TIME_OVERFLOW_   , 544,
-	"simulation time value overflow, simulation aborted" )
+        "simulation time value overflow, simulation aborted" )
 SC_DEFINE_MESSAGE(SC_ID_SIMULATION_STOP_CALLED_TWICE_ , 545,
-	"sc_stop has already been called" ) 
+        "sc_stop has already been called" ) 
 SC_DEFINE_MESSAGE(SC_ID_SIMULATION_START_AFTER_STOP_  , 546,
-	"sc_start called after sc_stop has been called" ) 
+        "sc_start called after sc_stop has been called" ) 
 SC_DEFINE_MESSAGE(SC_ID_STOP_MODE_AFTER_START_        , 547,
-	"attempt to set sc_stop mode  after start will be ignored" ) 
+        "attempt to set sc_stop mode  after start will be ignored" ) 
 SC_DEFINE_MESSAGE( SC_ID_SIMULATION_START_AFTER_ERROR_, 548,
        "attempt to restart simulation after error" )
 SC_DEFINE_MESSAGE( SC_ID_SIMULATION_UNCAUGHT_EXCEPTION_, 549,
@@ -167,23 +167,23 @@ SC_DEFINE_MESSAGE( SC_ID_SIMULATION_START_UNEXPECTED_, 554,
 SC_DEFINE_MESSAGE(SC_ID_THROW_IT_IGNORED_  , 556,
         "throw_it on method/non-running process is being ignored " )
 SC_DEFINE_MESSAGE(SC_ID_NOT_EXPECTING_DYNAMIC_EVENT_NOTIFY_ , 557,
-	"dynamic event notification encountered when sensitivity is static" )
+        "dynamic event notification encountered when sensitivity is static" )
 SC_DEFINE_MESSAGE(SC_ID_DISABLE_WILL_ORPHAN_PROCESS_     , 558,
        "disable() or dont_initialize() called on process with no static sensitivity, it will be orphaned" )
 SC_DEFINE_MESSAGE(SC_ID_PROCESS_CONTROL_CORNER_CASE_     , 559,
-	"Undefined process control interaction" ) 
+        "Undefined process control interaction" ) 
 SC_DEFINE_MESSAGE(SC_ID_METHOD_TERMINATION_EVENT_        , 560,
-	"Attempt to get terminated event for a method process" ) 
+        "Attempt to get terminated event for a method process" ) 
 SC_DEFINE_MESSAGE(SC_ID_JOIN_ON_METHOD_HANDLE_        , 561,
-	"Attempt to register method process with sc_join object" ) 
+        "Attempt to register method process with sc_join object" ) 
 SC_DEFINE_MESSAGE(SC_ID_NO_PROCESS_SEMANTICS_         , 563,
-	"Attempt to invoke process with no semantics() method" )
+        "Attempt to invoke process with no semantics() method" )
 SC_DEFINE_MESSAGE(SC_ID_EVENT_ON_NULL_PROCESS_         , 564,
-	"Attempt to get an event for non-existent process" )
+        "Attempt to get an event for non-existent process" )
 SC_DEFINE_MESSAGE(SC_ID_EVENT_LIST_FAILED_, 565,
          "invalid use of sc_(and|or)_event_list" )
 SC_DEFINE_MESSAGE(SC_ID_UNKNOWN_PROCESS_TYPE_,       566,
-	"Unknown process type" )
+        "Unknown process type" )
 SC_DEFINE_MESSAGE(SC_ID_TIME_CONVERSION_FAILED_, 567,
         "sc_time conversion failed")
 // available number 568

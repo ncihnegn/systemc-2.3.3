@@ -642,27 +642,27 @@ protected:
 
     void initialize( const sc_unsigned* obj_p, int index_ )
         {
-	    m_obj_p = const_cast<sc_unsigned*>( obj_p );
-	    m_index = index_;
-	}
+            m_obj_p = const_cast<sc_unsigned*>( obj_p );
+            m_index = index_;
+        }
 
 public:
 
     // destructor
 
     virtual ~sc_unsigned_bitref_r()
-	{}
+        {}
 
     // copy constructor
 
     sc_unsigned_bitref_r( const sc_unsigned_bitref_r& a )
-	: sc_value_base(a), m_index( a.m_index ), m_obj_p( a.m_obj_p )
-	{}
+        : sc_value_base(a), m_index( a.m_index ), m_obj_p( a.m_obj_p )
+        {}
 
     // capacity
 
     int length() const
-	{ return 1; }
+        { return 1; }
 
 
     // implicit conversion to bool
@@ -675,10 +675,10 @@ public:
     // explicit conversions
 
     uint64 value() const
-	{ return operator uint64(); }
+        { return operator uint64(); }
 
     bool to_bool() const
-	{ return operator uint64(); }
+        { return operator uint64(); }
 
 
     // concatenation support
@@ -691,31 +691,31 @@ public:
         {
             int  bit_mask = 1 << (low_i % BITS_PER_DIGIT);
             int  word_i = low_i / BITS_PER_DIGIT;
-	    dst_p[word_i] &= ~bit_mask;
-	    return false;
+            dst_p[word_i] &= ~bit_mask;
+            return false;
         }
     virtual bool concat_get_data( sc_digit* dst_p, int low_i ) const
         {
             int  bit_mask = 1 << (low_i % BITS_PER_DIGIT);
-	    bool result;	// True if non-zero.
+            bool result;        // True if non-zero.
             int  word_i = low_i / BITS_PER_DIGIT;
             if ( operator uint64() )
-	    {
+            {
                 dst_p[word_i] |= bit_mask;
-		result = true;
-	    }
+                result = true;
+            }
             else
-	    {
+            {
                 dst_p[word_i] &= ~bit_mask;
-		result = false;
-	    }
-	    return result;
+                result = false;
+            }
+            return result;
         }
 
     // other methods
 
     void print( ::std::ostream& os = ::std::cout ) const
-	{ os << to_bool(); }
+        { os << to_bool(); }
 
 protected:
 
@@ -758,8 +758,8 @@ public:
     // copy constructor
 
     sc_unsigned_bitref( const sc_unsigned_bitref& a )
-	: sc_unsigned_bitref_r( a )
-	{}
+        : sc_unsigned_bitref_r( a )
+        {}
 
 
     // assignment operators
@@ -812,35 +812,35 @@ protected:
     // constructor
 
     sc_unsigned_subref_r() : sc_value_base(), m_left(0), m_obj_p(0), m_right(0)
-	{}
+        {}
 
     void initialize( const sc_unsigned* obj_p, int left_, int right_ )
-	{
-	    m_obj_p = const_cast<sc_unsigned*>( obj_p );
-	    m_left = left_;
-	    m_right = right_;
-	}
+        {
+            m_obj_p = const_cast<sc_unsigned*>( obj_p );
+            m_left = left_;
+            m_right = right_;
+        }
 
 public:
 
     // destructor
 
     virtual ~sc_unsigned_subref_r()
-	{}
+        {}
 
 
     // copy constructor
 
     sc_unsigned_subref_r( const sc_unsigned_subref_r& a )
-	: sc_value_base(a), m_left( a.m_left ), m_obj_p( a.m_obj_p ),
-	  m_right( a.m_right )
-	{}
+        : sc_value_base(a), m_left( a.m_left ), m_obj_p( a.m_obj_p ),
+          m_right( a.m_right )
+        {}
 
 
     // capacity
 
     int length() const
-	{ return m_left >= m_right ? (m_left-m_right+1) : (m_right-m_left+1 ); }
+        { return m_left >= m_right ? (m_left-m_right+1) : (m_right-m_left+1 ); }
 
 
     // implicit conversion to sc_unsigned
@@ -868,10 +868,10 @@ public:
     // concatenation support
 
     virtual int concat_length(bool* xz_present_p) const
-	{
-	    if ( xz_present_p ) *xz_present_p = false;
-	    return m_left - m_right + 1;
-	}
+        {
+            if ( xz_present_p ) *xz_present_p = false;
+            return m_left - m_right + 1;
+        }
     virtual uint64 concat_get_uint64() const;
     virtual bool concat_get_ctrl( sc_digit* dst_p, int low_i ) const;
     virtual bool concat_get_data( sc_digit* dst_p, int low_i ) const;
@@ -888,7 +888,7 @@ public:
     // other methods
 
     void print( ::std::ostream& os = ::std::cout ) const
-	{ os << to_string(sc_io_base(os,SC_DEC),sc_io_show_base(os)); }
+        { os << to_string(sc_io_base(os,SC_DEC),sc_io_show_base(os)); }
 
 protected:
 
@@ -926,15 +926,15 @@ class SC_API sc_unsigned_subref
 
 protected:
     sc_unsigned_subref() : sc_unsigned_subref_r()
-	{}
+        {}
 
 public:
 
     // copy constructor
 
     sc_unsigned_subref( const sc_unsigned_subref& a )
-	: sc_unsigned_subref_r( a )
-	{}
+        : sc_unsigned_subref_r( a )
+        {}
 
     // assignment operators
 
@@ -952,10 +952,10 @@ public:
     const sc_unsigned_subref& operator = ( long a );
 
     const sc_unsigned_subref& operator = ( unsigned int a )
-	{ return operator = ( (unsigned long) a ); }
+        { return operator = ( (unsigned long) a ); }
 
     const sc_unsigned_subref& operator = ( int a )
-	{ return operator = ( (long) a ); }
+        { return operator = ( (long) a ); }
 
     const sc_unsigned_subref& operator = ( uint64 a );
     const sc_unsigned_subref& operator = ( int64 a );
@@ -1044,10 +1044,10 @@ public:
     const sc_unsigned& operator = ( unsigned long             v);
 
     const sc_unsigned& operator = ( int                       v)
-	{ return operator=((long) v); }
+        { return operator=((long) v); }
 
     const sc_unsigned& operator = ( unsigned int              v)
-	{ return operator=((unsigned long) v); }
+        { return operator=((unsigned long) v); }
 
     const sc_unsigned& operator = ( double                    v);
     const sc_unsigned& operator = ( const sc_int_base&        v);
@@ -1067,15 +1067,15 @@ public:
     // destructor
 
     virtual ~sc_unsigned()
-	{
+        {
 #           ifndef SC_MAX_NBITS
-	        delete [] digit;
+                delete [] digit;
 #           endif
-	}
+        }
 
     // Concatenation support:
 
-	sc_digit* get_raw() const { return digit; }
+        sc_digit* get_raw() const { return digit; }
     virtual int concat_length(bool* xz_present_p) const
        { if ( xz_present_p ) *xz_present_p = false; return nbits-1; }
     virtual bool concat_get_ctrl( sc_digit* dst_p, int low_i ) const;
@@ -1108,7 +1108,7 @@ public:
         {
             check_index(i);
             sc_unsigned_bitref* result_p =
-	    	sc_unsigned_bitref::m_pool.allocate();
+                    sc_unsigned_bitref::m_pool.allocate();
             result_p->initialize( this, i );
             return *result_p;
         }
@@ -1117,7 +1117,7 @@ public:
         {
             check_index(i);
             sc_unsigned_bitref* result_p =
-	        sc_unsigned_bitref::m_pool.allocate();
+                sc_unsigned_bitref::m_pool.allocate();
             result_p->initialize( this, i );
             return *result_p;
         }
@@ -1126,7 +1126,7 @@ public:
         {
             check_index(i);
             sc_unsigned_bitref* result_p =
-	        sc_unsigned_bitref::m_pool.allocate();
+                sc_unsigned_bitref::m_pool.allocate();
             result_p->initialize( this, i );
             return *result_p;
         }
@@ -1135,7 +1135,7 @@ public:
         {
             check_index(i);
             sc_unsigned_bitref* result_p =
-	        sc_unsigned_bitref::m_pool.allocate();
+                sc_unsigned_bitref::m_pool.allocate();
             result_p->initialize( this, i );
             return *result_p;
         }
@@ -1168,7 +1168,7 @@ public:
         {
             check_range(i,j);
             sc_unsigned_subref* result_p =
-	        sc_unsigned_subref::m_pool.allocate();
+                sc_unsigned_subref::m_pool.allocate();
             result_p->initialize( this, i, j );
             return *result_p;
         }
@@ -1177,7 +1177,7 @@ public:
         {
             check_range(i,j);
             sc_unsigned_subref* result_p =
-	        sc_unsigned_subref::m_pool.allocate();
+                sc_unsigned_subref::m_pool.allocate();
             result_p->initialize( this, i, j );
             return *result_p;
         }
@@ -1186,7 +1186,7 @@ public:
         {
             check_range(i,j);
             sc_unsigned_subref* result_p =
-	        sc_unsigned_subref::m_pool.allocate();
+                sc_unsigned_subref::m_pool.allocate();
             result_p->initialize( this, i, j );
             return *result_p;
         }
@@ -1195,7 +1195,7 @@ public:
         {
             check_range(i,j);
             sc_unsigned_subref* result_p =
-	        sc_unsigned_subref::m_pool.allocate();
+                sc_unsigned_subref::m_pool.allocate();
             result_p->initialize( this, i, j );
             return *result_p;
         }
@@ -1212,10 +1212,10 @@ public:
 
 #ifdef SC_DT_DEPRECATED
     int to_signed() const
-	{ return to_int(); }
+        { return to_int(); }
 
     unsigned int to_unsigned() const
-	{ return to_uint(); }
+        { return to_uint(); }
 #endif
 
     // explicit conversion to character string
@@ -1226,7 +1226,7 @@ public:
     // Print functions. dump prints the internals of the class.
 
     void print( ::std::ostream& os = ::std::cout ) const
-	{ os << to_string(sc_io_base(os,SC_DEC),sc_io_show_base(os)); }
+        { os << to_string(sc_io_base(os,SC_DEC),sc_io_show_base(os)); }
 
     void scan( ::std::istream& is = ::std::cin );
 
@@ -2073,7 +2073,7 @@ inline bool sc_unsigned_subref_r::and_reduce() const
 {
    const sc_unsigned* target_p = m_obj_p;
    for ( int i = m_right; i <= m_left; i++ )
-	if ( !target_p->test(i) ) return false;
+        if ( !target_p->test(i) ) return false;
    return true;
 }
 
@@ -2086,7 +2086,7 @@ inline bool sc_unsigned_subref_r::or_reduce() const
 {
    const sc_unsigned* target_p = m_obj_p;
    for ( int i = m_right; i <= m_left; i++ )
-	if ( target_p->test(i) ) return true;
+        if ( target_p->test(i) ) return true;
    return false;
 }
 
@@ -2101,7 +2101,7 @@ inline bool sc_unsigned_subref_r::xor_reduce() const
    const sc_unsigned* target_p = m_obj_p;
    odd = 0;
    for ( int i = m_right; i <= m_left; i++ )
-	if ( target_p->test(i) ) odd = ~odd;
+        if ( target_p->test(i) ) odd = ~odd;
    return odd ? true : false;
 }
 

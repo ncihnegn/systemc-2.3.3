@@ -92,16 +92,16 @@ class scfx_string;
 
 // function declarations
 SC_API void multiply( scfx_rep&, const scfx_rep&, const scfx_rep&,
-	       int max_wl = SC_DEFAULT_MAX_WL_ );
+               int max_wl = SC_DEFAULT_MAX_WL_ );
 SC_API scfx_rep*  neg_scfx_rep( const scfx_rep& );
 SC_API scfx_rep*  mult_scfx_rep( const scfx_rep&, const scfx_rep&,
-	                  int max_wl = SC_DEFAULT_MAX_WL_ );
+                          int max_wl = SC_DEFAULT_MAX_WL_ );
 SC_API scfx_rep*  div_scfx_rep( const scfx_rep&, const scfx_rep&,
-	                 int div_wl = SC_DEFAULT_DIV_WL_ );
+                         int div_wl = SC_DEFAULT_DIV_WL_ );
 SC_API scfx_rep*  add_scfx_rep( const scfx_rep&, const scfx_rep&,
-	                 int max_wl = SC_DEFAULT_MAX_WL_ );
+                         int max_wl = SC_DEFAULT_MAX_WL_ );
 SC_API scfx_rep*  sub_scfx_rep( const scfx_rep&, const scfx_rep&,
-	                 int max_wl = SC_DEFAULT_MAX_WL_ );
+                         int max_wl = SC_DEFAULT_MAX_WL_ );
 SC_API scfx_rep*  lsh_scfx_rep( const scfx_rep&, int );
 SC_API scfx_rep*  rsh_scfx_rep( const scfx_rep&, int );
 SC_API int        cmp_scfx_rep( const scfx_rep&, const scfx_rep& );
@@ -189,9 +189,9 @@ public:
     uint64 to_uint64() const;
 
     const char* to_string( sc_numrep,
-			   int,
-			   sc_fmt,
-			   const scfx_params* = 0 ) const;
+                           int,
+                           sc_fmt,
+                           const scfx_params* = 0 ) const;
 
 
     // assignment operator
@@ -238,18 +238,18 @@ public:
     void get_type( int&, int&, sc_enc& ) const;
 
     friend scfx_rep* quantization_scfx_rep( const scfx_rep&,
-					     const scfx_params&,
-					     bool& );
+                                             const scfx_params&,
+                                             bool& );
     friend scfx_rep*     overflow_scfx_rep( const scfx_rep&,
-					     const scfx_params&,
-					     bool& );
+                                             const scfx_params&,
+                                             bool& );
 
     bool rounding_flag() const;
 
 private:
 
     friend void  align( const scfx_rep&, const scfx_rep&, int&, int&,
-			scfx_mant_ref&, scfx_mant_ref& );
+                        scfx_mant_ref&, scfx_mant_ref& );
     friend int   compare_msw( const scfx_rep&, const scfx_rep& );
     friend int   compare_msw_ff( const scfx_rep& lhs, const scfx_rep& rhs );
     unsigned int divide_by_ten();
@@ -287,7 +287,7 @@ private:
 
     friend void print_dec( scfx_string&, const scfx_rep&, int, sc_fmt );
     friend void print_other( scfx_string&, const scfx_rep&, sc_numrep, int,
-			     sc_fmt, const scfx_params* );
+                             sc_fmt, const scfx_params* );
 
     void quantization( const scfx_params&, bool& );
     void     overflow( const scfx_params&, bool& );
@@ -366,12 +366,12 @@ scfx_rep::operator = ( const scfx_rep& f )
     if( &f != this )
     {
         m_mant  = f.m_mant;
-	m_wp    = f.m_wp;
-	m_sign  = f.m_sign;
-	m_state = f.m_state;
-	m_msw   = f.m_msw;
-	m_lsw   = f.m_lsw;
-	round( SC_DEFAULT_MAX_WL_ );
+        m_wp    = f.m_wp;
+        m_sign  = f.m_sign;
+        m_state = f.m_state;
+        m_msw   = f.m_msw;
+        m_lsw   = f.m_lsw;
+        round( SC_DEFAULT_MAX_WL_ );
     }
 }
 
@@ -435,7 +435,7 @@ scfx_rep::is_zero() const
     for( int i = 0; i < size(); i ++ )
     {
         if( m_mant[i] )
-	    return false;
+            return false;
     }
 
     return true;
@@ -465,8 +465,8 @@ scfx_rep::is_normal() const
 inline
 scfx_rep*
 quantization_scfx_rep( const scfx_rep& a,
-			const scfx_params& params,
-			bool& q_flag )
+                        const scfx_params& params,
+                        bool& q_flag )
 {
     scfx_rep& c = *new scfx_rep( a );
     c.quantization( params, q_flag );
@@ -476,8 +476,8 @@ quantization_scfx_rep( const scfx_rep& a,
 inline
 scfx_rep*
 overflow_scfx_rep( const scfx_rep& a,
-		    const scfx_params& params,
-		    bool& o_flag )
+                    const scfx_params& params,
+                    bool& o_flag )
 {
     scfx_rep& c = *new scfx_rep( a );
     c.overflow( params, o_flag );
@@ -498,9 +498,9 @@ scfx_rep::resize_to( int new_size, int restore )
     if( restore == -1 )
     {
         int size_incr = new_size - size();
-	m_wp += size_incr;
-	m_msw += size_incr;
-	m_lsw += size_incr;
+        m_wp += size_incr;
+        m_msw += size_incr;
+        m_lsw += size_incr;
     }
     m_mant.resize_to( new_size, restore );
 }
@@ -515,7 +515,7 @@ scfx_rep::calc_indices( int n ) const
     if( bi < 0 )
     {
         bi += bits_in_word;
-	-- wi;
+        -- wi;
     }
 
     return scfx_index( wi, bi );
@@ -533,18 +533,18 @@ scfx_rep::o_extend( const scfx_index& x, sc_enc enc )
     if( enc == SC_US_ || ( m_mant[wi] & ( ((word)1) << bi ) ) == 0 )
     {
         if( bi != bits_in_word - 1 )
-	    m_mant[wi] &= ~( ((word)-1) << ( bi + 1 ) );
-	for( int i = wi + 1; i < size(); ++ i )
-	    m_mant[i] = 0;
-	m_sign = 1;
+            m_mant[wi] &= ~( ((word)-1) << ( bi + 1 ) );
+        for( int i = wi + 1; i < size(); ++ i )
+            m_mant[i] = 0;
+        m_sign = 1;
     }
     else
     {
         if( bi != bits_in_word - 1 )
-	    m_mant[wi] |= ( ((word)-1) << ( bi + 1 ) );
-	for( int i = wi + 1; i < size(); ++ i )
-	    m_mant[i] = static_cast<word>( -1 );
-	m_sign = -1;
+            m_mant[wi] |= ( ((word)-1) << ( bi + 1 ) );
+        for( int i = wi + 1; i < size(); ++ i )
+            m_mant[i] = static_cast<word>( -1 );
+        m_sign = -1;
     }
 }
 
@@ -573,7 +573,7 @@ scfx_rep::o_zero_left( const scfx_index& x ) const
     if( bi != bits_in_word - 1 )
         zero = ( m_mant[wi] & ( ((word)-1) << ( bi + 1 ) ) ) == 0;
     for( int i = wi + 1; i < size(); ++ i )
-	zero = zero && m_mant[i] == 0;
+        zero = zero && m_mant[i] == 0;
 
     return zero;
 }
@@ -589,7 +589,7 @@ scfx_rep::o_zero_right( const scfx_index& x ) const
 
     bool zero = ( m_mant[wi] & ~( ((word)-1) << bi ) ) == 0;
     for( int i = wi - 1; i >= 0; -- i )
-	zero = zero && m_mant[i] == 0;
+        zero = zero && m_mant[i] == 0;
 
     return zero;
 }
@@ -607,17 +607,17 @@ scfx_rep::o_set_low( const scfx_index& x, sc_enc enc )
 
     if( enc == SC_TC_ )
     {
-	m_mant[wi] |= ( ((word)1) << bi );
-	m_sign = -1;
+        m_mant[wi] |= ( ((word)1) << bi );
+        m_sign = -1;
     }
     else
-	m_sign = 1;
+        m_sign = 1;
 }
 
 inline
 void
 scfx_rep::o_set_high( const scfx_index& x, const scfx_index& x2,
-		      sc_enc enc, int sign )
+                      sc_enc enc, int sign )
 {
     int wi = x.wi();
     int bi = x.bi();
@@ -630,29 +630,29 @@ scfx_rep::o_set_high( const scfx_index& x, const scfx_index& x2,
     int i;
 
     for( i = 0; i < size(); ++ i )
-	m_mant[i] = static_cast<word>( -1 );
+        m_mant[i] = static_cast<word>( -1 );
 
     m_mant[wi] &= ~( ((word)-1) << bi );
     for( i = wi + 1; i < size(); ++ i )
-	m_mant[i] = 0;
+        m_mant[i] = 0;
 
     m_mant[wi2] &= ( ((word)-1) << bi2 );
     for( i = wi2 - 1; i >= 0; -- i )
-	m_mant[i] = 0;
+        m_mant[i] = 0;
 
     if( enc == SC_TC_ )
-	m_sign = sign;
+        m_sign = sign;
     else
     {
-	m_mant[wi] |= ( ((word)1) << bi );
-	m_sign = 1;
+        m_mant[wi] |= ( ((word)1) << bi );
+        m_sign = 1;
     }
 }
 
 inline
 void
 scfx_rep::o_set( const scfx_index& x, const scfx_index& x3,
-		 sc_enc enc, bool under )
+                 sc_enc enc, bool under )
 {
     int wi = x.wi();
     int bi = x.bi();
@@ -664,25 +664,25 @@ scfx_rep::o_set( const scfx_index& x, const scfx_index& x3,
 
     if( bi3 != bits_in_word - 1 )
     {
-	if( under )
-	    m_mant[wi3] &= ~( ((word)-1) << ( bi3 + 1 ) );
-	else
-	    m_mant[wi3] |= ( ((word)-1) << ( bi3 + 1 ) );
+        if( under )
+            m_mant[wi3] &= ~( ((word)-1) << ( bi3 + 1 ) );
+        else
+            m_mant[wi3] |= ( ((word)-1) << ( bi3 + 1 ) );
     }
     for( int i = wi3 + 1; i < size(); ++ i )
     {
-	if( under )
-	    m_mant[i] = 0;
-	else
-	    m_mant[i] = static_cast<word>( -1 );
+        if( under )
+            m_mant[i] = 0;
+        else
+            m_mant[i] = static_cast<word>( -1 );
     }
 
     if( enc == SC_TC_ )
     {
-	if( under )
-	    m_mant[wi] |= ( ((word)1) << bi );
-	else
-	    m_mant[wi] &= ~( ((word)1) << bi );
+        if( under )
+            m_mant[wi] |= ( ((word)1) << bi );
+        else
+            m_mant[wi] &= ~( ((word)1) << bi );
     }
 }
 
@@ -695,7 +695,7 @@ scfx_rep::o_invert( const scfx_index& x2 )
 
     m_mant[wi2] ^= ( ((word)-1) << bi2 );
     for( int i = wi2 + 1; i < size(); ++ i )
-	m_mant[i] = ~ m_mant[i];
+        m_mant[i] = ~ m_mant[i];
 }
 
 inline
@@ -746,10 +746,10 @@ scfx_rep::q_incr( const scfx_index& x )
           resize_to( size() + 1, 1 );
 
         for( int i = wi + 1; i < size(); ++ i )
-	{
-	    if( ++ m_mant[i] != 0 )
-	        break;
-	}
+        {
+            if( ++ m_mant[i] != 0 )
+                break;
+        }
     }
 }
 
@@ -779,14 +779,14 @@ scfx_rep::q_zero( const scfx_index& x ) const
     if( bi != 0 )
     {
         zero = ( m_mant[wi] & ~( ((word)-1) << (bi - 1) ) ) == 0;
-	for( int i = wi - 1; i >= 0; -- i )
-	    zero = zero && m_mant[i] == 0;
+        for( int i = wi - 1; i >= 0; -- i )
+            zero = zero && m_mant[i] == 0;
     }
     else if( wi != 0 )
     {
         zero = ( m_mant[wi - 1] & ~( ((word)-1) << (bits_in_word - 1) ) ) == 0;
-	for( int i = wi - 2; i >= 0; -- i )
-	    zero = zero && m_mant[i] == 0;
+        for( int i = wi - 2; i >= 0; -- i )
+            zero = zero && m_mant[i] == 0;
     }
     else
         zero = true;
@@ -801,7 +801,7 @@ scfx_rep::find_lsw() const
     for( int i = 0; i < size(); i ++ )
     {
         if( m_mant[i] )
-	    return i;
+            return i;
     }
     return 0;
 }
@@ -813,7 +813,7 @@ scfx_rep::find_msw() const
     for( int i = size() - 1; i >= 0; i -- )
     {
         if( m_mant[i] )
-	    return i;
+            return i;
     }
     return 0;
 }
@@ -833,7 +833,7 @@ scfx_rep::toggle_tc()
     if( is_neg() )
     {
         complement( m_mant, m_mant, m_mant.size() );
-	inc( m_mant );
+        inc( m_mant );
     }
 }
 

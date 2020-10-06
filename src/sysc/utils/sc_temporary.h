@@ -98,26 +98,26 @@ class SC_API sc_byte_heap {
         m_next_p = m_bgn_p;
     }
 
-	inline std::size_t length()
-	{
-		return (std::size_t)(m_end_p - m_bgn_p);
-	}
+        inline std::size_t length()
+        {
+                return (std::size_t)(m_end_p - m_bgn_p);
+        }
 
-	inline sc_byte_heap() : 
-	    m_bgn_p(0), m_end_p(0), m_next_p(0)
-	{
-	}
+        inline sc_byte_heap() : 
+            m_bgn_p(0), m_end_p(0), m_next_p(0)
+        {
+        }
 
-		inline sc_byte_heap( std::size_t heap_size ) :
-	    m_bgn_p(0), m_end_p(0), m_next_p(0)
-	{
-		initialize( heap_size );
-	}
+                inline sc_byte_heap( std::size_t heap_size ) :
+            m_bgn_p(0), m_end_p(0), m_next_p(0)
+        {
+                initialize( heap_size );
+        }
 
-	inline ~sc_byte_heap()
-	{
-		delete [] m_bgn_p;
-	}
+        inline ~sc_byte_heap()
+        {
+                delete [] m_bgn_p;
+        }
 
 };
 
@@ -161,16 +161,16 @@ class SC_API sc_byte_heap {
 template<class T>
 class sc_vpool {
   protected:
-	std::size_t m_pool_i;	// Index of next entry to m_pool_m to provide.
-	T*          m_pool_p;	// Vector of temporaries.
-	std::size_t m_wrap;		// Mask to wrap vector index.
+        std::size_t m_pool_i;        // Index of next entry to m_pool_m to provide.
+        T*          m_pool_p;        // Vector of temporaries.
+        std::size_t m_wrap;                // Mask to wrap vector index.
 
   public:
-	inline sc_vpool( int log2, T* pool_p=0 );
-	inline ~sc_vpool();
-	inline T* allocate();
-	inline void reset();
-	inline std::size_t size();
+        inline sc_vpool( int log2, T* pool_p=0 );
+        inline ~sc_vpool();
+        inline T* allocate();
+        inline void reset();
+        inline std::size_t size();
 };
 
 template<class T> sc_vpool<T>::sc_vpool( int log2, T* pool_p )
@@ -178,31 +178,31 @@ template<class T> sc_vpool<T>::sc_vpool( int log2, T* pool_p )
   , m_pool_p( pool_p ? pool_p : new T[static_cast<std::size_t>(1) << log2] )
   , m_wrap( ~(static_cast<std::size_t>(-1) << log2) )
 {
-	// if ( log2 > 32 ) SC_REPORT_ERROR(SC_ID_POOL_SIZE_, "");
+        // if ( log2 > 32 ) SC_REPORT_ERROR(SC_ID_POOL_SIZE_, "");
 }
 
 template<class T> sc_vpool<T>::~sc_vpool()
 {
-	// delete [] m_pool_p;
+        // delete [] m_pool_p;
 }
 
 template<class T> T* sc_vpool<T>::allocate()
 {
-	T* result_p;	// Entry to return.
+        T* result_p;        // Entry to return.
 
-	result_p = &m_pool_p[m_pool_i];
-	m_pool_i = (m_pool_i + 1) & m_wrap;
-	return result_p;
+        result_p = &m_pool_p[m_pool_i];
+        m_pool_i = (m_pool_i + 1) & m_wrap;
+        return result_p;
 }
 
 template<class T> void sc_vpool<T>::reset()
 {
-	m_pool_i = 0;
+        m_pool_i = 0;
 }
 
 template<class T> std::size_t sc_vpool<T>::size()
 {
-	return m_wrap + 1;
+        return m_wrap + 1;
 }
 
 } // namespace sc_core

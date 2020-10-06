@@ -140,7 +140,7 @@ sc_object::remove_child_object( sc_object* object_p )
         if( object_p == m_child_objects[i] ) {
             m_child_objects[i] = m_child_objects[size - 1];
             m_child_objects.pop_back();
-	    object_p->m_parent = nullptr;
+            object_p->m_parent = nullptr;
             return true;
         }
     }
@@ -237,12 +237,12 @@ sc_object::sc_object(const char* nm) :
         *q = '\0';
         p = namebuf;
         if (has_illegal_char)
-	{
-	    std::string message = nm;
-	    message += " substituted by ";
-	    message += namebuf;
+        {
+            std::string message = nm;
+            message += " substituted by ";
+            message += namebuf;
             SC_REPORT_WARNING( SC_ID_ILLEGAL_CHARACTERS_, message.c_str());
-	}
+        }
     }
     sc_object_init(p);
     sc_mempool::release( namebuf, namebuf_alloc );
@@ -272,24 +272,24 @@ void sc_object::detach()
         sc_object_manager* object_manager = m_simc->get_object_manager();
         object_manager->remove_object(m_name);
 
-		// REMOVE OBJECT FROM PARENT'S LIST OF OBJECTS:
+                // REMOVE OBJECT FROM PARENT'S LIST OF OBJECTS:
 
         if ( m_parent )
-	    m_parent->remove_child_object( this );
-	else
-	    m_simc->remove_child_object( this );
+            m_parent->remove_child_object( this );
+        else
+            m_simc->remove_child_object( this );
 
         // ORPHAN THIS OBJECT'S CHILDREN:
 
 #if 0 // ####
-	    ::std::<sc_object*> children_p = &get_child_objects();
-		int                 child_n = children_p->size();
-		sc_object*          parent_p;
+            ::std::<sc_object*> children_p = &get_child_objects();
+                int                 child_n = children_p->size();
+                sc_object*          parent_p;
 
-		for ( int child_i = 0; child_i < child_n; child_i++ )
-		{
-			(*children_p)[child_i]->m_parent = 0;
-		}
+                for ( int child_i = 0; child_i < child_n; child_i++ )
+                {
+                        (*children_p)[child_i]->m_parent = 0;
+                }
 #endif
 
     }
@@ -379,8 +379,8 @@ sc_attr_base*
 sc_object::remove_attribute( const std::string& name_ )
 {
     if ( m_attr_cltn_p )
-	return ( m_attr_cltn_p->remove( name_ ) );
-    	return nullptr;
+        return ( m_attr_cltn_p->remove( name_ ) );
+            return nullptr;
 }
 
 
@@ -390,7 +390,7 @@ void
 sc_object::remove_all_attributes()
 {
     if ( m_attr_cltn_p )
-	m_attr_cltn_p->remove_all();
+        m_attr_cltn_p->remove_all();
 }
 
 
@@ -400,8 +400,8 @@ int
 sc_object::num_attributes() const
 {
     if ( m_attr_cltn_p )
-	return ( m_attr_cltn_p->size() );
-    	return 0;
+        return ( m_attr_cltn_p->size() );
+            return 0;
 }
 
 

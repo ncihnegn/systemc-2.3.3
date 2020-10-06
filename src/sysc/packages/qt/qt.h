@@ -45,10 +45,10 @@ typedef struct qt_t {
 /* Find ``top'' of the stack, space on the stack. */
 #ifndef QUICKTHREADS_SP
 #ifdef QUICKTHREADS_GROW_DOWN
-#define QUICKTHREADS_SP(sto, size)	((qt_t *)(&((char *)(sto))[(size)]))
+#define QUICKTHREADS_SP(sto, size)        ((qt_t *)(&((char *)(sto))[(size)]))
 #endif
 #ifdef QUICKTHREADS_GROW_UP
-#define QUICKTHREADS_SP(sto, size)	((qt_t *)(sto))
+#define QUICKTHREADS_SP(sto, size)        ((qt_t *)(sto))
 #endif
 #if !defined(QUICKTHREADS_SP)
   #error "QUICKTHREADS_QT_H: Stack must grow up or down!"
@@ -75,7 +75,7 @@ typedef void (qt_cleanup_t)(void *pt, void *vuserf_return);
 
 /* Internal helper for putting stuff on stack. */
 #ifndef QUICKTHREADS_SPUT
-#define QUICKTHREADS_SPUT(top, at, val)	\
+#define QUICKTHREADS_SPUT(top, at, val)        \
     (((qt_word_t *)(top))[(at)] = (qt_word_t)(val))
 #endif
 
@@ -94,9 +94,9 @@ typedef void (qt_cleanup_t)(void *pt, void *vuserf_return);
 /* All things are put on the stack relative to the final value of
    the stack pointer. */
 #ifdef QUICKTHREADS_GROW_DOWN
-#define QUICKTHREADS_ADJ(sp)	(((char *)sp) - QUICKTHREADS_STKBASE)
+#define QUICKTHREADS_ADJ(sp)        (((char *)sp) - QUICKTHREADS_STKBASE)
 #else
-#define QUICKTHREADS_ADJ(sp)	(((char *)sp) + QUICKTHREADS_STKBASE)
+#define QUICKTHREADS_ADJ(sp)        (((char *)sp) + QUICKTHREADS_STKBASE)
 #endif
 
 #define QUICKTHREADS_ARGS(sp, pu, pt, userf, only) \
@@ -117,10 +117,10 @@ typedef void (qt_cleanup_t)(void *pt, void *vuserf_return);
 
 #ifdef QUICKTHREADS_VARGS_DEFAULT
 #ifndef QUICKTHREADS_VARGS_MD0
-#define QUICKTHREADS_VARGS_MD0(sp, vasize)	(sp)
+#define QUICKTHREADS_VARGS_MD0(sp, vasize)        (sp)
 #endif
 #ifndef QUICKTHREADS_VARGS_MD1
-#define QUICKTHREADS_VARGS_MD1(sp)	do { ; } while (0)
+#define QUICKTHREADS_VARGS_MD1(sp)        do { ; } while (0)
 #endif
 
 #ifndef QUICKTHREADS_VSTKBASE
@@ -130,20 +130,20 @@ typedef void (qt_cleanup_t)(void *pt, void *vuserf_return);
 /* Sometimes the stack pointer needs to munged a bit when storing
    the list of arguments. */
 #ifndef QUICKTHREADS_VARGS_ADJUST
-#define QUICKTHREADS_VARGS_ADJUST(sp)	(sp)
+#define QUICKTHREADS_VARGS_ADJUST(sp)        (sp)
 #endif
 
 /* All things are put on the stack relative to the final value of
    the stack pointer. */
 #ifdef QUICKTHREADS_GROW_DOWN
-#define QUICKTHREADS_VADJ(sp)	(((char *)sp) - QUICKTHREADS_VSTKBASE)
+#define QUICKTHREADS_VADJ(sp)        (((char *)sp) - QUICKTHREADS_VSTKBASE)
 #else
-#define QUICKTHREADS_VADJ(sp)	(((char *)sp) + QUICKTHREADS_VSTKBASE)
+#define QUICKTHREADS_VADJ(sp)        (((char *)sp) + QUICKTHREADS_VSTKBASE)
 #endif
 
 extern qt_t *qt_vargs (qt_t *sp, int nbytes, void *vargs,
-		       void *pt, qt_startup_t *startup,
-		       qt_vuserf_t *vuserf, qt_cleanup_t *cleanup);
+                       void *pt, qt_startup_t *startup,
+                       qt_vuserf_t *vuserf, qt_cleanup_t *cleanup);
 
 #ifndef QUICKTHREADS_VARGS
 #define QUICKTHREADS_VARGS(sp, nbytes, vargs, pt, startup, vuserf, cleanup) \
@@ -157,7 +157,7 @@ extern qt_t *qt_vargs (qt_t *sp, int nbytes, void *vargs,
    using the stack of the new thread. */
 typedef void *(qt_helper_t)(qt_t *old, void *a0, void *a1);
 typedef void *(qt_block_t)(qt_helper_t *helper, void *a0, void *a1,
-			  qt_t *newthread);
+                          qt_t *newthread);
 
 /* Rearrange the parameters so that things passed to the helper
    function are already in the right argument registers. */
@@ -172,20 +172,20 @@ extern void *qt_abort (qt_helper_t *h, void *a0, void *a1, qt_t *newthread);
 
 #ifndef QUICKTHREADS_BLOCK
 extern void *qt_block (qt_helper_t *h, void *a0, void *a1,
-		       qt_t *newthread);
+                       qt_t *newthread);
 #define QUICKTHREADS_BLOCK(h, a0, a1, newthread) \
     (qt_block (h, a0, a1, newthread))
 #endif
 
 #ifndef QUICKTHREADS_BLOCKI
 extern void *qt_blocki (qt_helper_t *h, void *a0, void *a1,
-			qt_t *newthread);
+                        qt_t *newthread);
 #define QUICKTHREADS_BLOCKI(h, a0, a1, newthread) \
     (qt_blocki (h, a0, a1, newthread))
 #endif
 
 #ifdef __cplusplus
-}		/* Match `extern "C" {' at top. */
+}                /* Match `extern "C" {' at top. */
 #endif
 
 #endif // !defined(SC_USE_PTHREADS)
