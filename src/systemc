@@ -69,6 +69,7 @@
 // include this file first
 #include "sysc/kernel/sc_cmnhdr.h"
 
+#include "sysc/kernel/sc_attribute.h"
 #include "sysc/kernel/sc_externs.h"
 #include "sysc/kernel/sc_except.h"
 #include "sysc/kernel/sc_module.h"
